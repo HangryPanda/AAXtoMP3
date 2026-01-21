@@ -1,6 +1,43 @@
+# Authcode and activation files
 ACTIVATION
 .authcode
-*aax
-*jpg
-*json
-Audiobook/*
+
+# Audiobook source files
+*.aax
+*.aaxc
+
+# Downloaded/converted content directories
+Audiobooks/
+Audiobook/
+M4B/
+Podcasts/
+Vouchers/
+LibraryData/
+
+# Converted audio files
+*.mp3
+*.m4a
+*.m4b
+*.flac
+*.ogg
+*.opus
+
+# Cover art and metadata
+*.jpg
+*.jpeg
+*.png
+*.json
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,28 @@
+services:
+  audible-manager:
+    build:
+      context: ..
+      dockerfile: gui/Dockerfile
+    container_name: audible-library-manager
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8501}:8501"
+      - "${TERMINAL_PORT:-7681}:7681"
+    volumes:
+      # Persistent authentication and cache
+      - audible_data:/data
+      # Downloaded AAXC files
+      - ${DOWNLOAD_PATH:-./downloads}:/downloads
+      # Converted M4B files
+      - ${CONVERTED_PATH:-./converted}:/converted
+      # Completed source files (after conversion)
+      - ${COMPLETED_PATH:-./completed}:/completed
+      # Host audible-cli credentials (optional, for easier auth)
+      - ${AUDIBLE_CONFIG:-~/.audible}:/host_audible:ro
+      # External Library Backups (optional)
+      - ${LIBRARY_BACKUPS_PATH:-./library_backups}:/library_backups:ro
+    environment:
+      - TZ=${TZ:-America/Los_Angeles}
+
+volumes:
+  audible_data:
