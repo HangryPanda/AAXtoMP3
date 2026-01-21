@@ -28,6 +28,7 @@ SETTINGS_FILE = Path("/data/settings.json")
 DOWNLOAD_DIR = Path("/downloads")
 CONVERTED_DIR = Path("/converted")
 COMPLETED_DIR = Path("/completed")  # For moving source files after conversion
+LEGACY_LIBRARY_DIR = Path("/legacy_library")  # Mount point for legacy LibraryData
 LIBRARY_BACKUPS_DIR = Path("/library_backups")
 JOB_STATUS_FILE = Path("/data/job_status.json")
 LIBRARY_TSV_FILE = Path("/data/library.tsv")
@@ -234,6 +235,86 @@ def save_settings(settings):
     SETTINGS_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(SETTINGS_FILE, "w") as f:
         json.dump(settings, f, indent=2)
+
+
+# ============== LEGACY LIBRARY ==============
+
+def load_legacy_library():
+    """
+    Load legacy library data from LibraryData/library.json.
+    Returns a dict mapping ASIN -> entry data with normalized paths.
+    """
+    legacy_file = LEGACY_LIBRARY_DIR / "library.json"
+    if not legacy_file.exists():
+        return {}
+
+    try:
+        with open(legacy_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+
+    library = data.get("library", [])
+    result = {}
+
+    for entry in library:
+        # Extract ASIN from content_license if available
+        asin = entry.get("asin")
+        if not asin:
+            content_license = entry.get("content_license", {})
+            asin = content_license.get("asin")
+
+        if not asin:
+            continue
+
+        # Normalize paths - check if files exist at original path or in legacy mounts
+        original_file = entry.get("original_file", "")
+        voucher = entry.get("voucher", "")
+        cover = entry.get("cover", "")
+        converted_m4b = entry.get("converted_m4b")
+        converted_mp3 = entry.get("converted_mp3")
+
+        # Try to find files - check multiple possible locations
+        aaxc_path = _find_legacy_file(original_file, ["/downloads", "/legacy_aax", "/legacy_library/AAX"])
+        voucher_path = _find_legacy_file(voucher, ["/downloads", "/legacy_vouchers", "/legacy_library/Vouchers"])
+        cover_path = _find_legacy_file(cover, ["/downloads", "/legacy_covers", "/legacy_library/Covers"])
+
+        result[asin] = {
+            "title": entry.get("title", ""),
+            "status": entry.get("status", "pending"),
+            "aaxc_path": aaxc_path,
+            "voucher_path": voucher_path,
+            "cover_path": cover_path,
+            "converted_m4b": converted_m4b,
+            "converted_mp3": converted_mp3,
+            "legacy": True,  # Mark as from legacy library
+        }
+
+    return result
+
+
+def _find_legacy_file(original_path, search_dirs):
+    """
+    Try to find a file from legacy library.
+    First checks if the original path exists, then searches in alternate directories.
+    """
+    if not original_path:
+        return None
+
+    original = Path(original_path)
+
+    # Check original path
+    if original.exists():
+        return original
+
+    # Extract just the filename and search in alternate locations
+    filename = original.name
+    for search_dir in search_dirs:
+        candidate = Path(search_dir) / filename
+        if candidate.exists():
+            return candidate
+
+    return None
 
 
 # ============== JOB STATUS ==============
@@ -1127,11 +1208,26 @@ def build_status_cache(library, settings, job_status):
     manifest = load_converted_manifest()
     manifest_success_asins = {v.get("asin") for v in manifest.values() if v.get("asin") and v.get("status") == "success"}
 
+    # Load legacy library data (if available)
+    legacy_library = load_legacy_library()
+
     # Scan DOWNLOAD_DIR (flat) and COMPLETED_DIR (recursive) for source files
     # Don't scan CONVERTED_DIR - AAXC files there are leftovers from completed conversions
     aaxc_files = list(DOWNLOAD_DIR.glob("*.aaxc")) + list(COMPLETED_DIR.rglob("*.aaxc"))
     voucher_files = list(DOWNLOAD_DIR.glob("*.voucher")) + list(COMPLETED_DIR.rglob("*.voucher"))
     cover_files = list(DOWNLOAD_DIR.glob("*.jpg")) + list(COMPLETED_DIR.rglob("*.jpg"))
+
+    # Also scan legacy library directories if they exist
+    legacy_aax_dir = LEGACY_LIBRARY_DIR / "AAX"
+    legacy_vouchers_dir = LEGACY_LIBRARY_DIR / "Vouchers"
+    legacy_covers_dir = LEGACY_LIBRARY_DIR / "Covers"
+
+    if legacy_aax_dir.exists():
+        aaxc_files += list(legacy_aax_dir.glob("*.aaxc"))
+    if legacy_vouchers_dir.exists():
+        voucher_files += list(legacy_vouchers_dir.glob("*.voucher"))
+    if legacy_covers_dir.exists():
+        cover_files += list(legacy_covers_dir.glob("*.jpg"))
 
     aaxc_by_asin = _index_files_by_asin(aaxc_files)
     voucher_by_asin = _index_files_by_asin(voucher_files)
@@ -1154,12 +1250,32 @@ def build_status_cache(library, settings, job_status):
         asin = book.get("asin", "") or ""
         title = book.get("title", "") or ""
 
+        # First try current file scanning
         aaxc_path = aaxc_by_asin.get(asin) or _find_by_title(aaxc_by_title, title)
         voucher_path = voucher_by_asin.get(asin) or _find_by_title(voucher_by_title, title)
         cover_path = cover_by_asin.get(asin) or _find_by_title(cover_by_title, title)
+
+        # Fall back to legacy library data if not found
+        legacy_entry = legacy_library.get(asin)
+        if legacy_entry:
+            if not aaxc_path and legacy_entry.get("aaxc_path"):
+                aaxc_path = legacy_entry["aaxc_path"]
+            if not voucher_path and legacy_entry.get("voucher_path"):
+                voucher_path = legacy_entry["voucher_path"]
+            if not cover_path and legacy_entry.get("cover_path"):
+                cover_path = legacy_entry["cover_path"]
+
         downloaded = bool(aaxc_path and voucher_path)
-        # Check both filesystem (ASIN in filename) AND manifest (handles migrated files)
+
+        # Check conversion status from multiple sources:
+        # 1. Filesystem scan (ASIN in filename)
+        # 2. Conversion manifest
+        # 3. Legacy library (converted_m4b or converted_mp3 fields)
         converted = asin in converted_asins_from_files or asin in manifest_success_asins
+        if not converted and legacy_entry:
+            if legacy_entry.get("converted_m4b") or legacy_entry.get("converted_mp3"):
+                converted = True
+
         validation = job_status.get("validated", {}).get(asin, {})
 
         cache[asin] = {
@@ -1173,6 +1289,7 @@ def build_status_cache(library, settings, job_status):
             "validated": validation.get("valid"),
             "validation_error": validation.get("error", ""),
             "_title": title,
+            "_legacy": bool(legacy_entry),
         }
 
     return cache
@@ -1549,6 +1666,191 @@ def format_duration(minutes):
     return f"{minutes // 60}h {minutes % 60}m"
 
 
+def player_page():
+    """Audio player page to test converted audiobooks."""
+    st.header("🎧 Audio Player")
+    st.caption("Test your converted audiobooks to verify they play correctly.")
+
+    # Load converted manifest
+    manifest = load_converted_manifest()
+
+    # Get all successful conversions from manifest (don't check if files exist yet)
+    playable = []
+    for key, entry in manifest.items():
+        if entry.get("status") == "success" and entry.get("output_path"):
+            output_path = Path(entry["output_path"])
+            playable.append({
+                "key": key,
+                "title": entry.get("title", output_path.stem),
+                "asin": entry.get("asin", ""),
+                "path": output_path,
+                "converted_at": entry.get("ended_at", entry.get("imported_at", "")),
+                "exists": output_path.exists(),
+            })
+
+    if not playable:
+        st.info("No converted audiobooks found. Convert some books first from the Library tab.")
+        return
+
+    # Sort by title
+    playable.sort(key=lambda x: x["title"].lower())
+
+    found_count = sum(1 for p in playable if p["exists"])
+    missing_count = len(playable) - found_count
+
+    st.write(f"**{len(playable)}** audiobooks in manifest ({found_count} found, {missing_count} missing)")
+
+    if missing_count > 0:
+        st.warning(f"{missing_count} files not found at expected paths. This may be a path encoding issue.")
+
+    # Create selection dropdown with status indicators
+    options = {}
+    for p in playable:
+        status = "✅" if p["exists"] else "❌"
+        label = f"{status} {p['title']}"
+        options[label] = p
+
+    selected_title = st.selectbox(
+        "Select an audiobook to play",
+        options=list(options.keys()),
+        key="player_select"
+    )
+
+    if selected_title:
+        selected = options[selected_title]
+        audio_path = selected["path"]
+
+        st.divider()
+
+        # Check if file exists
+        if not selected["exists"]:
+            st.error(f"❌ File not found at expected path:")
+            st.code(str(audio_path))
+            st.info("This may be due to Unicode character differences in the path. Check if the file exists with a slightly different name.")
+
+            # Try to find similar files in parent directory
+            parent = audio_path.parent
+            if parent.exists():
+                st.write("**Files in parent directory:**")
+                try:
+                    for f in sorted(parent.iterdir())[:10]:
+                        st.text(f"  {f.name}")
+                except Exception as e:
+                    st.text(f"  (Error listing: {e})")
+            else:
+                st.warning(f"Parent directory also not found: {parent}")
+            return
+
+        # Layout: cover art on left, player controls on right
+        col1, col2 = st.columns([1, 2])
+
+        with col1:
+            # Try to find cover art
+            cover_found = False
+
+            # Check for cover in same directory as audio file
+            for ext in [".jpg", ".jpeg", ".png"]:
+                cover_path = audio_path.with_suffix(ext)
+                if cover_path.exists():
+                    st.image(str(cover_path), width=250)
+                    cover_found = True
+                    break
+
+            # Check for cover.jpg in same directory
+            if not cover_found:
+                cover_path = audio_path.parent / "cover.jpg"
+                if cover_path.exists():
+                    st.image(str(cover_path), width=250)
+                    cover_found = True
+
+            # Check for folder.jpg
+            if not cover_found:
+                cover_path = audio_path.parent / "folder.jpg"
+                if cover_path.exists():
+                    st.image(str(cover_path), width=250)
+                    cover_found = True
+
+            if not cover_found:
+                st.markdown("*No cover art found*")
+
+        with col2:
+            st.subheader(selected["title"])
+
+            if selected["asin"]:
+                st.caption(f"ASIN: {selected['asin']}")
+
+            st.caption(f"📁 {audio_path}")
+
+            if selected["converted_at"]:
+                st.caption(f"Converted: {selected['converted_at']}")
+
+            # File info
+            file_size_mb = audio_path.stat().st_size / (1024 * 1024)
+            st.caption(f"Size: {file_size_mb:.1f} MB | Format: {audio_path.suffix.upper()}")
+
+            st.divider()
+
+            # Audio player
+            st.write("**Audio Player**")
+            try:
+                with open(audio_path, "rb") as f:
+                    audio_bytes = f.read()
+
+                # Determine MIME type
+                suffix = audio_path.suffix.lower()
+                mime_types = {
+                    ".mp3": "audio/mpeg",
+                    ".m4a": "audio/mp4",
+                    ".m4b": "audio/mp4",
+                    ".ogg": "audio/ogg",
+                    ".opus": "audio/opus",
+                    ".flac": "audio/flac",
+                    ".wav": "audio/wav",
+                }
+                mime_type = mime_types.get(suffix, "audio/mpeg")
+
+                st.audio(audio_bytes, format=mime_type)
+                st.success("✅ Audio loaded successfully - conversion verified!")
+
+            except Exception as e:
+                st.error(f"❌ Failed to load audio: {e}")
+                st.warning("The conversion may have issues. Check the file manually.")
+
+        # Additional file browser for chaptered books
+        st.divider()
+        with st.expander("📂 Browse all files in output directory"):
+            parent_dir = audio_path.parent
+            files = sorted(parent_dir.iterdir())
+
+            audio_files = [f for f in files if f.suffix.lower() in [".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".flac"]]
+            other_files = [f for f in files if f not in audio_files]
+
+            if len(audio_files) > 1:
+                st.write(f"**{len(audio_files)} audio files found** (chaptered audiobook)")
+
+                chapter_select = st.selectbox(
+                    "Select chapter/file to play",
+                    options=[f.name for f in audio_files],
+                    key="chapter_select"
+                )
+
+                if chapter_select:
+                    chapter_path = parent_dir / chapter_select
+                    try:
+                        with open(chapter_path, "rb") as f:
+                            chapter_bytes = f.read()
+                        suffix = chapter_path.suffix.lower()
+                        mime_type = mime_types.get(suffix, "audio/mpeg")
+                        st.audio(chapter_bytes, format=mime_type)
+                    except Exception as e:
+                        st.error(f"Failed to load chapter: {e}")
+
+            if other_files:
+                st.write("**Other files:**")
+                for f in other_files:
+                    st.text(f"  {f.name}")
+
+
 def terminal_page():
     """Terminal page."""
     st.header("💻 Terminal")
@@ -1649,7 +1951,7 @@ def login_page():
 
         st.markdown("After completing authentication, click the button below:")
 
-        if st.button("🔄 Check for credentials", use_container_width=True, type="primary"):
+        if st.button("🔄 Check for credentials", width='stretch', type="primary"):
             # Check if audible-cli created credentials
             if audible_cli_config.exists():
                 auth_files = list(audible_cli_config.glob("*.json"))
@@ -1827,7 +2129,7 @@ def settings_page():
             help="Useful if you have old backups with series info not present in current export"
         )
 
-        if st.form_submit_button("💾 Save Settings", use_container_width=True):
+        if st.form_submit_button("💾 Save Settings", width='stretch'):
             new_settings = {
                 "output_format": output_format,
                 "single_file": single_file,
@@ -1919,7 +2221,7 @@ def settings_page():
                     st.rerun()
 
     if job_status.get("failed_downloads") or job_status.get("failed_conversions"):
-        if st.button("🗑️ Clear All Failed", use_container_width=True):
+        if st.button("🗑️ Clear All Failed", width='stretch'):
             save_job_status({"failed_downloads": {}, "failed_conversions": {}, "interrupted": {}, "validated": {}})
             st.rerun()
 
@@ -1938,13 +2240,16 @@ def main_page(auth):
     job_status = load_job_status()
 
     # Navigation
-    tab1, tab2, tab3 = st.tabs(["📚 Library", "⚙️ Settings", "💻 Terminal"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📚 Library", "🎧 Player", "⚙️ Settings", "💻 Terminal"])
 
-    with tab3:
+    with tab4:
         terminal_page()
 
-    with tab2:
+    with tab3:
         settings_page()
+
+    with tab2:
+        player_page()
 
     with tab1:
         st.title("📚 Audible Library Manager")
@@ -2001,11 +2306,11 @@ def main_page(auth):
             # 1. Global Controls
             c_g1, c_g2 = st.columns(2)
             with c_g1:
-                if st.button("🔄 Refresh", use_container_width=True, help="Reload library cache"):
+                if st.button("🔄 Refresh", width='stretch', help="Reload library cache"):
                     LIBRARY_CACHE.unlink(missing_ok=True)
                     st.rerun()
             with c_g2:
-                if st.button("🚪 Logout", use_container_width=True):
+                if st.button("🚪 Logout", width='stretch'):
                     AUTH_FILE.unlink(missing_ok=True)
                     LIBRARY_CACHE.unlink(missing_ok=True)
                     st.rerun()
@@ -2025,7 +2330,7 @@ def main_page(auth):
                 if not_downloaded:
                     st.caption(f"**Download** ({len(not_downloaded)} items)")
                     dl_jobs = st.slider("Parallel DLs", 1, MAX_PARALLEL_DOWNLOADS, min(2, MAX_PARALLEL_DOWNLOADS), key="slider_dl_all")
-                    if st.button(f"⬇️ Download All", use_container_width=True):
+                    if st.button(f"⬇️ Download All", width='stretch'):
                         ok, err = start_download_all_job(settings, jobs=dl_jobs)
                         if not ok: st.error(err)
                         if auto_convert and ok:
@@ -2055,7 +2360,7 @@ def main_page(auth):
 
                 if to_convert:
                     st.caption(f"**Convert** ({len(to_convert)} items)")
-                    if st.button(f"🔄 Convert All", use_container_width=True):
+                    if st.button(f"🔄 Convert All", width='stretch'):
                         start_batch_convert_job(to_convert, settings, paths=to_convert_paths)
                         st.success(f"Queued {len(to_convert)} items")
                         time.sleep(1)
@@ -2066,7 +2371,7 @@ def main_page(auth):
                 to_validate = [(b, s) for b, s in downloaded_books if s.get("downloaded") and s.get("validated") is None and s.get("aaxc_path")]
                 if to_validate:
                     st.caption(f"**Validate** ({len(to_validate)} items)")
-                    if st.button(f"✅ Validate All", use_container_width=True):
+                    if st.button(f"✅ Validate All", width='stretch'):
                         progress = st.progress(0)
                         status_text = st.empty()
                         for i, (book, status) in enumerate(to_validate):
@@ -2081,7 +2386,7 @@ def main_page(auth):
                 failed_count = len(job_status.get("failed_downloads", {})) + len(job_status.get("failed_conversions", {}))
                 if failed_count > 0:
                     st.divider()
-                    if st.button(f"🔁 Retry Failed ({failed_count})", use_container_width=True, type="primary"):
+                    if st.button(f"🔁 Retry Failed ({failed_count})", width='stretch', type="primary"):
                         # Retry Downloads
                         for asin, info in job_status.get("failed_downloads", {}).items():
                             if info["retries"] < settings.get("max_retries", 3):
@@ -2296,7 +2601,7 @@ def main_page(auth):
             
             with c_batch1:
                 if page_to_download:
-                    if st.button(f"⬇️ Download Page ({len(page_to_download)})", disabled=dl_running, type="primary", use_container_width=True):
+                    if st.button(f"⬇️ Download Page ({len(page_to_download)})", disabled=dl_running, type="primary", width='stretch'):
                         ok, err = start_batch_download_job(page_to_download, settings, jobs=3)
                         if not ok: st.error(err)
                         else:
@@ -2308,7 +2613,7 @@ def main_page(auth):
             
             with c_batch2:
                 if page_to_convert:
-                    if st.button(f"🔄 Convert Page ({len(page_to_convert)})", type="primary", use_container_width=True):
+                    if st.button(f"🔄 Convert Page ({len(page_to_convert)})", type="primary", width='stretch'):
                         start_batch_convert_job(page_to_convert, settings, paths=page_to_convert_paths)
                         st.success("Added to conversion queue")
                         time.sleep(1)
@@ -2361,9 +2666,9 @@ def main_page(auth):
                                  book.get("product_images", {}).get("250")
                     
                     if cover_path and Path(cover_path).exists():
-                        st.image(str(cover_path), use_container_width=True)
+                        st.image(str(cover_path), width='stretch')
                     elif remote_url:
-                        st.image(remote_url, use_container_width=True)
+                        st.image(remote_url, width='stretch')
                     else:
                         # Placeholder if no cover
                         st.markdown(
@@ -2434,11 +2739,11 @@ def main_page(auth):
                 with c_actions:
                     # Determine Primary Action
                     if is_converting or is_repairing:
-                        st.button("⏳ Queued", key=f"q_{asin}", disabled=True, use_container_width=True)
+                        st.button("⏳ Queued", key=f"q_{asin}", disabled=True, width='stretch')
                     
                     elif not status.get("downloaded"):
                         # STATE: Not Downloaded
-                        if st.button("⬇️ Download", key=f"dl_{asin}", type="primary", use_container_width=True):
+                        if st.button("⬇️ Download", key=f"dl_{asin}", type="primary", width='stretch'):
                             with st.spinner("Starting download..."):
                                 success, msg = download_book(asin, title, settings)
                                 if not success: st.error(msg)
@@ -2446,7 +2751,7 @@ def main_page(auth):
                     
                     elif status.get("interrupted"):
                          # STATE: Interrupted -> Resume
-                         if st.button("▶️ Resume", key=f"res_{asin}", type="primary", use_container_width=True):
+                         if st.button("▶️ Resume", key=f"res_{asin}", type="primary", width='stretch'):
                             aaxc = status.get("aaxc_path")
                             start_batch_convert_job([asin], settings, paths=[aaxc] if aaxc else None)
                             st.toast(f"Resuming {title}...")
@@ -2456,7 +2761,7 @@ def main_page(auth):
                     elif not is_converted and status.get("aaxc_path"):
                         # STATE: Ready (Downloaded) -> Convert or Validate
                         # Primary: Convert
-                        if st.button("🔄 Convert", key=f"cv_{asin}", type="primary", use_container_width=True):
+                        if st.button("🔄 Convert", key=f"cv_{asin}", type="primary", width='stretch'):
                             start_batch_convert_job([asin], settings, paths=[status["aaxc_path"]])
                             st.toast(f"Queued {title} for conversion")
                             time.sleep(0.5)
@@ -2464,20 +2769,20 @@ def main_page(auth):
                         
                         # Secondary: Validate (Icon button to save space?)
                         if status.get("validated") is None:
-                            if st.button("✓ Validate", key=f"val_{asin}", use_container_width=True):
+                            if st.button("✓ Validate", key=f"val_{asin}", width='stretch'):
                                 with st.spinner("Validating..."):
                                     validate_book(status["aaxc_path"], asin, title)
                                     st.rerun()
                         elif status.get("validated") is True:
-                             st.button("✓ Valid", key=f"val_ok_{asin}", disabled=True, use_container_width=True)
+                             st.button("✓ Valid", key=f"val_ok_{asin}", disabled=True, width='stretch')
                         else:
-                             st.button("⚠️ Invalid", key=f"val_bad_{asin}", disabled=True, use_container_width=True)
+                             st.button("⚠️ Invalid", key=f"val_bad_{asin}", disabled=True, width='stretch')
 
                     elif is_converted:
                         # STATE: Done
-                        st.button("✅ Done", key=f"done_{asin}", disabled=True, use_container_width=True)
+                        st.button("✅ Done", key=f"done_{asin}", disabled=True, width='stretch')
                         # Maybe a small 'Redo' button?
-                        if st.button("🔄 Redo", key=f"redo_{asin}", help="Convert again", use_container_width=True):
+                        if st.button("🔄 Redo", key=f"redo_{asin}", help="Convert again", width='stretch'):
                              aaxc = status.get("aaxc_path")
                              start_batch_convert_job([asin], settings, paths=[aaxc] if aaxc else None)
                              st.toast(f"Re-queued {title}")
@@ -2486,7 +2791,7 @@ def main_page(auth):
 
                     # Error State Actions
                     if is_failed:
-                        if st.button("🔁 Retry", key=f"retry_{asin}", type="primary", use_container_width=True):
+                        if st.button("🔁 Retry", key=f"retry_{asin}", type="primary", width='stretch'):
                             # Retry logic simplified for single item
                             if asin in job_status.get("failed_downloads", {}):
                                 download_book(asin, title, settings)

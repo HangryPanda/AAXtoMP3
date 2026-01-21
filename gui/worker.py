@@ -32,7 +32,7 @@ CONVERT_LOCKS_DIR = DATA_DIR / "convert_locks"
 LIBRARY_JOB_FILE = DATA_DIR / "library_job.json"
 LIBRARY_LOG = DATA_DIR / "library_refresh.log"
 
-ASIN_RE = re.compile(r"\bB[A-Z0-9]{9}\b")
+ASIN_RE = re.compile(r"\b[A-Z0-9]{10}\b")  # Matches both B-prefix ASINs and numeric ASINs
 MATCH_NORMALIZE_RE = re.compile(r"[^a-z0-9]+")
 
 

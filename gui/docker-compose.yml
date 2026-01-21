@@ -10,7 +10,7 @@ services:
       - "${TERMINAL_PORT:-7681}:7681"
     volumes:
       # Persistent authentication and cache
-      - audible_data:/data
+      - ${DATA_PATH:-./data}:/data
       # Downloaded AAXC files
       - ${DOWNLOAD_PATH:-./downloads}:/downloads
       # Converted M4B files
@@ -21,8 +21,8 @@ services:
       - ${AUDIBLE_CONFIG:-~/.audible}:/host_audible:ro
       # External Library Backups (optional)
       - ${LIBRARY_BACKUPS_PATH:-./library_backups}:/library_backups:ro
+      # Legacy library data (optional, for migrating from previous setup)
+      - ${LEGACY_LIBRARY_PATH:-./LibraryData}:/legacy_library:ro
     environment:
-      - TZ=${TZ:-America/Los_Angeles}
+      - TZ=${TZ:-US/Central}
 
-volumes:
-  audible_data:
