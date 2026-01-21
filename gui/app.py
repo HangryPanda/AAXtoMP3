@@ -239,6 +239,7 @@ def save_settings(settings):
 
 # ============== LEGACY LIBRARY ==============
 
+@st.cache_data(ttl=60)  # Cache legacy library for 60 seconds
 def load_legacy_library():
     """
     Load legacy library data from LibraryData/library.json.
@@ -337,6 +338,7 @@ def save_job_status(status):
         json.dump(status, f, indent=2)
 
 
+@st.cache_data(ttl=10)  # Cache for 10 seconds
 def load_converted_manifest():
     """Load the detailed conversion manifest from worker.py."""
     manifest_path = Path("/data/converted_manifest.json")
@@ -347,6 +349,40 @@ def load_converted_manifest():
         except Exception:
             pass
     return {}
+
+
+@st.cache_data(ttl=30)  # Cache file listings for 30 seconds
+def _scan_files_cached():
+    """Scan all relevant directories for source and output files. Cached to avoid repeated I/O."""
+    aaxc_files = list(DOWNLOAD_DIR.glob("*.aaxc")) + list(COMPLETED_DIR.rglob("*.aaxc"))
+    voucher_files = list(DOWNLOAD_DIR.glob("*.voucher")) + list(COMPLETED_DIR.rglob("*.voucher"))
+    cover_files = list(DOWNLOAD_DIR.glob("*.jpg")) + list(COMPLETED_DIR.rglob("*.jpg"))
+
+    # Legacy directories
+    legacy_aax_dir = LEGACY_LIBRARY_DIR / "AAX"
+    legacy_vouchers_dir = LEGACY_LIBRARY_DIR / "Vouchers"
+    legacy_covers_dir = LEGACY_LIBRARY_DIR / "Covers"
+
+    if legacy_aax_dir.exists():
+        aaxc_files += list(legacy_aax_dir.glob("*.aaxc"))
+    if legacy_vouchers_dir.exists():
+        voucher_files += list(legacy_vouchers_dir.glob("*.voucher"))
+    if legacy_covers_dir.exists():
+        cover_files += list(legacy_covers_dir.glob("*.jpg"))
+
+    # Convert to serializable format for caching
+    return {
+        "aaxc": [str(p) for p in aaxc_files],
+        "voucher": [str(p) for p in voucher_files],
+        "cover": [str(p) for p in cover_files],
+    }
+
+
+@st.cache_data(ttl=30)
+def _scan_output_files_cached(fmt: str):
+    """Scan converted directory for output files. Cached separately since format may vary."""
+    output_files = list(CONVERTED_DIR.rglob(f"*.{fmt}"))
+    return [str(p) for p in output_files]
 
 
 def mark_download_failed(asin, title, error=""):
@@ -584,190 +620,42 @@ def _tail_log(path: Path, max_lines=80):
         return ""
 
 
-def render_activity_log_drawer():
-    """Render a drawer-style activity log with copy to clipboard functionality."""
-    # Gather all logs
-    combined_log = _tail_log(DOWNLOAD_ALL_LOG, 10) + \
-                   _tail_log(DOWNLOAD_BATCH_LOG, 10) + \
-                   _tail_log(CONVERT_ALL_LOG, 15) + \
-                   _tail_log(CONVERT_BATCH_LOG, 15)
+def logs_page():
+    """Logs tab showing activity from downloads and conversions."""
+    st.header("📋 Activity Logs")
 
-    # Clean up extra blank lines
-    lines = [line for line in combined_log.split('\n') if line.strip()]
-    combined_log = '\n'.join(lines[-30:])  # Keep last 30 non-empty lines
+    col1, col2 = st.columns([1, 5])
+    with col1:
+        if st.button("🔄 Refresh", key="refresh_logs"):
+            st.rerun()
 
-    if not combined_log.strip():
-        combined_log = "No recent activity"
+    # Auto-refresh option
+    auto_refresh = st.checkbox("Auto-refresh (every 5s)", value=False, key="auto_refresh_logs")
+    if auto_refresh:
+        components.html("<script>setTimeout(()=>window.location.reload(), 5000);</script>", height=0)
 
-    # Escape for JavaScript
-    log_escaped = combined_log.replace('\\', '\\\\').replace('`', '\\`').replace('$', '\\$')
+    st.divider()
 
-    # Generate unique ID for this component
-    drawer_id = f"activity_drawer_{id(combined_log) % 10000}"
+    # Download Logs
+    with st.expander("📥 Download Logs", expanded=True):
+        download_log = _tail_log(DOWNLOAD_ALL_LOG, 30) + _tail_log(DOWNLOAD_BATCH_LOG, 30)
+        lines = [line for line in download_log.split('\n') if line.strip()]
+        download_log = '\n'.join(lines[-50:]) or "No download activity"
+        st.code(download_log, language="bash")
 
-    drawer_html = f"""
-    <style>
-        .activity-drawer {{
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 9999;
-            font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace;
-        }}
-        .drawer-toggle {{
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e0e0;
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #333;
-            user-select: none;
-        }}
-        .drawer-toggle:hover {{
-            background: linear-gradient(135deg, #1f1f3a 0%, #1a2744 100%);
-        }}
-        .drawer-title {{
-            font-weight: 600;
-            font-size: 14px;
-        }}
-        .drawer-actions {{
-            display: flex;
-            gap: 8px;
-        }}
-        .drawer-btn {{
-            background: #2d3748;
-            border: 1px solid #4a5568;
-            color: #e0e0e0;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
-        }}
-        .drawer-btn:hover {{
-            background: #4a5568;
-            border-color: #718096;
-        }}
-        .drawer-btn.copied {{
-            background: #276749;
-            border-color: #48bb78;
-        }}
-        .drawer-content {{
-            background: #0d1117;
-            color: #c9d1d9;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-top: 1px solid #333;
-        }}
-        .drawer-content.open {{
-            max-height: 300px;
-            overflow-y: auto;
-        }}
-        .drawer-content pre {{
-            margin: 0;
-            padding: 12px 16px;
-            font-size: 12px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }}
-        .drawer-content::-webkit-scrollbar {{
-            width: 8px;
-        }}
-        .drawer-content::-webkit-scrollbar-track {{
-            background: #1a1a2e;
-        }}
-        .drawer-content::-webkit-scrollbar-thumb {{
-            background: #4a5568;
-            border-radius: 4px;
-        }}
-        .chevron {{
-            transition: transform 0.3s;
-        }}
-        .chevron.open {{
-            transform: rotate(180deg);
-        }}
-    </style>
+    # Conversion Logs
+    with st.expander("🔄 Conversion Logs", expanded=True):
+        convert_log = _tail_log(CONVERT_ALL_LOG, 30) + _tail_log(CONVERT_BATCH_LOG, 30)
+        lines = [line for line in convert_log.split('\n') if line.strip()]
+        convert_log = '\n'.join(lines[-50:]) or "No conversion activity"
+        st.code(convert_log, language="bash")
 
-    <div class="activity-drawer" id="{drawer_id}">
-        <div class="drawer-toggle" onclick="toggleDrawer_{drawer_id}()">
-            <span class="drawer-title">📡 Activity Log</span>
-            <div class="drawer-actions">
-                <button class="drawer-btn" id="copy_btn_{drawer_id}" onclick="event.stopPropagation(); copyLog_{drawer_id}()">
-                    📋 Copy
-                </button>
-                <button class="drawer-btn" onclick="event.stopPropagation(); clearLog_{drawer_id}()">
-                    🗑️ Clear
-                </button>
-                <span class="chevron" id="chevron_{drawer_id}">▲</span>
-            </div>
-        </div>
-        <div class="drawer-content" id="content_{drawer_id}">
-            <pre id="log_text_{drawer_id}">{combined_log}</pre>
-        </div>
-    </div>
-
-    <script>
-        const logText_{drawer_id} = `{log_escaped}`;
-
-        function toggleDrawer_{drawer_id}() {{
-            const content = document.getElementById('content_{drawer_id}');
-            const chevron = document.getElementById('chevron_{drawer_id}');
-            content.classList.toggle('open');
-            chevron.classList.toggle('open');
-
-            // Auto-scroll to bottom when opened
-            if (content.classList.contains('open')) {{
-                content.scrollTop = content.scrollHeight;
-            }}
-        }}
-
-        function copyLog_{drawer_id}() {{
-            const text = document.getElementById('log_text_{drawer_id}').textContent;
-            navigator.clipboard.writeText(text).then(() => {{
-                const btn = document.getElementById('copy_btn_{drawer_id}');
-                const originalText = btn.textContent;
-                btn.textContent = '✓ Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {{
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                }}, 2000);
-            }}).catch(err => {{
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-
-                const btn = document.getElementById('copy_btn_{drawer_id}');
-                btn.textContent = '✓ Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {{
-                    btn.textContent = '📋 Copy';
-                    btn.classList.remove('copied');
-                }}, 2000);
-            }});
-        }}
-
-        function clearLog_{drawer_id}() {{
-            document.getElementById('log_text_{drawer_id}').textContent = 'Log cleared (refresh to reload)';
-        }}
-
-        // Auto-open drawer if there's activity
-        if (logText_{drawer_id}.trim() && logText_{drawer_id}.trim() !== 'No recent activity') {{
-            // Keep closed by default, user can open
-        }}
-    </script>
-    """
-
-    components.html(drawer_html, height=45)
+    # Library Refresh Logs
+    with st.expander("📚 Library Refresh Logs", expanded=False):
+        lib_log = _tail_log(LIBRARY_REFRESH_LOG, 50)
+        lines = [line for line in lib_log.split('\n') if line.strip()]
+        lib_log = '\n'.join(lines[-50:]) or "No library refresh activity"
+        st.code(lib_log, language="bash")
 
 
 def load_library_job():
@@ -1200,7 +1088,7 @@ def fetch_library(client, force_refresh=False):
 
 def build_status_cache(library, settings, job_status):
     """
-    Build a lightweight per-ASIN status cache.
+    Build a lightweight per-ASIN status cache using cached file listings.
     """
     fmt = settings.get("output_format", "m4b")
 
@@ -1211,23 +1099,11 @@ def build_status_cache(library, settings, job_status):
     # Load legacy library data (if available)
     legacy_library = load_legacy_library()
 
-    # Scan DOWNLOAD_DIR (flat) and COMPLETED_DIR (recursive) for source files
-    # Don't scan CONVERTED_DIR - AAXC files there are leftovers from completed conversions
-    aaxc_files = list(DOWNLOAD_DIR.glob("*.aaxc")) + list(COMPLETED_DIR.rglob("*.aaxc"))
-    voucher_files = list(DOWNLOAD_DIR.glob("*.voucher")) + list(COMPLETED_DIR.rglob("*.voucher"))
-    cover_files = list(DOWNLOAD_DIR.glob("*.jpg")) + list(COMPLETED_DIR.rglob("*.jpg"))
-
-    # Also scan legacy library directories if they exist
-    legacy_aax_dir = LEGACY_LIBRARY_DIR / "AAX"
-    legacy_vouchers_dir = LEGACY_LIBRARY_DIR / "Vouchers"
-    legacy_covers_dir = LEGACY_LIBRARY_DIR / "Covers"
-
-    if legacy_aax_dir.exists():
-        aaxc_files += list(legacy_aax_dir.glob("*.aaxc"))
-    if legacy_vouchers_dir.exists():
-        voucher_files += list(legacy_vouchers_dir.glob("*.voucher"))
-    if legacy_covers_dir.exists():
-        cover_files += list(legacy_covers_dir.glob("*.jpg"))
+    # Use CACHED file listings instead of scanning every time
+    file_cache = _scan_files_cached()
+    aaxc_files = [Path(p) for p in file_cache["aaxc"]]
+    voucher_files = [Path(p) for p in file_cache["voucher"]]
+    cover_files = [Path(p) for p in file_cache["cover"]]
 
     aaxc_by_asin = _index_files_by_asin(aaxc_files)
     voucher_by_asin = _index_files_by_asin(voucher_files)
@@ -1237,8 +1113,8 @@ def build_status_cache(library, settings, job_status):
     voucher_by_title = [(_norm_match(p.name), p) for p in voucher_files]
     cover_by_title = [(_norm_match(p.name), p) for p in cover_files]
 
-    # Scan for output files by ASIN in filename (fallback method)
-    output_files = list(CONVERTED_DIR.rglob(f"*.{fmt}"))
+    # Use CACHED output file listing
+    output_files = [Path(p) for p in _scan_output_files_cached(fmt)]
     converted_asins_from_files = set()
     for p in output_files:
         asin = _extract_asin(p.name) or _extract_asin(str(p))
@@ -1296,23 +1172,21 @@ def build_status_cache(library, settings, job_status):
 
 
 def get_book_status(asin, title, settings=None):
-    """Check download/convert status for a book."""
+    """Check download/convert status for a book. Uses cached file listings for performance."""
     if settings is None:
         settings = load_settings()
 
-    # Locate AAXC and Voucher (Check Download and Completed dirs only)
-    # Don't check CONVERTED_DIR - AAXC files there are leftovers from completed conversions
-    aaxc_by_asin = list(DOWNLOAD_DIR.glob(f"*{asin}*.aaxc")) + \
-                   list(COMPLETED_DIR.rglob(f"*{asin}*.aaxc"))
+    # Use CACHED file listings instead of fresh scans
+    file_cache = _scan_files_cached()
+    aaxc_files = [Path(p) for p in file_cache["aaxc"]]
+    voucher_files = [Path(p) for p in file_cache["voucher"]]
+    cover_files = [Path(p) for p in file_cache["cover"]]
 
-    voucher_by_asin = list(DOWNLOAD_DIR.glob(f"*{asin}*.voucher")) + \
-                      list(COMPLETED_DIR.rglob(f"*{asin}*.voucher"))
+    # Filter by ASIN
+    aaxc_by_asin = [p for p in aaxc_files if asin in p.name]
+    voucher_by_asin = [p for p in voucher_files if asin in p.name]
+    cover_by_asin = [p for p in cover_files if asin in p.name]
 
-    # Locate Cover (can check all dirs - covers are useful even after conversion)
-    cover_by_asin = list(DOWNLOAD_DIR.glob(f"*{asin}*.jpg")) + \
-                    list(COMPLETED_DIR.rglob(f"*{asin}*.jpg")) + \
-                    list(CONVERTED_DIR.rglob(f"*{asin}*.jpg"))
-    
     cover_path = cover_by_asin[0] if cover_by_asin else None
 
     if not aaxc_by_asin or not voucher_by_asin:
@@ -1320,28 +1194,24 @@ def get_book_status(asin, title, settings=None):
         title_norm = _norm_match(title)
         if len(title_norm) >= 8:
             if not aaxc_by_asin:
-                aaxc_by_asin = [p for p in DOWNLOAD_DIR.glob("*.aaxc") if title_norm in _norm_match(p.name)] + \
-                               [p for p in COMPLETED_DIR.rglob("*.aaxc") if title_norm in _norm_match(p.name)]
+                aaxc_by_asin = [p for p in aaxc_files if title_norm in _norm_match(p.name)]
             if not voucher_by_asin:
-                voucher_by_asin = [p for p in DOWNLOAD_DIR.glob("*.voucher") if title_norm in _norm_match(p.name)] + \
-                                  [p for p in COMPLETED_DIR.rglob("*.voucher") if title_norm in _norm_match(p.name)]
+                voucher_by_asin = [p for p in voucher_files if title_norm in _norm_match(p.name)]
             if not cover_path:
-                covers = [p for p in DOWNLOAD_DIR.glob("*.jpg") if title_norm in _norm_match(p.name)] + \
-                         [p for p in COMPLETED_DIR.rglob("*.jpg") if title_norm in _norm_match(p.name)] + \
-                         [p for p in CONVERTED_DIR.rglob("*.jpg") if title_norm in _norm_match(p.name)]
+                covers = [p for p in cover_files if title_norm in _norm_match(p.name)]
                 if covers:
                     cover_path = covers[0]
 
-    # Check for output files based on format
+    # Use CACHED output file listing
     fmt = settings.get("output_format", "m4b")
-    output_files = list(CONVERTED_DIR.rglob(f"*.{fmt}"))
+    output_files = [Path(p) for p in _scan_output_files_cached(fmt)]
 
     downloaded = len(aaxc_by_asin) > 0 and len(voucher_by_asin) > 0
 
     converted = False
     # Normalize title: remove non-alnum, lowercase
     safe_title = "".join(c for c in title if c.isalnum()).lower()
-    
+
     # Check manifest first (most reliable if converted by this system)
     manifest = load_converted_manifest()
     # We need to find the key in manifest that corresponds to this book
@@ -1357,12 +1227,12 @@ def get_book_status(asin, title, settings=None):
         for f in output_files:
             # Normalize filename similarly
             f_norm = "".join(c for c in f.name if c.isalnum()).lower()
-            
+
             # Check 1: ASIN in path (very reliable)
             if asin.lower() in str(f).lower():
                 converted = True
                 break
-            
+
             # Check 2: Title match (fuzzy)
             # We check if the simplified title is contained in the simplified filename
             # Use a reasonable length to avoid false positives on short titles
@@ -1370,23 +1240,15 @@ def get_book_status(asin, title, settings=None):
                 converted = True
                 break
 
-    # Check for partial conversion (interrupted) - chaptered mode
-    partial_chapters = list(CONVERTED_DIR.rglob(f"*{asin}*/*.mp3")) + \
-                       list(CONVERTED_DIR.rglob(f"*{asin}*/*.m4a")) + \
-                       list(CONVERTED_DIR.rglob(f"*{asin}*/*.ogg")) + \
-                       list(CONVERTED_DIR.rglob(f"*{asin}*/*.flac"))
-    interrupted = downloaded and not converted and len(partial_chapters) > 0
-
-    # Get last chapter number if interrupted
+    # Check for partial conversion (interrupted) - skip the expensive rglob, use manifest instead
+    interrupted = False
     last_chapter = None
-    if interrupted:
-        chapter_nums = []
-        for f in partial_chapters:
-            match = re.search(r'-(\d+)\s', f.name)
-            if match:
-                chapter_nums.append(int(match.group(1)))
-        if chapter_nums:
-            last_chapter = max(chapter_nums)
+    if downloaded and not converted:
+        # Check manifest for running/interrupted status
+        for entry in manifest.values():
+            if entry.get("asin") == asin and entry.get("status") in ["running", "interrupted"]:
+                interrupted = True
+                break
 
     # Check validation status
     job_status = load_job_status()
@@ -2240,7 +2102,10 @@ def main_page(auth):
     job_status = load_job_status()
 
     # Navigation
-    tab1, tab2, tab3, tab4 = st.tabs(["📚 Library", "🎧 Player", "⚙️ Settings", "💻 Terminal"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📚 Library", "🎧 Player", "⚙️ Settings", "💻 Terminal", "📋 Logs"])
+
+    with tab5:
+        logs_page()
 
     with tab4:
         terminal_page()
@@ -2306,13 +2171,16 @@ def main_page(auth):
             # 1. Global Controls
             c_g1, c_g2 = st.columns(2)
             with c_g1:
-                if st.button("🔄 Refresh", width='stretch', help="Reload library cache"):
+                if st.button("🔄 Refresh", width='stretch', help="Clear caches and reload"):
+                    # Clear all Streamlit caches
+                    st.cache_data.clear()
                     LIBRARY_CACHE.unlink(missing_ok=True)
                     st.rerun()
             with c_g2:
                 if st.button("🚪 Logout", width='stretch'):
                     AUTH_FILE.unlink(missing_ok=True)
                     LIBRARY_CACHE.unlink(missing_ok=True)
+                    st.cache_data.clear()
                     st.rerun()
             
             auto_convert = st.checkbox(
@@ -2800,8 +2668,6 @@ def main_page(auth):
                                 start_batch_convert_job([asin], settings, paths=[aaxc] if aaxc else None)
                             st.rerun()
 
-        # Render activity log drawer at the bottom of the page
-        render_activity_log_drawer()
 
 
 def main():

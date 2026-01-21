@@ -3,6 +3,9 @@ services:
     build:
       context: ..
       dockerfile: gui/Dockerfile
+      # Enable BuildKit for cache mounts and better performance
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     container_name: audible-library-manager
     restart: unless-stopped
     ports:
@@ -26,3 +29,32 @@ services:
     environment:
       - TZ=${TZ:-US/Central}
 
+  # Development profile with live reload
+  # Usage: docker compose --profile dev up audible-manager-dev
+  audible-manager-dev:
+    profiles: ["dev"]
+    build:
+      context: ..
+      dockerfile: gui/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    container_name: audible-library-manager-dev
+    ports:
+      - "${PORT:-8501}:8501"
+      - "${TERMINAL_PORT:-7681}:7681"
+    volumes:
+      # Mount source code for live editing (no rebuild needed)
+      - ./app.py:/app/app.py:ro
+      - ./worker.py:/app/worker.py:ro
+      - ./entrypoint.sh:/app/entrypoint.sh:ro
+      - ../AAXtoMP3:/app/AAXtoMP3:ro
+      # Data volumes
+      - ${DATA_PATH:-./data}:/data
+      - ${DOWNLOAD_PATH:-./downloads}:/downloads
+      - ${CONVERTED_PATH:-./converted}:/converted
+      - ${COMPLETED_PATH:-./completed}:/completed
+      - ${AUDIBLE_CONFIG:-~/.audible}:/host_audible:ro
+      - ${LIBRARY_BACKUPS_PATH:-./library_backups}:/library_backups:ro
+      - ${LEGACY_LIBRARY_PATH:-./LibraryData}:/legacy_library:ro
+    environment:
+      - TZ=${TZ:-US/Central}

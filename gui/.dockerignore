@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Local data directories (mounted as volumes instead)
+data/
+downloads/
+converted/
+completed/
+library_backups/
+LibraryData/
+
+# Data files
+*.csv
+*.tsv
+*.parquet
+*.json
+*.log
+!package.json
+!tsconfig.json
+
+# Test files
+test_*.py
+debug_*.py
+*_test.py
+
+# Documentation
+*.md
+!README.md
+
+# OS files
+.DS_Store
+Thumbs.db
+*.smb*
+
+# Build artifacts
+*.tar
+*.tar.gz
+*.zip
+
+# Node (if any frontend tooling)
+node_modules/
+
+# Misc
+*.bak
+*.tmp
