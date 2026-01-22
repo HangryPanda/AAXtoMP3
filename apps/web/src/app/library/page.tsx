@@ -47,7 +47,8 @@ function PaginationControls({
   onPageChange: (nextPage: number) => void;
   className?: string;
 }) {
-  // Always show pagination to maintain UI consistency
+  if (totalPages <= 1) return null;
+
   const canPrev = currentPage > 1;
   const canNext = currentPage < totalPages;
 

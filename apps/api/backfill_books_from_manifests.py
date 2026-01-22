@@ -175,9 +175,37 @@ async def main() -> None:
         for asin, d in downloads.items():
             if asin not in books_by_asin:
                 orphan_downloads += 1
-        for asin in conversions_by_asin.keys():
-            if asin not in books_by_asin:
+                if not args.dry_run:
+                    # Create basic book record for orphan download
+                    new_book = Book(
+                        asin=asin,
+                        title=f"Orphan Download {asin}",  # Placeholder title
+                        status=BookStatus.DOWNLOADED,
+                        local_path_aax=d.aaxc_path,
+                        local_path_voucher=d.voucher_path,
+                        local_path_cover=d.cover_path,
+                        updated_at=now
+                    )
+                    session.add(new_book)
+                    would_update += 1
+
+        for asin, conv_list in conversions_by_asin.items():
+            if asin not in books_by_asin and asin not in downloads:  # avoid double insert if in both
                 orphan_conversions += 1
+                if not args.dry_run:
+                    best = _pick_best_convert(conv_list, prefer_audiobook_path=args.prefer_audiobook_path)
+                    fmt = _guess_format(best.output_path)
+                    
+                    new_book = Book(
+                        asin=asin,
+                        title=f"Orphan Conversion {asin}",  # Placeholder title
+                        status=BookStatus.COMPLETED,
+                        local_path_converted=best.output_path,
+                        conversion_format=fmt,
+                        updated_at=now
+                    )
+                    session.add(new_book)
+                    would_update += 1
 
         for asin, book in books_by_asin.items():
             changed = False
