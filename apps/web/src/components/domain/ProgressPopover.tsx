@@ -121,7 +121,10 @@ export function ProgressPopover() {
 
   // Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
-    // Only allow dragging from header
+    // Prevent event from bubbling to parent elements and stop default browser behavior (like text selection)
+    e.stopPropagation();
+    e.preventDefault();
+    
     setIsDragging(true);
     setDragOffset({
       x: e.clientX - progressPopover.position.x,
