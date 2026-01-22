@@ -1,0 +1,27 @@
+# Development Dockerfile for Audible Library Web
+# Includes hot reload support
+
+FROM node:20-alpine
+
+# Install curl for health checks
+RUN apk add --no-cache curl bash
+
+WORKDIR /app
+
+# Install dependencies
+COPY apps/web/package.json apps/web/package-lock.json* ./
+RUN npm install
+
+# Copy entrypoint script
+COPY docker/scripts/entrypoint-web.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set environment variables
+ENV NODE_ENV=development \
+    NEXT_TELEMETRY_DISABLED=1
+
+# Expose port
+EXPOSE 3000
+
+# Run via entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

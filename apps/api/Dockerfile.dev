@@ -1,0 +1,43 @@
+# Development Dockerfile for Audible Library API
+# Includes hot reload support
+
+FROM python:3.11-slim
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    mediainfo \
+    jq \
+    curl \
+    bash \
+    grep \
+    sed \
+    findutils \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+WORKDIR /app
+
+# Install Python dependencies
+COPY apps/api/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy entrypoint script
+COPY docker/scripts/entrypoint-api.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Create required directories
+RUN mkdir -p /data/downloads /data/converted /data/completed /core
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    DEBUG=true
+
+# Expose port
+EXPOSE 8000
+
+# Run via entrypoint script (which handles migrations and starts uvicorn with --reload in debug mode)
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

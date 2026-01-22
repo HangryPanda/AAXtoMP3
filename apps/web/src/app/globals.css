@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors - Light Mode */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+
+  /* Status Colors */
+  --status-new: 240 5.9% 60%;
+  --status-downloading: 217.2 91.2% 59.8%;
+  --status-downloaded: 188.7 94.5% 42.7%;
+  --status-validating: 280.3 87.3% 59.4%;
+  --status-validated: 239.6 83.5% 66.7%;
+  --status-converting: 47.9 95.8% 53.1%;
+  --status-completed: 142.1 76.2% 36.3%;
+  --status-failed: 0 84.2% 60.2%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors - Dark Mode */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --font-sans: var(--font-inter);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Status badge colors */
+.status-new {
+  background-color: hsl(var(--status-new) / 0.1);
+  color: hsl(var(--status-new));
+  border-color: hsl(var(--status-new) / 0.2);
+}
+
+.status-downloading {
+  background-color: hsl(var(--status-downloading) / 0.1);
+  color: hsl(var(--status-downloading));
+  border-color: hsl(var(--status-downloading) / 0.2);
+}
+
+.status-downloaded {
+  background-color: hsl(var(--status-downloaded) / 0.1);
+  color: hsl(var(--status-downloaded));
+  border-color: hsl(var(--status-downloaded) / 0.2);
+}
+
+.status-validating {
+  background-color: hsl(var(--status-validating) / 0.1);
+  color: hsl(var(--status-validating));
+  border-color: hsl(var(--status-validating) / 0.2);
+}
+
+.status-validated {
+  background-color: hsl(var(--status-validated) / 0.1);
+  color: hsl(var(--status-validated));
+  border-color: hsl(var(--status-validated) / 0.2);
+}
+
+.status-converting {
+  background-color: hsl(var(--status-converting) / 0.1);
+  color: hsl(var(--status-converting));
+  border-color: hsl(var(--status-converting) / 0.2);
+}
+
+.status-completed {
+  background-color: hsl(var(--status-completed) / 0.1);
+  color: hsl(var(--status-completed));
+  border-color: hsl(var(--status-completed) / 0.2);
+}
+
+.status-failed {
+  background-color: hsl(var(--status-failed) / 0.1);
+  color: hsl(var(--status-failed));
+  border-color: hsl(var(--status-failed) / 0.2);
+}
+
+/* XTerm terminal styling */
+.xterm-container {
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+}
+
+.xterm .xterm-viewport {
+  scrollbar-width: thin;
+}

@@ -1,0 +1,74 @@
+version: "3.9"
+
+# Development compose file with hot reload
+# Usage: docker-compose -f docker-compose.dev.yml up
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: audible-postgres-dev
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-audible}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-audible_db}
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-audible} -d ${POSTGRES_DB:-audible_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile.dev
+    container_name: audible-api-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-audible}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-audible_db}
+      DEBUG: "true"
+      SKIP_MIGRATIONS: "true"
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      DOWNLOADS_DIR: /data/downloads
+      CONVERTED_DIR: /data/converted
+      COMPLETED_DIR: /data/completed
+      CORE_SCRIPTS_DIR: /core
+      MANIFEST_DIR: /specs
+    volumes:
+      - ./apps/api:/app
+      - ./core:/core:ro
+      - ./specs:/specs:ro
+      - ${DOWNLOADS_HOST_DIR:-/Volumes/Media/Audiobooks/Downloads}:/data/downloads
+      - ${CONVERTED_HOST_DIR:-/Volumes/Media/Audiobooks/Converted}:/data/converted
+      - ${COMPLETED_HOST_DIR:-/Volumes/Media/Audiobooks/Completed}:/data/completed
+      - ~/.audible:/root/.audible:ro
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile.dev
+    container_name: audible-web-dev
+    depends_on:
+      - api
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      NEXT_PUBLIC_WS_URL: ws://localhost:8000
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    command: npm run dev
+
+volumes:
+  postgres-data-dev:
+    driver: local

@@ -1,20 +1,37 @@
+# ===========================================
+# Audible Library Manager - Git Ignore
+# ===========================================
+
+# ===========================================
 # Authcode and activation files
+# ===========================================
 ACTIVATION
 .authcode
+*.voucher
 
+# ===========================================
 # Audiobook source files
+# ===========================================
 *.aax
 *.aaxc
 
+# ===========================================
 # Downloaded/converted content directories
+# ===========================================
 Audiobooks/
 Audiobook/
 M4B/
 Podcasts/
 Vouchers/
 LibraryData/
+data/downloads/
+data/converted/
+data/completed/
+data/
 
+# ===========================================
 # Converted audio files
+# ===========================================
 *.mp3
 *.m4a
 *.m4b
@@ -22,22 +39,156 @@ LibraryData/
 *.ogg
 *.opus
 
-# Cover art and metadata
+# ===========================================
+# Cover art and metadata (except specific configs)
+# ===========================================
 *.jpg
 *.jpeg
 *.png
-*.json
+!apps/web/public/**/*.png
+!apps/web/public/**/*.jpg
+!apps/web/public/**/*.jpeg
 
+# ===========================================
 # macOS
+# ===========================================
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
+# ===========================================
 # Python
+# ===========================================
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
 .venv/
 venv/
+ENV/
+env/
 .env
+.env.local
+.env.*.local
+!.env.example
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.cover
+*.coverage
+.hypothesis/
 
-# IDE
+# ===========================================
+# Node.js
+# ===========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+*.tgz
+
+# ===========================================
+# Next.js
+# ===========================================
+.next/
+out/
+.vercel
+
+# ===========================================
+# Build outputs
+# ===========================================
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# ===========================================
+# Testing
+# ===========================================
+coverage/
+playwright-report/
+test-results/
+*.lcov
+
+# ===========================================
+# Docker
+# ===========================================
+# Postgres data volumes
+postgres-data/
+pgdata/
+
+# ===========================================
+# IDE and editors
+# ===========================================
 .vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
 .idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ===========================================
+# Logs
+# ===========================================
+*.log
+logs/
+*.log.*
+
+# ===========================================
+# Temporary files
+# ===========================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# ===========================================
+# Secrets and credentials
+# ===========================================
+*.pem
+*.key
+*.crt
+credentials.json
+secrets.json
+service-account.json
+.secrets
+
+# ===========================================
+# Alembic
+# ===========================================
+# Don't ignore versions directory, only pycache
+apps/api/alembic/__pycache__/
+
+# ===========================================
+# Misc
+# ===========================================
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
