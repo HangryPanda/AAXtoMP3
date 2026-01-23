@@ -1,5 +1,6 @@
 """Application configuration using Pydantic Settings."""
 
+from enum import Enum
 from functools import lru_cache
 import json
 from pathlib import Path
@@ -7,6 +8,14 @@ from typing import Literal
 
 from pydantic import Field, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class MoveFilesPolicy(str, Enum):
+    """Policy for handling misplaced converted files during repair."""
+
+    REPORT_ONLY = "report_only"  # Just log, don't move
+    ALWAYS_MOVE = "always_move"  # Auto-move without prompting
+    ASK_EACH = "ask_each"  # Return list for user confirmation
 
 
 class Settings(BaseSettings):
@@ -60,6 +69,30 @@ class Settings(BaseSettings):
     ws_log_buffer_ms: int = Field(default=100, description="WebSocket log buffer interval in ms")
     ws_ping_interval: int = Field(default=30, description="WebSocket ping interval in seconds")
 
+    # Repair
+    move_files_policy: MoveFilesPolicy = Field(
+        default=MoveFilesPolicy.REPORT_ONLY,
+        description="How to handle misplaced converted files during repair",
+    )
+    repair_extract_metadata: bool = Field(
+        default=True,
+        description="Extract metadata (chapters, technical info) from M4B files during repair",
+    )
+    repair_delete_duplicates: bool = Field(
+        default=False,
+        description="Automatically delete duplicate conversions during repair (keeps best match)",
+    )
+    repair_update_manifests: bool = Field(
+        default=True,
+        description="Update download/converted manifests from filesystem during repair",
+    )
+
+    # Post-Conversion
+    move_after_complete: bool = Field(
+        default=False,
+        description="Move source AAXC files to completed_dir after successful conversion",
+    )
+
     # CORS
     # NOTE: Keep this as a string so pydantic-settings doesn't attempt JSON parsing
     # before our validators run (which breaks on comma-separated values).
@@ -87,7 +120,8 @@ class Settings(BaseSettings):
     @property
     def aaxtomp3_path(self) -> Path:
         """Full path to AAXtoMP3 script."""
-        return self.core_scripts_dir / "AAXtoMP3"
+        # Use .resolve() to ensure the path is absolute
+        return (self.core_scripts_dir / "AAXtoMP3").resolve()
 
     def ensure_directories(self) -> None:
         """Create required directories if they don't exist."""

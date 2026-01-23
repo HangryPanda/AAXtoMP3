@@ -125,11 +125,11 @@
     "output_path": "/converted/Audiobook/pirateaba/Flowers of Esthelm: The Wandering Inn, Book 3/Flowers of Esthelm: The Wandering Inn, Book 3.m4b",
     "imported_at": "2026-01-21T23:31:45.635198"
   },
-  "/completed/B0F14RPXHR_Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)-AAX_44_128.aaxc": {
+  "/completed/B0F14RPXHR_Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)-AAX_44_128.aaxc": {
     "status": "success",
     "asin": "B0F14RPXHR",
-    "title": "Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)",
-    "output_path": "/converted/Audiobook/J.K. Rowling/Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)/Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition).m4b",
+    "title": "Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)",
+    "output_path": "/converted/Audiobook/J.K. Rowling/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition).m4b",
     "imported_at": "2026-01-21T23:16:52.902735"
   },
   "/completed/B0F154ZCSN_Harry Potter and the Chamber of Secrets (Full-Cast Edition)-AAX_44_128.aaxc": {
@@ -881,7 +881,7 @@
   "legacy_import_B0CZBN1WM3": {
     "status": "success",
     "asin": "B0CZBN1WM3",
-    "title": "The Healer\u2019s Way",
+    "title": "The Healer’s Way",
     "output_path": "/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way: Healer's Way, Book 1/The Healer's Way: Healer's Way, Book 1.m4b",
     "imported_at": "2026-01-21T23:26:27.835916"
   },
@@ -1386,14 +1386,14 @@
     "status": "success",
     "asin": "B09V1XJ949",
     "title": "Mother of Learning Arc 2",
-    "output_path": "/converted/Audiobook/nobody103, Domagoj Kurmaic\u0301/Mother of Learning Arc 2: Mother of Learning, Book 2/Mother of Learning Arc 2: Mother of Learning, Book 2.m4b",
+    "output_path": "/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 2: Mother of Learning, Book 2/Mother of Learning Arc 2: Mother of Learning, Book 2.m4b",
     "imported_at": "2026-01-21T23:33:29.427189"
   },
   "/completed/B0B3CH221B_Mother of Learning Arc 3: Mother of Learning, Book 3-AAX_22_64.aaxc": {
     "status": "success",
     "asin": "B0B3CH221B",
     "title": "Mother of Learning Arc 3",
-    "output_path": "/converted/Audiobook/nobody103, Domagoj Kurmaic\u0301/Mother of Learning Arc 3: Mother of Learning, Book 3/Mother of Learning Arc 3: Mother of Learning, Book 3.m4b",
+    "output_path": "/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 3: Mother of Learning, Book 3/Mother of Learning Arc 3: Mother of Learning, Book 3.m4b",
     "imported_at": "2026-01-21T23:33:34.331267"
   },
   "/completed/B09Y2D2D5T_Beware of Chicken: A Xianxia Cultivation Novel: Beware of Chicken, Book 1-AAX_44_128.aaxc": {
@@ -1528,7 +1528,7 @@
     "status": "success",
     "asin": "B0D5FJGZBB",
     "title": "Angels Before Man",
-    "output_path": "/converted/Audiobook/Rafael Nicola\u0301s/Angels Before Man: Angels, Book 1/Angels Before Man: Angels, Book 1.m4b",
+    "output_path": "/converted/Audiobook/Rafael Nicolás/Angels Before Man: Angels, Book 1/Angels Before Man: Angels, Book 1.m4b",
     "imported_at": "2026-01-21T23:35:11.700505"
   },
   "/completed/B0DRPTW742_The Sleeping World: Singing with a Humpback Whale-AAX_44_128.aaxc": {
@@ -1622,5 +1622,644 @@
     "title": "Nolyn",
     "output_path": "/converted/Michael J. Sullivan/Nolyn: The Rise and Fall, Book 1/Nolyn: The Rise and Fall, Book 1.m4b",
     "imported_at": "2026-01-21T23:42:56.186236"
+  },
+  "/data/converted/Audiobook/A. F. Kay/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/Return of the Runebound Professor 5 A Progression Fantasy Epic  Return of the Runebound Professor, Book 5/Return of the Runebound Professor 5 A Progression Fantasy Epic  Return of the Runebound Professor, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 5 A Progression Fantasy Epic  Return of the Runebound Professor, Book 5",
+    "output_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor 5 A Progression Fantasy Epic  Return of the Runebound Professor, Book 5/Return of the Runebound Professor 5 A Progression Fantasy Epic  Return of the Runebound Professor, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6/Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6",
+    "output_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6/Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translated by/Campaign Last Life, Book 6/Campaign Last Life, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Campaign Last Life, Book 6",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translated by/Campaign Last Life, Book 6/Campaign Last Life, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Wind and Truth Book Five of the Stormlight Archive/Wind and Truth Book Five of the Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wind and Truth Book Five of the Stormlight Archive",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Wind and Truth Book Five of the Stormlight Archive/Wind and Truth Book Five of the Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/The Way of Kings The Stormlight Archive, Book 1/The Way of Kings The Stormlight Archive, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Way of Kings The Stormlight Archive, Book 1",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Way of Kings The Stormlight Archive, Book 1/The Way of Kings The Stormlight Archive, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Words of Radiance The Stormlight Archive, Book 2/Words of Radiance The Stormlight Archive, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Words of Radiance The Stormlight Archive, Book 2",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Words of Radiance The Stormlight Archive, Book 2/Words of Radiance The Stormlight Archive, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. Mantis/The Path of Ascension 8 A LitRPG Adventure/The Path of Ascension 8 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension 8 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension 8 A LitRPG Adventure/The Path of Ascension 8 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Dakota Krout/Tenacity The Completionist Chronicles, Book 9/Tenacity The Completionist Chronicles, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tenacity The Completionist Chronicles, Book 9",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Tenacity The Completionist Chronicles, Book 9/Tenacity The Completionist Chronicles, Book 9.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daman/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)",
+    "output_path": "/data/converted/Audiobook/Daman/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daman/Rebellion of Darklings The Divine Elements, Book 4/Rebellion of Darklings The Divine Elements, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rebellion of Darklings The Divine Elements, Book 4",
+    "output_path": "/data/converted/Audiobook/Daman/Rebellion of Darklings The Divine Elements, Book 4/Rebellion of Darklings The Divine Elements, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/DB King/Spellweaver Codex Elder Mage Chronicles, Book 1/Spellweaver Codex Elder Mage Chronicles, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Spellweaver Codex Elder Mage Chronicles, Book 1",
+    "output_path": "/data/converted/Audiobook/DB King/Spellweaver Codex Elder Mage Chronicles, Book 1/Spellweaver Codex Elder Mage Chronicles, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Four/Unintended Cultivator, Volume Four.m4b": {
+    "status": "success",
+    "asin": "b0dmq8qb6f",
+    "title": "Unintended Cultivator, Volume Four",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Four/Unintended Cultivator, Volume Four.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "title_metadata"
+  },
+  "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator Volume 3/Unintended Cultivator Volume 3.m4b": {
+    "status": "success",
+    "asin": "b0d8lm5f6n",
+    "title": "Unintended Cultivator: Volume 3",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator Volume 3/Unintended Cultivator Volume 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "title_metadata"
+  },
+  "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume 2/Unintended Cultivator, Volume 2.m4b": {
+    "status": "success",
+    "asin": "b0d4w1rtwx",
+    "title": "Unintended Cultivator, Volume 2",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume 2/Unintended Cultivator, Volume 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "title_metadata"
+  },
+  "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Five/Unintended Cultivator, Volume Five.m4b": {
+    "status": "success",
+    "asin": "b0dvtn4hz6",
+    "title": "Unintended Cultivator, Volume Five",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Five/Unintended Cultivator, Volume Five.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "title_metadata"
+  },
+  "/data/converted/Audiobook/Gregory Maguire/Wicked The Life and Times of the Wicked Witch of the West/Wicked The Life and Times of the Wicked Witch of the West.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wicked The Life and Times of the Wicked Witch of the West",
+    "output_path": "/data/converted/Audiobook/Gregory Maguire/Wicked The Life and Times of the Wicked Witch of the West/Wicked The Life and Times of the Wicked Witch of the West.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Honour Rae/All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5/All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5",
+    "output_path": "/data/converted/Audiobook/Honour Rae/All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5/All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 7 A Progression Fantasy Epic/Mark of the Fool 7 A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 7 A Progression Fantasy Epic",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 7 A Progression Fantasy Epic/Mark of the Fool 7 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 9 A Progression Fantasy Epic/Mark of the Fool 9 A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 9 A Progression Fantasy Epic",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 9 A Progression Fantasy Epic/Mark of the Fool 9 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/The Fourth Law of Cultivation Qi=MC^2, Book 4/The Fourth Law of Cultivation Qi=MC^2, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Fourth Law of Cultivation Qi=MC^2, Book 4",
+    "output_path": "/data/converted/Audiobook/Krazekode/The Fourth Law of Cultivation Qi=MC^2, Book 4/The Fourth Law of Cultivation Qi=MC^2, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael G. Manning/Daughter of the Dragon Wrath of the Stormking, Book 2/Daughter of the Dragon Wrath of the Stormking, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Daughter of the Dragon Wrath of the Stormking, Book 2",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/Daughter of the Dragon Wrath of the Stormking, Book 2/Daughter of the Dragon Wrath of the Stormking, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/Drumindor Riyria Chronicles, Book 5/Drumindor Riyria Chronicles, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Drumindor Riyria Chronicles, Book 5",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Drumindor Riyria Chronicles, Book 5/Drumindor Riyria Chronicles, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michele Notaro/The Enchanter's Soul The Ellwood Chronicles II/The Enchanter's Soul The Ellwood Chronicles II.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Enchanter's Soul The Ellwood Chronicles II",
+    "output_path": "/data/converted/Audiobook/Michele Notaro/The Enchanter's Soul The Ellwood Chronicles II/The Enchanter's Soul The Ellwood Chronicles II.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Nameless Author/Nameless Sovereign 3 A Cultivation Progression Fantasy/Nameless Sovereign 3 A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign 3 A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Audiobook/Nameless Author/Nameless Sovereign 3 A Cultivation Progression Fantasy/Nameless Sovereign 3 A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Nameless Author/Nameless Sovereign 2 A Cultivation Progression Fantasy/Nameless Sovereign 2 A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign 2 A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Audiobook/Nameless Author/Nameless Sovereign 2 A Cultivation Progression Fantasy/Nameless Sovereign 2 A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer’s Way Healer's Way, Book 2/The Healer’s Way Healer's Way, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Healer’s Way Healer's Way, Book 2",
+    "output_path": "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer’s Way Healer's Way, Book 2/The Healer’s Way Healer's Way, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick King/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques",
+    "output_path": "/data/converted/Audiobook/Patrick King/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarah Lin/Archcrafter  The Weirkey Chronicles, Book 3/Archcrafter  The Weirkey Chronicles, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Archcrafter  The Weirkey Chronicles, Book 3",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/Archcrafter  The Weirkey Chronicles, Book 3/Archcrafter  The Weirkey Chronicles, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarah Lin/Chasmfall The Weirkey Chronicles, Book 4/Chasmfall The Weirkey Chronicles, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chasmfall The Weirkey Chronicles, Book 4",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/Chasmfall The Weirkey Chronicles, Book 4/Chasmfall The Weirkey Chronicles, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarah Lin/The Weirkey Chronicles Omnibus Books 1-3/The Weirkey Chronicles Omnibus Books 1-3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Weirkey Chronicles Omnibus Books 1-3",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/The Weirkey Chronicles Omnibus Books 1-3/The Weirkey Chronicles Omnibus Books 1-3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/Requirements A LitRPG Adventure (System Universe, Book 7)/Requirements A LitRPG Adventure (System Universe, Book 7).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Requirements A LitRPG Adventure (System Universe, Book 7)",
+    "output_path": "/data/converted/Audiobook/SunriseCV/Requirements A LitRPG Adventure (System Universe, Book 7)/Requirements A LitRPG Adventure (System Universe, Book 7).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/System Change System Universe, Book 1/System Change System Universe, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "System Change System Universe, Book 1",
+    "output_path": "/data/converted/Audiobook/SunriseCV/System Change System Universe, Book 1/System Change System Universe, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 14 A LitRPG Adventure/Defiance of the Fall 14 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Defiance of the Fall 14 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 14 A LitRPG Adventure/Defiance of the Fall 14 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/ToraAKR/Rebirth of the Density God Density God, Book 3/Rebirth of the Density God Density God, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rebirth of the Density God Density God, Book 3",
+    "output_path": "/data/converted/Audiobook/ToraAKR/Rebirth of the Density God Density God, Book 3/Rebirth of the Density God Density God, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial A Progression Fantasy Epic/Ashborn Primordial A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Ashborn Primordial A Progression Fantasy Epic",
+    "output_path": "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial A Progression Fantasy Epic/Ashborn Primordial A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Fae and Faire The Wandering Inn, Book 2/Fae and Faire The Wandering Inn, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Fae and Faire The Wandering Inn, Book 2",
+    "output_path": "/data/converted/Audiobook/pirateaba/Fae and Faire The Wandering Inn, Book 2/Fae and Faire The Wandering Inn, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Hell's Wardens The Wandering Inn, Book 14/Hell's Wardens The Wandering Inn, Book 14.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Hell's Wardens The Wandering Inn, Book 14",
+    "output_path": "/data/converted/Audiobook/pirateaba/Hell's Wardens The Wandering Inn, Book 14/Hell's Wardens The Wandering Inn, Book 14.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Huntsong Singer of Terandria Series, Book 2/Huntsong Singer of Terandria Series, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Huntsong Singer of Terandria Series, Book 2",
+    "output_path": "/data/converted/Audiobook/pirateaba/Huntsong Singer of Terandria Series, Book 2/Huntsong Singer of Terandria Series, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Garden of Sanctuary The Wandering Inn, Book 15/Garden of Sanctuary The Wandering Inn, Book 15.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Garden of Sanctuary The Wandering Inn, Book 15",
+    "output_path": "/data/converted/Audiobook/pirateaba/Garden of Sanctuary The Wandering Inn, Book 15/Garden of Sanctuary The Wandering Inn, Book 15.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/King of Duels The Wandering Inn, Book 16/King of Duels The Wandering Inn, Book 16.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "King of Duels The Wandering Inn, Book 16",
+    "output_path": "/data/converted/Audiobook/pirateaba/King of Duels The Wandering Inn, Book 16/King of Duels The Wandering Inn, Book 16.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Lady of Fire The Wandering Inn, Book 17/Lady of Fire The Wandering Inn, Book 17.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Lady of Fire The Wandering Inn, Book 17",
+    "output_path": "/data/converted/Audiobook/pirateaba/Lady of Fire The Wandering Inn, Book 17/Lady of Fire The Wandering Inn, Book 17.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 2 Mother of Learning, Book 2/Mother of Learning Arc 2 Mother of Learning, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mother of Learning Arc 2 Mother of Learning, Book 2",
+    "output_path": "/data/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 2 Mother of Learning, Book 2/Mother of Learning Arc 2 Mother of Learning, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 3 Mother of Learning, Book 3/Mother of Learning Arc 3 Mother of Learning, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mother of Learning Arc 3 Mother of Learning, Book 3",
+    "output_path": "/data/converted/Audiobook/nobody103, Domagoj Kurmaić/Mother of Learning Arc 3 Mother of Learning, Book 3/Mother of Learning Arc 3 Mother of Learning, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Andrew Rowe/When Wizards Follow Fools Arcane Ascension, Book 5/When Wizards Follow Fools Arcane Ascension, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "When Wizards Follow Fools Arcane Ascension, Book 5",
+    "output_path": "/data/converted/Audiobook/Andrew Rowe/When Wizards Follow Fools Arcane Ascension, Book 5/When Wizards Follow Fools Arcane Ascension, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Andrew Rowe/A Brief History of Chronomancy Arcane Ascension, Book 6/A Brief History of Chronomancy Arcane Ascension, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "A Brief History of Chronomancy Arcane Ascension, Book 6",
+    "output_path": "/data/converted/Audiobook/Andrew Rowe/A Brief History of Chronomancy Arcane Ascension, Book 6/A Brief History of Chronomancy Arcane Ascension, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SourpatchHero, Tommy Kerper/An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3/An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3",
+    "output_path": "/data/converted/Audiobook/SourpatchHero, Tommy Kerper/An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3/An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Maxime J. Durand, Void Herald/Apocalypse Tamer The Complete Series Apocalypse Tamer Box Set, Book 1/Apocalypse Tamer The Complete Series Apocalypse Tamer Box Set, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Apocalypse Tamer The Complete Series Apocalypse Tamer Box Set, Book 1",
+    "output_path": "/data/converted/Audiobook/Maxime J. Durand, Void Herald/Apocalypse Tamer The Complete Series Apocalypse Tamer Box Set, Book 1/Apocalypse Tamer The Complete Series Apocalypse Tamer Box Set, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Rhett C. Bruno, Jaime Castle/An Unexpected Hero A LitRPG Adventure/An Unexpected Hero A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "An Unexpected Hero A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/Rhett C. Bruno, Jaime Castle/An Unexpected Hero A LitRPG Adventure/An Unexpected Hero A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael R. Miller/Reckoning Songs of Chaos, Book 4/Reckoning Songs of Chaos, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Reckoning Songs of Chaos, Book 4",
+    "output_path": "/data/converted/Audiobook/Michael R. Miller/Reckoning Songs of Chaos, Book 4/Reckoning Songs of Chaos, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Kel Kade/Ritual of Ruin King's Dark Tidings, Book 7/Ritual of Ruin King's Dark Tidings, Book 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Ritual of Ruin King's Dark Tidings, Book 7",
+    "output_path": "/data/converted/Audiobook/Kel Kade/Ritual of Ruin King's Dark Tidings, Book 7/Ritual of Ruin King's Dark Tidings, Book 7.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Kel Kade/Knight of Shadows King's Dark Tidings, Book 6/Knight of Shadows King's Dark Tidings, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Knight of Shadows King's Dark Tidings, Book 6",
+    "output_path": "/data/converted/Audiobook/Kel Kade/Knight of Shadows King's Dark Tidings, Book 6/Knight of Shadows King's Dark Tidings, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TJ Klune/Somewhere Beyond the Sea Cerulean Chronicles, Book 2/Somewhere Beyond the Sea Cerulean Chronicles, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Somewhere Beyond the Sea Cerulean Chronicles, Book 2",
+    "output_path": "/data/converted/Audiobook/TJ Klune/Somewhere Beyond the Sea Cerulean Chronicles, Book 2/Somewhere Beyond the Sea Cerulean Chronicles, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Rafael Nicolás/Angels Before Man Angels, Book 1/Angels Before Man Angels, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Angels Before Man Angels, Book 1",
+    "output_path": "/data/converted/Audiobook/Rafael Nicolás/Angels Before Man Angels, Book 1/Angels Before Man Angels, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translator/The Law of Power Last Life, Book 7/The Law of Power Last Life, Book 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Law of Power Last Life, Book 7",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translator/The Law of Power Last Life, Book 7/The Law of Power Last Life, Book 7.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/A. F. Kay/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)",
+    "output_path": "/data/converted/A. F. Kay/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)/Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk, Zachary J. Lorang - translated by/Campaign Last Life, Book 6/Campaign Last Life, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Campaign Last Life, Book 6",
+    "output_path": "/data/converted/Alexey Osadchuk, Zachary J. Lorang - translated by/Campaign Last Life, Book 6/Campaign Last Life, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/The Way of Kings The Stormlight Archive, Book 1/The Way of Kings The Stormlight Archive, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Way of Kings The Stormlight Archive, Book 1",
+    "output_path": "/data/converted/Brandon Sanderson/The Way of Kings The Stormlight Archive, Book 1/The Way of Kings The Stormlight Archive, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Wind and Truth Book Five of the Stormlight Archive/Wind and Truth Book Five of the Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wind and Truth Book Five of the Stormlight Archive",
+    "output_path": "/data/converted/Brandon Sanderson/Wind and Truth Book Five of the Stormlight Archive/Wind and Truth Book Five of the Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Words of Radiance The Stormlight Archive, Book 2/Words of Radiance The Stormlight Archive, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Words of Radiance The Stormlight Archive, Book 2",
+    "output_path": "/data/converted/Brandon Sanderson/Words of Radiance The Stormlight Archive, Book 2/Words of Radiance The Stormlight Archive, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/DB King/Spellweaver Codex Elder Mage Chronicles, Book 1/Spellweaver Codex Elder Mage Chronicles, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Spellweaver Codex Elder Mage Chronicles, Book 1",
+    "output_path": "/data/converted/DB King/Spellweaver Codex Elder Mage Chronicles, Book 1/Spellweaver Codex Elder Mage Chronicles, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Dakota Krout/Tenacity The Completionist Chronicles, Book 9/Tenacity The Completionist Chronicles, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tenacity The Completionist Chronicles, Book 9",
+    "output_path": "/data/converted/Dakota Krout/Tenacity The Completionist Chronicles, Book 9/Tenacity The Completionist Chronicles, Book 9.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daman/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)",
+    "output_path": "/data/converted/Daman/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)/Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daman/Rebellion of Darklings The Divine Elements, Book 4/Rebellion of Darklings The Divine Elements, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rebellion of Darklings The Divine Elements, Book 4",
+    "output_path": "/data/converted/Daman/Rebellion of Darklings The Divine Elements, Book 4/Rebellion of Darklings The Divine Elements, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Gregory Maguire/Wicked The Life and Times of the Wicked Witch of the West/Wicked The Life and Times of the Wicked Witch of the West.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wicked The Life and Times of the Wicked Witch of the West",
+    "output_path": "/data/converted/Gregory Maguire/Wicked The Life and Times of the Wicked Witch of the West/Wicked The Life and Times of the Wicked Witch of the West.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.M. Clarke/Mark of the Fool 7 A Progression Fantasy Epic/Mark of the Fool 7 A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 7 A Progression Fantasy Epic",
+    "output_path": "/data/converted/J.M. Clarke/Mark of the Fool 7 A Progression Fantasy Epic/Mark of the Fool 7 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michele Notaro/The Enchanter's Soul The Ellwood Chronicles II/The Enchanter's Soul The Ellwood Chronicles II.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Enchanter's Soul The Ellwood Chronicles II",
+    "output_path": "/data/converted/Michele Notaro/The Enchanter's Soul The Ellwood Chronicles II/The Enchanter's Soul The Ellwood Chronicles II.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Nameless Author/Nameless Sovereign 2 A Cultivation Progression Fantasy/Nameless Sovereign 2 A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign 2 A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Nameless Author/Nameless Sovereign 2 A Cultivation Progression Fantasy/Nameless Sovereign 2 A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Nameless Author/Nameless Sovereign 3 A Cultivation Progression Fantasy/Nameless Sovereign 3 A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign 3 A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Nameless Author/Nameless Sovereign 3 A Cultivation Progression Fantasy/Nameless Sovereign 3 A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer’s Way Healer's Way, Book 2/The Healer’s Way Healer's Way, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Healer’s Way Healer's Way, Book 2",
+    "output_path": "/data/converted/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer’s Way Healer's Way, Book 2/The Healer’s Way Healer's Way, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick King/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques",
+    "output_path": "/data/converted/Patrick King/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques/Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
   }
 }

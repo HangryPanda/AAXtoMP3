@@ -137,7 +137,7 @@ export function BookRow({
 
       {/* Status */}
       <div className="w-24 shrink-0">
-        <StatusBadge status={book.status} />
+        <StatusBadge status={book.status} showIcon showLabel={false} />
       </div>
 
       {/* Actions */}

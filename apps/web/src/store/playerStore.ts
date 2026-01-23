@@ -7,6 +7,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Howl } from "howler";
 import { saveProgress, getProgress } from "@/lib/db";
+import { updatePlaybackProgress } from "@/services/books";
 
 /**
  * Player state interface
@@ -74,17 +75,28 @@ const SAVE_POSITION_INTERVAL = 5000; // Save every 5 seconds
  * Start position save interval
  */
 function startPositionSaveInterval(
-  getState: () => PlayerState,
-  saveProgressFn: typeof saveProgress
+  getState: () => PlayerState
 ): void {
   stopPositionSaveInterval();
 
   savePositionInterval = setInterval(() => {
     const state = getState();
     if (state.currentBookId && state.isPlaying && state.duration > 0) {
-      saveProgressFn(state.currentBookId, state.currentTime, state.duration).catch(
+      const positionMs = Math.floor(state.currentTime * 1000);
+      
+      // Save locally first
+      saveProgress(state.currentBookId, state.currentTime, state.duration).catch(
         console.error
       );
+
+      // Sync to backend
+      updatePlaybackProgress(state.currentBookId, {
+        position_ms: positionMs,
+        playback_speed: state.playbackRate,
+        is_finished: state.currentTime >= state.duration * 0.95,
+      }).catch(err => {
+        console.warn("Failed to sync progress to backend:", err);
+      });
     }
   }, SAVE_POSITION_INTERVAL);
 }
@@ -124,7 +136,7 @@ export const usePlayerStore = create<PlayerStore>()(
         if (howlInstance && !get().isPlaying) {
           howlInstance.play();
           set({ isPlaying: true, error: null });
-          startPositionSaveInterval(get, saveProgress);
+          startPositionSaveInterval(get);
         }
       },
 
@@ -137,9 +149,17 @@ export const usePlayerStore = create<PlayerStore>()(
           // Save position immediately on pause
           const state = get();
           if (state.currentBookId && state.duration > 0) {
+            const positionMs = Math.floor(state.currentTime * 1000);
+            
             saveProgress(state.currentBookId, state.currentTime, state.duration).catch(
               console.error
             );
+
+            updatePlaybackProgress(state.currentBookId, {
+              position_ms: positionMs,
+              playback_speed: state.playbackRate,
+              is_finished: state.currentTime >= state.duration * 0.95,
+            }).catch(console.error);
           }
         }
       },
@@ -211,6 +231,7 @@ export const usePlayerStore = create<PlayerStore>()(
         howlInstance = new Howl({
           src: [audioUrl],
           html5: true, // Use HTML5 Audio for large files
+          format: ["m4b", "m4a", "mp4", "mp3", "flac", "ogg", "opus"],
           volume: currentState.volume,
           rate: currentState.playbackRate,
           mute: currentState.isMuted,
@@ -229,7 +250,7 @@ export const usePlayerStore = create<PlayerStore>()(
           },
           onplay: () => {
             set({ isPlaying: true });
-            startPositionSaveInterval(get, saveProgress);
+            startPositionSaveInterval(get);
 
             // Update time during playback
             const updateTime = () => {
@@ -256,9 +277,17 @@ export const usePlayerStore = create<PlayerStore>()(
             // Mark as completed
             const state = get();
             if (state.currentBookId) {
+              const positionMs = Math.floor(state.duration * 1000);
+              
               saveProgress(state.currentBookId, state.duration, state.duration).catch(
                 console.error
               );
+
+              updatePlaybackProgress(state.currentBookId, {
+                position_ms: positionMs,
+                playback_speed: state.playbackRate,
+                is_finished: true,
+              }).catch(console.error);
             }
           },
           onloaderror: (_id, error) => {
@@ -280,9 +309,17 @@ export const usePlayerStore = create<PlayerStore>()(
         // Save final position
         const state = get();
         if (state.currentBookId && state.duration > 0) {
+          const positionMs = Math.floor(state.currentTime * 1000);
+          
           saveProgress(state.currentBookId, state.currentTime, state.duration).catch(
             console.error
           );
+
+          updatePlaybackProgress(state.currentBookId, {
+            position_ms: positionMs,
+            playback_speed: state.playbackRate,
+            is_finished: state.currentTime >= state.duration * 0.95,
+          }).catch(console.error);
         }
 
         // Cleanup

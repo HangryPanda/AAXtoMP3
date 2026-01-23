@@ -37,6 +37,16 @@ export interface ProductImages {
   [key: string]: string;
 }
 
+export interface PlaybackProgressResponse {
+  book_asin: string;
+  position_ms: number;
+  last_chapter_id: string | null;
+  playback_speed: number;
+  is_finished: boolean;
+  last_played_at: string;
+  completed_at: string | null;
+}
+
 export interface Book {
   asin: string;
   title: string;
@@ -52,6 +62,7 @@ export interface Book {
   publisher?: string | null;
   language?: string | null;
   format_type?: string | null;
+  content_type?: string | null;
   aax_available: boolean;
   aaxc_available: boolean;
   status: BookStatus;
@@ -69,6 +80,7 @@ export interface BookListParams {
   page?: number;
   page_size?: number;
   status?: BookStatus;
+  content_type?: "audiobook" | "podcast";
   search?: string;
   series_title?: string;
   has_local?: boolean;
@@ -131,6 +143,18 @@ export interface RepairPreview {
   orphan_conversions: number;
   missing_files: number;
   duplicate_conversions: number;
+  // Disk-derived metrics
+  downloaded_on_disk_total: number;
+  downloaded_on_disk_remote_total: number;
+  converted_m4b_files_on_disk_total: number;
+  converted_m4b_titles_on_disk_total: number;
+  converted_m4b_in_audiobook_dir_total: number;
+  converted_m4b_outside_audiobook_dir_total: number;
+  // Database-derived metrics (primary source of truth)
+  downloaded_db_total: number;
+  converted_db_total: number;
+  // Misplaced files
+  misplaced_files_count: number;
   generated_at: string;
 }
 

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { StatusBadge } from "./StatusBadge";
 import { ActionMenu } from "./ActionMenu";
+import { BookProgressOverlay, useBookDimmedState } from "./BookProgressOverlay";
 import {
   canPlay,
   getCoverUrl,
@@ -48,6 +49,7 @@ export function BookCard({
   const seriesInfo = getSeriesInfo(book);
   const duration = formatRuntime(book.runtime_length_min);
   const isPlayable = canPlay(book);
+  const isDimmed = useBookDimmedState(book.asin);
 
   const handlePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -66,6 +68,7 @@ export function BookCard({
       className={cn(
         "group relative overflow-hidden transition-shadow hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
         selected && "ring-2 ring-primary",
+        isDimmed && "opacity-60",
         className
       )}
     >
@@ -115,9 +118,12 @@ export function BookCard({
           </Button>
         </div>
 
+        {/* Progress Overlay for active jobs */}
+        <BookProgressOverlay asin={book.asin} />
+
         {/* Status Badge */}
         <div className="absolute right-2 top-2">
-          <StatusBadge status={book.status} />
+          <StatusBadge status={book.status} showIcon showLabel={false} />
         </div>
       </div>
 

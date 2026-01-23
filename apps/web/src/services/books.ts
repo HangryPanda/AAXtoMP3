@@ -15,6 +15,7 @@ import type {
   PaginatedLocalItems,
   LocalItem,
   RepairPreview,
+  PlaybackProgressResponse,
 } from "@/types";
 
 /**
@@ -166,5 +167,35 @@ export async function applyRepair(): Promise<QueuedJobResponse> {
   return apiRequest<QueuedJobResponse>({
     method: "POST",
     url: "/library/repair/apply",
+  });
+}
+
+/**
+ * Update playback progress for a book
+ */
+export async function updatePlaybackProgress(
+  asin: string,
+  data: {
+    position_ms: number;
+    playback_speed?: number;
+    is_finished?: boolean;
+    chapter_id?: string;
+  }
+): Promise<PlaybackProgressResponse> {
+  return apiRequest<PlaybackProgressResponse>({
+    method: "PATCH",
+    url: `/library/${asin}/progress`,
+    data,
+  });
+}
+
+/**
+ * Get books in progress (Continue Listening)
+ */
+export async function getContinueListening(limit = 5): Promise<PlaybackProgressResponse[]> {
+  return apiRequest<PlaybackProgressResponse[]>({
+    method: "GET",
+    url: "/library/continue-listening",
+    params: { limit },
   });
 }

@@ -103,6 +103,43 @@ class TestLibraryEndpoints:
             assert item["status"] == "COMPLETED"
 
     @pytest.mark.asyncio
+    async def test_get_books_filter_by_content_type(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test filtering books by content type (audiobook vs podcast)."""
+        podcast = Book(
+            asin="P001",
+            title="Podcast 1",
+            metadata_json={"content_type": "Podcast"},
+        )
+        audiobook = Book(
+            asin="A001",
+            title="Audiobook 1",
+            metadata_json={"content_type": "Product"},
+        )
+        unknown = Book(
+            asin="U001",
+            title="Unknown 1",
+            metadata_json=None,
+        )
+        test_session.add_all([podcast, audiobook, unknown])
+        await test_session.commit()
+
+        response = await client.get("/library?content_type=podcast")
+        data = response.json()
+        assert data["total"] == 1
+        assert data["items"][0]["asin"] == "P001"
+        assert data["items"][0]["content_type"] == "Podcast"
+
+        response = await client.get("/library?content_type=audiobook")
+        data = response.json()
+        asins = {it["asin"] for it in data["items"]}
+        assert "P001" not in asins
+        assert {"A001", "U001"}.issubset(asins)
+
+    @pytest.mark.asyncio
     async def test_get_books_search(
         self,
         client: AsyncClient,

@@ -23,7 +23,7 @@ class WebSocketManager:
     def __init__(self) -> None:
         """Initialize WebSocket manager."""
         self.settings = get_settings()
-        self._connections: dict[str, WebSocket] = {}
+        self._connections: dict[str, set[WebSocket]] = {}
         self._buffers: dict[str, list[dict[str, Any]]] = {}
         self._flush_tasks: dict[str, asyncio.Task[None]] = {}
         self._buffer_interval = self.settings.ws_log_buffer_ms / 1000.0
@@ -37,29 +37,33 @@ class WebSocketManager:
             resource_id: Identifier for the resource (e.g., job_id)
         """
         await websocket.accept()
-        self._connections[resource_id] = websocket
-        self._buffers[resource_id] = []
+        self._connections.setdefault(resource_id, set()).add(websocket)
+        self._buffers.setdefault(resource_id, [])
 
-    def disconnect(self, resource_id: str) -> None:
+    def disconnect(self, websocket: WebSocket, resource_id: str) -> None:
         """
         Remove a WebSocket connection.
 
         Args:
             resource_id: Identifier for the resource
         """
-        if resource_id in self._connections:
-            del self._connections[resource_id]
+        conns = self._connections.get(resource_id)
+        if conns is not None:
+            conns.discard(websocket)
+            if not conns:
+                del self._connections[resource_id]
 
-        if resource_id in self._buffers:
-            del self._buffers[resource_id]
-
-        if resource_id in self._flush_tasks:
-            self._flush_tasks[resource_id].cancel()
-            del self._flush_tasks[resource_id]
+        # If no listeners remain, clean up buffers/tasks for that resource id.
+        if resource_id not in self._connections:
+            if resource_id in self._buffers:
+                del self._buffers[resource_id]
+            if resource_id in self._flush_tasks:
+                self._flush_tasks[resource_id].cancel()
+                del self._flush_tasks[resource_id]
 
     def is_connected(self, resource_id: str) -> bool:
         """Check if a resource has an active connection."""
-        return resource_id in self._connections
+        return resource_id in self._connections and len(self._connections[resource_id]) > 0
 
     async def send_personal_message(
         self,
@@ -79,12 +83,23 @@ class WebSocketManager:
         if resource_id not in self._connections:
             return False
 
-        try:
-            await self._connections[resource_id].send_json(message)
-            return True
-        except Exception:
-            self.disconnect(resource_id)
+        websockets = list(self._connections.get(resource_id, set()))
+        if not websockets:
             return False
+
+        sent_any = False
+        to_drop: list[WebSocket] = []
+        for ws in websockets:
+            try:
+                await ws.send_json(message)
+                sent_any = True
+            except Exception:
+                to_drop.append(ws)
+
+        for ws in to_drop:
+            self.disconnect(ws, resource_id)
+
+        return sent_any
 
     async def broadcast(self, message: dict[str, Any]) -> None:
         """
@@ -93,17 +108,8 @@ class WebSocketManager:
         Args:
             message: Message to broadcast
         """
-        disconnected: list[str] = []
-
-        for resource_id, websocket in self._connections.items():
-            try:
-                await websocket.send_json(message)
-            except Exception:
-                disconnected.append(resource_id)
-
-        # Clean up disconnected clients
-        for resource_id in disconnected:
-            self.disconnect(resource_id)
+        for resource_id in list(self._connections.keys()):
+            await self.send_personal_message(message, resource_id)
 
     def buffer_message(self, message: dict[str, Any], resource_id: str) -> None:
         """
@@ -150,13 +156,17 @@ class WebSocketManager:
 
         try:
             # Send all buffered messages as a batch
-            await self._connections[resource_id].send_json({
-                "type": "batch",
-                "messages": messages,
-                "count": len(messages),
-            })
+            await self.send_personal_message(
+                {
+                    "type": "batch",
+                    "messages": messages,
+                    "count": len(messages),
+                },
+                resource_id,
+            )
         except Exception:
-            self.disconnect(resource_id)
+            # Connection cleanup is handled by send_personal_message
+            return
 
     def create_progress_callback(
         self,
@@ -176,6 +186,7 @@ class WebSocketManager:
         def callback(percent: int, line: str) -> None:
             message = {
                 "type": message_type,
+                "job_id": resource_id,
                 "percent": percent,
                 "line": line,
             }
@@ -187,7 +198,9 @@ class WebSocketManager:
                 )
             else:
                 # Log line - buffer it
-                self.buffer_message({"type": "log", "line": line}, resource_id)
+                self.buffer_message(
+                    {"type": "log", "job_id": resource_id, "line": line}, resource_id
+                )
 
         return callback
 
@@ -196,6 +209,7 @@ class WebSocketManager:
         resource_id: str,
         status: str,
         progress: int = 0,
+        message: str | None = None,
         error: str | None = None,
     ) -> bool:
         """
@@ -205,18 +219,23 @@ class WebSocketManager:
             resource_id: Target resource ID
             status: Current status
             progress: Progress percentage
+            message: Optional status message (e.g., current book being downloaded)
             error: Optional error message
 
         Returns:
             True if sent successfully
         """
-        message = {
+        payload: dict[str, Any] = {
             "type": "status",
+            "job_id": resource_id,
             "status": status,
             "progress": progress,
         }
 
-        if error:
-            message["error"] = error
+        if message:
+            payload["message"] = message
 
-        return await self.send_personal_message(message, resource_id)
+        if error:
+            payload["error"] = error
+
+        return await self.send_personal_message(payload, resource_id)

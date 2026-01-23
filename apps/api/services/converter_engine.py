@@ -51,7 +51,7 @@ class ConverterEngine:
     def __init__(self) -> None:
         """Initialize converter engine."""
         self.settings = get_settings()
-        self.script_path = self.settings.aaxtomp3_path
+        self.script_path = self.settings.aaxtomp3_path.resolve()
 
         if not self.script_path.exists():
             logger.warning(
@@ -259,14 +259,17 @@ class ConverterEngine:
             await process.wait()
 
             success = process.returncode == 0
+            stdout_str = "\n".join(output_lines)
+            stderr_str = "\n".join(error_lines)
+
             result: dict[str, Any] = {
                 "success": success,
                 "returncode": process.returncode,
                 "input_file": str(input_file),
                 "output_dir": str(output_dir),
                 "format": format,
-                "stdout": "\n".join(output_lines),
-                "stderr": "\n".join(error_lines),
+                "stdout": stdout_str,
+                "stderr": stderr_str,
                 "duration_seconds": total_duration_seconds,
             }
 
@@ -279,6 +282,10 @@ class ConverterEngine:
                     input_file.name,
                     process.returncode,
                 )
+                # If stderr is empty but return code is non-zero, use stdout as error info
+                if not stderr_str and stdout_str:
+                    result["stderr"] = stdout_str
+                
                 if detected_errors:
                     result["detected_errors"] = detected_errors
 

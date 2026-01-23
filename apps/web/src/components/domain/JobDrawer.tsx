@@ -7,9 +7,13 @@ import {
   FileAudio,
   RefreshCw,
   Wrench,
-  X,
   FileText,
   XCircle,
+  Clock,
+  Loader2,
+  CheckCircle2,
+  AlertTriangle,
+  Ban,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -45,6 +49,17 @@ const STATUS_BADGE_VARIANTS: Record<JobStatus, "default" | "secondary" | "destru
   FAILED: "destructive",
   CANCELLED: "secondary",
 };
+
+const STATUS_ICONS: Record<JobStatus, React.ElementType> = {
+  PENDING: Clock,
+  QUEUED: Clock,
+  RUNNING: Loader2,
+  COMPLETED: CheckCircle2,
+  FAILED: AlertTriangle,
+  CANCELLED: Ban,
+};
+
+const ACTIVE_BADGE_ICON: React.ElementType = Loader2;
 
 export interface JobDrawerProps {
   open: boolean;
@@ -86,26 +101,23 @@ export function JobDrawer({
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose?.()}>
-      <DialogContent className={cn("max-w-md", className)}>
+      <DialogContent
+        className={cn("w-[min(92vw,900px)] max-w-3xl", className)}
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <span>Jobs</span>
             {activeJobs.length > 0 && (
-              <Badge variant="info">{activeJobs.length} active</Badge>
+              <Badge variant="info" className="gap-1">
+                <ACTIVE_BADGE_ICON className="h-3.5 w-3.5 animate-spin" />
+                <span className="tabular-nums">{activeJobs.length}</span>
+                <span className="sr-only">active</span>
+              </Badge>
             )}
           </DialogTitle>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-4 top-4"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </DialogHeader>
 
-        <div className="max-h-[60vh] overflow-y-auto">
+        <div className="max-h-[65vh] overflow-y-auto pr-3 scrollbar-subtle">
           {jobs.length === 0 ? (
             <div className="flex h-32 items-center justify-center text-muted-foreground">
               No jobs
@@ -165,6 +177,7 @@ interface JobItemProps {
 
 function JobItem({ job, onCancel, onViewLogs }: JobItemProps) {
   const Icon = JOB_TYPE_ICONS[job.task_type];
+  const StatusIcon = STATUS_ICONS[job.status];
   const isActive = isJobActive(job);
   const canCancel = canCancelJob(job);
   const duration = getJobDuration(job);
@@ -194,7 +207,10 @@ function JobItem({ job, onCancel, onViewLogs }: JobItemProps) {
               {job.task_type}
             </span>
             <Badge variant={STATUS_BADGE_VARIANTS[job.status]} className="shrink-0">
-              {job.status.toLowerCase()}
+              <StatusIcon
+                className={cn("h-3.5 w-3.5", job.status === "RUNNING" && "animate-spin")}
+              />
+              <span className="sr-only">{job.status}</span>
             </Badge>
           </div>
 

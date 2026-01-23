@@ -1,0 +1,60 @@
+# macOS AppleDouble files (cause xattr errors on NFS)
+._*
+.DS_Store
+**/.DS_Store
+**/._*
+
+# Python virtual environments
+.venv/
+.venv_*/
+**/.venv/
+**/.venv_*/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Test/dev artifacts
+.coverage
+.pytest_cache/
+**/.pytest_cache/
+.nfs.*
+**/.nfs.*
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Node modules (web app builds its own)
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Documentation (not needed in container)
+docs/
+*.md
+!README.md
+
+# Specs handled separately via volume mount
+specs/
+
+# Local scripts not needed in container
+apps/api/bootstrap_venv.sh
+apps/api/run_dev.sh
+apps/api/run_prod.sh
+apps/api/backfill_metadata.py

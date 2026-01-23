@@ -11,7 +11,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from "@tanstack/react-query";
-import { getBooks, getBookDetails, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair } from "@/services/books";
+import { getBooks, getBookDetails, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair, getContinueListening } from "@/services/books";
 import {
   getAllBooks,
   bulkPutBooks,
@@ -320,7 +320,23 @@ export function useApplyRepair() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: bookKeys.repairPreview() });
       queryClient.invalidateQueries({ queryKey: bookKeys.all });
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
     },
+  });
+}
+
+/**
+ * Hook for fetching books in progress (Continue Listening)
+ */
+export function useContinueListening(
+  limit = 5,
+  options?: Omit<UseQueryOptions<any>, "queryKey" | "queryFn">
+) {
+  return useQuery({
+    queryKey: [...bookKeys.all, "continue-listening", limit],
+    queryFn: () => getContinueListening(limit),
+    staleTime: 15 * 1000,
+    ...options,
   });
 }
 

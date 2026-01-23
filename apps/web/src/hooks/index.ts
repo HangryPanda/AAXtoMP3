@@ -6,3 +6,4 @@ export * from "./useBooks";
 export * from "./useJobs";
 export * from "./useSettings";
 export * from "./useJobWebSocket";
+export * from "./useProgressStats";

@@ -1108,9 +1108,9 @@
   },
   "B0F14RPXHR": {
     "asin": "B0F14RPXHR",
-    "title": "Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)",
-    "aaxc_path": "/Volumes/Media/Audiobooks/Completed/B0F14RPXHR_Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)-AAX_44_128.aaxc",
-    "voucher_path": "/Volumes/Media/Audiobooks/Completed/B0F14RPXHR_Harry Potter and the Sorcerer\u2019s Stone (Full-Cast Edition)-AAX_44_128.voucher",
+    "title": "Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)",
+    "aaxc_path": "/Volumes/Media/Audiobooks/Completed/B0F14RPXHR_Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)-AAX_44_128.aaxc",
+    "voucher_path": "/Volumes/Media/Audiobooks/Completed/B0F14RPXHR_Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)-AAX_44_128.voucher",
     "cover_path": null,
     "downloaded_at": "2026-01-20T12:16:23",
     "status": "success"
@@ -1645,5 +1645,2927 @@
     "cover_path": null,
     "downloaded_at": "2026-01-20T23:43:03",
     "status": "success"
+  },
+  "mastering": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/Mastering_Magic_Jeff_the_Game_Master_Book_3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/Mastering_Magic_Jeff_the_Game_Master_Book_3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/Mastering_Magic_Jeff_the_Game_Master_Book_3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09p4byyx5": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09P4BYYX5_Heir of Novron [Dramatized Adaptation] Riyria Revelations, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09P4BYYX5_Heir of Novron [Dramatized Adaptation] Riyria Revelations, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09P4BYYX5_Heir of Novron [Dramatized Adaptation] Riyria Revelations, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0btz81d9l": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BTZ81D9L_Expanse Unbound, Book 6-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0BTZ81D9L_Expanse Unbound, Book 6-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0BTZ81D9L_Expanse Unbound, Book 6_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cyhkdfdq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CYHKDFDQ_The Path of Ascension 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CYHKDFDQ_The Path of Ascension 5-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CYHKDFDQ_The Path of Ascension 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bch31c5f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BCH31C5F_Fury Unbound, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BCH31C5F_Fury Unbound, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BCH31C5F_Fury Unbound, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b6gbzrh9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B6GBZRH9_Hunger Unbound, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0B6GBZRH9_Hunger Unbound, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0B6GBZRH9_Hunger Unbound, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b1n8qzz4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B1N8QZZ4_Silence Unbound, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B1N8QZZ4_Silence Unbound, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B1N8QZZ4_Silence Unbound, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dx2ltl1l": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DX2LTL1L_Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DX2LTL1L_Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DX2LTL1L_Zealot's Eleventh Crusade A Fantasy LitRPG Adventure (Divine Apostasy, Book 11)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dvj8g4xk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DVJ8G4XK_Nameless Sovereign 3 A Cultivation Progression Fantasy-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DVJ8G4XK_Nameless Sovereign 3 A Cultivation Progression Fantasy-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DVJ8G4XK_Nameless Sovereign 3 A Cultivation Progression Fantasy_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d2jlzryr": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D2JLZRYR_The Orc and the Manny Monsters Hollow, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D2JLZRYR_The Orc and the Manny Monsters Hollow, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D2JLZRYR_The Orc and the Manny Monsters Hollow, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cvmwts91": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CVMWTS91_Sent to a Fantasy World and Now All the Men Want Me, Volume 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CVMWTS91_Sent to a Fantasy World and Now All the Men Want Me, Volume 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CVMWTS91_Sent to a Fantasy World and Now All the Men Want Me, Volume 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09gl2jc7l": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09GL2JC7L_The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09GL2JC7L_The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09GL2JC7L_The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b06xwgxbl8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B06XWGXBL8_Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B06XWGXBL8_Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B06XWGXBL8_Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ddm5y9ps": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DDM5Y9PS_Rebirth of the Density God Density God, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DDM5Y9PS_Rebirth of the Density God Density God, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DDM5Y9PS_Rebirth of the Density God Density God, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ds2slv5f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DS2SLV5F_Requirements A LitRPG Adventure (System Universe, Book 7)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DS2SLV5F_Requirements A LitRPG Adventure (System Universe, Book 7)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DS2SLV5F_Requirements A LitRPG Adventure (System Universe, Book 7)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dm9lmprh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DM9LMPRH_Mark of the Fool 7-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DM9LMPRH_Mark of the Fool 7-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DM9LMPRH_Mark of the Fool 7_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dmq8qb6f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DMQ8QB6F_Unintended Cultivator, Volume Four-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DMQ8QB6F_Unintended Cultivator, Volume Four-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DMQ8QB6F_Unintended Cultivator, Volume Four_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d4w3jnd8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D4W3JND8_Rise of the Density God Density God, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D4W3JND8_Rise of the Density God Density God, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D4W3JND8_Rise of the Density God Density God, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d5kn58gz": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D5KN58GZ_Return of the Runebound Professor 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D5KN58GZ_Return of the Runebound Professor 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D5KN58GZ_Return of the Runebound Professor 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dpn9qkfl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DPN9QKFL_Defiance of the Fall 14 A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DPN9QKFL_Defiance of the Fall 14 A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DPN9QKFL_Defiance of the Fall 14 A LitRPG Adventure_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d9pgkymt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D9PGKYMT_Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D9PGKYMT_Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D9PGKYMT_Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cq3759c3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CQ3759C3_Wind and Truth Book Five of the Stormlight Archive-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CQ3759C3_Wind and Truth Book Five of the Stormlight Archive-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CQ3759C3_Wind and Truth Book Five of the Stormlight Archive_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0718z5k4c": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0718Z5K4C_Oathbringer-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0718Z5K4C_Oathbringer-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0718Z5K4C_Oathbringer_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b5m28hzk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B5M28HZK_Edgedancer Stormlight Archive-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B5M28HZK_Edgedancer Stormlight Archive-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B5M28HZK_Edgedancer Stormlight Archive_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cxtxfhmc": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CXTXFHMC_Corin and the Courtier Beautiful Beasts, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CXTXFHMC_Corin and the Courtier Beautiful Beasts, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CXTXFHMC_Corin and the Courtier Beautiful Beasts, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b00hwf0mhw": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B00HWF0MHW_Words of Radiance The Stormlight Archive, Book 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B00HWF0MHW_Words of Radiance The Stormlight Archive, Book 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B00HWF0MHW_Words of Radiance The Stormlight Archive, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b003zwfo7e": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B003ZWFO7E_The Way of Kings The Stormlight Archive, Book 1-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B003ZWFO7E_The Way of Kings The Stormlight Archive, Book 1-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B003ZWFO7E_The Way of Kings The Stormlight Archive, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b005zui3oa": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B005ZUI3OA_The Alloy of Law A Mistborn Novel-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B005ZUI3OA_The Alloy of Law A Mistborn Novel-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B005ZUI3OA_The Alloy of Law A Mistborn Novel_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002va9ikk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002VA9IKK_The Hero of Ages Mistborn, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002VA9IKK_The Hero of Ages Mistborn, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002VA9IKK_The Hero of Ages Mistborn, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002v5glq4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002V5GLQ4_The Well of Ascension Mistborn, Book 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002V5GLQ4_The Well of Ascension Mistborn, Book 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002V5GLQ4_The Well of Ascension Mistborn, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002v0qcyu": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002V0QCYU_The Final Empire Mistborn Book 1-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002V0QCYU_The Final Empire Mistborn Book 1-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002V0QCYU_The Final Empire Mistborn Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d34k16z2": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D34K16Z2_Dawn of the Density God Density God, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D34K16Z2_Dawn of the Density God Density God, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D34K16Z2_Dawn of the Density God Density God, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d5jtfytp": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D5JTFYTP_Return of the Runebound Professor 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D5JTFYTP_Return of the Runebound Professor 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D5JTFYTP_Return of the Runebound Professor 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dlhkcrzg": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DLHKCRZG_Nameless Sovereign 2 A Cultivation Progression Fantasy-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DLHKCRZG_Nameless Sovereign 2 A Cultivation Progression Fantasy-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DLHKCRZG_Nameless Sovereign 2 A Cultivation Progression Fantasy_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0czpym8q4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CZPYM8Q4_When the Moon Hatched A Novel-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CZPYM8Q4_When the Moon Hatched A Novel-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CZPYM8Q4_When the Moon Hatched A Novel_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dkpy4zyh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DKPY4ZYH_Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DKPY4ZYH_Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DKPY4ZYH_Path Walker A Xianxia Cultivation Fantasy (The Divine Elements, Book 5)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09xy39b53": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09XY39B53_Dissonance A LitRPG Adventure (Unbound Book 1)-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09XY39B53_Dissonance A LitRPG Adventure (Unbound Book 1)-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09XY39B53_Dissonance A LitRPG Adventure (Unbound Book 1)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bhx4wvj2": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BHX4WVJ2_The Complete Rhenwars Saga An Epic Fantasy Pentalogy-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0BHX4WVJ2_The Complete Rhenwars Saga An Epic Fantasy Pentalogy-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0BHX4WVJ2_The Complete Rhenwars Saga An Epic Fantasy Pentalogy_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dcm1rk2d": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DCM1RK2D_Rebellion of Darklings The Divine Elements, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DCM1RK2D_Rebellion of Darklings The Divine Elements, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DCM1RK2D_Rebellion of Darklings The Divine Elements, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cc72gkgs": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CC72GKGS_A Circle of Stars The Stardust Duology, Book One-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CC72GKGS_A Circle of Stars The Stardust Duology, Book One-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CC72GKGS_A Circle of Stars The Stardust Duology, Book One_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d92qck71": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D92QCK71_Dragon Warrior Rise of the Devourer, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D92QCK71_Dragon Warrior Rise of the Devourer, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D92QCK71_Dragon Warrior Rise of the Devourer, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cs3yl3rn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CS3YL3RN_Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CS3YL3RN_Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CS3YL3RN_Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cfvyyf4p": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CFVYYF4P_Rise of the Devourer Voidborne A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CFVYYF4P_Rise of the Devourer Voidborne A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CFVYYF4P_Rise of the Devourer Voidborne A LitRPG Adventure_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09v1s8wk7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09V1S8WK7_Land of the Elementals, Books 1-3 Box Set-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09V1S8WK7_Land of the Elementals, Books 1-3 Box Set-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09V1S8WK7_Land of the Elementals, Books 1-3 Box Set_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cyn3npx3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CYN3NPX3_Reborn-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CYN3NPX3_Reborn-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CYN3NPX3_Reborn_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d98lk2mf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D98LK2MF_Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D98LK2MF_Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D98LK2MF_Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b074nbtrgl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B074NBTRGL_Iron Gold-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B074NBTRGL_Iron Gold-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B074NBTRGL_Iron Gold_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0db2m9vkn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DB2M9VKN_The Tenth Muse Divine Apostasy, Book 10-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DB2M9VKN_The Tenth Muse Divine Apostasy, Book 10-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DB2M9VKN_The Tenth Muse Divine Apostasy, Book 10_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b019nmz6fe": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B019NMZ6FE_Morning Star Book III of the Red Rising Trilogy-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B019NMZ6FE_Morning Star Book III of the Red Rising Trilogy-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B019NMZ6FE_Morning Star Book III of the Red Rising Trilogy_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0czpnxkhq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CZPNXKHQ_Reign of Havoc Legends of The Tainted, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CZPNXKHQ_Reign of Havoc Legends of The Tainted, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CZPNXKHQ_Reign of Havoc Legends of The Tainted, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b00r6s1rcy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B00R6S1RCY_Golden Son Book II of the Red Rising Trilogy-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B00R6S1RCY_Golden Son Book II of the Red Rising Trilogy-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B00R6S1RCY_Golden Son Book II of the Red Rising Trilogy_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d94v4zvt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D94V4ZVT_The Shadow Rising Book Four of 'The Wheel of Time'-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0D94V4ZVT_The Shadow Rising Book Four of 'The Wheel of Time'-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0D94V4ZVT_The Shadow Rising Book Four of 'The Wheel of Time'_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d5dpfbxl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D5DPFBXL_Emperor's End The Ripple System, Book 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0D5DPFBXL_Emperor's End The Ripple System, Book 5-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0D5DPFBXL_Emperor's End The Ripple System, Book 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dccyt451": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0DCCYT451_Campaign Last Life, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0DCCYT451_Campaign Last Life, Book 6-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0DCCYT451_Campaign Last Life, Book 6_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cxfbtcbv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CXFBTCBV_All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CXFBTCBV_All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CXFBTCBV_All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cq97pncj": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CQ97PNCJ_All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CQ97PNCJ_All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CQ97PNCJ_All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ct92k6k8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CT92K6K8_Unintended Cultivator, Volume One-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CT92K6K8_Unintended Cultivator, Volume One-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CT92K6K8_Unintended Cultivator, Volume One_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c549d366": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C549D366_The Elemental Keyes Circle the Square, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C549D366_The Elemental Keyes Circle the Square, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C549D366_The Elemental Keyes Circle the Square, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cs4qylhb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CS4QYLHB_The Healer's Way Healer's Way, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CS4QYLHB_The Healer's Way Healer's Way, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CS4QYLHB_The Healer's Way Healer's Way, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cjvxgnyt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CJVXGNYT_Antimage Ends of Magic, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CJVXGNYT_Antimage Ends of Magic, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CJVXGNYT_Antimage Ends of Magic, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cdn84fnd": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CDN84FND_Rune Seeker A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CDN84FND_Rune Seeker A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CDN84FND_Rune Seeker A LitRPG Adventure_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bvxf2b5y": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BVXF2B5Y_Bastard Last Life Series, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BVXF2B5Y_Bastard Last Life Series, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BVXF2B5Y_Bastard Last Life Series, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bj7rksxb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BJ7RKSXB_Wed to the Barbarian Barbarian Duet, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BJ7RKSXB_Wed to the Barbarian Barbarian Duet, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BJ7RKSXB_Wed to the Barbarian Barbarian Duet, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bg6fwr4h": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BG6FWR4H_The Lost Hero-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BG6FWR4H_The Lost Hero-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BG6FWR4H_The Lost Hero_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b089x9q2zk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B089X9Q2ZK_Nolyn The Rise and Fall, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B089X9Q2ZK_Nolyn The Rise and Fall, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B089X9Q2ZK_Nolyn The Rise and Fall, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b07956bmdh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B07956BMDH_Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B07956BMDH_Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B07956BMDH_Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ccbw5lxt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CCBW5LXT_The Elemental Ruins Circle the Square, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CCBW5LXT_The Elemental Ruins Circle the Square, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CCBW5LXT_The Elemental Ruins Circle the Square, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c5mpmqyx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C5MPMQYX_The Silmarillion-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C5MPMQYX_The Silmarillion-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C5MPMQYX_The Silmarillion_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cn1vbbxh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CN1VBBXH_The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CN1VBBXH_The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CN1VBBXH_The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cwx12xh6": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CWX12XH6_The Fetters of Fate The Bladeborn Saga, Book 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CWX12XH6_The Fetters of Fate The Bladeborn Saga, Book 5-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CWX12XH6_The Fetters of Fate The Bladeborn Saga, Book 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blg9fqvt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLG9FQVT_The Winds of War The Bladeborn Saga, Book 4-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0BLG9FQVT_The Winds of War The Bladeborn Saga, Book 4-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0BLG9FQVT_The Winds of War The Bladeborn Saga, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09vjc9hxy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09VJC9HXY_An Echo of Titans The Bladeborn Saga, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09VJC9HXY_An Echo of Titans The Bladeborn Saga, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09VJC9HXY_An Echo of Titans The Bladeborn Saga, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09dmlvbkw": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09DMLVBKW_Ghost of the Shadowfort The Bladeborn Saga, Book 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09DMLVBKW_Ghost of the Shadowfort The Bladeborn Saga, Book 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09DMLVBKW_Ghost of the Shadowfort The Bladeborn Saga, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c9v9bnk3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C9V9BNK3_The Second Law of Cultivation Qi=MC^2, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C9V9BNK3_The Second Law of Cultivation Qi=MC^2, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C9V9BNK3_The Second Law of Cultivation Qi=MC^2, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bss9b6yg": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BSS9B6YG_Pool of Dreams-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BSS9B6YG_Pool of Dreams-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BSS9B6YG_Pool of Dreams_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bxfmg1v9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BXFMG1V9_The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BXFMG1V9_The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BXFMG1V9_The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bdt1ztgs": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BDT1ZTGS_Shadebound The Last King, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BDT1ZTGS_Shadebound The Last King, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BDT1ZTGS_Shadebound The Last King, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b94tb39p": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B94TB39P_To Wield a Plague Passage to Dawn, Book 2.5-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B94TB39P_To Wield a Plague Passage to Dawn, Book 2.5-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B94TB39P_To Wield a Plague Passage to Dawn, Book 2.5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002v5b9so": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002V5B9SO_Daemon-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002V5B9SO_Daemon-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002V5B9SO_Daemon_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0crzxz59p": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CRZXZ59P_Demon's Rage The Bloodwood Saga, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CRZXZ59P_Demon's Rage The Bloodwood Saga, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CRZXZ59P_Demon's Rage The Bloodwood Saga, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cw21hw3q": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CW21HW3Q_Ashborn Primordial A Progression Fantasy Epic-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CW21HW3Q_Ashborn Primordial A Progression Fantasy Epic-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CW21HW3Q_Ashborn Primordial A Progression Fantasy Epic_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bld14l5v": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLD14L5V_Spellweaver Codex Elder Mage Chronicles, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLD14L5V_Spellweaver Codex Elder Mage Chronicles, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BLD14L5V_Spellweaver Codex Elder Mage Chronicles, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cxfhqgrl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CXFHQGRL_Mark of the Fool 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CXFHQGRL_Mark of the Fool 5-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CXFHQGRL_Mark of the Fool 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cwlw4kp1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CWLW4KP1_The Mage from Nowhere Legends of the Tainted, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CWLW4KP1_The Mage from Nowhere Legends of the Tainted, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CWLW4KP1_The Mage from Nowhere Legends of the Tainted, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0csgcstkv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CSGCSTKV_System Interference System Universe, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CSGCSTKV_System Interference System Universe, Book 5-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CSGCSTKV_System Interference System Universe, Book 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cjs1ps67": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CJS1PS67_Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CJS1PS67_Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CJS1PS67_Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cc6j6xd2": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CC6J6XD2_The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CC6J6XD2_The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CC6J6XD2_The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cx9l4xdh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CX9L4XDH_Tarot's Ninth Harbinger Divine Apostasy, Book 9-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CX9L4XDH_Tarot's Ninth Harbinger Divine Apostasy, Book 9-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CX9L4XDH_Tarot's Ninth Harbinger Divine Apostasy, Book 9_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cvbksnj9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CVBKSNJ9_Defiance of the Fall 12-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CVBKSNJ9_Defiance of the Fall 12-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CVBKSNJ9_Defiance of the Fall 12_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0by3ml6ty": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BY3ML6TY_Dark Heir-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BY3ML6TY_Dark Heir-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BY3ML6TY_Dark Heir_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b07v9pj6vq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B07V9PJ6VQ_The Enchanter's Soul The Ellwood Chronicles II-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B07V9PJ6VQ_The Enchanter's Soul The Ellwood Chronicles II-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B07V9PJ6VQ_The Enchanter's Soul The Ellwood Chronicles II_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c5y5y375": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C5Y5Y375_Savannah A LitRPG Adventure (System Universe, Book 3)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C5Y5Y375_Savannah A LitRPG Adventure (System Universe, Book 3)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C5Y5Y375_Savannah A LitRPG Adventure (System Universe, Book 3)_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bs73p4yf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BS73P4YF_Torith System Universe, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BS73P4YF_Torith System Universe, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BS73P4YF_Torith System Universe, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cn1r8z48": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CN1R8Z48_Planesfall Painting the Mists, Book 18-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CN1R8Z48_Planesfall Painting the Mists, Book 18-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CN1R8Z48_Planesfall Painting the Mists, Book 18_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c6vt4tq7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C6VT4TQ7_Bloodstorm Painting the Mists, Book 17-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0C6VT4TQ7_Bloodstorm Painting the Mists, Book 17-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0C6VT4TQ7_Bloodstorm Painting the Mists, Book 17_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bm2bkwnt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BM2BKWNT_Heartforge Painting the Mists, Book 16-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BM2BKWNT_Heartforge Painting the Mists, Book 16-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BM2BKWNT_Heartforge Painting the Mists, Book 16_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b77p7wgt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B77P7WGT_Pendulum of Fate, Part 2 Painting the Mists, Book 15-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B77P7WGT_Pendulum of Fate, Part 2 Painting the Mists, Book 15-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B77P7WGT_Pendulum of Fate, Part 2 Painting the Mists, Book 15_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b3sflsdj": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B3SFLSDJ_Pendulum of Fate, Part 1 Painting the Mists, Book 14-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B3SFLSDJ_Pendulum of Fate, Part 1 Painting the Mists, Book 14-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B3SFLSDJ_Pendulum of Fate, Part 1 Painting the Mists, Book 14_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09l5bydsn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09L5BYDSN_Echoes of Divinity Painting the Mists, Book 13-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09L5BYDSN_Echoes of Divinity Painting the Mists, Book 13-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09L5BYDSN_Echoes of Divinity Painting the Mists, Book 13_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bh9fdkp8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BH9FDKP8_System Change A LitRPG Adventure System Universe, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BH9FDKP8_System Change A LitRPG Adventure System Universe, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BH9FDKP8_System Change A LitRPG Adventure System Universe, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09dz3fysw": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09DZ3FYSW_Claddings of Light Painting the Mists, Book 12-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09DZ3FYSW_Claddings of Light Painting the Mists, Book 12-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09DZ3FYSW_Claddings of Light Painting the Mists, Book 12_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09wst6l37": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09WST6L37_Mastering Magic: Jeff the Game Master, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09WST6L37_Mastering Magic: Jeff the Game Master, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09WST6L37_Mastering Magic: Jeff the Game Master, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cnkvxb79": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CNKVXB79_Chasmfall: The Weirkey Chronicles, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CNKVXB79_Chasmfall: The Weirkey Chronicles, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CNKVXB79_Chasmfall: The Weirkey Chronicles, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bt8brvdk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BT8BRVDK_Archcrafter: The Weirkey Chronicles, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BT8BRVDK_Archcrafter: The Weirkey Chronicles, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BT8BRVDK_Archcrafter: The Weirkey Chronicles, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0clymtzzv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CLYMTZZV_The Weirkey Chronicles Omnibus: Books 1-3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CLYMTZZV_The Weirkey Chronicles Omnibus: Books 1-3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CLYMTZZV_The Weirkey Chronicles Omnibus: Books 1-3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d4w1rtwx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D4W1RTWX_Unintended Cultivator, Volume 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D4W1RTWX_Unintended Cultivator, Volume 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D4W1RTWX_Unintended Cultivator, Volume 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d8lm5f6n": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0D8LM5F6N_Unintended Cultivator: Volume 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0D8LM5F6N_Unintended Cultivator: Volume 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0D8LM5F6N_Unintended Cultivator: Volume 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ck4zrwmy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CK4ZRWMY_Tenacity: The Completionist Chronicles, Book 9-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CK4ZRWMY_Tenacity: The Completionist Chronicles, Book 9-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CK4ZRWMY_Tenacity: The Completionist Chronicles, Book 9_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "1774244268": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/1774244268_Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1, 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/1774244268_Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1, 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/1774244268_Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1, 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09r2jj8dl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09R2JJ8DL_The Other Way: Passage to Dawn, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09R2JJ8DL_The Other Way: Passage to Dawn, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09R2JJ8DL_The Other Way: Passage to Dawn, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c3f9b47d": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C3F9B47D_The Rascor Plains: Immortal Great Souls, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C3F9B47D_The Rascor Plains: Immortal Great Souls, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C3F9B47D_The Rascor Plains: Immortal Great Souls, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b07bzsv2pv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B07BZSV2PV_A Wizard's Soul: Sentinels of Creation, Volume 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B07BZSV2PV_A Wizard's Soul: Sentinels of Creation, Volume 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B07BZSV2PV_A Wizard's Soul: Sentinels of Creation, Volume 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b074zngrrv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B074ZNGRRV_A Tale of Two Gardens: Sentinels of Creation, Volume 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B074ZNGRRV_A Tale of Two Gardens: Sentinels of Creation, Volume 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B074ZNGRRV_A Tale of Two Gardens: Sentinels of Creation, Volume 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b007vrykwo": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B007VRYKWO_The Enchantress-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B007VRYKWO_The Enchantress-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B007VRYKWO_The Enchantress_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09jt4ph62": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09JT4PH62_The Eye of the World: Book One of The Wheel of Time-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09JT4PH62_The Eye of the World: Book One of The Wheel of Time-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09JT4PH62_The Eye of the World: Book One of The Wheel of Time_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b004y17ab8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B004Y17AB8_The Warlock: The Secrets of the Immortal Nicholas Flamel-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B004Y17AB8_The Warlock: The Secrets of the Immortal Nicholas Flamel-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B004Y17AB8_The Warlock: The Secrets of the Immortal Nicholas Flamel_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b003m55qyu": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B003M55QYU_The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B003M55QYU_The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B003M55QYU_The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002va8zqi": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002VA8ZQI_The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002VA8ZQI_The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002VA8ZQI_The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002v1bhqw": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002V1BHQW_The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002V1BHQW_The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002V1BHQW_The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cbkvwngj": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0CBKVWNGJ_The Eighth Harmony: A Fantasy LitRPG Adventure Divine Apostasy, Book 8-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0CBKVWNGJ_The Eighth Harmony: A Fantasy LitRPG Adventure Divine Apostasy, Book 8-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0CBKVWNGJ_The Eighth Harmony: A Fantasy LitRPG Adventure Divine Apostasy, Book 8_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bf183934": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BF183934_A Thief in the Night-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BF183934_A Thief in the Night-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BF183934_A Thief in the Night_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b002v1ja16": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B002V1JA16_The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B002V1JA16_The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B002V1JA16_The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "1774244985": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/1774244985_The Lost City of Ithos: Mage Errant, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/1774244985_The Lost City of Ithos: Mage Errant, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/1774244985_The Lost City of Ithos: Mage Errant, Book 4_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "1774241846": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/1774241846_A Traitor in Skyhold: Mage Errant, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/1774241846_A Traitor in Skyhold: Mage Errant, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/1774241846_A Traitor in Skyhold: Mage Errant, Book 3_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "1774249979": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/1774249979_The Siege of Skyhold: Mage Errant, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/1774249979_The Siege of Skyhold: Mage Errant, Book 5-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/1774249979_The Siege of Skyhold: Mage Errant, Book 5_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b3pymyty": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B3PYMYTY_Tongue Eater: Mage Errant, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B3PYMYTY_Tongue Eater: Mage Errant, Book 6-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B3PYMYTY_Tongue Eater: Mage Errant, Book 6_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "1774240130": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/1774240130_Mage Errant: Publisher's Pack: Mage Errant, Book 1, 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/1774240130_Mage Errant: Publisher's Pack: Mage Errant, Book 1, 2-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/1774240130_Mage Errant: Publisher's Pack: Mage Errant, Book 1, 2_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09lyzpflz": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09LYZPFLZ_The Colour of Magic: Discworld, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09LYZPFLZ_The Colour of Magic: Discworld, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09LYZPFLZ_The Colour of Magic: Discworld, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bxqn4qb9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BXQN4QB9_Waybound: Cradle, Book 12-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BXQN4QB9_Waybound: Cradle, Book 12-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BXQN4QB9_Waybound: Cradle, Book 12_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c2s8k8y9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C2S8K8Y9_Asher: Demons-In-Law, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C2S8K8Y9_Asher: Demons-In-Law, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C2S8K8Y9_Asher: Demons-In-Law, Book 1_(1215).jpg",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj7y35m": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ7Y35M_Sleep Sound with Noah Reid Episode 1 Harmonic Winds on Chacaltaya Mountain-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ7Y35M_Sleep Sound with Noah Reid Episode 1 Harmonic Winds on Chacaltaya Mountain-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj8kj69": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ8KJ69_Sleep Sound with Noah Reid Episode 2 Footsteps in the Snow-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ8KJ69_Sleep Sound with Noah Reid Episode 2 Footsteps in the Snow-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj9mts7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ9MTS7_Sleep Sound with Noah Reid Episode 3 Rustling Winds and Nestling Birds in Sinlahekin-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ9MTS7_Sleep Sound with Noah Reid Episode 3 Rustling Winds and Nestling Birds in Sinlahekin-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj8xlkw": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ8XLKW_Sleep Sound with Noah Reid Episode 4 Jokulsarlon Glacier Lagoon in Iceland-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ8XLKW_Sleep Sound with Noah Reid Episode 4 Jokulsarlon Glacier Lagoon in Iceland-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj9sbzk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ9SBZK_Sleep Sound with Noah Reid Episode 5 Winter Campfire-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ9SBZK_Sleep Sound with Noah Reid Episode 5 Winter Campfire-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0blj6vxb3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ6VXB3_Sleep Sound with Noah Reid Episode 6 Thaw-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJ8WZKC_Sleep Sound with Noah Reid/B0BLJ6VXB3_Sleep Sound with Noah Reid Episode 6 Thaw-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t91qxpx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T91QXPX_The Prophecy: Trailer-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T91QXPX_The Prophecy: Trailer-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t95zwkh": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T95ZWKH_The Prophecy: Episode 1: Mary-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T95ZWKH_The Prophecy: Episode 1: Mary-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t98pzq4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T98PZQ4_The Prophecy: Episode 2: Jonah-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T98PZQ4_The Prophecy: Episode 2: Jonah-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t8wp6ql": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T8WP6QL_The Prophecy: Episode 3: Daniel-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T8WP6QL_The Prophecy: Episode 3: Daniel-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t99w15g": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T99W15G_The Prophecy: Episode 4: Come Through the Sawmill-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T99W15G_The Prophecy: Episode 4: Come Through the Sawmill-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t9188gm": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9188GM_The Prophecy: Episode 5: Missing-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9188GM_The Prophecy: Episode 5: Missing-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t9h7pqn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9H7PQN_The Prophecy: Episode 6: Truth Is...-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9H7PQN_The Prophecy: Episode 6: Truth Is...-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t8pfm8z": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T8PFM8Z_The Prophecy: Episode 7: All Roads Lead To...-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T8PFM8Z_The Prophecy: Episode 7: All Roads Lead To...-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09t9869sb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9869SB_The Prophecy: Episode 8: Knock Knock-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09T94QHK6_The Prophecy/B09T9869SB_The Prophecy: Episode 8: Knock Knock-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c26ny595": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26NY595_The Space Within: Episode 1: Pilot-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26NY595_The Space Within: Episode 1: Pilot-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c26flk9f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26FLK9F_The Space Within: Teaser-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26FLK9F_The Space Within: Teaser-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c26cvypm": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26CVYPM_The Space Within: Episode 2: The Purple Crayon-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C26CVYPM_The Space Within: Episode 2: The Purple Crayon-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c2658wqg": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C2658WQG_The Space Within: Episode 3: Circles Inside Circles-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C2658WQG_The Space Within: Episode 3: Circles Inside Circles-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c2635jyt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C2635JYT_The Space Within: Episode 4: Messengers-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C2635JYT_The Space Within: Episode 4: Messengers-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c266yqkt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C266YQKT_The Space Within: Episode 5: Schrödinger's Cat-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C266YQKT_The Space Within: Episode 5: Schrödinger's Cat-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c269lyrc": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C269LYRC_The Space Within: Episode 6: The Gloaming-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C269LYRC_The Space Within: Episode 6: The Gloaming-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c25pk8qn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C25PK8QN_The Space Within: Episode 7: A Thing of Beauty-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C25PK8QN_The Space Within: Episode 7: A Thing of Beauty-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c261b5f1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C261B5F1_The Space Within: Episode 8: Divine Child-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C265FCZ2_The Space Within/B0C261B5F1_The Space Within: Episode 8: Divine Child-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2dztd78": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZTD78_Moriarty: Trailer-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZTD78_Moriarty: Trailer-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f2npqk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F2NPQK_Moriarty: Chapter One-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F2NPQK_Moriarty: Chapter One-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f1th2v": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F1TH2V_Moriarty: Chapter Two-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F1TH2V_Moriarty: Chapter Two-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f34hh1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F34HH1_Moriarty: Chapter Three-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F34HH1_Moriarty: Chapter Three-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f13tmk": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F13TMK_Moriarty: Chapter Four-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F13TMK_Moriarty: Chapter Four-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2dzphf7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZPHF7_Moriarty: Chapter Five-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZPHF7_Moriarty: Chapter Five-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f2hq6v": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F2HQ6V_Moriarty: Chapter Six-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F2HQ6V_Moriarty: Chapter Six-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2dzpk8f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZPK8F_Moriarty: Chapter Seven-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZPK8F_Moriarty: Chapter Seven-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2dzt7tv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZT7TV_Moriarty: Chapter Eight-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DZT7TV_Moriarty: Chapter Eight-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2dyrskf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DYRSKF_Moriarty: Chapter Nine-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2DYRSKF_Moriarty: Chapter Nine-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b2f1hxll": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F1HXLL_Moriarty: Chapter Ten-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0B2F1HXLL_Moriarty: Chapter Ten-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cmqx4qq3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0CMQX4QQ3_Moriarty: The Silent Order: Chapter One-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2DZBVRR_Moriarty: The Devil's Game/B0CMQX4QQ3_Moriarty: The Silent Order: Chapter One-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0g3n4brjd": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G3N4BRJD_True Crime All The Time (Ad-free): Marie Robards (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G3N4BRJD_True Crime All The Time (Ad-free): Marie Robards (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0g2kt7jwy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G2KT7JWY_True Crime All The Time (Ad-free): William Walker (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G2KT7JWY_True Crime All The Time (Ad-free): William Walker (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0g1lg1xxv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G1LG1XXV_True Crime All The Time (Ad-free): Shawn Johnson (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0G1LG1XXV_True Crime All The Time (Ad-free): Shawn Johnson (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fz7k1rk3": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FZ7K1RK3_True Crime All The Time (Ad-free): Jose Herran (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FZ7K1RK3_True Crime All The Time (Ad-free): Jose Herran (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fxw411sj": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FXW411SJ_True Crime All The Time (Ad-free): The D.C. Arsonist (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FXW411SJ_True Crime All The Time (Ad-free): The D.C. Arsonist (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fx1n2drt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FX1N2DRT_True Crime All The Time (Ad-free): Brian Sugrim (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FX1N2DRT_True Crime All The Time (Ad-free): Brian Sugrim (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fvwjsyjy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FVWJSYJY_True Crime All The Time (Ad-free): Tiffany Boyer (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FVWJSYJY_True Crime All The Time (Ad-free): Tiffany Boyer (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ftyfkdzc": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FTYFKDZC_True Crime All The Time (Ad-free): The Night Stalker (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FTYFKDZC_True Crime All The Time (Ad-free): The Night Stalker (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ft1wyf6b": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FT1WYF6B_True Crime All The Time (Ad-free): Rodney Alcala Part 3 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FT1WYF6B_True Crime All The Time (Ad-free): Rodney Alcala Part 3 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0frzrwnkg": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FRZRWNKG_True Crime All The Time (Ad-free): Rodney Alcala Part 2 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FRZRWNKG_True Crime All The Time (Ad-free): Rodney Alcala Part 2 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fr3xcl3s": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FR3XCL3S_True Crime All The Time (Ad-free): Rodney Alcala Part 1 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FR3XCL3S_True Crime All The Time (Ad-free): Rodney Alcala Part 1 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fq4l264z": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FQ4L264Z_True Crime All The Time (Ad-free): David Brom (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FQ4L264Z_True Crime All The Time (Ad-free): David Brom (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fpbxg1gz": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FPBXG1GZ_True Crime All The Time (Ad-free): The McStay Family Murders (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FPBXG1GZ_True Crime All The Time (Ad-free): The McStay Family Murders (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fnm1mzxc": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FNM1MZXC_True Crime All The Time (Ad-free): Todd Kendhammer (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FNM1MZXC_True Crime All The Time (Ad-free): Todd Kendhammer (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fmqqxwrm": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FMQQXWRM_True Crime All The Time (Ad-free): Antolin Garcia-Torres (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FMQQXWRM_True Crime All The Time (Ad-free): Antolin Garcia-Torres (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0flx2z1ky": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FLX2Z1KY_True Crime All The Time (Ad-free): Angelika Graswald (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FLX2Z1KY_True Crime All The Time (Ad-free): Angelika Graswald (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fl1jhn8h": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FL1JHN8H_True Crime All The Time (Ad-free): Steven Jones (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FL1JHN8H_True Crime All The Time (Ad-free): Steven Jones (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fj7tx7zx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FJ7TX7ZX_True Crime All The Time (Ad-free): Melissa Merritt (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FJ7TX7ZX_True Crime All The Time (Ad-free): Melissa Merritt (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fhgj4qhp": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FHGJ4QHP_True Crime All The Time (Ad-free): Christopher McCowen (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FHGJ4QHP_True Crime All The Time (Ad-free): Christopher McCowen (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fgwxnt86": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FGWXNT86_True Crime All The Time (Ad-free): Edward Cairney and Avril Jones (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FGWXNT86_True Crime All The Time (Ad-free): Edward Cairney and Avril Jones (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fg215hvb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FG215HVB_True Crime All The Time (Ad-free): Nancy Brophy (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FG215HVB_True Crime All The Time (Ad-free): Nancy Brophy (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ff3sc73h": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FF3SC73H_True Crime All The Time (Ad-free): Stephen Marshall (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FF3SC73H_True Crime All The Time (Ad-free): Stephen Marshall (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fd968zrv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FD968ZRV_True Crime All The Time (Ad-free): Dale Bruner (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FD968ZRV_True Crime All The Time (Ad-free): Dale Bruner (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fcdsgzjl": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FCDSGZJL_True Crime All The Time (Ad-free): Meg Wellnitz-Appleton and Bill Meece (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FCDSGZJL_True Crime All The Time (Ad-free): Meg Wellnitz-Appleton and Bill Meece (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fblmchbt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMCHBT_True Crime All The Time (Ad-free): Melanie McGuire (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMCHBT_True Crime All The Time (Ad-free): Melanie McGuire (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fblmrlfy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMRLFY_True Crime All The Time (Ad-free): Bryan Patrick Miller (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMRLFY_True Crime All The Time (Ad-free): Bryan Patrick Miller (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fblms9nv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMS9NV_True Crime All The Time (Ad-free): Richard Merritt Part 2 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLMS9NV_True Crime All The Time (Ad-free): Richard Merritt Part 2 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fblny1tb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLNY1TB_True Crime All The Time (Ad-free): Richard Merritt Part 1 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0FBLNY1TB_True Crime All The Time (Ad-free): Richard Merritt Part 1 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f7gy591y": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F7GY591Y_True Crime All The Time (Ad-free): Aldo Pacheco (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F7GY591Y_True Crime All The Time (Ad-free): Aldo Pacheco (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f6md21rz": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F6MD21RZ_True Crime All The Time (Ad-free): Timothy John Cook (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F6MD21RZ_True Crime All The Time (Ad-free): Timothy John Cook (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f5pdm3n7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F5PDM3N7_True Crime All The Time (Ad-free): Kate Webster (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F5PDM3N7_True Crime All The Time (Ad-free): Kate Webster (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f5pdymn7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F5PDYMN7_True Crime All The Time (Ad-free): The Swanson Motel Murders (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F5PDYMN7_True Crime All The Time (Ad-free): The Swanson Motel Murders (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f3wlz6tv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F3WLZ6TV_True Crime All The Time (Ad-free): Jonathan Scott Graham (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F3WLZ6TV_True Crime All The Time (Ad-free): Jonathan Scott Graham (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f31s4fsy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F31S4FSY_True Crime All The Time (Ad-free): Johnny Lewis (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F31S4FSY_True Crime All The Time (Ad-free): Johnny Lewis (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f28dhwrz": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F28DHWRZ_True Crime All The Time (Ad-free): Richard Glossip (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F28DHWRZ_True Crime All The Time (Ad-free): Richard Glossip (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f1m6r3jp": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F1M6R3JP_True Crime All The Time (Ad-free): William Leslie Arnold (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0F1M6R3JP_True Crime All The Time (Ad-free): William Leslie Arnold (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dzwhsmc6": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DZWHSMC6_True Crime All The Time (Ad-free): Mark Latunski (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DZWHSMC6_True Crime All The Time (Ad-free): Mark Latunski (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dz1m484b": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DZ1M484B_True Crime All The Time (Ad-free): James VanCallis (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DZ1M484B_True Crime All The Time (Ad-free): James VanCallis (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dy6xvfr9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DY6XVFR9_True Crime All The Time (Ad-free): Bernard Finch and Carole Tregoff (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DY6XVFR9_True Crime All The Time (Ad-free): Bernard Finch and Carole Tregoff (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dxdmx5n1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DXDMX5N1_True Crime All The Time (Ad-free): Scott Watson (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DXDMX5N1_True Crime All The Time (Ad-free): Scott Watson (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dwm77mb5": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DWM77MB5_True Crime All The Time (Ad-free): Stephen Reitz (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DWM77MB5_True Crime All The Time (Ad-free): Stephen Reitz (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dvs9vlmf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DVS9VLMF_True Crime All The Time (Ad-free): The White House Farm Murders (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DVS9VLMF_True Crime All The Time (Ad-free): The White House Farm Murders (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dv51j8xr": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DV51J8XR_True Crime All The Time (Ad-free): Shawn Gant-Benalcazar (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DV51J8XR_True Crime All The Time (Ad-free): Shawn Gant-Benalcazar (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dth3t91h": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DTH3T91H_True Crime All The Time (Ad-free): Steve Pankey (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DTH3T91H_True Crime All The Time (Ad-free): Steve Pankey (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dsvfwzx1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DSVFWZX1_True Crime All The Time (Ad-free): Kodi Patten and Toni Fratto (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DSVFWZX1_True Crime All The Time (Ad-free): Kodi Patten and Toni Fratto (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dsb36bsf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DSB36BSF_True Crime All The Time (Ad-free): The Murder of Cari Farver (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DSB36BSF_True Crime All The Time (Ad-free): The Murder of Cari Farver (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dr7nwjvb": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DR7NWJVB_True Crime All The Time (Ad-free): Bruce McArthur Part 2 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DR7NWJVB_True Crime All The Time (Ad-free): Bruce McArthur Part 2 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dqk876cq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DQK876CQ_True Crime All The Time (Ad-free): Bruce McArthur Part 1 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DQK876CQ_True Crime All The Time (Ad-free): Bruce McArthur Part 1 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dpvz6dzf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DPVZ6DZF_True Crime All The Time (Ad-free): Michelle Yvette Busha (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DPVZ6DZF_True Crime All The Time (Ad-free): Michelle Yvette Busha (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dpf4ynsr": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DPF4YNSR_True Crime All The Time (Ad-free): The Gitchie Manitou Murders (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DPF4YNSR_True Crime All The Time (Ad-free): The Gitchie Manitou Murders (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dnybvz1c": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DNYBVZ1C_True Crime All The Time (Ad-free): Timothy Bliefnick (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DNYBVZ1C_True Crime All The Time (Ad-free): Timothy Bliefnick (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dndjygt4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DNDJYGT4_True Crime All The Time (Ad-free): Scarlett Jenkinson and Eddie Ratcliffe (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DNDJYGT4_True Crime All The Time (Ad-free): Scarlett Jenkinson and Eddie Ratcliffe (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dmmxskn7": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DMMXSKN7_True Crime All The Time (Ad-free): Kimberly Kessler (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DMMXSKN7_True Crime All The Time (Ad-free): Kimberly Kessler (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dlvqcxzf": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DLVQCXZF_True Crime All The Time (Ad-free): Grant Amato (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DLVQCXZF_True Crime All The Time (Ad-free): Grant Amato (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dl4wrd99": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DL4WRD99_True Crime All The Time (Ad-free): Andre McDonald (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DL4WRD99_True Crime All The Time (Ad-free): Andre McDonald (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dkdmgw3f": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DKDMGW3F_True Crime All The Time (Ad-free): Brian Scott Hartman (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DKDMGW3F_True Crime All The Time (Ad-free): Brian Scott Hartman (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0djztjd9c": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJZTJD9C_True Crime All The Time (Ad-free): Kathleen Wise (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJZTJD9C_True Crime All The Time (Ad-free): Kathleen Wise (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0djlds5c5": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJLDS5C5_True Crime All The Time (Ad-free): Walter Leo Jackson Sr (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJLDS5C5_True Crime All The Time (Ad-free): Walter Leo Jackson Sr (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dj8316st": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJ8316ST_True Crime All The Time (Ad-free): Freddie Owens (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DJ8316ST_True Crime All The Time (Ad-free): Freddie Owens (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dhr58hmy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DHR58HMY_True Crime All The Time (Ad-free): Stephen Epperly (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DHR58HMY_True Crime All The Time (Ad-free): Stephen Epperly (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dh41pvmn": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DH41PVMN_True Crime All The Time (Ad-free): Albert Fish Part 2 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DH41PVMN_True Crime All The Time (Ad-free): Albert Fish Part 2 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dgfnv3c9": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DGFNV3C9_True Crime All The Time (Ad-free): Albert Fish Part 1 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DGFNV3C9_True Crime All The Time (Ad-free): Albert Fish Part 1 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dfvtxs6d": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DFVTXS6D_True Crime All The Time (Ad-free): Sarah Marie Johnson (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DFVTXS6D_True Crime All The Time (Ad-free): Sarah Marie Johnson (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0df6t6mwq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DF6T6MWQ_True Crime All The Time (Ad-free): Viktoria Nasyrova (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DF6T6MWQ_True Crime All The Time (Ad-free): Viktoria Nasyrova (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ddk1jzjm": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DDK1JZJM_True Crime All The Time (Ad-free): Leonard Tyburski (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DDK1JZJM_True Crime All The Time (Ad-free): Leonard Tyburski (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dcv45m8g": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DCV45M8G_True Crime All The Time (Ad-free): Kimberly Hricko (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DCV45M8G_True Crime All The Time (Ad-free): Kimberly Hricko (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dbgvdzf8": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DBGVDZF8_True Crime All The Time (Ad-free): Damien Guerrero and Kinzie Noordman (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0DBGVDZF8_True Crime All The Time (Ad-free): Damien Guerrero and Kinzie Noordman (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d9v3rbgt": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D9V3RBGT_True Crime All The Time (Ad-free): Michael Glazebrook (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D9V3RBGT_True Crime All The Time (Ad-free): Michael Glazebrook (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d9g5gvzy": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D9G5GVZY_True Crime All The Time (Ad-free): Alejandro Rojas (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D9G5GVZY_True Crime All The Time (Ad-free): Alejandro Rojas (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d91bzj16": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D91BZJ16_True Crime All The Time (Ad-free): William Burke and William Hare (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D91BZJ16_True Crime All The Time (Ad-free): William Burke and William Hare (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d8hkcphx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D8HKCPHX_True Crime All The Time (Ad-free): The Murder of Phil Hartman (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D8HKCPHX_True Crime All The Time (Ad-free): The Murder of Phil Hartman (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d7v3kqv1": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D7V3KQV1_True Crime All The Time (Ad-free): Jodi Arias Part 2 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D7V3KQV1_True Crime All The Time (Ad-free): Jodi Arias Part 2 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d788y72l": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D788Y72L_True Crime All The Time (Ad-free): Jodi Arias Part 1 (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D788Y72L_True Crime All The Time (Ad-free): Jodi Arias Part 1 (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d6m88btx": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D6M88BTX_True Crime All The Time (Ad-free): Wendi Mae Davidson (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D6M88BTX_True Crime All The Time (Ad-free): Wendi Mae Davidson (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d5x3814b": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D5X3814B_True Crime All The Time (Ad-free): Father Gerald Robinson (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D5X3814B_True Crime All The Time (Ad-free): Father Gerald Robinson (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d58vw2pq": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D58VW2PQ_True Crime All The Time (Ad-free): Dan White (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D58VW2PQ_True Crime All The Time (Ad-free): Dan White (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d4l34zpr": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D4L34ZPR_True Crime All The Time (Ad-free): Roderick and Mark Newell (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D4L34ZPR_True Crime All The Time (Ad-free): Roderick and Mark Newell (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d4169ksv": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D4169KSV_True Crime All The Time (Ad-free): Stephen Allwine (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D4169KSV_True Crime All The Time (Ad-free): Stephen Allwine (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d3d5ph76": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D3D5PH76_True Crime All The Time (Ad-free): Tony Boyle (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D3D5PH76_True Crime All The Time (Ad-free): Tony Boyle (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d2wy64t4": {
+    "status": "success",
+    "aaxc_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D2WY64T4_True Crime All The Time (Ad-free): Matthew Owens (Ad-free)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B08D6TT96L_True Crime All The Time (Ad-free)/B0D2WY64T4_True Crime All The Time (Ad-free): Matthew Owens (Ad-free)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "198271297x": {
+    "status": "success",
+    "aaxc_path": "/data/completed/198271297X_Becoming Supernatural How Common People Are Doing the Uncommon-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/198271297X_Becoming Supernatural How Common People Are Doing the Uncommon-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0934gtsgt": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0934GTSGT_Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0934GTSGT_Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09cqjtc7x": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09CQJTC7X_Manipulating Magic Jeff the Game Master, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B09CQJTC7X_Manipulating Magic Jeff the Game Master, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09sj1t9kf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09SJ1T9KF_The General of Izril The Wandering Inn, Book 6-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B09SJ1T9KF_The General of Izril The Wandering Inn, Book 6-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09fr6rbvy": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09FR6RBVY_The Last Light The Wandering Inn, Book 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B09FR6RBVY_The Last Light The Wandering Inn, Book 5-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09v1xj949": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09V1XJ949_Mother of Learning Arc 2 Mother of Learning, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B09V1XJ949_Mother of Learning Arc 2 Mother of Learning, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09y2d2d5t": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09Y2D2D5T_Beware of Chicken A Xianxia Cultivation Novel Beware of Chicken, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B09Y2D2D5T_Beware of Chicken A Xianxia Cultivation Novel Beware of Chicken, Book 1-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b09xyl9mqj": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B09XYL9MQJ_Rains of Liscor The Wandering Inn, Book 7-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B09XYL9MQJ_Rains of Liscor The Wandering Inn, Book 7-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b3gb64t1": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0B3GB64T1_Legends & Lattes A Novel of High Fantasy and Low Stakes-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0B3GB64T1_Legends & Lattes A Novel of High Fantasy and Low Stakes-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0b3ch221b": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0B3CH221B_Mother of Learning Arc 3 Mother of Learning, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0B3CH221B_Mother of Learning Arc 3 Mother of Learning, Book 3-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bdp2wrx7": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0BDP2WRX7_Blood of Liscor The Wandering Inn, Book 8-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0BDP2WRX7_Blood of Liscor The Wandering Inn, Book 8-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bkr654b3": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0BKR654B3_Mother of Learning Arc 4 Mother of Learning, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0BKR654B3_Mother of Learning Arc 4 Mother of Learning, Book 4-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bss6x5kf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0BSS6X5KF_Tears of Liscor The Wandering Inn, Book 9-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0BSS6X5KF_Tears of Liscor The Wandering Inn, Book 9-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c82ts539": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0C82TS539_The Wind Runner The Wandering Inn, Book 10-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0C82TS539_The Wind Runner The Wandering Inn, Book 10-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c6rcb8k2": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0C6RCB8K2_Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0C6RCB8K2_Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cfrkvqj5": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CFRKVQJ5_The Titan of Baleros The Wandering Inn, Book 11-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0CFRKVQJ5_The Titan of Baleros The Wandering Inn, Book 11-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cptbf8h1": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CPTBF8H1_Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0CPTBF8H1_Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ch1l61bg": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CH1L61BG_I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0CH1L61BG_I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0crjh5rws": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CRJH5RWS_Wizard's Tower, Books 1-3 A LitRPG Series Bundle-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0CRJH5RWS_Wizard's Tower, Books 1-3 A LitRPG Series Bundle-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cxfcnfkz": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CXFCNFKZ_The Witch of Webs The Wandering Inn, Book 12-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0CXFCNFKZ_The Witch of Webs The Wandering Inn, Book 12-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cs3xxw7c": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CS3XXW7C_Chrysalis, Books 1-3 A LitRPG Adventure Box Set-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0CS3XXW7C_Chrysalis, Books 1-3 A LitRPG Adventure Box Set-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d7f6bzbc": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D7F6BZBC_The Empress of Beasts The Wandering Inn, Book 13-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0D7F6BZBC_The Empress of Beasts The Wandering Inn, Book 13-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dccz5mg2": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DCCZ5MG2_Hell's Wardens The Wandering Inn, Book 14-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0DCCZ5MG2_Hell's Wardens The Wandering Inn, Book 14-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ddlhdjd9": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DDLHDJD9_An Unexpected Hero A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DDLHDJD9_An Unexpected Hero A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0djpxb664": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DJPXB664_An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DJPXB664_An Education in Magical Affairs An Isekai LitRPG I'm Not the Hero, Book 3-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d9wkpjhq": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D9WKPJHQ_Apocalypse Tamer The Complete Series A LitRPG Series Bundle-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0D9WKPJHQ_Apocalypse Tamer The Complete Series A LitRPG Series Bundle-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dpxm78xp": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DPXM78XP_The Fourth Law of Cultivation Qi=MC^2, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DPXM78XP_The Fourth Law of Cultivation Qi=MC^2, Book 4-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dnksr7pb": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DNKSR7PB_Daughter of the Dragon Wrath of the Stormking, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DNKSR7PB_Daughter of the Dragon Wrath of the Stormking, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dlz54s5y": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DLZ54S5Y_Return of the Runebound Professor 5 A Progression Fantasy Epic Return of the Runebound Professor, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DLZ54S5Y_Return of the Runebound Professor 5 A Progression Fantasy Epic Return of the Runebound Professor, Book 5-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f154zcsn": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F154ZCSN_Harry Potter and the Chamber of Secrets (Full-Cast Edition)-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0F154ZCSN_Harry Potter and the Chamber of Secrets (Full-Cast Edition)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0drljzx5g": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DRLJZX5G_Garden of Sanctuary The Wandering Inn, Book 15-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0DRLJZX5G_Garden of Sanctuary The Wandering Inn, Book 15-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f6vvc8qx": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F6VVC8QX_King of Duels The Wandering Inn, Book 16-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0F6VVC8QX_King of Duels The Wandering Inn, Book 16-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fjspg55z": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0FJSPG55Z_Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0FJSPG55Z_Return of the Runebound Professor 6 A Progression Fantasy Epic Return of the Runebound Professor, Book 6-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0frnj6bsj": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0FRNJ6BSJ_Ritual of Ruin King's Dark Tidings, Book 7-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0FRNJ6BSJ_Ritual of Ruin King's Dark Tidings, Book 7-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b071d42t27": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B071D42T27_The Disappearance of Winter's Daughter-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B071D42T27_The Disappearance of Winter's Daughter-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b07j5swz8b": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B07J5SWZ8B_One True Mate Series Bundle Books 1-4-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B07J5SWZ8B_One True Mate Series Bundle Books 1-4-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0bj387wgd": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0BJ387WGD_Threshold Unbound, Book 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0BJ387WGD_Threshold Unbound, Book 5-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0chjznby1": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CHJZNBY1_The Path of Ascension 4 A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0CHJZNBY1_The Path of Ascension 4 A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0ckwp6fm1": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CKWP6FM1_Somewhere Beyond the Sea Cerulean Chronicles, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0CKWP6FM1_Somewhere Beyond the Sea Cerulean Chronicles, Book 2-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d2375byf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D2375BYF_The Path of Ascension 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0D2375BYF_The Path of Ascension 6-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d81hn8gy": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D81HN8GY_Return of the Runebound Professor 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0D81HN8GY_Return of the Runebound Professor 4-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d5fjgzbb": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D5FJGZBB_Angels Before Man Angels, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0D5FJGZBB_Angels Before Man Angels, Book 1-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dckgqg4k": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DCKGQG4K_The Path of Ascension 7-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DCKGQG4K_The Path of Ascension 7-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d828zg1y": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D828ZG1Y_Drumindor Riyria Chronicles, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0D828ZG1Y_Drumindor Riyria Chronicles, Book 5-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dgqvb5b9": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DGQVB5B9_Knight of Shadows King's Dark Tidings, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DGQVB5B9_Knight of Shadows King's Dark Tidings, Book 6-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0drptw742": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DRPTW742_The Sleeping World Singing with a Humpback Whale-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DRPTW742_The Sleeping World Singing with a Humpback Whale-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0d9wk2zcg": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0D9WK2ZCG_My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0D9WK2ZCG_My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dj3gb9wz": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DJ3GB9WZ_When Wizards Follow Fools Arcane Ascension, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DJ3GB9WZ_When Wizards Follow Fools Arcane Ascension, Book 5-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dscj66n4": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DSCJ66N4_The Path of Ascension 8 A LitRPG Adventure-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0DSCJ66N4_The Path of Ascension 8 A LitRPG Adventure-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dv1zs4jf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DV1ZS4JF_All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DV1ZS4JF_All the Skills 5 A Deck-Building LitRPG All the Skills, Book 5-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dw9kqll1": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DW9KQLL1_The Sleeping World Dune Vibrations with a Fennec Fox-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DW9KQLL1_The Sleeping World Dune Vibrations with a Fennec Fox-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dvtn4hz6": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DVTN4HZ6_Unintended Cultivator, Volume Five-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DVTN4HZ6_Unintended Cultivator, Volume Five-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dy8ml8mw": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DY8ML8MW_Mark of the Fool 8-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0DY8ML8MW_Mark of the Fool 8-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dscgzh31": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DSCGZH31_Sylver Seeker, Books 1-4 A LitRPG Adventure-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0DSCGZH31_Sylver Seeker, Books 1-4 A LitRPG Adventure-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f15gbhxm": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F15GBHXM_A Brief History of Chronomancy Arcane Ascension, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0F15GBHXM_A Brief History of Chronomancy Arcane Ascension, Book 6-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f44vy3xw": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F44VY3XW_The Law of Power Last Life, Book 7-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0F44VY3XW_The Law of Power Last Life, Book 7-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f4l1zyry": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F4L1ZYRY_Murder at the Patel Motel-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0F4L1ZYRY_Murder at the Patel Motel-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fcyrlkrp": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0FCYRLKRP_Mark of the Fool 9 A Progression Fantasy Epic-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0FCYRLKRP_Mark of the Fool 9 A Progression Fantasy Epic-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b07sh9c3p5": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B07SH9C3P5_Top Secret-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B07SH9C3P5_Top Secret-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0c66cclkl": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0C66CCLKL_A Summoner Awakens Origins (A Deck Building LitRPG)-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0C66CCLKL_A Summoner Awakens Origins (A Deck Building LitRPG)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cslv4cz5": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0CSLV4CZ5_Gravesong Singer of Terandria Series, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0CSLV4CZ5_Gravesong Singer of Terandria Series, Book 1-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0dg45vjrf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0DG45VJRF_Huntsong Singer of Terandria Series, Book 2-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0DG45VJRF_Huntsong Singer of Terandria Series, Book 2-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f14rpxhr": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F14RPXHR_Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)-AAX_44_128.aaxc",
+    "voucher_path": "/data/completed/B0F14RPXHR_Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)-AAX_44_128.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0f67cgbcf": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0F67CGBCF_Reckoning Songs of Chaos, Book 4-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0F67CGBCF_Reckoning Songs of Chaos, Book 4-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0fmtcz1hm": {
+    "status": "success",
+    "aaxc_path": "/data/completed/B0FMTCZ1HM_Lady of Fire The Wandering Inn, Book 17-AAX_22_64.aaxc",
+    "voucher_path": "/data/completed/B0FMTCZ1HM_Lady of Fire The Wandering Inn, Book 17-AAX_22_64.voucher",
+    "cover_path": null,
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "filesystem_scan"
+  },
+  "b0cqpzxng4": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor A Progression Fantasy Epic/Return of the Runebound Professor A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0crw2vk9n": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Adara Wolf, R. Phoenix/The Monster's Pet Collection of Books 1-3/The Monster's Pet Collection of Books 1-3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d92m415y": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 4 The Hedge Wizard, Book 4/The Hedge Wizard 4 The Hedge Wizard, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b09zvlq2hx": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cskrdkvk": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alexander Olson/Adventurer Ends of Magic, Book 2/Adventurer Ends of Magic, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cq14q5xf": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alexey Osadchuk/Blood Ties Last Life, Book 3/Blood Ties Last Life, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0c7xm1zdm": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Frontier Last Life, Book 2/The Frontier Last Life, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cydvgvs8": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Flame of the North Last Life, Book 4/The Flame of the North Last Life, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d6whhg3q": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translated by/The Edges of Power Last Life, Book 5/The Edges of Power Last Life, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b07hmjsjg5": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Casey McQuiston/Red, White & Royal Blue A Novel/Red, White & Royal Blue A Novel.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b08pzbgq7n": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/D. K. Holmberg/The Spirit Binds Elemental Academy, Book 5/The Spirit Binds Elemental Academy, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cz4xv97p": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/D.E. Sherman/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b08r3wjq3y": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/D.K. Holmberg/Elemental Academy Boxset Books 1-3/Elemental Academy Boxset Books 1-3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b08ggh27z3": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/D.K. Holmberg/The Wind Rages  Elemental Academy, Book 4/The Wind Rages  Elemental Academy, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cpfxsnql": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Dakota Krout/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d8926bm4": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Daman/The Desolate Mountains The Divine Elements, Book 2/The Desolate Mountains The Divine Elements, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d85fvrq4": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Daman/Scion of Raizel The Divine Elements, Book 3/Scion of Raizel The Divine Elements, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d8c1xnn2": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Daman/The Blood Legacy The Divine Elements, Book 1/The Blood Legacy The Divine Elements, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cxkvkpng": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Eden Finley, Saxon James/The Bastard and the Heir/The Bastard and the Heir.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b01agmpgqy": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Edward W. Robertson/The Red Sea The Cycle of Galand, Book 1/The Red Sea The Cycle of Galand, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0bzzzhffg": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Honour Rae/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0bltldsym": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Honour Rae/All the Skills A Deck-Building LitRPG All the Skills, Book 1/All the Skills A Deck-Building LitRPG All the Skills, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0ck8xbnvl": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d94thhpz": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 6/Mark of the Fool 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cx299kw4": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 3 Home Sweet Home/Jake's Magical Market 3 Home Sweet Home.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cqmgvtc8": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 2 A Trek Through Time/Jake's Magical Market 2 A Trek Through Time.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b09mdmd85z": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market/Jake's Magical Market.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1666111228": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Jez Cajiao/Age of Stone Rise of Mankind Series, Book 1/Age of Stone Rise of Mankind Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0bjqq1bv1": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Keira Andrews/The Barbarian's Vow  Barbarian Duet, Book 2/The Barbarian's Vow  Barbarian Duet, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0c672f3q3": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b06x16l1xr": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Swords The Legends of the First Empire, Book 2/Age of Swords The Legends of the First Empire, Book 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0161r0xbq": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Myth Book One of The Legends of the First Empire/Age of Myth Book One of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1490656243": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Legend Book Four of The Legends of the First Empire/Age of Legend Book Four of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d9hzfth9": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Nameless Author/Nameless Sovereign A Cultivation Progression Fantasy/Nameless Sovereign A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0czbn1wm3": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way Healer's Way, Book 1/The Healer's Way Healer's Way, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b002v8n63c": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Orson Scott Card/Stonefather/Stonefather.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1039400825": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Words of Creation Painting the Mists, Book 10/Words of Creation Painting the Mists, Book 10.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774245108": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Shattered Lands Painting the Mists, Book 8/Shattered Lands Painting the Mists, Book 8.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774241315": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Clear Sky Painting the Mists, Book 1/Clear Sky Painting the Mists, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1039403816": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Crown of the Starry Sky Painting the Mists, Book 11/Crown of the Starry Sky Painting the Mists, Book 11.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774247275": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Edge of Oblivion Painting the Mists, Book 9/Edge of Oblivion Painting the Mists, Book 9.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774241951": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Corrupted Crimson Painting the Mists, Book 5/Corrupted Crimson Painting the Mists, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "177424439x": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Shifting Tides Painting the Mists, Book 7/Shifting Tides Painting the Mists, Book 7.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "177424196x": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Kindling Painting the Mists, Book 6/Kindling Painting the Mists, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774241943": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Pure Jade Painting the Mists, Book 4/Pure Jade Painting the Mists, Book 4.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1774241498": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Laplante/Light in the Darkness Painting the Mists, Book 3/Light in the Darkness Painting the Mists, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0c9p5dppk": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Patrick Rothfuss/The Narrow Road Between Desires Kingkiller Chronicle/The Narrow Road Between Desires Kingkiller Chronicle.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1620798239": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Peter A. Flannery/Decimus Fate and the Talisman of Dreams/Decimus Fate and the Talisman of Dreams.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0788bd32g": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Peter A. Flannery/Battle Mage/Battle Mage.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0czph9w7d": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Phil Tucker/LastRock Immortal Great Souls, Book 3/LastRock Immortal Great Souls, Book 3.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b00i2vww5u": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Pierce Brown/Red Rising/Red Rising.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0cq9p7jn6": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Robbie Couch/Another First Chance/Another First Chance.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0b7kh46fc": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Robert Jordan/The Great Hunt Book Two of 'The Wheel of Time'/The Great Hunt Book Two of 'The Wheel of Time'.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "1515943518": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/S.M. Boyce/Wraithblade The Wraithblade Saga, Book 1/Wraithblade The Wraithblade Saga, Book 1.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0czy9l58g": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Sarah Lin/Bondsfungi The Weirkey Chronicles, Book 5/Bondsfungi The Weirkey Chronicles, Book 5.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0c1pv6q7c": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10)/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10).m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d1dpr1x3": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d5yzhqb3": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/SunriseCV/Indaria System Universe, Book 6/Indaria System Universe, Book 6.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0clymb4b6": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 11 A LitRPG Adventure/Defiance of the Fall 11 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d42n8vl9": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 13/Defiance of the Fall 13.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0c78g69zw": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall, Book 10/Defiance of the Fall, Book 10.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
+  },
+  "b0d6z9wh2k": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial 2/Ashborn Primordial 2.m4b",
+    "discovered_at": "2026-01-23T02:40:13.664782",
+    "source": "inferred"
   }
 }

@@ -66,6 +66,7 @@ export function useJobWebSocket(
   } = options;
 
   const wsRef = useRef<WebSocketClient | null>(null);
+  const currentJobIdRef = useRef<string | null>(jobId ?? null);
   const { updateJob, markCompleted } = useUpdateJobFromWS();
 
   const [state, setState] = useState<JobWebSocketState>({
@@ -75,6 +76,10 @@ export function useJobWebSocket(
     error: null,
     isConnected: false,
   });
+
+  useEffect(() => {
+    currentJobIdRef.current = jobId ?? null;
+  }, [jobId]);
 
   // Handle status messages
   const handleStatus: MessageHandler<WSStatusMessage> = useCallback(
@@ -90,6 +95,7 @@ export function useJobWebSocket(
         updateJob(jobId, {
           status: message.status as "RUNNING" | "COMPLETED" | "FAILED",
           progress_percent: message.progress,
+          status_message: message.message ?? null,
           error_message: message.error ?? null,
         });
 
@@ -107,6 +113,13 @@ export function useJobWebSocket(
   // Handle progress messages
   const handleProgress: MessageHandler<WSProgressMessage> = useCallback(
     (message) => {
+      if (
+        message.job_id &&
+        currentJobIdRef.current &&
+        message.job_id !== currentJobIdRef.current
+      ) {
+        return;
+      }
       setState((prev) => ({
         ...prev,
         progress: message.percent,
@@ -127,6 +140,13 @@ export function useJobWebSocket(
   // Handle log messages
   const handleLog: MessageHandler<WSLogMessage> = useCallback(
     (message) => {
+      if (
+        message.job_id &&
+        currentJobIdRef.current &&
+        message.job_id !== currentJobIdRef.current
+      ) {
+        return;
+      }
       setState((prev) => {
         const newLogs = [...prev.logs, message.line];
         // Keep only last maxLogLines
@@ -140,6 +160,20 @@ export function useJobWebSocket(
     },
     [maxLogLines, onLog]
   );
+
+  const handleConnected: MessageHandler<{ type: "connected"; job_id: string }> =
+    useCallback((message) => {
+      // Reset logs on (re)connect so server tail replay doesn't duplicate in the UI.
+      if (currentJobIdRef.current && message.job_id !== currentJobIdRef.current) {
+        return;
+      }
+      setState((prev) => ({
+        ...prev,
+        logs: [],
+        error: null,
+        progress: 0,
+      }));
+    }, []);
 
   // Handle connection state changes
   const handleStateChange = useCallback(
@@ -182,13 +216,22 @@ export function useJobWebSocket(
     });
 
     // Subscribe to message types
+    ws.subscribe("connected", handleConnected);
     ws.subscribe("status", handleStatus);
     ws.subscribe("progress", handleProgress);
     ws.subscribe("log", handleLog);
 
     ws.connect();
     wsRef.current = ws;
-  }, [jobId, handleStateChange, handleError, handleStatus, handleProgress, handleLog]);
+  }, [
+    jobId,
+    handleStateChange,
+    handleError,
+    handleConnected,
+    handleStatus,
+    handleProgress,
+    handleLog,
+  ]);
 
   // Disconnect from WebSocket
   const disconnect = useCallback(() => {
@@ -237,7 +280,7 @@ export function useMultiJobWebSocket(
   const { updateJob, markCompleted } = useUpdateJobFromWS();
 
   const [jobStates, setJobStates] = useState<
-    Map<string, { progress: number; status: string | null }>
+    Map<string, { progress: number; status: string | null; message: string | null }>
   >(new Map());
 
   // Connect to a specific job
@@ -254,13 +297,14 @@ export function useMultiJobWebSocket(
       ws.subscribe("status", (msg: WSStatusMessage) => {
         setJobStates((prev) => {
           const newMap = new Map(prev);
-          newMap.set(jobId, { progress: msg.progress, status: msg.status });
+          newMap.set(jobId, { progress: msg.progress, status: msg.status, message: msg.message ?? null });
           return newMap;
         });
 
         updateJob(jobId, {
           status: msg.status as "RUNNING" | "COMPLETED" | "FAILED",
           progress_percent: msg.progress,
+          status_message: msg.message ?? null,
         });
 
         if (msg.status === "COMPLETED" || msg.status === "FAILED") {
@@ -273,7 +317,7 @@ export function useMultiJobWebSocket(
       ws.subscribe("progress", (msg: WSProgressMessage) => {
         setJobStates((prev) => {
           const newMap = new Map(prev);
-          const current = prev.get(jobId) ?? { progress: 0, status: null };
+          const current = prev.get(jobId) ?? { progress: 0, status: null, message: null };
           newMap.set(jobId, { ...current, progress: msg.percent });
           return newMap;
         });

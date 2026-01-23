@@ -46,6 +46,8 @@ class AudibleClient:
         self.settings = get_settings()
         self.auth_file = self.settings.audible_auth_file
         self.profile = self.settings.audible_profile
+        # Derive config directory from auth file path for CLI commands
+        self.config_dir = self.auth_file.parent
 
     async def is_authenticated(self) -> bool:
         """
@@ -260,6 +262,15 @@ class AudibleClient:
 
         cmd = [
             "audible",
+        ]
+
+        # Add global options (must come before subcommand)
+        if self.config_dir and self.config_dir.exists():
+            cmd.extend(["--config-dir", str(self.config_dir)])
+        if self.profile:
+            cmd.extend(["--profile", self.profile])
+
+        cmd.extend([
             "download",
             "--asin",
             asin,
@@ -274,12 +285,15 @@ class AudibleClient:
             "--quality",
             quality,
             "--no-confirm",
-        ]
+        ])
 
         if aaxc:
             cmd.append("--aaxc")
 
+        logger.info("Running download command: %s", " ".join(cmd[:8]) + "...")
         result = await self._run_command(cmd, timeout=1800)  # 30 minute timeout
+        logger.info("Download command returned: returncode=%s, stderr_preview=%s",
+                   result.get("returncode"), result.get("stderr", "")[:200])
 
         success = result["returncode"] == 0
 
@@ -407,9 +421,14 @@ class AudibleClient:
         """
         logger.debug("Fetching activation bytes")
 
-        result = await self._run_command(
-            ["audible", "activation-bytes", "--output-format", "json"]
-        )
+        cmd = ["audible"]
+        if self.config_dir and self.config_dir.exists():
+            cmd.extend(["--config-dir", str(self.config_dir)])
+        if self.profile:
+            cmd.extend(["--profile", self.profile])
+        cmd.extend(["activation-bytes", "--output-format", "json"])
+
+        result = await self._run_command(cmd)
 
         if result["returncode"] != 0:
             logger.warning(
@@ -446,7 +465,7 @@ class AudibleClient:
             Dictionary with returncode, stdout, stderr.
         """
         cmd_str = " ".join(cmd[:3]) + "..."  # Log first few args only
-        logger.debug("Executing command: %s (timeout=%ds)", cmd_str, timeout)
+        logger.info("Executing command: %s (timeout=%ds)", cmd_str, timeout)
 
         process: asyncio.subprocess.Process | None = None
 
@@ -456,6 +475,7 @@ class AudibleClient:
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
+            logger.info("Process created with PID: %s", process.pid)
 
             stdout, stderr = await asyncio.wait_for(
                 process.communicate(), timeout=timeout
@@ -468,10 +488,10 @@ class AudibleClient:
             }
 
             if process.returncode != 0:
-                logger.debug(
+                logger.info(
                     "Command exited with code %d: %s",
                     process.returncode,
-                    result["stderr"][:200],
+                    result["stderr"][:300],
                 )
 
             return result
@@ -490,7 +510,7 @@ class AudibleClient:
                 "stderr": f"Command timed out after {timeout}s",
             }
         except FileNotFoundError as e:
-            logger.error("Command not found: %s", cmd[0])
+            logger.error("Command not found: %s - %s", cmd[0], e)
             return {
                 "returncode": -1,
                 "stdout": "",

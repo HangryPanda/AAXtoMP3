@@ -34,6 +34,7 @@ authorOverride=             # Override the author, ignoring the metadata
 audibleCli=0                # Default off, Use additional data gathered from mkb79/audible-cli
 aaxc_key=                   # Initialize variables, in case we need them in debug_vars
 aaxc_iv=                    # Initialize variables, in case we need them in debug_vars
+asin=                       # ASIN identifier, extracted from audible-cli data when available
 ffmpegPath=                 # Set a custom path, useful for using the updated version that supports aaxc
 ffmpegName=ffmpeg           # Set a custom ffmpeg binary name, useful tailoring to local setup
 ffprobeName=ffprobe         # Set a custom ffprobe binary name, useful tailoring to local setup
@@ -558,9 +559,11 @@ save_metadata() {
 CHAPTER\((.key))NAME=\(.value.title)"' "${extra_chapter_file}" > "${tmp_chapter_file}"
     fi
 
-    # get extra meta data from library.tsv
+    # Always extract ASIN from chapter JSON when audible-cli data is available
+    asin=$(jq -r '.content_metadata.content_reference.asin' "${extra_chapter_file}")
+
+    # get extra meta data from library.tsv (series info)
     if [[ "${library_file_exists}" == 1 ]]; then
-      asin=$(jq -r '.content_metadata.content_reference.asin' "${extra_chapter_file}")
       if [[ ! -z "${asin}" ]]; then
         lib_entry=$($GREP "^${asin}" "${library_file}")
         if [[ ! -z "${lib_entry}" ]]; then
@@ -781,6 +784,8 @@ do
       -metadata publisher="${publisher}" \
       -metadata series="${series}" \
       -metadata series_sequence="${series_sequence}" \
+      -metadata ASIN="${asin}" \
+      -metadata AUDIBLE_ASIN="${asin}" \
       -f ${container} \
       "${output_file}"
     if [ "$((${loglevel} > 0))" == "1" ]; then

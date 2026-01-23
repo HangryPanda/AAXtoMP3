@@ -9,6 +9,30 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
+/**
+ * Convert ISO timestamp in log line to local time.
+ * Matches patterns like: 2024-01-22T02:33:11.123Z or 2024-01-22T02:33:11Z
+ */
+function convertLogTimestampToLocal(line: string): string {
+  const isoPattern = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z)/;
+  const match = line.match(isoPattern);
+  if (match) {
+    try {
+      const date = new Date(match[1]);
+      const localTime = date.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+      return line.replace(match[1], localTime);
+    } catch {
+      return line;
+    }
+  }
+  return line;
+}
+
 export interface TerminalProps {
   title?: string;
   height?: number;
@@ -170,25 +194,28 @@ export function Terminal({
         )}
 
         {!loading &&
-          logs.map((line, index) => (
-            <div
-              key={index}
-              className={cn(
-                "whitespace-pre-wrap break-all",
-                line.includes("[ERROR]") || line.includes("error")
-                  ? "text-red-400"
-                  : line.includes("[WARN]") || line.includes("warn")
-                  ? "text-yellow-400"
-                  : line.includes("[INFO]")
-                  ? "text-blue-400"
-                  : line.includes("[SUCCESS]") || line.includes("success")
-                  ? "text-green-400"
-                  : "text-zinc-300"
-              )}
-            >
-              {line}
-            </div>
-          ))}
+          logs.map((line, index) => {
+            const displayLine = convertLogTimestampToLocal(line);
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "whitespace-pre-wrap break-all",
+                  line.includes("[ERROR]") || line.includes("error")
+                    ? "text-red-400"
+                    : line.includes("[WARN]") || line.includes("warn")
+                    ? "text-yellow-400"
+                    : line.includes("[INFO]")
+                    ? "text-blue-400"
+                    : line.includes("[SUCCESS]") || line.includes("success")
+                    ? "text-green-400"
+                    : "text-zinc-300"
+                )}
+              >
+                {displayLine}
+              </div>
+            );
+          })}
       </div>
     </div>
   );

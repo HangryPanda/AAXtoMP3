@@ -4,6 +4,8 @@
 
 export type OutputFormat = "mp3" | "m4a" | "m4b" | "flac" | "opus" | "ogg";
 
+export type MoveFilesPolicy = "report_only" | "always_move" | "ask_each";
+
 export interface Settings {
   output_format: OutputFormat;
   single_file: boolean;
@@ -20,6 +22,11 @@ export interface Settings {
   max_retries: number;
   author_override: string;
   keep_author_index: number;
+  // Repair settings
+  repair_extract_metadata: boolean;
+  repair_delete_duplicates: boolean;
+  repair_update_manifests: boolean;
+  move_files_policy: MoveFilesPolicy;
 }
 
 export interface SettingsUpdate {
@@ -38,6 +45,11 @@ export interface SettingsUpdate {
   max_retries?: number;
   author_override?: string;
   keep_author_index?: number;
+  // Repair settings
+  repair_extract_metadata?: boolean;
+  repair_delete_duplicates?: boolean;
+  repair_update_manifests?: boolean;
+  move_files_policy?: MoveFilesPolicy;
 }
 
 export interface NamingVariables {
@@ -106,4 +118,9 @@ export const DEFAULT_SETTINGS: Settings = {
   max_retries: 3,
   author_override: "",
   keep_author_index: 0,
+  // Repair settings
+  repair_extract_metadata: true,
+  repair_delete_duplicates: false,
+  repair_update_manifests: true,
+  move_files_policy: "report_only",
 };

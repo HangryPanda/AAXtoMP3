@@ -3,6 +3,7 @@
 import asyncio
 import json
 import logging
+import shutil
 from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
@@ -14,6 +15,8 @@ from db.models import Book, BookStatus
 from db.session import get_session
 from services.audible_client import AudibleClient
 from services.converter_engine import ConverterEngine
+from services.metadata_extractor import MetadataExtractor
+from services.library_manager import LibraryManager
 from services.repair_pipeline import apply_repair
 from sqlalchemy import select
 
@@ -79,6 +82,8 @@ class JobManager:
         # Services
         self.audible_client = AudibleClient()
         self.converter = ConverterEngine()
+        self.metadata_extractor = MetadataExtractor()
+        self.library_manager = LibraryManager(self.metadata_extractor)
         self.settings = settings
 
         logger.info(
@@ -95,6 +100,43 @@ class JobManager:
             callback: Async callback for status updates, or None to disable.
         """
         self._status_callback = callback
+
+    def set_progress_callback(
+        self, job_id: UUID, callback: Callable[[int, str], None] | None
+    ) -> None:
+        """Register (or clear) a per-job progress/log callback."""
+        if callback is None:
+            self._progress_callbacks.pop(job_id, None)
+        else:
+            self._progress_callbacks[job_id] = callback
+
+    def _job_log_dir(self) -> Path:
+        d = self.settings.data_dir / "job_logs"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+
+    def _job_log_path(self, job_id: UUID) -> Path:
+        return self._job_log_dir() / f"{job_id}.log"
+
+    def _format_log_line(self, level: str, line: str) -> str:
+        ts = datetime.utcnow().isoformat(timespec="milliseconds") + "Z"
+        safe = (line or "").rstrip("\n")
+        return f"{ts} [{level}] {safe}"
+
+    def _append_job_log(self, job_id: UUID, level: str, line: str) -> str:
+        """
+        Append a line to the job log and return the formatted line.
+
+        Best-effort: never raises.
+        """
+        formatted = self._format_log_line(level, line)
+        try:
+            path = self._job_log_path(job_id)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.open("a", encoding="utf-8").write(formatted + "\n")
+        except Exception:
+            pass
+        return formatted
 
     async def _notify_status(
         self,
@@ -114,6 +156,11 @@ class JobManager:
             message: Optional message.
             error: Optional error message.
         """
+        if message:
+            self._append_job_log(job_id, "INFO", message)
+        if error:
+            self._append_job_log(job_id, "ERROR", error)
+
         if self._status_callback:
             try:
                 await self._status_callback(
@@ -268,6 +315,50 @@ class JobManager:
             "Queued for repair",
         )
 
+    async def queue_library_scan(
+        self,
+        job_id: UUID,
+        force: bool = False,
+        progress_callback: Callable[[int, str], None] | None = None,
+    ) -> None:
+        """
+        Queue a library-wide metadata scan job.
+        """
+        logger.info("Queuing library scan job %s (force=%s)", job_id, force)
+
+        if progress_callback:
+            self._progress_callbacks[job_id] = progress_callback
+
+        task = asyncio.create_task(
+            self._execute_library_scan(job_id, force),
+            name=f"scan-{job_id}",
+        )
+        self._tasks[job_id] = task
+
+        await self._notify_status(
+            job_id,
+            "QUEUED",
+            0,
+            "Queued for library metadata scan",
+        )
+
+    async def _execute_library_scan(self, job_id: UUID, force: bool) -> dict[str, Any]:
+        """Execute library scan with status updates."""
+        logger.info("Starting library scan execution for job %s", job_id)
+        await self._notify_status(job_id, "RUNNING", 0, "Starting metadata scan...")
+        
+        try:
+            async for session in get_session():
+                count = await self.library_manager.scan_library(session, force=force)
+                break
+            
+            await self._notify_status(job_id, "COMPLETED", 100, f"Scan complete. Updated {count} books.")
+            return {"success": True, "count": count}
+        except Exception as e:
+            logger.exception("Exception during library scan job %s", job_id)
+            await self._notify_status(job_id, "FAILED", 0, error=str(e))
+            return {"success": False, "error": str(e)}
+
     async def cancel_job(self, job_id: UUID) -> bool:
         """
         Cancel a running job.
@@ -342,44 +433,90 @@ class JobManager:
 
             await self._notify_status(job_id, "RUNNING", 0, "Starting download")
 
+            # Pre-fetch book titles for better progress messages
+            titles: dict[str, str] = {}
+            try:
+                async for session in get_session():
+                    stmt = select(Book).where(Book.asin.in_(asins))
+                    result = await session.execute(stmt)
+                    books = result.scalars().all()
+                    titles = {book.asin: book.title for book in books}
+                    break
+            except Exception as e:
+                logger.warning("Could not fetch book titles: %s", e)
+
             callback = self._progress_callbacks.get(job_id)
             results: list[dict[str, Any]] = []
             total = len(asins)
+            completed_count = 0
+            results_lock = asyncio.Lock()
 
-            for idx, asin in enumerate(asins):
-                if self.is_cancelled(job_id):
-                    logger.info("Job %s cancelled during download", job_id)
-                    break
+            # Semaphore to limit parallel downloads to 5
+            download_limit = asyncio.Semaphore(5)
 
-                progress = int((idx / total) * 100)
-                message = f"Downloading {asin} ({idx + 1}/{total})"
+            async def download_one(asin: str) -> dict[str, Any]:
+                nonlocal completed_count
+                title = titles.get(asin, asin)
 
-                if callback:
-                    callback(progress, message)
+                async with download_limit:
+                    if self.is_cancelled(job_id):
+                        return {"success": False, "asin": asin, "cancelled": True}
 
-                await self._notify_status(job_id, "RUNNING", progress, message)
+                    # Log start
+                    formatted = self._append_job_log(job_id, "INFO", f"Downloading: {title}")
+                    if callback:
+                        callback(-1, formatted)
 
-                try:
-                    result = await self.audible_client.download(
-                        asin=asin,
-                        output_dir=self.settings.downloads_dir,
-                        cover_size="1215",
-                    )
-                    results.append(result)
+                    try:
+                        result = await self.audible_client.download(
+                            asin=asin,
+                            output_dir=self.settings.downloads_dir,
+                            cover_size="1215",
+                        )
 
-                    if not result.get("success"):
-                        logger.warning(
-                            "Download failed for ASIN %s in job %s",
+                        async with results_lock:
+                            completed_count += 1
+                            progress = int((completed_count / total) * 100)
+                            message = f"Downloading: {completed_count}/{total} completed"
+                            await self._notify_status(job_id, "RUNNING", progress, message)
+                            if callback:
+                                callback(progress, message)
+
+                        if not result.get("success"):
+                            error_msg = result.get("stderr") or result.get("error") or "Unknown error"
+                            error_log = f"Failed: {title} - {error_msg[:400]}"
+                            logger.warning(
+                                "Download failed for ASIN %s in job %s: %s",
+                                asin,
+                                job_id,
+                                error_msg[:200],
+                            )
+                            formatted = self._append_job_log(job_id, "ERROR", error_log)
+                            if callback:
+                                callback(-1, formatted)
+                        else:
+                            formatted = self._append_job_log(job_id, "INFO", f"Completed: {title}")
+                            if callback:
+                                callback(-1, formatted)
+
+                        return result
+
+                    except Exception as e:
+                        logger.exception(
+                            "Exception downloading ASIN %s in job %s",
                             asin,
                             job_id,
                         )
-                except Exception as e:
-                    logger.exception(
-                        "Exception downloading ASIN %s in job %s",
-                        asin,
-                        job_id,
-                    )
-                    results.append({"success": False, "asin": asin, "error": str(e)})
+                        async with results_lock:
+                            completed_count += 1
+                        formatted = self._append_job_log(job_id, "ERROR", f"Exception {title}: {str(e)[:500]}")
+                        if callback:
+                            callback(-1, formatted)
+                        return {"success": False, "asin": asin, "error": str(e)}
+
+            # Run all downloads in parallel (limited by semaphore)
+            tasks = [download_one(asin) for asin in asins]
+            results = await asyncio.gather(*tasks)
 
             # Final status
             success = all(r.get("success", False) for r in results)
@@ -387,6 +524,7 @@ class JobManager:
 
             if callback:
                 callback(100, "Download complete")
+                callback(-1, self._format_log_line("INFO", "Download complete"))
 
             if success:
                 await self._notify_status(
@@ -414,7 +552,19 @@ class JobManager:
                             stmt = select(Book).where(Book.asin == asin)
                             result = await session.execute(stmt)
                             book = result.scalar_one_or_none()
-                            
+
+                            # Get title from book record or result
+                            book_title = (book.title if book else None) or res.get("title") or asin
+
+                            # Update download manifest
+                            self._update_download_manifest(
+                                asin=asin,
+                                title=book_title,
+                                aaxc_path=local_aax,
+                                voucher_path=local_voucher,
+                                cover_path=local_cover,
+                            )
+
                             if book:
                                 if local_aax: book.local_path_aax = str(local_aax)
                                 if local_voucher: book.local_path_voucher = str(local_voucher)
@@ -457,6 +607,8 @@ class JobManager:
         await self._notify_status(job_id, "RUNNING", 0, "Connecting to Audible...")
 
         callback = self._progress_callbacks.get(job_id)
+        if callback:
+            callback(-1, self._format_log_line("INFO", "Starting library sync"))
 
         try:
             # Check authentication
@@ -467,12 +619,16 @@ class JobManager:
 
             # Fetch library
             await self._notify_status(job_id, "RUNNING", 10, "Fetching library items...")
+            if callback:
+                callback(-1, self._format_log_line("INFO", "Fetching library items..."))
             library_items = await self.audible_client.get_library()
             total_items = len(library_items)
             
             await self._notify_status(
                 job_id, "RUNNING", 20, f"Processing {total_items} items..."
             )
+            if callback:
+                callback(-1, self._format_log_line("INFO", f"Processing {total_items} items..."))
 
             # Update DB
             async for session in get_session():
@@ -582,6 +738,8 @@ class JobManager:
                 return {"success": False, "cancelled": True}
 
             await self._notify_status(job_id, "COMPLETED", 100, "Library sync complete")
+            if callback:
+                callback(-1, self._format_log_line("INFO", "Library sync complete"))
             return {"success": True, "count": total_items}
 
         except Exception as e:
@@ -598,21 +756,57 @@ class JobManager:
 
         await self._notify_status(job_id, "RUNNING", 0, "Starting repair...")
         callback = self._progress_callbacks.get(job_id)
+        if callback:
+            callback(-1, self._format_log_line("INFO", "Starting repair..."))
 
         try:
             async for session in get_session():
                 if callback:
                     callback(20, "Reconciling manifests and filesystem...")
+                    callback(-1, self._format_log_line("INFO", "Reconciling manifests and filesystem..."))
                 await self._notify_status(job_id, "RUNNING", 20, "Reconciling manifests and filesystem...")
-                result = await apply_repair(session)
+                result = await apply_repair(session, job_id=job_id)
                 break
+
+            def emit_info(msg: str) -> None:
+                formatted = self._append_job_log(job_id, "INFO", msg)
+                if callback:
+                    callback(-1, formatted)
 
             await self._notify_status(
                 job_id,
                 "COMPLETED",
                 100,
-                f"Repair complete (updated_books={result.get('updated_books')}, inserted_local_items={result.get('inserted_local_items')})",
+                f"Repair complete (updated_books={result.get('updated_books')}, inserted_local_items={result.get('inserted_local_items')}, duplicate_asins={result.get('duplicate_asins')})",
             )
+            emit_info(
+                f"Repair summary: updated_books={result.get('updated_books')}, inserted_local_items={result.get('inserted_local_items')}, deduped_local_items={result.get('deduped_local_items')}, duplicate_asins={result.get('duplicate_asins')}"
+            )
+
+            breakdown = result.get("updates_breakdown") or {}
+            if isinstance(breakdown, dict) and breakdown:
+                parts = []
+                for k in [
+                    "set_local_path_aax",
+                    "set_local_path_voucher",
+                    "set_local_path_cover",
+                    "set_local_path_converted",
+                    "set_conversion_format",
+                    "set_status_downloaded",
+                    "set_status_completed",
+                ]:
+                    v = breakdown.get(k)
+                    if isinstance(v, int) and v > 0:
+                        parts.append(f"{k}={v}")
+                if parts:
+                    emit_info("Updates: " + ", ".join(parts))
+
+            report_path = result.get("duplicates_report_path")
+            if isinstance(report_path, str) and report_path:
+                emit_info(f"Duplicates report: {report_path}")
+
+            if int(result.get("updated_books") or 0) == 0 and int(result.get("inserted_local_items") or 0) == 0:
+                emit_info("No DB changes needed.")
             return {"success": True, **result}
         except Exception as e:
             logger.exception("Exception during repair job %s", job_id)
@@ -655,11 +849,14 @@ class JobManager:
                 error_msg = f"Input file not found for {asin}"
                 logger.error(error_msg)
                 if callback:
-                    callback(-1, error_msg)
+                    callback(-1, self._append_job_log(job_id, "ERROR", error_msg))
                 await self._notify_status(job_id, "FAILED", 0, error=error_msg)
                 return {"success": False, "error": "Input file not found"}
 
             logger.info("Found input file: %s", input_file)
+
+            # Capture start time for manifest
+            started_at = datetime.utcnow().isoformat()
 
             # Find voucher file for AAXC
             voucher_file = None
@@ -675,6 +872,16 @@ class JobManager:
 
             def progress_wrapper(percent: int, line: str) -> None:
                 nonlocal last_progress
+                if percent < 0:
+                    # Treat as log line.
+                    if not line:
+                        return
+                    trimmed = line if len(line) <= 2000 else (line[:2000] + "…")
+                    formatted = self._append_job_log(job_id, "INFO", trimmed)
+                    if callback:
+                        callback(-1, formatted)
+                    return
+
                 if callback:
                     callback(percent, line)
 
@@ -718,28 +925,76 @@ class JobManager:
                             book = db_res.scalar_one_or_none()
                             if book:
                                 book.status = BookStatus.COMPLETED
-                                if "output_file" in result:
-                                    book.local_path_converted = str(result["output_file"])
-                                elif "files" in result and result["files"]:
-                                    # Fallback if output_file is not set but files list is
-                                    book.local_path_converted = str(result["files"][0])
+                                
+                                # Find output path from multiple possible keys
+                                output_path = None
+                                for key in ["output_files", "files", "output_file"]:
+                                    val = result.get(key)
+                                    if isinstance(val, list) and len(val) > 0:
+                                        output_path = str(val[0])
+                                        break
+                                    elif isinstance(val, str) and val:
+                                        output_path = val
+                                        break
+                                
+                                if output_path:
+                                    book.local_path_converted = output_path
                                 
                                 book.conversion_format = format
                                 session.add(book)
                                 await session.commit()
+                                
+                                # Trigger metadata scan for the new file
+                                try:
+                                    await self.library_manager.scan_book(session, asin)
+                                except Exception as e:
+                                    logger.error(f"Post-conversion scan failed for {asin}: {e}")
+
+                                # Update converted manifest
+                                book_title = book.title if book else asin
+                                self._update_converted_manifest(
+                                    source_path=str(input_file),
+                                    asin=asin,
+                                    title=book_title,
+                                    output_path=output_path,
+                                    success=True,
+                                    started_at=started_at,
+                                )
+
+                                # Move source files to completed directory
+                                self._move_sources_to_completed(input_file, asin)
+
                         except Exception as e:
                             logger.error(f"Failed to update book status for {asin}: {e}")
                         finally:
                             break
                 else:
-                    error_msg = result.get("error") or result.get("stderr", "Unknown error")
+                    # Priority for error message: detected_errors[0] > error > stderr > Unknown error
+                    detected = result.get("detected_errors", [])
+                    error_msg = (
+                        (detected[0] if detected else None)
+                        or result.get("error")
+                        or result.get("stderr")
+                        or "Unknown error"
+                    )
                     await self._notify_status(
                         job_id,
                         "FAILED",
                         0,
                         error=str(error_msg)[:500],  # Truncate long errors
                     )
-                    logger.error("Conversion job %s failed: %s", job_id, error_msg[:200])
+                    logger.error("Conversion job %s failed: %s", job_id, str(error_msg)[:200])
+
+                    # Update converted manifest with failure
+                    self._update_converted_manifest(
+                        source_path=str(input_file),
+                        asin=asin,
+                        title=asin,  # Use ASIN as title since we don't have book info
+                        output_path=None,
+                        success=False,
+                        started_at=started_at,
+                        error=str(error_msg)[:500],
+                    )
 
                 return result
 
@@ -765,3 +1020,173 @@ class JobManager:
                 return matches[0]
 
         return None
+
+    def _update_converted_manifest(
+        self,
+        source_path: str,
+        asin: str,
+        title: str,
+        output_path: str | None,
+        success: bool,
+        started_at: str,
+        error: str | None = None,
+    ) -> None:
+        """
+        Update converted manifest after conversion attempt.
+
+        Args:
+            source_path: Path to the source AAXC file (used as key).
+            asin: The book ASIN.
+            title: The book title.
+            output_path: Path to the converted file (for success).
+            success: Whether conversion succeeded.
+            started_at: ISO timestamp when conversion started.
+            error: Error message (for failure).
+        """
+        manifest_path = self.settings.manifest_dir / "converted_manifest.json"
+
+        # Read existing manifest or start fresh
+        manifest: dict[str, dict[str, Any]] = {}
+        if manifest_path.exists():
+            try:
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                logger.warning(
+                    "Corrupt converted manifest at %s, starting fresh",
+                    manifest_path,
+                )
+                manifest = {}
+
+        # Key is the source AAXC path (matching worker.py pattern)
+        key = source_path
+
+        if success:
+            manifest[key] = {
+                "status": "success",
+                "asin": asin,
+                "title": title,
+                "output_path": output_path or "",
+                "started_at": started_at,
+                "ended_at": datetime.utcnow().isoformat(),
+            }
+        else:
+            manifest[key] = {
+                "status": "failed",
+                "asin": asin,
+                "title": title,
+                "error": error or "Unknown error",
+                "ended_at": datetime.utcnow().isoformat(),
+            }
+
+        # Ensure directory exists
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write manifest back
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+        logger.info(
+            "Updated converted manifest for %s (status=%s)",
+            asin,
+            "success" if success else "failed",
+        )
+
+    def _move_sources_to_completed(self, aaxc_path: Path, asin: str) -> None:
+        """
+        Move source files to completed directory after successful conversion.
+
+        Only executes if move_after_complete setting is True.
+
+        Args:
+            aaxc_path: Path to the AAXC file.
+            asin: The book ASIN (for logging).
+        """
+        if not self.settings.move_after_complete:
+            return
+
+        # Ensure completed directory exists
+        self.settings.completed_dir.mkdir(parents=True, exist_ok=True)
+
+        # Files to move: AAXC, voucher, chapters.json, and cover
+        files_to_move: list[Path] = [
+            aaxc_path,
+            aaxc_path.with_suffix(".voucher"),
+            Path(str(aaxc_path).replace(".aaxc", "-chapters.json")),
+        ]
+
+        # Move each file if it exists
+        for file_path in files_to_move:
+            if file_path.exists():
+                try:
+                    dest = self.settings.completed_dir / file_path.name
+                    shutil.move(str(file_path), str(dest))
+                    logger.info("Moved %s to %s", file_path.name, self.settings.completed_dir)
+                except Exception as e:
+                    logger.warning("Failed to move %s: %s", file_path, e)
+
+        # Move cover files (glob for {stem}*jpg in same directory)
+        stem = aaxc_path.stem
+        parent_dir = aaxc_path.parent
+        for jpg_file in parent_dir.glob(f"{stem}*.jpg"):
+            try:
+                dest = self.settings.completed_dir / jpg_file.name
+                shutil.move(str(jpg_file), str(dest))
+                logger.info("Moved %s to %s", jpg_file.name, self.settings.completed_dir)
+            except Exception as e:
+                logger.warning("Failed to move cover %s: %s", jpg_file, e)
+
+    def _update_download_manifest(
+        self,
+        asin: str,
+        title: str,
+        aaxc_path: str | None,
+        voucher_path: str | None,
+        cover_path: str | None,
+    ) -> None:
+        """
+        Update download manifest after successful download.
+
+        Args:
+            asin: The book ASIN.
+            title: The book title.
+            aaxc_path: Path to the downloaded AAXC file.
+            voucher_path: Path to the voucher file.
+            cover_path: Path to the cover image.
+        """
+        manifest_path = self.settings.manifest_dir / "download_manifest.json"
+
+        # Read existing manifest or start fresh
+        manifest: dict[str, dict[str, str]] = {}
+        if manifest_path.exists():
+            try:
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                logger.warning(
+                    "Corrupt download manifest at %s, starting fresh",
+                    manifest_path,
+                )
+                manifest = {}
+
+        # Add/update entry
+        manifest[asin] = {
+            "asin": asin,
+            "title": title,
+            "aaxc_path": aaxc_path or "",
+            "voucher_path": voucher_path or "",
+            "cover_path": cover_path or "",
+            "downloaded_at": datetime.utcnow().isoformat(),
+            "status": "success",
+        }
+
+        # Ensure directory exists
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write manifest back
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+        logger.info("Updated download manifest for ASIN %s", asin)

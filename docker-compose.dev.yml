@@ -42,7 +42,7 @@ services:
     volumes:
       - ./apps/api:/app
       - ./core:/core:ro
-      - ./specs:/specs:ro
+      - ./specs:/specs
       - ${DOWNLOADS_HOST_DIR:-/Volumes/Media/Audiobooks/Downloads}:/data/downloads
       - ${CONVERTED_HOST_DIR:-/Volumes/Media/Audiobooks/Converted}:/data/converted
       - ${COMPLETED_HOST_DIR:-/Volumes/Media/Audiobooks/Completed}:/data/completed

@@ -27,3 +27,5 @@ export type { JobDrawerProps } from "./JobDrawer";
 
 export { Terminal } from "./Terminal";
 export type { TerminalProps } from "./Terminal";
+
+export { BookProgressOverlay, useBookDimmedState, useBookJobInfo } from "./BookProgressOverlay";

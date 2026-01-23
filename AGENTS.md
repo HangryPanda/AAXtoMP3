@@ -45,6 +45,7 @@ Key endpoints:
 - Recommended (avoids PATH/Python confusion): `cd apps/api && ./run_dev.sh`
 - Restart helper (stops only this API + waits for `/health`): `bash apps/api/restart_api.sh`
 - `cd apps/api && pytest`
+- Use the venv explicitly to avoid the “wrong python” problem: `cd apps/api && source .venv_test/bin/activate && python -m pytest`
 - `cd apps/api && ruff check . && mypy .`
 - Migrations: `cd apps/api && alembic upgrade head`
 

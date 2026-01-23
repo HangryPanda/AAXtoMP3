@@ -18,6 +18,7 @@ export interface Job {
   book_asin: string | null;
   status: JobStatus;
   progress_percent: number;
+  status_message: string | null;
   log_file_path: string | null;
   error_message: string | null;
   started_at: string | null;

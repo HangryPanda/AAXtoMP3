@@ -78,6 +78,7 @@ export const mockJobs: Job[] = [
     book_asin: "B08C6YJ1LS",
     status: "RUNNING",
     progress_percent: 45,
+    status_message: "Downloading...",
     log_file_path: "/logs/job-001.log",
     error_message: null,
     started_at: "2024-01-15T10:00:00Z",
@@ -90,6 +91,7 @@ export const mockJobs: Job[] = [
     book_asin: "B07B4FZRNZ",
     status: "COMPLETED",
     progress_percent: 100,
+    status_message: null,
     log_file_path: "/logs/job-002.log",
     error_message: null,
     started_at: "2024-01-14T08:00:00Z",
@@ -267,7 +269,7 @@ export const handlers = [
     return HttpResponse.json(response, { status: 201 });
   }),
 
-  http.post(`${API_BASE}/api/jobs/:id/cancel`, async ({ params }) => {
+  http.delete(`${API_BASE}/api/jobs/:id`, async ({ params }) => {
     const { id } = params;
     const job = mockJobs.find((j) => j.id === id);
 

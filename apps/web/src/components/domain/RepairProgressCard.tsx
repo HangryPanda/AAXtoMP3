@@ -46,10 +46,7 @@ export function RepairProgressCard({ className }: { className?: string }) {
   const { data } = useJobsFiltered(
     { task_type: "REPAIR", limit: 1 },
     {
-      refetchInterval: (q) => {
-        const latest = q.state.data?.items?.[0];
-        return latest && isJobActive(latest) ? 2000 : 15000;
-      },
+      refetchInterval: false,
     }
   );
 
@@ -105,4 +102,3 @@ export function RepairProgressCard({ className }: { className?: string }) {
     </Card>
   );
 }
-

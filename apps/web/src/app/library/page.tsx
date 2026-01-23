@@ -21,7 +21,6 @@ import { BookRow } from "@/components/domain/BookRow";
 import { LocalItemCard } from "@/components/domain/LocalItemCard";
 import { LocalItemRow } from "@/components/domain/LocalItemRow";
 import { RepairProgressCard } from "@/components/domain/RepairProgressCard";
-import { ProgressPopover } from "@/components/domain/ProgressPopover";
 import { LibraryToolbar, type SortField, type SortOrder } from "@/components/domain/LibraryToolbar";
 import { Button } from "@/components/ui/Button";
 import {
@@ -117,6 +116,10 @@ function LibraryContent() {
   // URL States
   const searchQuery = searchParams.get("search") || "";
   const filterStatus = (searchParams.get("status") as BookStatus) || undefined;
+  const contentType =
+    (searchParams.get("content_type") as "audiobook" | "podcast") === "podcast"
+      ? "podcast"
+      : "audiobook";
   const seriesValue = searchParams.get("series") || "all";
   const sourceValue = (searchParams.get("source") as "all" | "audible" | "local" | "both") || "all";
   const sortField = (searchParams.get("sort") as SortField) || "purchase_date";
@@ -142,6 +145,7 @@ function LibraryContent() {
   } = useBooks({ 
     search: searchQuery,
     status: filterStatus,
+    content_type: contentType,
     series_title: seriesValue === "all" ? undefined : seriesValue,
     has_local: sourceValue === "both" ? true : undefined,
     sort_by: sortField,
@@ -194,6 +198,31 @@ function LibraryContent() {
   
   const failedCount = failedJobs?.total ?? 0;
 
+  // Sort books so active/queued jobs appear first
+  const sortedBooks = useMemo(() => {
+    if (!booksData?.items) return [];
+    if (!activeJobs?.items?.length) return booksData.items;
+
+    const activeAsins = new Set(activeJobs.items.map((j) => j.book_asin));
+
+    return [...booksData.items].sort((a, b) => {
+      const aActive = activeAsins.has(a.asin);
+      const bActive = activeAsins.has(b.asin);
+
+      if (aActive && !bActive) return -1;
+      if (!aActive && bActive) return 1;
+
+      // Within active, sort by queue position (created_at)
+      if (aActive && bActive) {
+        const aJob = activeJobs.items.find((j) => j.book_asin === a.asin);
+        const bJob = activeJobs.items.find((j) => j.book_asin === b.asin);
+        return (aJob?.created_at || "").localeCompare(bJob?.created_at || "");
+      }
+
+      return 0; // Keep original order for non-active
+    });
+  }, [booksData, activeJobs]);
+
   // URL Sync Handlers
   const updateUrl = (updates: Record<string, string | undefined>) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -205,6 +234,7 @@ function LibraryContent() {
     if (
       updates.search !== undefined ||
       updates.status !== undefined ||
+      updates.content_type !== undefined ||
       updates.series !== undefined ||
       updates.source !== undefined
     ) {
@@ -215,6 +245,8 @@ function LibraryContent() {
 
   const handleSearch = (value: string) => updateUrl({ search: value });
   const handleFilter = (status: BookStatus | undefined) => updateUrl({ status });
+  const handleContentType = (value: "audiobook" | "podcast") =>
+    updateUrl({ content_type: value === "audiobook" ? undefined : value });
   const handleSeries = (seriesTitle: string | undefined) =>
     updateUrl({ series: seriesTitle });
   const handleSource = (value: "all" | "audible" | "local" | "both") => updateUrl({ source: value });
@@ -297,31 +329,54 @@ function LibraryContent() {
     }
   };
 
+  const hasActiveFilters =
+    !!searchQuery ||
+    !!filterStatus ||
+    seriesValue !== "all" ||
+    sourceValue !== "all" ||
+    contentType === "podcast";
+
   return (
     <div className="flex flex-col h-full">
       {/* Stats Bar */}
       <div className="flex gap-4 mb-6 overflow-x-auto pb-2">
+        {/* ... stats cards ... */}
         <div className="bg-card border border-border rounded-lg px-4 py-3 min-w-[140px] shadow-sm">
           <div className="text-2xl font-bold">{repairPreview?.remote_total ?? syncStatusData?.total_books ?? booksData?.total ?? 0}</div>
           <div className="text-sm text-muted-foreground">Total Books</div>
         </div>
         <div className="bg-card border border-border rounded-lg px-4 py-3 min-w-[160px] shadow-sm">
           <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-500">
-            {repairPreview?.downloaded_total ?? 0}
+            {repairPreview?.downloaded_db_total ?? repairPreview?.downloaded_on_disk_remote_total ?? repairPreview?.downloaded_total ?? 0}
           </div>
           <div className="text-sm text-muted-foreground">Downloaded</div>
           <div className="text-xs text-muted-foreground/80">
             Download queue: {downloadQueueCount}
           </div>
+          {repairPreview?.downloaded_on_disk_total !== undefined && (
+            <div className="text-[11px] text-muted-foreground/80">
+              On disk: {repairPreview.downloaded_on_disk_total} (orphans: {repairPreview.orphan_downloads})
+            </div>
+          )}
         </div>
         <div className="bg-card border border-border rounded-lg px-4 py-3 min-w-[140px] shadow-sm">
           <div className="text-2xl font-bold text-green-600 dark:text-green-500">
-            {repairPreview?.converted_total ?? 0}
+            {repairPreview?.converted_db_total ?? repairPreview?.converted_m4b_titles_on_disk_total ?? repairPreview?.converted_total ?? 0}
           </div>
           <div className="text-sm text-muted-foreground">Converted</div>
           <div className="text-xs text-muted-foreground/80">
             Convert queue: {convertQueueCount}
           </div>
+          {repairPreview?.converted_m4b_files_on_disk_total !== undefined && (
+            <div className="text-[11px] text-muted-foreground/80">
+              M4B files: {repairPreview.converted_m4b_files_on_disk_total} (local: {repairPreview.orphan_conversions})
+            </div>
+          )}
+          {repairPreview?.misplaced_files_count !== undefined && repairPreview.misplaced_files_count > 0 && (
+            <div className="text-[11px] text-amber-600 dark:text-amber-500">
+              Misplaced: {repairPreview.misplaced_files_count}
+            </div>
+          )}
           {repairPreview && (
             <div className="text-xs text-muted-foreground/80">
               Of downloaded: {repairPreview.converted_of_downloaded}
@@ -378,6 +433,40 @@ function LibraryContent() {
           onSortChange={handleSort}
           onViewChange={setViewMode}
         />
+
+        {/* Audiobooks / Podcasts Tabs */}
+        {sourceValue !== "local" && (
+          <div className="flex items-center gap-2 px-1">
+            <div className="inline-flex items-center rounded-md border border-border bg-muted/30 p-1">
+              <button
+                type="button"
+                onClick={() => handleContentType("audiobook")}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-medium rounded-sm transition-colors",
+                  contentType === "audiobook"
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-muted-foreground hover:bg-background/50"
+                )}
+                aria-pressed={contentType === "audiobook"}
+              >
+                Audiobooks
+              </button>
+              <button
+                type="button"
+                onClick={() => handleContentType("podcast")}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-medium rounded-sm transition-colors",
+                  contentType === "podcast"
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-muted-foreground hover:bg-background/50"
+                )}
+                aria-pressed={contentType === "podcast"}
+              >
+                Podcasts
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Selection Bar (Audible lists only) */}
         {sourceValue !== "local" && (
@@ -583,22 +672,35 @@ function LibraryContent() {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
             <p className="text-sm text-muted-foreground">Loading your library...</p>
           </div>
-        ) : booksData?.items.length === 0 ? (
+        ) : sortedBooks.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-80 border-2 border-dashed border-border rounded-xl text-muted-foreground bg-muted/20">
             <Download className="w-16 h-16 mb-4 opacity-20" />
-            <p className="text-xl font-semibold text-foreground">No books found</p>
+            <p className="text-xl font-semibold text-foreground">
+              No {contentType === "podcast" ? "podcasts" : "audiobooks"} found
+            </p>
             <p className="text-sm text-muted-foreground max-w-xs text-center mt-2 mb-6">
               {searchQuery 
                 ? `No results for "${searchQuery}". Try a different search term or clear your filters.` 
                 : "Your library is empty. Sync with Audible to import your audiobooks."}
             </p>
-            {!searchQuery ? (
+            {!hasActiveFilters ? (
               <Button onClick={() => syncLibrary()} disabled={isSyncing} className="gap-2">
                 <RefreshCw className={cn("w-4 h-4", isSyncing && "animate-spin")} />
                 Sync Library Now
               </Button>
             ) : (
-              <Button variant="outline" onClick={() => updateUrl({ search: undefined, status: undefined })}>
+              <Button
+                variant="outline"
+                onClick={() =>
+                  updateUrl({
+                    search: undefined,
+                    status: undefined,
+                    content_type: undefined,
+                    series: undefined,
+                    source: undefined,
+                  })
+                }
+              >
                 Clear all filters
               </Button>
             )}
@@ -610,7 +712,7 @@ function LibraryContent() {
               ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"
               : "space-y-1"
           )}>
-            {booksData?.items.map((book) => (
+            {sortedBooks.map((book) => (
               viewMode === "grid" ? (
                 <BookCard
                   key={book.asin}
@@ -658,7 +760,6 @@ function LibraryContent() {
           </div>
         )}
       </main>
-      <ProgressPopover />
     </div>
   );
 }

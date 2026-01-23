@@ -7,7 +7,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { useActiveJobs } from "@/hooks/useJobs";
 import { useResetSettings, useSettings, useUpdateSettings } from "@/hooks/useSettings";
 import { useUIStore } from "@/store/uiStore";
-import type { OutputFormat, Settings, SettingsUpdate } from "@/types/settings";
+import type { OutputFormat, Settings, SettingsUpdate, MoveFilesPolicy } from "@/types/settings";
 import {
   OUTPUT_FORMAT_OPTIONS,
   COMPRESSION_RANGES,
@@ -368,6 +368,83 @@ export default function SettingsPage() {
                 />
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Repair Settings */}
+        <section className="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold mb-4">Repair Settings</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Configure how the repair tool reconciles your library with files on disk.
+          </p>
+
+          <div className="space-y-4">
+            <div className="flex items-start space-x-3 p-3 rounded-md hover:bg-muted/50 transition-colors cursor-pointer">
+              <input
+                type="checkbox"
+                id="repair_extract_metadata"
+                checked={settings.repair_extract_metadata}
+                onChange={(e) => updateSetting("repair_extract_metadata", e.target.checked)}
+                className="h-4 w-4 mt-1 rounded border-input text-primary focus:ring-ring"
+              />
+              <div className="grid gap-1.5 leading-none">
+                <label htmlFor="repair_extract_metadata" className="text-sm font-medium leading-none cursor-pointer">
+                  Extract Metadata
+                </label>
+                <p className="text-xs text-muted-foreground">
+                  Extract chapters, technical info, and cover art from M4B files during repair.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-3 p-3 rounded-md hover:bg-muted/50 transition-colors cursor-pointer">
+              <input
+                type="checkbox"
+                id="repair_update_manifests"
+                checked={settings.repair_update_manifests}
+                onChange={(e) => updateSetting("repair_update_manifests", e.target.checked)}
+                className="h-4 w-4 mt-1 rounded border-input text-primary focus:ring-ring"
+              />
+              <div className="grid gap-1.5 leading-none">
+                <label htmlFor="repair_update_manifests" className="text-sm font-medium leading-none cursor-pointer">
+                  Update Manifests
+                </label>
+                <p className="text-xs text-muted-foreground">
+                  Sync download and converted manifests with actual files on disk.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-3 p-3 rounded-md hover:bg-muted/50 transition-colors cursor-pointer">
+              <input
+                type="checkbox"
+                id="repair_delete_duplicates"
+                checked={settings.repair_delete_duplicates}
+                onChange={(e) => updateSetting("repair_delete_duplicates", e.target.checked)}
+                className="h-4 w-4 mt-1 rounded border-input text-primary focus:ring-ring"
+              />
+              <div className="grid gap-1.5 leading-none">
+                <label htmlFor="repair_delete_duplicates" className="text-sm font-medium leading-none cursor-pointer">
+                  Auto-Delete Duplicates
+                </label>
+                <p className="text-xs text-muted-foreground">
+                  Automatically delete duplicate conversions during repair (keeps best match).
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-2 p-3">
+              <label className="text-sm font-medium">Misplaced Files Policy</label>
+              <select
+                value={settings.move_files_policy}
+                onChange={(e) => updateSetting("move_files_policy", e.target.value as MoveFilesPolicy)}
+                className="w-full h-10 px-3 py-2 bg-background rounded-md border border-input focus:ring-2 focus:ring-ring focus:outline-none"
+              >
+                <option value="report_only">Report Only — Log misplaced files but don&apos;t move them</option>
+                <option value="always_move">Always Move — Automatically move files to correct location</option>
+                <option value="ask_each">Ask Each — Prompt before moving each file</option>
+              </select>
+            </div>
           </div>
         </section>
       </div>

@@ -67,6 +67,7 @@ class JobType(str, Enum):
     CONVERT = "CONVERT"
     SYNC = "SYNC"
     REPAIR = "REPAIR"
+    SCAN = "SCAN"
 
 
 class JobStatus(str, Enum):
@@ -80,22 +81,27 @@ class JobStatus(str, Enum):
     CANCELLED = "CANCELLED"
 
 
-class Author(BaseModel):
+class AuthorSchema(BaseModel):
+    """Schema for Author data."""
     asin: str | None = None
     name: str
 
-class Narrator(BaseModel):
+class NarratorSchema(BaseModel):
+    """Schema for Narrator data."""
     name: str
 
-class Series(BaseModel):
+class SeriesSchema(BaseModel):
+    """Schema for Series data."""
     asin: str | None = None
     title: str
     sequence: str | None = None
 
-class Chapter(BaseModel):
+class ChapterSchema(BaseModel):
+    """Schema for Chapter data extracted from media."""
     title: str
     length_ms: int
     start_offset_ms: int
+
 
 class ProductImages(BaseModel):
     """Dynamic product images model with varying keys."""
@@ -164,9 +170,10 @@ class BookUpdate(SQLModel):
 
 
 class BookRead(BookBase):
-    """Schema for reading a book."""
+    """Schema for reading a book, including parsed and enriched data."""
 
     status: BookStatus
+    content_type: str | None = None
     local_path_aax: str | None
     local_path_voucher: str | None
     local_path_cover: str | None
@@ -179,14 +186,14 @@ class BookRead(BookBase):
     # Hidden field to source data from
     metadata_json: Any | None = Field(default=None, exclude=True)
 
-    # Parsed fields
-    authors: list[Author] = Field(default_factory=list)
-    narrators: list[Narrator] = Field(default_factory=list)
-    series: list[Series] | None = None
+    # Parsed fields using the renamed Schemas
+    authors: list[AuthorSchema] = Field(default_factory=list)
+    narrators: list[NarratorSchema] = Field(default_factory=list)
+    series: list[SeriesSchema] | None = None
     product_images: dict[str, str] | None = None
-    chapters: list[Chapter] = Field(default_factory=list)
+    chapters: list[ChapterSchema] = Field(default_factory=list)
 
-    # Exclude raw JSON fields from output
+    # Exclude raw JSON fields from output, but keep them for internal use
     authors_json: str = Field(exclude=True)
     narrators_json: str = Field(exclude=True)
     series_json: str | None = Field(default=None, exclude=True)
@@ -201,19 +208,31 @@ class BookRead(BookBase):
         works reliably with SQLModel's from_attributes mode.
         """
         if not self.authors and self.authors_json:
-            self.authors = [Author.model_validate(a) for a in _parse_jsonish_list(self.authors_json)]
+            self.authors = [AuthorSchema.model_validate(a) for a in _parse_jsonish_list(self.authors_json)]
 
         if not self.narrators and self.narrators_json:
-            self.narrators = [Narrator.model_validate(n) for n in _parse_jsonish_list(self.narrators_json)]
+            self.narrators = [NarratorSchema.model_validate(n) for n in _parse_jsonish_list(self.narrators_json)]
 
         if self.series is None and self.series_json:
             series_list = _parse_jsonish_list(self.series_json)
-            self.series = [Series.model_validate(s) for s in series_list] if series_list else None
+            self.series = [SeriesSchema.model_validate(s) for s in series_list] if series_list else None
 
         if self.product_images is None and self.product_images_json:
             images = _parse_jsonish_dict(self.product_images_json)
             if images is not None:
                 self.product_images = {str(k): str(v) for k, v in images.items() if v is not None}
+
+        if self.content_type is None and self.metadata_json:
+            mj = self.metadata_json
+            if isinstance(mj, str):
+                try:
+                    mj = json.loads(mj)
+                except Exception:
+                    mj = None
+            if isinstance(mj, dict):
+                ct = mj.get("content_type") or mj.get("contentType")
+                if isinstance(ct, str) and ct.strip():
+                    self.content_type = ct.strip()
 
         return self
 
@@ -235,6 +254,121 @@ class BookRead(BookBase):
                 return mj.get("chapters", [])
         return []
 
+
+# --- New Metadata Tables ---
+
+class Person(SQLModel, table=True):
+    """Person entity (author or narrator)."""
+    __tablename__ = "people"
+
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    name: str = Field(index=True)
+    sort_name: str | None = Field(default=None)
+
+
+class BookAuthor(SQLModel, table=True):
+    """Link between Book and Person (Author)."""
+    __tablename__ = "book_authors"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True)
+    person_id: UUID = Field(foreign_key="people.id", primary_key=True)
+    role: str = Field(default="AUTHOR") # Could be used for other roles if needed
+    ordinal: int = Field(default=0)
+
+
+class BookNarrator(SQLModel, table=True):
+    """Link between Book and Person (Narrator)."""
+    __tablename__ = "book_narrators"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True)
+    person_id: UUID = Field(foreign_key="people.id", primary_key=True)
+    ordinal: int = Field(default=0)
+
+
+class Series(SQLModel, table=True):
+    """Series entity."""
+    __tablename__ = "series"
+
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    name: str = Field(index=True)
+
+
+class BookSeries(SQLModel, table=True):
+    """Link between Book and Series."""
+    __tablename__ = "book_series"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True)
+    series_id: UUID = Field(foreign_key="series.id", primary_key=True)
+    series_index: str | None = Field(default=None)
+
+
+class Chapter(SQLModel, table=True):
+    """Extracted chapter metadata."""
+    __tablename__ = "chapters"
+
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    book_asin: str = Field(foreign_key="books.asin", index=True)
+    index: int
+    title: str
+    start_offset_ms: int # Aligned with ChapterSchema's start_offset_ms
+    length_ms: int     # Aligned with ChapterSchema's length_ms
+    end_offset_ms: int # Calculated from start_offset_ms + length_ms, useful for queries
+
+
+class BookAsset(SQLModel, table=True):
+    """Asset files associated with a book (e.g., cover art)."""
+    __tablename__ = "book_assets"
+
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    book_asin: str = Field(foreign_key="books.asin", index=True)
+    asset_type: str = Field(index=True) # e.g., 'cover'
+    path: str # Path to the asset file
+    mime_type: str | None = None
+    width: int | None = None
+    height: int | None = None
+    hash: str | None = None # For fingerprinting
+
+
+class BookTechnical(SQLModel, table=True):
+    """Technical details extracted from the media file."""
+    __tablename__ = "book_technical"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True)
+    format: str | None = None
+    bitrate: int | None = None
+    sample_rate: int | None = None
+    channels: int | None = None
+    duration_ms: int | None = None
+    file_size: int | None = None
+    extracted_at: datetime = Field(default_factory=datetime.utcnow)
+    extractor_version: str | None = None
+
+
+class PlaybackProgress(SQLModel, table=True):
+    """User playback state."""
+    __tablename__ = "playback_progress"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True)
+    position_ms: int = Field(default=0)
+    last_chapter_id: UUID | None = Field(foreign_key="chapters.id", default=None)
+    playback_speed: float = Field(default=1.0)
+    is_finished: bool = Field(default=False)
+    last_played_at: datetime = Field(default_factory=datetime.utcnow)
+    completed_at: datetime | None = None
+
+
+class BookScanState(SQLModel, table=True):
+    """State for managing file scans and invalidation."""
+    __tablename__ = "book_scan_state"
+
+    book_asin: str = Field(foreign_key="books.asin", primary_key=True) # Unique identifier for the book this scan state belongs to
+    file_path: str = Field(index=True, unique=True) # The canonical path to the media file
+    file_mtime: float # Last modification time of the file
+    file_size: int    # Size of the file
+    # Optional: A fast hash (e.g., first/last N MB) for stricter change detection
+    fast_hash: str | None = None
+    extracted_at: datetime = Field(default_factory=datetime.utcnow)
+    extractor_version: str | None = Field(default=None) # Version of the metadata extractor used
 
 
 class JobBase(SQLModel):
@@ -333,6 +467,18 @@ class SettingsModel(SQLModel, table=True):
     keep_author_index: int = Field(default=0)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
+    # Add aaxtomp3_path to settings
+    aaxtomp3_path: str = Field(default="/usr/local/bin/AAXtoMP3", description="Path to the AAXtoMP3 script")
+
+    # Add cover_cache_dir to settings
+    cover_cache_dir: str = Field(default="/app/data/covers", description="Directory to cache cover images")
+
+    # Repair settings
+    repair_extract_metadata: bool = Field(default=True, description="Extract metadata from M4B files during repair")
+    repair_delete_duplicates: bool = Field(default=False, description="Auto-delete duplicate conversions during repair")
+    repair_update_manifests: bool = Field(default=True, description="Update manifests from filesystem during repair")
+    move_files_policy: str = Field(default="report_only", description="Policy for misplaced files: report_only, always_move, ask_each")
+
 
 class SettingsUpdate(SQLModel):
     """Schema for updating settings."""
@@ -352,6 +498,14 @@ class SettingsUpdate(SQLModel):
     max_retries: int | None = None
     author_override: str | None = None
     keep_author_index: int | None = None
+    aaxtomp3_path: str | None = None
+    cover_cache_dir: str | None = None
+    # Repair settings
+    repair_extract_metadata: bool | None = None
+    repair_delete_duplicates: bool | None = None
+    repair_update_manifests: bool | None = None
+    move_files_policy: str | None = None
+
 
     @field_validator("compression_mp3")
     @classmethod
@@ -372,4 +526,11 @@ class SettingsUpdate(SQLModel):
     def validate_opus_compression(cls, v: int | None) -> int | None:
         if v is not None and not 0 <= v <= 10:
             raise ValueError("Opus compression must be between 0-10")
+        return v
+
+    @field_validator("move_files_policy")
+    @classmethod
+    def validate_move_files_policy(cls, v: str | None) -> str | None:
+        if v is not None and v not in ("report_only", "always_move", "ask_each"):
+            raise ValueError("move_files_policy must be: report_only, always_move, or ask_each")
         return v

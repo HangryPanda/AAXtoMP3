@@ -1,6 +1,7 @@
 """Job management endpoints."""
 
 from datetime import datetime
+from collections import deque
 from typing import Any, Literal
 from uuid import UUID
 
@@ -10,6 +11,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models import Job, JobCreate, JobRead, JobStatus, JobType
+from core.config import get_settings
 from db.session import get_session
 from services.job_manager import JobManager
 from services.websocket_manager import WebSocketManager
@@ -234,6 +236,28 @@ async def job_websocket(
     await ws_manager.connect(websocket, str(job_id))
 
     try:
+        # Register a progress/log callback so the client receives "terminal" output.
+        progress_cb = ws_manager.create_progress_callback(str(job_id))
+        job_manager.set_progress_callback(job_id, progress_cb)
+
+        # Send connected event + a human-friendly line so the log modal isn't empty.
+        await ws_manager.send_personal_message(
+            {
+                "type": "connected",
+                "job_id": str(job_id),
+            },
+            str(job_id),
+        )
+
+        # Replay tail of persisted logs (if present) so completed jobs show history.
+        settings = get_settings()
+        log_path = str(settings.data_dir / "job_logs" / f"{job_id}.log")
+        for line in _tail_lines(log_path, max_lines=500):
+            await ws_manager.send_personal_message(
+                {"type": "log", "job_id": str(job_id), "line": line},
+                str(job_id),
+            )
+
         # Send initial status
         await ws_manager.send_personal_message(
             {
@@ -253,7 +277,63 @@ async def job_websocket(
                 await websocket.send_text("pong")
 
     except WebSocketDisconnect:
-        ws_manager.disconnect(str(job_id))
+        pass
+    except Exception:
+        pass
+    finally:
+        ws_manager.disconnect(websocket, str(job_id))
+        job_manager.set_progress_callback(job_id, None)
+
+
+@router.websocket("/ws")
+async def jobs_websocket(
+    websocket: WebSocket,
+    session: AsyncSession = Depends(get_session),
+) -> None:
+    """
+    Global jobs websocket feed.
+
+    Used to avoid polling for RUNNING/PENDING/QUEUED job updates in the UI.
+    """
+    resource_id = "jobs"
+    await ws_manager.connect(websocket, resource_id)
+
+    try:
+        # Send an initial snapshot of active jobs.
+        stmt = (
+            select(Job)
+            .where(Job.status.in_([JobStatus.RUNNING, JobStatus.PENDING, JobStatus.QUEUED]))
+            .order_by(Job.created_at.desc())
+            .limit(200)
+        )
+        res = await session.execute(stmt)
+        jobs = res.scalars().all()
+        messages: list[dict[str, Any]] = []
+        for job in jobs:
+            messages.append(
+                {
+                    "type": "status",
+                    "job_id": str(job.id),
+                    "status": job.status.value,
+                    "progress": job.progress_percent,
+                    "message": None,
+                    "error": job.error_message,
+                }
+            )
+
+        await ws_manager.send_personal_message(
+            {"type": "batch", "messages": messages, "count": len(messages)},
+            resource_id,
+        )
+
+        while True:
+            data = await websocket.receive_text()
+            if data == "ping":
+                await websocket.send_text("pong")
+    except WebSocketDisconnect:
+        pass
+    finally:
+        ws_manager.disconnect(websocket, resource_id)
 
 
 async def handle_job_status_update(
@@ -279,6 +359,21 @@ async def handle_job_status_update(
     
     # Send to specific job channel
     await ws_manager.send_personal_message(payload, str(job_id))
+    # And to global jobs feed
+    await ws_manager.send_personal_message(payload, "jobs")
+
+    # Also emit log lines so the "View logs" UI has something to display.
+    now_iso = datetime.utcnow().isoformat() + "Z"
+    if message:
+        await ws_manager.send_personal_message(
+            {"type": "log", "line": f"{now_iso} [INFO] {message}"},
+            str(job_id),
+        )
+    if error:
+        await ws_manager.send_personal_message(
+            {"type": "log", "line": f"{now_iso} [ERROR] {error}"},
+            str(job_id),
+        )
 
     # 2. Update Database
     # We need to manually manage the session here since we're outside a request context
@@ -315,3 +410,14 @@ async def handle_job_status_update(
 
 # Register the callback
 job_manager.set_status_callback(handle_job_status_update)
+
+
+def _tail_lines(path: str, max_lines: int = 500) -> list[str]:
+    try:
+        dq: deque[str] = deque(maxlen=max_lines)
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                dq.append(line.rstrip("\n"))
+        return list(dq)
+    except Exception:
+        return []

@@ -11,7 +11,22 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlmodel import SQLModel
 
 # Import all models to ensure they are registered with SQLModel.metadata
-from db.models import Book, Job, SettingsModel  # noqa: F401
+from db.models import (  # noqa: F401
+    Book,
+    Job,
+    SettingsModel,
+    Person,
+    BookAuthor,
+    BookNarrator,
+    Series,
+    BookSeries,
+    Chapter,
+    BookAsset,
+    BookTechnical,
+    PlaybackProgress,
+    BookScanState,
+    LocalItem,
+)
 
 # Alembic Config object
 config = context.config

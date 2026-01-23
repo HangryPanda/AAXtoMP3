@@ -1,0 +1,62 @@
+{
+    "content_license": {
+        "acr": "CR!A9XGJPA6YD0ZB54BEHW0CEFGD0PG",
+        "asin": "B09WST6L37",
+        "content_metadata": {
+            "content_reference": {
+                "acr": "CR!A9XGJPA6YD0ZB54BEHW0CEFGD0PG",
+                "asin": "B09WST6L37",
+                "codec": "mp4a.40.2",
+                "content_format": "AAX_44_128",
+                "content_size_in_bytes": 608799658,
+                "file_version": "2",
+                "marketplace": "AF2M0KC94RCEA",
+                "sku": "BK_PODM_003569",
+                "tempo": "1.0",
+                "version": "40744171"
+            },
+            "content_url": {
+                "offline_url": "https://dze5l2jxnquy5.cloudfront.net/bk_podm_003569/40744171/aax/2/bk_podm_003569_lc_128_44100_2.aax?id=d2406400-6233-4f9b-aa91-7ab20ce681e6&Expires=1768935086&Signature=bv9rZWu0QX1g~AMypMGF8d9maKj3POsYk-gLZDjYUYqK6qOc4T5wSobce6aDp7HV~ssVqP9kt7wuf2UF~RSM-XiG8CoBJVTBumAa-svI5yAYGuASn5PF8VsNuuteFX9HMAMD922o-ZV1jcyaWX0g~1T2WenaWx4VLL5vKzgGJwxNMrRBr29Jb-RG1vYzRTj2hfhfNpt8Xiwt92u~byY5nBrWbB4W6JNtH0b4Ewnm5pW0wsmzxf19CUcdObDQtuaGHLmPWQgNJuIuBeYfwCnCoIs9oa8HJZgsn5o9GGYF-pX5JHeM5KpqIhoBdNb8BxWOATHkxRTX7N5ZfJdv1ukuDw__&Key-Pair-Id=K13BOWPVA44D7"
+            },
+            "last_position_heard": {
+                "status": "DoesNotExist"
+            }
+        },
+        "drm_type": "Adrm",
+        "granted_right": "Ownership",
+        "license_id": "d2406400-6233-4f9b-aa91-7ab20ce681e6",
+        "license_response": {
+            "key": "13b845ec2d51b79a10e1a7a7248a83ad",
+            "iv": "b5663d0b0eed3bc4506c953eb52ad8af",
+            "rules": [
+                {
+                    "parameters": [
+                        {
+                            "expireDate": "3000-01-01T00:00:00Z",
+                            "type": "EXPIRES"
+                        }
+                    ],
+                    "name": "DefaultExpiresRule"
+                }
+            ]
+        },
+        "license_response_type": "FullTitle",
+        "message": "Ownership: User [A2DGE890HNBM1Y] has [Purchase] rights.",
+        "playback_info": {
+            "last_position_heard": {
+                "status": "DoesNotExist"
+            }
+        },
+        "preview": false,
+        "recap_eligible": false,
+        "request_id": "A4FFB8F2D480CBA903FE28CCD7F54ACD0A4EA227_15TMVM0ERSK18HNN9897",
+        "requires_ad_supported_playback": false,
+        "status_code": "Granted",
+        "voucher_id": "cdn:A4FFB8F2D480CBA903FE28CCD7F54ACD0A4EA227_15TMVM0ERSK18HNN9897"
+    },
+    "response_groups": [
+        "always-returned",
+        "last_position_heard",
+        "content_reference"
+    ]
+}

@@ -16,17 +16,20 @@ export interface WSStatusMessage {
   job_id: string;
   status: string;
   progress: number;
+  message?: string;
   error?: string;
 }
 
 export interface WSProgressMessage {
   type: "progress";
+  job_id?: string;
   percent: number;
   line: string;
 }
 
 export interface WSLogMessage {
   type: "log";
+  job_id?: string;
   line: string;
   timestamp?: string;
 }

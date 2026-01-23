@@ -7,7 +7,7 @@ VENV_PY="$ROOT_DIR/.venv/bin/python"
 if [[ ! -x "$VENV_PY" ]]; then
   echo "Missing venv python at: $VENV_PY" >&2
   echo "Create it with:" >&2
-  echo "  cd \"$ROOT_DIR\" && python3 -m venv .venv && \"$ROOT_DIR/.venv/bin/python\" -m pip install -r requirements.txt" >&2
+  echo "  bash \"$ROOT_DIR/bootstrap_venv.sh\"" >&2
   exit 1
 fi
 
