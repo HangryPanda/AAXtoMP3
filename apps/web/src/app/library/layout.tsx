@@ -13,6 +13,8 @@ export default function LibraryLayout({
   const pathname = usePathname();
   const { data: activeJobs } = useActiveJobs();
   const setJobDrawerOpen = useUIStore((state) => state.setJobDrawerOpen);
+  const isRepairProgressCardVisible = useUIStore((s) => s.isRepairProgressCardVisible);
+  const toggleRepairProgressCardVisible = useUIStore((s) => s.toggleRepairProgressCardVisible);
   
   return (
     <AppShell
@@ -20,6 +22,8 @@ export default function LibraryLayout({
         activePath: pathname,
         activeJobCount: activeJobs?.total ?? 0,
         onJobsClick: () => setJobDrawerOpen(true),
+        showRepairProgressCard: isRepairProgressCardVisible,
+        onToggleRepairProgressCard: toggleRepairProgressCardVisible,
       }}
       headerProps={{
         title: "Library",
