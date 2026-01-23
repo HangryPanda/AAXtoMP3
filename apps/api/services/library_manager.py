@@ -47,14 +47,24 @@ class LibraryManager:
         result = await session.execute(select(BookScanState).where(BookScanState.book_asin == asin))
         scan_state = result.scalar_one_or_none()
 
+        # Check if chapters exist - if not, we need to rescan regardless of fingerprint
+        chapters_result = await session.execute(
+            select(Chapter).where(Chapter.book_asin == asin).limit(1)
+        )
+        has_chapters = chapters_result.scalar_one_or_none() is not None
+
         needs_scan = force or not scan_state or \
                      scan_state.file_mtime != fingerprint["mtime"] or \
                      scan_state.file_size != fingerprint["size"] or \
-                     scan_state.extractor_version != self.extractor.VERSION
+                     scan_state.extractor_version != self.extractor.VERSION or \
+                     not has_chapters  # Force rescan if no chapters in DB
 
         if not needs_scan:
             logger.info("Book %s is up to date, skipping scan", asin)
             return True
+
+        if not has_chapters and scan_state:
+            logger.info("Book %s has scan state but no chapters, forcing rescan", asin)
 
         # 3. Extract metadata
         logger.info("Extracting metadata for book %s from %s", asin, file_path)
@@ -116,6 +126,7 @@ class LibraryManager:
 
         # --- Chapters ---
         await session.execute(delete(Chapter).where(Chapter.book_asin == asin))
+        logger.info("Persisting %d chapters for book %s", len(metadata.chapters), asin)
         for c in metadata.chapters:
             session.add(Chapter(
                 book_asin=asin,

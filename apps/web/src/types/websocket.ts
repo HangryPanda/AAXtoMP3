@@ -18,6 +18,7 @@ export interface WSStatusMessage {
   progress: number;
   message?: string;
   error?: string;
+  updated_at?: string;
 }
 
 export interface WSProgressMessage {

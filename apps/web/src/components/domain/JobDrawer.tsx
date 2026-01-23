@@ -14,6 +14,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   Ban,
+  Pause,
+  Play,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -45,6 +47,7 @@ const STATUS_BADGE_VARIANTS: Record<JobStatus, "default" | "secondary" | "destru
   PENDING: "secondary",
   QUEUED: "info",
   RUNNING: "warning",
+  PAUSED: "secondary",
   COMPLETED: "success",
   FAILED: "destructive",
   CANCELLED: "secondary",
@@ -54,6 +57,7 @@ const STATUS_ICONS: Record<JobStatus, React.ElementType> = {
   PENDING: Clock,
   QUEUED: Clock,
   RUNNING: Loader2,
+  PAUSED: Pause,
   COMPLETED: CheckCircle2,
   FAILED: AlertTriangle,
   CANCELLED: Ban,
@@ -66,6 +70,8 @@ export interface JobDrawerProps {
   jobs: Job[];
   onClose?: () => void;
   onCancelJob?: (job: Job) => void;
+  onPauseJob?: (job: Job) => void;
+  onResumeJob?: (job: Job) => void;
   onViewLogs?: (job: Job) => void;
   className?: string;
 }
@@ -75,6 +81,8 @@ export function JobDrawer({
   jobs,
   onClose,
   onCancelJob,
+  onPauseJob,
+  onResumeJob,
   onViewLogs,
   className,
 }: JobDrawerProps) {
@@ -136,6 +144,8 @@ export function JobDrawer({
                         key={job.id}
                         job={job}
                         onCancel={onCancelJob}
+                        onPause={onPauseJob}
+                        onResume={onResumeJob}
                         onViewLogs={onViewLogs}
                       />
                     ))}
@@ -155,6 +165,8 @@ export function JobDrawer({
                         key={job.id}
                         job={job}
                         onCancel={onCancelJob}
+                        onPause={onPauseJob}
+                        onResume={onResumeJob}
                         onViewLogs={onViewLogs}
                       />
                     ))}
@@ -172,10 +184,12 @@ export function JobDrawer({
 interface JobItemProps {
   job: Job;
   onCancel?: (job: Job) => void;
+  onPause?: (job: Job) => void;
+  onResume?: (job: Job) => void;
   onViewLogs?: (job: Job) => void;
 }
 
-function JobItem({ job, onCancel, onViewLogs }: JobItemProps) {
+function JobItem({ job, onCancel, onPause, onResume, onViewLogs }: JobItemProps) {
   const Icon = JOB_TYPE_ICONS[job.task_type];
   const StatusIcon = STATUS_ICONS[job.status];
   const isActive = isJobActive(job);
@@ -255,6 +269,30 @@ function JobItem({ job, onCancel, onViewLogs }: JobItemProps) {
           <FileText className="mr-1 h-3 w-3" />
           Logs
         </Button>
+
+        {isActive && job.status !== "PAUSED" && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onPause?.(job)}
+            aria-label="Pause job"
+          >
+            <Pause className="mr-1 h-3 w-3" />
+            Pause
+          </Button>
+        )}
+
+        {job.status === "PAUSED" && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onResume?.(job)}
+            aria-label="Resume job"
+          >
+            <Play className="mr-1 h-3 w-3" />
+            Resume
+          </Button>
+        )}
 
         {canCancel && (
           <Button

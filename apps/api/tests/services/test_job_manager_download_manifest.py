@@ -55,12 +55,18 @@ class TestDownloadManifestUpdate:
             # Mock database session to avoid DB calls
             with patch("services.job_manager.get_session") as mock_get_session:
                 mock_session = AsyncMock()
-                mock_session.execute = AsyncMock(return_value=MagicMock(scalar_one_or_none=MagicMock(return_value=None)))
-                mock_session.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[])))
+                # Mock for result.scalars().all() and result.scalar_one_or_none()
+                mock_result = MagicMock()
+                mock_result.scalars.return_value.all.return_value = []
+                mock_result.scalar_one_or_none.return_value = None
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.commit = AsyncMock()
+                mock_session.add = MagicMock()
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                # Use side_effect to create a new generator on each call
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()
@@ -115,15 +121,15 @@ class TestDownloadManifestUpdate:
 
                 mock_session = AsyncMock()
                 mock_result = MagicMock()
-                mock_result.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[mock_book])))
-                mock_result.scalar_one_or_none = MagicMock(return_value=mock_book)
+                mock_result.scalars.return_value.all.return_value = [mock_book]
+                mock_result.scalar_one_or_none.return_value = mock_book
                 mock_session.execute = AsyncMock(return_value=mock_result)
                 mock_session.add = MagicMock()
                 mock_session.commit = AsyncMock()
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()
@@ -197,12 +203,12 @@ class TestDownloadManifestUpdate:
             with patch("services.job_manager.get_session") as mock_get_session:
                 mock_session = AsyncMock()
                 mock_result = MagicMock()
-                mock_result.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[])))
+                mock_result.scalars.return_value.all.return_value = []
                 mock_session.execute = AsyncMock(return_value=mock_result)
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()
@@ -281,15 +287,15 @@ class TestDownloadManifestUpdate:
 
                 mock_session = AsyncMock()
                 mock_result = MagicMock()
-                mock_result.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[mock_book])))
-                mock_result.scalar_one_or_none = MagicMock(return_value=mock_book)
+                mock_result.scalars.return_value.all.return_value = [mock_book]
+                mock_result.scalar_one_or_none.return_value = mock_book
                 mock_session.execute = AsyncMock(return_value=mock_result)
                 mock_session.add = MagicMock()
                 mock_session.commit = AsyncMock()
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()
@@ -350,15 +356,15 @@ class TestDownloadManifestUpdate:
 
                 mock_session = AsyncMock()
                 mock_result = MagicMock()
-                mock_result.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[mock_book])))
-                mock_result.scalar_one_or_none = MagicMock(return_value=mock_book)
+                mock_result.scalars.return_value.all.return_value = [mock_book]
+                mock_result.scalar_one_or_none.return_value = mock_book
                 mock_session.execute = AsyncMock(return_value=mock_result)
                 mock_session.add = MagicMock()
                 mock_session.commit = AsyncMock()
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()
@@ -411,15 +417,15 @@ class TestDownloadManifestUpdate:
 
                 mock_session = AsyncMock()
                 mock_result = MagicMock()
-                mock_result.scalars = MagicMock(return_value=MagicMock(all=MagicMock(return_value=[mock_book])))
-                mock_result.scalar_one_or_none = MagicMock(return_value=mock_book)
+                mock_result.scalars.return_value.all.return_value = [mock_book]
+                mock_result.scalar_one_or_none.return_value = mock_book
                 mock_session.execute = AsyncMock(return_value=mock_result)
                 mock_session.add = MagicMock()
                 mock_session.commit = AsyncMock()
 
-                async def session_gen():
+                async def make_session_gen():
                     yield mock_session
-                mock_get_session.return_value = session_gen()
+                mock_get_session.side_effect = lambda: make_session_gen()
 
                 from uuid import uuid4
                 job_id = uuid4()

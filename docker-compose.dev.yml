@@ -39,14 +39,16 @@ services:
       COMPLETED_DIR: /data/completed
       CORE_SCRIPTS_DIR: /core
       MANIFEST_DIR: /specs
+      AUDIBLE_AUTH_FILE: /audible-config/audibleAuth
+      AUDIBLE_PROFILE: jc4369@gmail.com
     volumes:
       - ./apps/api:/app
       - ./core:/core:ro
       - ./specs:/specs
-      - ${DOWNLOADS_HOST_DIR:-/Volumes/Media/Audiobooks/Downloads}:/data/downloads
-      - ${CONVERTED_HOST_DIR:-/Volumes/Media/Audiobooks/Converted}:/data/converted
-      - ${COMPLETED_HOST_DIR:-/Volumes/Media/Audiobooks/Completed}:/data/completed
-      - ~/.audible:/root/.audible:ro
+      - /Volumes/Media/Audiobooks/Downloads:/data/downloads
+      - /Volumes/Media/Audiobooks/Converted:/data/converted
+      - /Volumes/Media/Audiobooks/Completed:/data/completed
+      - ~/.audible:/audible-config:ro
     ports:
       - "8000:8000"
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload

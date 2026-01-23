@@ -211,3 +211,79 @@ body {
 .scrollbar-subtle::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.35);
 }
+
+/* View Transitions API - for smooth player cover animations */
+@supports (view-transition-name: none) {
+  ::view-transition-old(player-cover),
+  ::view-transition-new(player-cover) {
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  ::view-transition-old(player-cover) {
+    animation-name: scale-down-fade-out;
+  }
+
+  ::view-transition-new(player-cover) {
+    animation-name: scale-up-fade-in;
+  }
+
+  @keyframes scale-down-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+  }
+
+  @keyframes scale-up-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Mini-player slide animation */
+  ::view-transition-old(mini-player),
+  ::view-transition-new(mini-player) {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  ::view-transition-old(mini-player) {
+    animation-name: slide-down-fade-out;
+  }
+
+  ::view-transition-new(mini-player) {
+    animation-name: slide-up-fade-in;
+  }
+
+  @keyframes slide-down-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes slide-up-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

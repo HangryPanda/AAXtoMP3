@@ -12,7 +12,11 @@ import {
   GripHorizontal,
   RotateCcw,
   CheckCircle2,
-  History
+  History,
+  FileText,
+  XCircle,
+  Pause,
+  Play
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -23,10 +27,13 @@ import {
   useActiveJobs,
   useJobs,
   useJobsFiltered,
-  useCreateDownloadJob,
-  useCreateConvertJob,
+  useRetryJob,
+  usePauseJob,
+  useResumeJob,
+  useClearJobHistory,
 } from "@/hooks/useJobs";
 import { Job, JobStatus, JobType, isJobActive } from "@/types";
+import { ConnectionState } from "@/services/websocket";
 
 // Icons for job types
 const JOB_TYPE_ICONS: Record<JobType, React.ElementType> = {
@@ -48,6 +55,25 @@ function formatDuration(seconds: number): string {
   return `${hours}h ${remainingMinutes}m`;
 }
 
+function formatAge(iso: string | undefined): string {
+  if (!iso) return "—";
+  const t = new Date(iso).getTime();
+  if (!Number.isFinite(t)) return "—";
+  const seconds = Math.max(0, Math.floor((Date.now() - t) / 1000));
+  if (seconds < 60) return `${seconds}s`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  return `${hours}h`;
+}
+
+function ageSeconds(iso: string | undefined): number | null {
+  if (!iso) return null;
+  const t = new Date(iso).getTime();
+  if (!Number.isFinite(t)) return null;
+  return Math.max(0, Math.floor((Date.now() - t) / 1000));
+}
+
 interface JobStat {
   speed: number;
   etr: number;
@@ -55,7 +81,29 @@ interface JobStat {
   lastTime: number;
 }
 
-export function ProgressPopover() {
+export interface ProgressPopoverProps {
+  jobsFeedConnectionState: ConnectionState;
+  onOpenJobs: () => void;
+  onViewLogs: (job: Job) => void;
+  onCancelJob: (jobId: string) => void;
+}
+
+const STATUS_LABEL: Record<JobStatus, string> = {
+  PENDING: "Pending",
+  QUEUED: "Queued",
+  RUNNING: "Running",
+  PAUSED: "Paused",
+  COMPLETED: "Completed",
+  FAILED: "Failed",
+  CANCELLED: "Cancelled",
+};
+
+export function ProgressPopover({
+  jobsFeedConnectionState,
+  onOpenJobs,
+  onViewLogs,
+  onCancelJob,
+}: ProgressPopoverProps) {
   const { 
     progressPopover, 
     closeProgressPopover, 
@@ -71,6 +119,12 @@ export function ProgressPopover() {
     enabled: progressPopover.isOpen,
     refetchInterval: false,
   });
+  const { data: failedCountData } = useJobsFiltered(
+    { status: "FAILED" as JobStatus, limit: 1 },
+    { enabled: progressPopover.isOpen, refetchInterval: 30000, staleTime: 15000 }
+  );
+  const failedCount = failedCountData?.total ?? 0;
+
   const { data: failedJobsData } = useJobs("FAILED", {
     enabled: shouldPoll && activeTab === "failed",
     refetchInterval: false,
@@ -84,8 +138,10 @@ export function ProgressPopover() {
     }
   );
   
-  const { mutate: retryDownload } = useCreateDownloadJob();
-  const { mutate: retryConvert } = useCreateConvertJob();
+  const { mutate: retryJobById } = useRetryJob();
+  const { mutate: pauseJobById } = usePauseJob();
+  const { mutate: resumeJobById } = useResumeJob();
+  const { mutate: clearHistory } = useClearJobHistory();
 
   const activeJobs = React.useMemo(() => 
     activeJobsData?.items.filter(isJobActive) || [], 
@@ -108,6 +164,7 @@ export function ProgressPopover() {
   // State for the calculated stats to display
   const [displayStats, setDisplayStats] = React.useState<Record<string, JobStat>>({});
   const [isDragging, setIsDragging] = React.useState(false);
+  const [dragPosition, setDragPosition] = React.useState<{ x: number; y: number } | null>(null);
 
   // Calculate stats in an effect to handle impurity (Date.now) correctly
   React.useEffect(() => {
@@ -171,9 +228,22 @@ export function ProgressPopover() {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top
       };
+      setDragPosition({ x: rect.left, y: rect.top });
       setIsDragging(true);
     }
   };
+
+  const clampToViewport = React.useCallback((x: number, y: number) => {
+    const el = cardRef.current;
+    const w = el?.offsetWidth ?? 0;
+    const h = el?.offsetHeight ?? 0;
+    const maxX = Math.max(0, window.innerWidth - w);
+    const maxY = Math.max(0, window.innerHeight - h);
+    return {
+      x: Math.min(Math.max(0, x), maxX),
+      y: Math.min(Math.max(0, y), maxY),
+    };
+  }, []);
 
   React.useEffect(() => {
     if (!isDragging) return;
@@ -181,21 +251,20 @@ export function ProgressPopover() {
     const onMouseMove = (e: MouseEvent) => {
       if (!dragStartRef.current || !cardRef.current) return;
       
-      // Direct DOM update for performance (60fps)
       const newX = e.clientX - dragStartRef.current.x;
       const newY = e.clientY - dragStartRef.current.y;
-      
-      cardRef.current.style.left = `${newX}px`;
-      cardRef.current.style.top = `${newY}px`;
+      setDragPosition({ x: newX, y: newY });
     };
 
     const onMouseUp = (e: MouseEvent) => {
       if (dragStartRef.current && cardRef.current) {
         const newX = e.clientX - dragStartRef.current.x;
         const newY = e.clientY - dragStartRef.current.y;
-        updateProgressPopoverPosition(newX, newY);
+        const clamped = clampToViewport(newX, newY);
+        updateProgressPopoverPosition(clamped.x, clamped.y);
       }
       setIsDragging(false);
+      setDragPosition(null);
       dragStartRef.current = null;
     };
 
@@ -205,19 +274,29 @@ export function ProgressPopover() {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
     };
-  }, [isDragging, updateProgressPopoverPosition]);
+  }, [clampToViewport, isDragging, updateProgressPopoverPosition]);
+
+  // Clamp position on resize to avoid the popover going off-screen.
+  React.useEffect(() => {
+    if (!progressPopover.isOpen) return;
+    const onResize = () => {
+      const clamped = clampToViewport(progressPopover.position.x, progressPopover.position.y);
+      if (clamped.x !== progressPopover.position.x || clamped.y !== progressPopover.position.y) {
+        updateProgressPopoverPosition(clamped.x, clamped.y);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [clampToViewport, progressPopover.isOpen, progressPopover.position.x, progressPopover.position.y, updateProgressPopoverPosition]);
 
   const handleRetry = (job: Job) => {
-    if (!job.book_asin) return;
-    
-    if (job.task_type === 'DOWNLOAD') {
-      retryDownload(job.book_asin);
-    } else if (job.task_type === 'CONVERT') {
-      retryConvert({ asin: job.book_asin });
-    }
+    if (job.task_type !== "DOWNLOAD" && job.task_type !== "CONVERT") return;
+    retryJobById(job.id);
   };
 
   if (!progressPopover.isOpen) return null;
+
+  const isRealtimeConnected = jobsFeedConnectionState === ConnectionState.CONNECTED;
 
   // Render Minimized View
   if (progressPopover.isMinimized) {
@@ -225,7 +304,10 @@ export function ProgressPopover() {
       <div 
         ref={cardRef}
         className="fixed z-50 shadow-lg cursor-pointer bg-primary text-primary-foreground rounded-full px-3 py-1.5 flex items-center gap-2 animate-in fade-in zoom-in duration-200 hover:scale-105 transition-transform"
-        style={{ left: progressPopover.position.x, top: progressPopover.position.y }}
+        style={{
+          left: (dragPosition?.x ?? progressPopover.position.x),
+          top: (dragPosition?.y ?? progressPopover.position.y),
+        }}
         onClick={maximizeProgressPopover}
         onMouseDown={handleMouseDown}
       >
@@ -234,14 +316,14 @@ export function ProgressPopover() {
              <div className="relative">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
              </div>
-           ) : failedJobs.length > 0 ? (
+           ) : failedCount > 0 ? (
              <AlertCircle className="w-4 h-4 text-destructive-foreground" />
            ) : (
              <CheckCircle2 className="w-4 h-4" />
           )}
         </div>
         <span className="text-xs font-medium whitespace-nowrap">
-          {activeJobs.length} Active {failedJobs.length > 0 && `• ${failedJobs.length} Failed`}
+          {activeJobs.length} Active {failedCount > 0 && `• ${failedCount} Failed`}
         </span>
       </div>
     );
@@ -251,8 +333,11 @@ export function ProgressPopover() {
   return (
     <Card 
       ref={cardRef}
-      className="fixed z-50 w-80 shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in zoom-in duration-200 border-primary/20 bg-background/95 backdrop-blur-sm"
-      style={{ left: progressPopover.position.x, top: progressPopover.position.y }}
+      className="fixed z-50 w-[min(92vw,520px)] shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in zoom-in duration-200 border-primary/20 bg-background/95 backdrop-blur-sm"
+      style={{
+        left: (dragPosition?.x ?? progressPopover.position.x),
+        top: (dragPosition?.y ?? progressPopover.position.y),
+      }}
     >
       <CardHeader 
         className="p-2 border-b bg-muted/30 cursor-grab active:cursor-grabbing flex flex-row items-center justify-between space-y-0"
@@ -261,8 +346,54 @@ export function ProgressPopover() {
         <CardTitle className="text-xs font-medium flex items-center gap-2 select-none">
           <GripHorizontal className="w-3.5 h-3.5 text-muted-foreground" />
           Tasks
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 text-[10px] font-medium",
+              isRealtimeConnected ? "text-emerald-600" : "text-muted-foreground"
+            )}
+            title={
+              isRealtimeConnected
+                ? "Realtime connected"
+                : "Realtime disconnected (UI may be stale)"
+            }
+          >
+            <span
+              className={cn(
+                "h-1.5 w-1.5 rounded-full",
+                isRealtimeConnected ? "bg-emerald-600" : "bg-muted-foreground"
+              )}
+            />
+            {isRealtimeConnected ? "Live" : "Stale"}
+          </span>
         </CardTitle>
         <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-6 px-2 text-[11px]"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenJobs();
+            }}
+            title="View jobs"
+          >
+            Jobs
+          </Button>
+          {activeJobs.length > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 px-2 text-[11px] text-destructive hover:text-destructive"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!window.confirm(`Cancel ${activeJobs.length} active job(s)?`)) return;
+                for (const job of activeJobs) onCancelJob(job.id);
+              }}
+              title="Cancel all active jobs"
+            >
+              Cancel all
+            </Button>
+          )}
           <Button variant="ghost" size="icon" className="h-6 w-6" onClick={(e) => { e.stopPropagation(); minimizeProgressPopover(); }}>
             <Minus className="h-3 w-3" />
           </Button>
@@ -273,13 +404,15 @@ export function ProgressPopover() {
       </CardHeader>
       
       {/* Tabs / Toggle */}
-      <div className="flex p-1 bg-muted/30 border-b">
+      <div className="flex p-1 bg-muted/30 border-b" role="tablist" aria-label="Tasks tabs">
         <button
           className={cn(
             "flex-1 text-[11px] font-medium py-1 px-2 rounded-sm transition-colors",
             activeTab === "active" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
           onClick={() => setActiveTab("active")}
+          role="tab"
+          aria-selected={activeTab === "active"}
         >
           Active ({activeJobs.length})
         </button>
@@ -289,8 +422,10 @@ export function ProgressPopover() {
             activeTab === "failed" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
           onClick={() => setActiveTab("failed")}
+          role="tab"
+          aria-selected={activeTab === "failed"}
         >
-          Failed ({failedJobs.length})
+          Failed ({failedCount})
         </button>
         <button
           className={cn(
@@ -298,10 +433,18 @@ export function ProgressPopover() {
             activeTab === "history" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
           onClick={() => setActiveTab("history")}
+          role="tab"
+          aria-selected={activeTab === "history"}
         >
           History
         </button>
       </div>
+
+      {!isRealtimeConnected && (
+        <div className="px-3 py-2 border-b bg-muted/20 text-[11px] text-muted-foreground">
+          Realtime disconnected — data may be stale. Open <span className="font-medium">Jobs</span> to verify status.
+        </div>
+      )}
       
       <CardContent className="p-0 overflow-y-auto flex-1 custom-scrollbar">
         {activeTab === "active" ? (
@@ -317,9 +460,11 @@ export function ProgressPopover() {
                 const stats = displayStats[job.id];
                 const etr = stats ? formatDuration(stats.etr) : "--:--";
                 const speed = stats ? `${stats.speed.toFixed(1)}%/s` : "";
+                const secondsSinceUpdate = ageSeconds(job.updated_at);
+                const isStalled = (secondsSinceUpdate ?? 0) > 90 && job.status === "RUNNING" && !isDragging;
 
-                // Get display text from status_message or fallback
-                const statusText = job.status_message || "Processing...";
+                const statusText =
+                  job.status_message || `${STATUS_LABEL[job.status]}…`;
 
                 return (
                   <div key={job.id} className="p-2.5 hover:bg-muted/50 transition-colors">
@@ -329,8 +474,8 @@ export function ProgressPopover() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex justify-between items-start gap-2">
-                          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
-                            {job.task_type}
+                          <p className="text-[11px] font-medium text-muted-foreground">
+                            {job.task_type} • {STATUS_LABEL[job.status]}
                           </p>
                           <span className="text-xs font-semibold text-primary shrink-0">
                             {job.progress_percent}%
@@ -342,13 +487,69 @@ export function ProgressPopover() {
                         >
                           {statusText}
                         </p>
+                        <p className="text-[11px] text-muted-foreground truncate mt-0.5" title={job.book_asin || job.id}>
+                          {job.book_asin || job.id}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        {job.status === "PAUSED" ? (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => resumeJobById(job.id)}
+                            title="Resume"
+                          >
+                            <Play className="h-3.5 w-3.5" />
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => pauseJobById(job.id)}
+                            title="Pause"
+                          >
+                            <Pause className="h-3.5 w-3.5" />
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          onClick={() => onViewLogs(job)}
+                          title="View logs"
+                        >
+                          <FileText className="h-3.5 w-3.5" />
+                        </Button>
+                        {isJobActive(job) && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7 text-destructive hover:text-destructive"
+                            onClick={() => onCancelJob(job.id)}
+                            title="Cancel"
+                          >
+                            <XCircle className="h-3.5 w-3.5" />
+                          </Button>
+                        )}
                       </div>
                     </div>
 
                     <Progress value={job.progress_percent} className="h-1.5 mb-1.5" />
 
                     <div className="flex justify-between text-[10px] text-muted-foreground">
-                      <span>{speed || "—"}</span>
+                      <span className="flex items-center gap-2">
+                        <span>{speed || "—"}</span>
+                        <span title={job.updated_at ? `Updated at ${job.updated_at}` : ""}>
+                          Updated: {formatAge(job.updated_at)}
+                        </span>
+                        {isStalled && (
+                          <span className="text-destructive font-medium" title="No updates recently">
+                            Stalled
+                          </span>
+                        )}
+                      </span>
                       <span>ETA: {etr}</span>
                     </div>
                   </div>
@@ -377,15 +578,27 @@ export function ProgressPopover() {
                           <p className="text-xs font-medium truncate text-destructive">
                             {job.task_type} Failed
                           </p>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity -mt-1 -mr-1"
-                            onClick={() => handleRetry(job)}
-                            title="Retry"
-                          >
-                            <RotateCcw className="h-3.5 w-3.5" />
-                          </Button>
+                          <div className="flex items-center gap-1 -mt-1 -mr-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => onViewLogs(job)}
+                              title="View logs"
+                            >
+                              <FileText className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-6 w-6"
+                              onClick={() => handleRetry(job)}
+                              title="Retry"
+                              disabled={job.task_type !== "DOWNLOAD" && job.task_type !== "CONVERT"}
+                            >
+                              <RotateCcw className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
                         </div>
                         <p className="text-[10px] text-muted-foreground truncate" title={job.book_asin || job.id}>
                           {job.book_asin || job.id}
@@ -404,9 +617,38 @@ export function ProgressPopover() {
           <div className="p-5 text-center text-muted-foreground text-xs flex flex-col items-center gap-2">
             <History className="w-6 h-6 opacity-20" />
             <p>No recent history.</p>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                if (!window.confirm("Clear job history (completed/failed/cancelled)?")) return;
+                clearHistory({ delete_logs: false });
+              }}
+              className="text-[11px]"
+              title="Clear completed/failed/cancelled jobs"
+            >
+              Clear history
+            </Button>
           </div>
         ) : (
           <div className="divide-y">
+            <div className="p-2 flex items-center justify-between bg-muted/20">
+              <span className="text-[11px] text-muted-foreground">
+                Showing {historyJobs.length} most recent
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-[11px]"
+                onClick={() => {
+                  if (!window.confirm("Clear job history (completed/failed/cancelled)?")) return;
+                  clearHistory({ delete_logs: false });
+                }}
+                title="Clear completed/failed/cancelled jobs"
+              >
+                Clear history
+              </Button>
+            </div>
             {historyJobs.map((job) => {
               const Icon = JOB_TYPE_ICONS[job.task_type];
               const isFailed = job.status === "FAILED";
@@ -414,7 +656,7 @@ export function ProgressPopover() {
                 <div
                   key={job.id}
                   className={cn(
-                    "p-2 transition-colors",
+                    "p-2 transition-colors group",
                     isFailed ? "hover:bg-destructive/5" : "hover:bg-muted/50"
                   )}
                 >
@@ -439,11 +681,37 @@ export function ProgressPopover() {
                       <p className="text-[10px] text-muted-foreground truncate" title={job.book_asin || job.id}>
                         {job.book_asin || job.id}
                       </p>
+                      <p className="text-[10px] text-muted-foreground truncate" title={job.updated_at || job.created_at}>
+                        Updated: {formatAge(job.updated_at || job.created_at)}
+                      </p>
                       {job.error_message && (
                         <p className="text-[10px] text-destructive/80 mt-1 line-clamp-2" title={job.error_message}>
                           {job.error_message}
                         </p>
                       )}
+                    </div>
+                    <div className="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={() => onViewLogs(job)}
+                        title="View logs"
+                      >
+                        <FileText className="h-3.5 w-3.5" />
+                      </Button>
+                      {(job.status === "FAILED" || job.status === "CANCELLED") &&
+                        (job.task_type === "DOWNLOAD" || job.task_type === "CONVERT") && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => handleRetry(job)}
+                            title="Retry"
+                          >
+                            <RotateCcw className="h-3.5 w-3.5" />
+                          </Button>
+                        )}
                     </div>
                   </div>
                 </div>

@@ -60,10 +60,31 @@ class TestConversionUpdatesManifest:
                 }
             )
 
-            job_id = uuid4()
-            result = await manager._execute_conversion(
-                job_id, "B00TEST123", "m4b", None
-            )
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00TEST123"
+                mock_book.title = "Test Book"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                # Mock library_manager.scan_book to avoid side effects
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                result = await manager._execute_conversion(
+                    job_id, "B00TEST123", "m4b", None
+                )
 
             assert result["success"] is True
 
@@ -124,8 +145,28 @@ class TestConversionUpdatesManifest:
                 }
             )
 
-            job_id = uuid4()
-            await manager._execute_conversion(job_id, "B00TEST123", "m4b", None)
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00TEST123"
+                mock_book.title = "Test Book"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                await manager._execute_conversion(job_id, "B00TEST123", "m4b", None)
 
             manifest_path = manifest_dir / "converted_manifest.json"
             manifest = json.loads(manifest_path.read_text())
@@ -188,8 +229,28 @@ class TestConversionUpdatesManifest:
                 }
             )
 
-            job_id = uuid4()
-            await manager._execute_conversion(job_id, "B00MYASIN1", "m4b", None)
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00MYASIN1"
+                mock_book.title = "My Test Book"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                await manager._execute_conversion(job_id, "B00MYASIN1", "m4b", None)
 
             manifest_path = manifest_dir / "converted_manifest.json"
             manifest = json.loads(manifest_path.read_text())
@@ -313,8 +374,28 @@ class TestMoveSourcesAfterConversion:
                 }
             )
 
-            job_id = uuid4()
-            await manager._execute_conversion(job_id, "B00MOVE123", "m4b", None)
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00MOVE123"
+                mock_book.title = "Title"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                await manager._execute_conversion(job_id, "B00MOVE123", "m4b", None)
 
             # Verify files were moved
             assert not aaxc_file.exists(), "AAXC should be moved"
@@ -371,8 +452,28 @@ class TestMoveSourcesAfterConversion:
                 }
             )
 
-            job_id = uuid4()
-            await manager._execute_conversion(job_id, "B00STAY123", "m4b", None)
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00STAY123"
+                mock_book.title = "Title"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                await manager._execute_conversion(job_id, "B00STAY123", "m4b", None)
 
             # Verify files were NOT moved
             assert aaxc_file.exists(), "AAXC should stay when setting is False"
@@ -422,11 +523,31 @@ class TestMoveSourcesAfterConversion:
                 }
             )
 
-            job_id = uuid4()
-            # Should not raise an exception
-            result = await manager._execute_conversion(
-                job_id, "B00PART123", "m4b", None
-            )
+            # Mock database session
+            with patch("services.job_manager.get_session") as mock_get_session:
+                mock_book = MagicMock()
+                mock_book.asin = "B00PART123"
+                mock_book.title = "Title"
+
+                mock_session = AsyncMock()
+                mock_result = MagicMock()
+                mock_result.scalar_one_or_none.return_value = mock_book
+                mock_session.execute = AsyncMock(return_value=mock_result)
+                mock_session.add = MagicMock()
+                mock_session.commit = AsyncMock()
+
+                async def make_session_gen():
+                    yield mock_session
+                mock_get_session.side_effect = lambda: make_session_gen()
+
+                manager.library_manager = MagicMock()
+                manager.library_manager.scan_book = AsyncMock()
+
+                job_id = uuid4()
+                # Should not raise an exception
+                result = await manager._execute_conversion(
+                    job_id, "B00PART123", "m4b", None
+                )
 
             assert result["success"] is True
 

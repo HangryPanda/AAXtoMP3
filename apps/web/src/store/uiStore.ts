@@ -333,6 +333,10 @@ export const useUIStore = create<UIStore>()(
       partialize: (state) => ({
         viewMode: state.viewMode,
         sidebar: state.sidebar,
+        progressPopover: {
+          ...state.progressPopover,
+          isOpen: false, // don't auto-open on reload
+        },
       }),
     }
   )

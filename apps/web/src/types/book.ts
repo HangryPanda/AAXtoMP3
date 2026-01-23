@@ -33,6 +33,31 @@ export interface Chapter {
   start_offset_ms: number;
 }
 
+export interface BookDetailsChapter {
+  index: number;
+  title: string;
+  start_offset_ms: number;
+  length_ms: number;
+  end_offset_ms: number;
+}
+
+export interface BookDetailsResponse {
+  asin: string;
+  title: string;
+  subtitle?: string | null;
+  description?: string | null;
+  authors: Author[];
+  narrators: Narrator[];
+  genres: string[];
+  publisher?: string | null;
+  release_date?: string | null;
+  language?: string | null;
+  chapters: BookDetailsChapter[];
+  chapters_synthetic?: boolean;
+  cover_url?: string | null;
+  duration_total_ms?: number | null;
+}
+
 export interface ProductImages {
   [key: string]: string;
 }

@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
+const distDir = process.env.NEXT_DIST_DIR?.trim() || ".next";
+
 const nextConfig: NextConfig = {
   /* config options here */
+  distDir,
   reactCompiler: true,
 
   // Enable standalone output for Docker deployments

@@ -38,13 +38,15 @@ services:
       COMPLETED_DIR: /data/completed
       CORE_SCRIPTS_DIR: /core
       MANIFEST_DIR: /specs
+      AUDIBLE_AUTH_FILE: /audible-config/audibleAuth
+      AUDIBLE_PROFILE: jc4369@gmail.com
     volumes:
-      - ${DOWNLOADS_HOST_DIR:-/Volumes/Media/Audiobooks/Downloads}:/data/downloads
-      - ${CONVERTED_HOST_DIR:-/Volumes/Media/Audiobooks/Converted}:/data/converted
-      - ${COMPLETED_HOST_DIR:-/Volumes/Media/Audiobooks/Completed}:/data/completed
+      - /Volumes/Media/Audiobooks/Downloads:/data/downloads
+      - /Volumes/Media/Audiobooks/Converted:/data/converted
+      - /Volumes/Media/Audiobooks/Completed:/data/completed
       - ./core:/core:ro
-      - ./specs:/specs:ro
-      - audible-auth:/root/.audible:ro
+      - ./specs:/specs
+      - ~/.audible:/audible-config:ro
     ports:
       - "8000:8000"
     healthcheck:
@@ -94,6 +96,4 @@ services:
 
 volumes:
   postgres-data:
-    driver: local
-  audible-auth:
     driver: local

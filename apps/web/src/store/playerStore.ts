@@ -9,6 +9,11 @@ import { Howl } from "howler";
 import { saveProgress, getProgress } from "@/lib/db";
 import { updatePlaybackProgress } from "@/services/books";
 
+// Smart resume threshold in hours - if user hasn't listened for this long, rewind for context
+const SMART_RESUME_THRESHOLD_HOURS = 24;
+// How many seconds to rewind when smart resume triggers
+const SMART_RESUME_REWIND_SECONDS = 20;
+
 /**
  * Player state interface
  */
@@ -29,6 +34,10 @@ export interface PlayerState {
   volume: number;
   playbackRate: number;
   isMuted: boolean;
+
+  // Smart resume
+  lastPlayedAt: string | null;
+  smartResumeMessage: string | null;
 
   // Error state
   error: string | null;
@@ -60,6 +69,9 @@ export interface PlayerActions {
   _setDuration: (duration: number) => void;
   _setIsLoading: (loading: boolean) => void;
   _setError: (error: string | null) => void;
+
+  // Smart resume
+  clearSmartResumeMessage: () => void;
 }
 
 export type PlayerStore = PlayerState & PlayerActions;
@@ -129,13 +141,15 @@ export const usePlayerStore = create<PlayerStore>()(
       volume: 1,
       playbackRate: 1,
       isMuted: false,
+      lastPlayedAt: null,
+      smartResumeMessage: null,
       error: null,
 
       // Playback controls
       play: () => {
         if (howlInstance && !get().isPlaying) {
           howlInstance.play();
-          set({ isPlaying: true, error: null });
+          set({ isPlaying: true, error: null, lastPlayedAt: new Date().toISOString() });
           startPositionSaveInterval(get);
         }
       },
@@ -216,12 +230,26 @@ export const usePlayerStore = create<PlayerStore>()(
           currentAudioUrl: audioUrl,
         });
 
-        // Try to restore saved position
+        // Try to restore saved position with smart resume
         let startPosition = 0;
+        let smartResumeMessage: string | null = null;
         try {
           const progress = await getProgress(bookId);
           if (progress && !progress.completed) {
             startPosition = progress.currentTime;
+
+            // Check if we should apply smart resume (rewind for context)
+            if (progress.lastPlayedAt) {
+              const lastPlayed = new Date(progress.lastPlayedAt);
+              const now = new Date();
+              const hoursSinceLastPlayed =
+                (now.getTime() - lastPlayed.getTime()) / (1000 * 60 * 60);
+
+              if (hoursSinceLastPlayed >= SMART_RESUME_THRESHOLD_HOURS && startPosition > SMART_RESUME_REWIND_SECONDS) {
+                startPosition = Math.max(0, startPosition - SMART_RESUME_REWIND_SECONDS);
+                smartResumeMessage = `Rewound ${SMART_RESUME_REWIND_SECONDS}s for context`;
+              }
+            }
           }
         } catch {
           // Ignore - start from beginning
@@ -241,6 +269,7 @@ export const usePlayerStore = create<PlayerStore>()(
               isLoading: false,
               duration,
               currentTime: startPosition,
+              smartResumeMessage,
             });
 
             // Seek to saved position
@@ -372,6 +401,9 @@ export const usePlayerStore = create<PlayerStore>()(
       _setDuration: (duration: number) => set({ duration }),
       _setIsLoading: (isLoading: boolean) => set({ isLoading }),
       _setError: (error: string | null) => set({ error }),
+
+      // Smart resume
+      clearSmartResumeMessage: () => set({ smartResumeMessage: null }),
     }),
     {
       name: "player-storage",
@@ -381,6 +413,8 @@ export const usePlayerStore = create<PlayerStore>()(
         volume: state.volume,
         playbackRate: state.playbackRate,
         isMuted: state.isMuted,
+        lastPlayedAt: state.lastPlayedAt,
+        smartResumeMessage: state.smartResumeMessage,
         // Optionally persist current book for resume
         currentBookId: state.currentBookId,
         currentBookTitle: state.currentBookTitle,

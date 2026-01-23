@@ -65,6 +65,11 @@ class Settings(BaseSettings):
     max_download_concurrent: int = Field(default=5, ge=1, le=10, description="Max concurrent downloads")
     max_convert_concurrent: int = Field(default=2, ge=1, le=4, description="Max concurrent conversions")
 
+    # JIT Streaming
+    max_jit_streams: int = Field(default=2, ge=1, le=4, description="Max concurrent JIT streams")
+    jit_stream_bitrate: str = Field(default="128k", description="JIT stream bitrate")
+    jit_stream_format: str = Field(default="mp3", description="JIT output format (mp3, aac, opus, flac)")
+
     # WebSocket
     ws_log_buffer_ms: int = Field(default=100, description="WebSocket log buffer interval in ms")
     ws_ping_interval: int = Field(default=30, description="WebSocket ping interval in seconds")

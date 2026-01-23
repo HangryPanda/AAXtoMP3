@@ -18,6 +18,10 @@ import {
   createConvertJob,
   cancelJob,
   getActiveJobs,
+  retryJob,
+  pauseJob,
+  resumeJob,
+  clearJobHistory,
 } from "@/services/jobs";
 import type {
   Job,
@@ -248,6 +252,59 @@ export function useCancelJob() {
       queryClient.invalidateQueries({ queryKey: jobKeys.lists() });
       // Also invalidate books since job completion may change book status
       queryClient.invalidateQueries({ queryKey: bookKeys.all });
+    },
+  });
+}
+
+/**
+ * Hook for retrying a job by id (supports batch jobs)
+ */
+export function useRetryJob() {
+  const queryClient = useQueryClient();
+
+  return useMutation<{ job_id: string; status: string; message: string }, Error, string>({
+    mutationFn: (jobId) => retryJob(jobId),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: jobKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: jobKeys.active() });
+      queryClient.invalidateQueries({ queryKey: bookKeys.all });
+    },
+  });
+}
+
+export function usePauseJob() {
+  const queryClient = useQueryClient();
+  return useMutation<{ status: string; message: string }, Error, string>({
+    mutationFn: (jobId) => pauseJob(jobId),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: jobKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: jobKeys.active() });
+    },
+  });
+}
+
+export function useResumeJob() {
+  const queryClient = useQueryClient();
+  return useMutation<{ status: string; message: string }, Error, string>({
+    mutationFn: (jobId) => resumeJob(jobId),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: jobKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: jobKeys.active() });
+    },
+  });
+}
+
+/**
+ * Hook for clearing job history
+ */
+export function useClearJobHistory() {
+  const queryClient = useQueryClient();
+
+  return useMutation<{ deleted: number; message: string }, Error, { delete_logs?: boolean }>({
+    mutationFn: (vars) => clearJobHistory({ delete_logs: vars.delete_logs }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: jobKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: jobKeys.active() });
     },
   });
 }

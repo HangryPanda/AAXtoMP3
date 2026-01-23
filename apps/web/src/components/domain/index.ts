@@ -19,6 +19,9 @@ export type { LibraryToolbarProps, ViewMode, SortField, SortOrder } from "./Libr
 export { StickyPlayer } from "./StickyPlayer";
 export type { StickyPlayerProps } from "./StickyPlayer";
 
+export { ConnectedStickyPlayer } from "./ConnectedStickyPlayer";
+export type { ConnectedStickyPlayerProps } from "./ConnectedStickyPlayer";
+
 export { ChapterList } from "./ChapterList";
 export type { ChapterListProps, Chapter } from "./ChapterList";
 

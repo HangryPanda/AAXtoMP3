@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routes import health, jobs, library, settings, stream
 from core.config import get_settings
 from db.session import create_db_and_tables
+from services.job_recovery import mark_inflight_jobs_interrupted
 
 
 @asynccontextmanager
@@ -18,6 +19,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     config = get_settings()
     config.ensure_directories()
     await create_db_and_tables()
+    await mark_inflight_jobs_interrupted()
     yield
     # Shutdown - cleanup if needed
 

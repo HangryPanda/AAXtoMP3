@@ -13,6 +13,12 @@ from .converter_engine import (
     ConverterError,
     ValidationError,
 )
+from .jit_streaming import (
+    DecryptionParamsError,
+    JITStreamingError,
+    JITStreamingService,
+    VoucherParseError,
+)
 from .job_manager import JobManager
 from .websocket_manager import WebSocketManager
 
@@ -28,6 +34,11 @@ __all__ = [
     "ConverterError",
     "ConversionError",
     "ValidationError",
+    # JITStreamingService
+    "JITStreamingService",
+    "JITStreamingError",
+    "VoucherParseError",
+    "DecryptionParamsError",
     # JobManager
     "JobManager",
     # WebSocketManager

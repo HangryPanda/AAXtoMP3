@@ -1,8 +1,10 @@
 """Integration tests for audio streaming endpoints."""
 
+import json
 import tempfile
 from pathlib import Path
 from typing import Any
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from httpx import AsyncClient
@@ -402,3 +404,256 @@ class TestStreamInfoEndpoint:
 
         assert data["available"] is False
         assert data["status"] == "NEW"
+
+
+class TestJITStreamingEndpoints:
+    """Tests for JIT streaming functionality."""
+
+    @pytest.mark.asyncio
+    async def test_stream_prefers_converted_file(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+        tmp_path: Path,
+    ) -> None:
+        """Test that converted file is preferred over JIT streaming."""
+        # Create both converted and source files
+        converted_file = tmp_path / "converted.m4b"
+        converted_file.write_bytes(b"converted audio content")
+
+        source_file = tmp_path / "source.aaxc"
+        source_file.write_bytes(b"source audio content")
+
+        voucher_file = tmp_path / "source.voucher"
+        voucher_data = {
+            "content_license": {
+                "license_response": {"key": "testkey", "iv": "testiv"}
+            }
+        }
+        voucher_file.write_text(json.dumps(voucher_data))
+
+        book = Book(
+            asin="B00PREFER_CONVERTED",
+            title="Prefer Converted Test",
+            status=BookStatus.COMPLETED,
+            local_path_converted=str(converted_file),
+            local_path_aax=str(source_file),
+            local_path_voucher=str(voucher_file),
+            conversion_format="m4b",
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00PREFER_CONVERTED")
+
+        assert response.status_code == 200
+        # FileResponse for converted files includes Accept-Ranges
+        assert response.headers.get("accept-ranges") == "bytes"
+        # JIT streams have X-Stream-Mode header
+        assert response.headers.get("x-stream-mode") is None
+
+    @pytest.mark.asyncio
+    async def test_stream_info_shows_jit_available(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+        tmp_path: Path,
+    ) -> None:
+        """Test stream info shows JIT availability."""
+        source_file = tmp_path / "source.aaxc"
+        source_file.write_bytes(b"source audio content")
+
+        voucher_file = tmp_path / "source.voucher"
+        voucher_data = {
+            "content_license": {
+                "license_response": {"key": "testkey", "iv": "testiv"}
+            }
+        }
+        voucher_file.write_text(json.dumps(voucher_data))
+
+        book = Book(
+            asin="B00JIT_INFO",
+            title="JIT Info Test",
+            status=BookStatus.DOWNLOADED,
+            local_path_aax=str(source_file),
+            local_path_voucher=str(voucher_file),
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00JIT_INFO/info")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["jit_available"] is True
+        assert data["stream_mode"] == "jit"
+        assert data["available"] is True
+        assert "jit_format" in data
+        assert "jit_bitrate" in data
+        assert "jit_media_type" in data
+
+    @pytest.mark.asyncio
+    async def test_stream_info_jit_not_available_without_voucher(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+        tmp_path: Path,
+    ) -> None:
+        """Test JIT is not available for AAXC without voucher."""
+        source_file = tmp_path / "source.aaxc"
+        source_file.write_bytes(b"source audio content")
+
+        book = Book(
+            asin="B00NO_VOUCHER",
+            title="No Voucher Test",
+            status=BookStatus.DOWNLOADED,
+            local_path_aax=str(source_file),
+            local_path_voucher=None,
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00NO_VOUCHER/info")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["jit_available"] is False
+        assert data["stream_mode"] is None
+        assert data["available"] is False
+
+    @pytest.mark.asyncio
+    async def test_stream_info_jit_available_for_aax(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+        tmp_path: Path,
+    ) -> None:
+        """Test JIT is available for AAX files without voucher."""
+        source_file = tmp_path / "source.aax"
+        source_file.write_bytes(b"source audio content")
+
+        book = Book(
+            asin="B00AAX_JIT",
+            title="AAX JIT Test",
+            status=BookStatus.DOWNLOADED,
+            local_path_aax=str(source_file),
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00AAX_JIT/info")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["jit_available"] is True
+        assert data["stream_mode"] == "jit"
+
+    @pytest.mark.asyncio
+    async def test_stream_404_no_audio_source(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test 404 when no audio source available."""
+        book = Book(
+            asin="B00NO_SOURCE",
+            title="No Source Test",
+            status=BookStatus.NEW,
+            local_path_aax=None,
+            local_path_converted=None,
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00NO_SOURCE")
+
+        assert response.status_code == 404
+        data = response.json()
+        assert "No audio source available" in data["detail"]
+
+    @pytest.mark.asyncio
+    async def test_jit_status_endpoint(
+        self,
+        client: AsyncClient,
+    ) -> None:
+        """Test JIT status endpoint returns service info."""
+        response = await client.get("/stream/jit/status")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert "active_streams" in data
+        assert "stream_count" in data
+        assert "max_concurrent" in data
+        assert "default_format" in data
+        assert "default_bitrate" in data
+        assert isinstance(data["active_streams"], list)
+        assert isinstance(data["stream_count"], int)
+
+    @pytest.mark.asyncio
+    async def test_stream_info_with_both_sources(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+        tmp_path: Path,
+    ) -> None:
+        """Test stream info when both converted and source are available."""
+        converted_file = tmp_path / "converted.m4b"
+        converted_file.write_bytes(b"converted audio content")
+
+        source_file = tmp_path / "source.aaxc"
+        source_file.write_bytes(b"source audio content")
+
+        voucher_file = tmp_path / "source.voucher"
+        voucher_data = {
+            "content_license": {
+                "license_response": {"key": "testkey", "iv": "testiv"}
+            }
+        }
+        voucher_file.write_text(json.dumps(voucher_data))
+
+        book = Book(
+            asin="B00BOTH_SOURCES",
+            title="Both Sources Test",
+            status=BookStatus.COMPLETED,
+            local_path_converted=str(converted_file),
+            local_path_aax=str(source_file),
+            local_path_voucher=str(voucher_file),
+            conversion_format="m4b",
+        )
+        test_session.add(book)
+        await test_session.commit()
+
+        response = await client.get("/stream/B00BOTH_SOURCES/info")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        # Both should be available
+        assert data["available"] is True
+        assert data["jit_available"] is True
+        # But stream mode should prefer file
+        assert data["stream_mode"] == "file"
+        # Should have file info
+        assert data["format"] == "m4b"
+        assert data["file_size"] is not None
+        # Should also have JIT info
+        assert "jit_format" in data
+
+    @pytest.mark.asyncio
+    async def test_cancel_jit_stream_not_found(
+        self,
+        client: AsyncClient,
+    ) -> None:
+        """Test cancelling a non-existent JIT stream."""
+        response = await client.delete("/stream/jit/NONEXISTENT")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert data["success"] is False
+        assert "No active JIT stream" in data["message"]
+        assert data["asin"] == "NONEXISTENT"

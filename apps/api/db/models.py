@@ -76,6 +76,7 @@ class JobStatus(str, Enum):
     PENDING = "PENDING"
     QUEUED = "QUEUED"
     RUNNING = "RUNNING"
+    PAUSED = "PAUSED"
     COMPLETED = "COMPLETED"
     FAILED = "FAILED"
     CANCELLED = "CANCELLED"
@@ -386,11 +387,14 @@ class Job(JobBase, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     status: JobStatus = Field(default=JobStatus.PENDING, index=True)
     progress_percent: int = Field(default=0, ge=0, le=100)
+    status_message: str | None = Field(default=None, description="Latest human-readable status message")
     log_file_path: str | None = Field(default=None, description="Path to job log file")
     error_message: str | None = Field(default=None)
+    result_json: str | None = Field(default=None, description="JSON result summary for UI/debugging")
     started_at: datetime | None = Field(default=None)
     completed_at: datetime | None = Field(default=None)
     created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
     payload_json: str | None = Field(default=None, description="JSON payload with job-specific config")
 
 
@@ -406,11 +410,14 @@ class JobRead(JobBase):
     id: UUID
     status: JobStatus
     progress_percent: int
+    status_message: str | None
     log_file_path: str | None
     error_message: str | None
+    result_json: str | None
     started_at: datetime | None
     completed_at: datetime | None
     created_at: datetime
+    updated_at: datetime
 
 
 class LocalItem(SQLModel, table=True):

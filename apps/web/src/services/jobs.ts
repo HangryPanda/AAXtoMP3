@@ -96,10 +96,49 @@ export async function cancelJob(jobId: string): Promise<{ message: string }> {
 }
 
 /**
+ * Retry a job by id (supports batch download jobs)
+ */
+export async function retryJob(jobId: string): Promise<{ job_id: string; status: string; message: string }> {
+  return apiRequest<{ job_id: string; status: string; message: string }>({
+    method: "POST",
+    url: `/jobs/${jobId}/retry`,
+  });
+}
+
+export async function pauseJob(jobId: string): Promise<{ status: string; message: string }> {
+  return apiRequest<{ status: string; message: string }>({
+    method: "POST",
+    url: `/jobs/${jobId}/pause`,
+  });
+}
+
+export async function resumeJob(jobId: string): Promise<{ status: string; message: string }> {
+  return apiRequest<{ status: string; message: string }>({
+    method: "POST",
+    url: `/jobs/${jobId}/resume`,
+  });
+}
+
+/**
+ * Clear job history (completed/failed/cancelled) with optional log deletion.
+ */
+export async function clearJobHistory(params?: {
+  status?: string;
+  older_than?: string;
+  delete_logs?: boolean;
+}): Promise<{ deleted: number; message: string }> {
+  return apiRequest<{ deleted: number; message: string }>({
+    method: "DELETE",
+    url: "/jobs/history",
+    params: params && Object.keys(params).length > 0 ? params : undefined,
+  });
+}
+
+/**
  * Get all active jobs (running, pending, queued)
  */
 export async function getActiveJobs(): Promise<JobListResponse> {
-  return getJobs("RUNNING,PENDING,QUEUED" as JobStatus);
+  return getJobs("RUNNING,PENDING,QUEUED,PAUSED" as JobStatus);
 }
 
 /**

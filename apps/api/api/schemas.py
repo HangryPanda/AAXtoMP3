@@ -58,6 +58,8 @@ class BookDetailsResponse(BaseModel):
     language: str | None = None
     
     chapters: list[ChapterResponse] = []
+    # True when chapters are a synthetic fallback (e.g., DB chapters missing)
+    chapters_synthetic: bool = False
     technical: TechnicalResponse | None = None
     assets: list[AssetResponse] = []
     playback_progress: PlaybackProgressResponse | None = None

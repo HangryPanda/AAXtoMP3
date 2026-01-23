@@ -20,6 +20,7 @@ const STATUS_BADGE_VARIANTS: Record<
   PENDING: "secondary",
   QUEUED: "info",
   RUNNING: "warning",
+  PAUSED: "secondary",
   COMPLETED: "success",
   FAILED: "destructive",
   CANCELLED: "secondary",
@@ -34,6 +35,7 @@ function formatWhen(iso: string | null | undefined): string {
 
 function getSubtitle(job: Job): string {
   if (job.status === "RUNNING") return "Repairing your library index from disk/manifests…";
+  if (job.status === "PAUSED") return "Repair paused…";
   if (job.status === "QUEUED" || job.status === "PENDING") return "Repair queued…";
   if (job.status === "COMPLETED") return `Last run: ${formatWhen(job.completed_at ?? job.started_at ?? job.created_at)}`;
   if (job.status === "FAILED") return "Repair failed.";

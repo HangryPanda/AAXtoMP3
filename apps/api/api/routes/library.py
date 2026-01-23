@@ -30,6 +30,9 @@ from services.metadata_extractor import MetadataExtractor
 router = APIRouter(tags=["library"])
 logger = logging.getLogger(__name__)
 
+_scan_in_flight: set[str] = set()
+_scan_in_flight_lock = asyncio.Lock()
+
 
 class RepairPreviewResponse(BaseModel):
     """Response for repair preview with filesystem and database stats."""
@@ -360,6 +363,8 @@ async def sync_library(
     session: AsyncSession = Depends(get_session)
 ):
     """Trigger an Audible library sync."""
+    from api.routes.jobs import job_manager
+
     job = Job(
         task_type=JobType.SYNC,
         status=JobStatus.PENDING,
@@ -367,7 +372,11 @@ async def sync_library(
     )
     session.add(job)
     await session.commit()
-    
+    await session.refresh(job)
+
+    # Queue job for execution
+    await job_manager.queue_sync(job.id)
+
     return {
         "job_id": job.id,
         "message": "Library sync queued. Check /jobs for progress.",
@@ -453,23 +462,7 @@ async def get_book_details(
     if series_row:
         series = SeriesResponse(name=series_row[0], sequence=series_row[1])
 
-    # 7. Chapters
-    chapters_result = await session.execute(
-        select(Chapter)
-        .where(Chapter.book_asin == asin)
-        .order_by(Chapter.start_offset_ms)
-    )
-    chapters = [
-        ChapterResponse(
-            index=c.index,
-            title=c.title,
-            start_offset_ms=c.start_offset_ms,
-            length_ms=c.length_ms,
-            end_offset_ms=c.end_offset_ms
-        ) for c in chapters_result.scalars().all()
-    ]
-
-    # 8. Technical & Assets
+    # 7. Technical & Assets (needed for duration)
     tech_result = await session.execute(select(BookTechnical).where(BookTechnical.book_asin == asin))
     tech_row = tech_result.scalar_one_or_none()
     technical = None
@@ -482,6 +475,87 @@ async def get_book_details(
             duration_ms=tech_row.duration_ms,
             file_size=tech_row.file_size
         )
+
+    # 8. Chapters
+    chapters_result = await session.execute(
+        select(Chapter)
+        .where(Chapter.book_asin == asin)
+        .order_by(Chapter.start_offset_ms)
+    )
+    chapters = [
+        ChapterResponse(
+            index=c.index,
+            title=c.title,
+            start_offset_ms=c.start_offset_ms,
+            length_ms=c.length_ms,
+            end_offset_ms=c.end_offset_ms
+        )
+        for c in chapters_result.scalars().all()
+    ]
+
+    db_chapters_missing = len(chapters) == 0
+
+    duration_total_ms: int | None = None
+    if technical and technical.duration_ms:
+        duration_total_ms = technical.duration_ms
+    elif book.runtime_length_min:
+        duration_total_ms = int(book.runtime_length_min) * 60 * 1000
+
+    bind = session.bind
+    if db_chapters_missing:
+
+        async def _scan_if_needed() -> None:
+            logger.info("Background chapter scan task started for %s", asin)
+            if not book.local_path_converted:
+                logger.debug("Book %s has no local_path_converted, skipping background scan", asin)
+                return
+            converted_path = Path(book.local_path_converted)
+            if not converted_path.exists():
+                logger.debug("Converted file for %s not found at %s, skipping background scan", asin, converted_path)
+                return
+
+            async with _scan_in_flight_lock:
+                if asin in _scan_in_flight:
+                    logger.debug("Scan already in flight for %s, skipping", asin)
+                    return
+                _scan_in_flight.add(asin)
+                logger.debug("Added %s to scan_in_flight set", asin)
+
+            try:
+                if bind is None:
+                    logger.debug("No database bind available for background scan of %s", asin)
+                    return
+                from sqlalchemy.orm import sessionmaker
+
+                async_session_maker = sessionmaker(
+                    bind=bind,
+                    class_=AsyncSession,
+                    expire_on_commit=False,
+                )
+                logger.info("Starting background chapter extraction for %s", asin)
+                async with async_session_maker() as bg_session:
+                    result = await library_manager.scan_book(bg_session, asin, force=False)
+                    logger.info("Background chapter extraction for %s completed: %s", asin, result)
+            except Exception:
+                logger.exception("Background scan failed for %s", asin)
+            finally:
+                async with _scan_in_flight_lock:
+                    _scan_in_flight.discard(asin)
+
+        asyncio.create_task(_scan_if_needed(), name=f"scan-book-missing-chapters:{asin}")
+
+    chapters_synthetic = False
+    if db_chapters_missing and duration_total_ms and duration_total_ms > 0:
+        chapters = [
+            ChapterResponse(
+                index=0,
+                title="Full Duration",
+                start_offset_ms=0,
+                length_ms=duration_total_ms,
+                end_offset_ms=duration_total_ms,
+            )
+        ]
+        chapters_synthetic = True
 
     assets_result = await session.execute(select(BookAsset).where(BookAsset.book_asin == asin))
     assets = [
@@ -537,7 +611,8 @@ async def get_book_details(
         assets=assets,
         playback_progress=progress,
         cover_url=cover_url,
-        duration_total_ms=technical.duration_ms if technical else None
+        duration_total_ms=duration_total_ms,
+        chapters_synthetic=chapters_synthetic,
     )
 
 
@@ -604,6 +679,33 @@ async def update_progress(
 
     await session.commit()
     await session.refresh(progress)
+
+    return PlaybackProgressResponse(
+        book_asin=progress.book_asin,
+        position_ms=progress.position_ms,
+        last_chapter_id=progress.last_chapter_id,
+        playback_speed=progress.playback_speed,
+        is_finished=progress.is_finished,
+        last_played_at=progress.last_played_at,
+        completed_at=progress.completed_at
+    )
+
+
+@router.get("/{asin}/progress")
+async def get_progress(
+    asin: str,
+    session: AsyncSession = Depends(get_session),
+) -> PlaybackProgressResponse | None:
+    """Get playback progress for a book. Returns null if no progress exists."""
+    result = await session.execute(select(Book).where(Book.asin == asin))
+    if not result.scalar_one_or_none():
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    result = await session.execute(select(PlaybackProgress).where(PlaybackProgress.book_asin == asin))
+    progress = result.scalar_one_or_none()
+
+    if not progress:
+        return None
 
     return PlaybackProgressResponse(
         book_asin=progress.book_asin,

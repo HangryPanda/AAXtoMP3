@@ -11,7 +11,7 @@ from typing import Any, Protocol
 from uuid import UUID
 
 from core.config import get_settings
-from db.models import Book, BookStatus
+from db.models import Book, BookStatus, Job
 from db.session import get_session
 from services.audible_client import AudibleClient
 from services.converter_engine import ConverterEngine
@@ -72,6 +72,7 @@ class JobManager:
         # Track running tasks
         self._tasks: dict[UUID, asyncio.Task[Any]] = {}
         self._cancelled: set[UUID] = set()
+        self._pause_events: dict[UUID, asyncio.Event] = {}
 
         # Progress callbacks per job
         self._progress_callbacks: dict[UUID, Callable[[int, str], None]] = {}
@@ -109,6 +110,34 @@ class JobManager:
             self._progress_callbacks.pop(job_id, None)
         else:
             self._progress_callbacks[job_id] = callback
+
+    def _ensure_pause_event(self, job_id: UUID) -> asyncio.Event:
+        ev = self._pause_events.get(job_id)
+        if ev is None:
+            ev = asyncio.Event()
+            ev.set()
+            self._pause_events[job_id] = ev
+        return ev
+
+    async def _wait_if_paused(self, job_id: UUID) -> None:
+        ev = self._ensure_pause_event(job_id)
+        await ev.wait()
+
+    def pause_job(self, job_id: UUID) -> bool:
+        """Pause a running job cooperatively (may not stop an in-flight subprocess)."""
+        if job_id not in self._tasks:
+            return False
+        ev = self._ensure_pause_event(job_id)
+        ev.clear()
+        return True
+
+    def resume_job(self, job_id: UUID) -> bool:
+        """Resume a paused job."""
+        if job_id not in self._tasks:
+            return False
+        ev = self._ensure_pause_event(job_id)
+        ev.set()
+        return True
 
     def _job_log_dir(self) -> Path:
         d = self.settings.data_dir / "job_logs"
@@ -200,6 +229,7 @@ class JobManager:
 
         if progress_callback:
             self._progress_callbacks[job_id] = progress_callback
+        self._ensure_pause_event(job_id)
 
         task = asyncio.create_task(
             self._execute_download(job_id, asins),
@@ -241,6 +271,7 @@ class JobManager:
 
         if progress_callback:
             self._progress_callbacks[job_id] = progress_callback
+        self._ensure_pause_event(job_id)
 
         task = asyncio.create_task(
             self._execute_conversion(job_id, asin, format, naming_scheme),
@@ -431,6 +462,7 @@ class JobManager:
                 logger.info("Job %s was cancelled before starting", job_id)
                 return {"success": False, "cancelled": True}
 
+            await self._wait_if_paused(job_id)
             await self._notify_status(job_id, "RUNNING", 0, "Starting download")
 
             # Pre-fetch book titles for better progress messages
@@ -459,6 +491,7 @@ class JobManager:
                 title = titles.get(asin, asin)
 
                 async with download_limit:
+                    await self._wait_if_paused(job_id)
                     if self.is_cancelled(job_id):
                         return {"success": False, "asin": asin, "cancelled": True}
 
@@ -521,10 +554,72 @@ class JobManager:
             # Final status
             success = all(r.get("success", False) for r in results)
             successful_count = sum(1 for r in results if r.get("success"))
+            failed_results = [r for r in results if not r.get("success", False)]
+            failed_asins = [r.get("asin") for r in failed_results if r.get("asin")]
 
             if callback:
                 callback(100, "Download complete")
                 callback(-1, self._format_log_line("INFO", "Download complete"))
+
+            # Persist a result summary for the UI/debugging.
+            result_summary = {
+                "task_type": "DOWNLOAD",
+                "total": total,
+                "successful": successful_count,
+                "failed": len(failed_results),
+                "failed_asins": failed_asins,
+            }
+
+            # Update local paths in database for successful items (even if some failed).
+            async for session in get_session():
+                # Store result_json on the job record.
+                res_job = await session.execute(select(Job).where(Job.id == job_id))
+                job_row = res_job.scalar_one_or_none()
+                if job_row:
+                    job_row.result_json = json.dumps(result_summary, ensure_ascii=False)
+                    session.add(job_row)
+
+                for res in results:
+                    if res.get("success"):
+                        asin = res.get("asin")
+                        if not asin:
+                            continue
+
+                        # Find files
+                        files = res.get("files", [])
+                        local_aax = next((f for f in files if f.endswith(".aax") or f.endswith(".aaxc")), None)
+                        local_voucher = next((f for f in files if f.endswith(".voucher")), None)
+                        local_cover = next((f for f in files if f.endswith(".jpg") or f.endswith(".png")), None)
+
+                        # Update DB
+                        stmt = select(Book).where(Book.asin == asin)
+                        result = await session.execute(stmt)
+                        book = result.scalar_one_or_none()
+
+                        # Get title from book record or result
+                        book_title = (book.title if book else None) or res.get("title") or asin
+
+                        # Update download manifest
+                        self._update_download_manifest(
+                            asin=asin,
+                            title=book_title,
+                            aaxc_path=local_aax,
+                            voucher_path=local_voucher,
+                            cover_path=local_cover,
+                        )
+
+                        if book:
+                            if local_aax:
+                                book.local_path_aax = str(local_aax)
+                            if local_voucher:
+                                book.local_path_voucher = str(local_voucher)
+                            if local_cover:
+                                book.local_path_cover = str(local_cover)
+                            book.status = BookStatus.DOWNLOADED
+                            session.add(book)
+
+                await session.commit()
+                break
 
             if success:
                 await self._notify_status(
@@ -534,52 +629,13 @@ class JobManager:
                     f"Downloaded {successful_count}/{total} items",
                 )
                 logger.info("Download job %s completed successfully", job_id)
-
-                # Update local paths in database
-                async for session in get_session():
-                    for res in results:
-                        if res.get("success"):
-                            asin = res.get("asin")
-                            output_dir = Path(res.get("output_dir"))
-                            
-                            # Find files
-                            files = res.get("files", [])
-                            local_aax = next((f for f in files if f.endswith(".aax") or f.endswith(".aaxc")), None)
-                            local_voucher = next((f for f in files if f.endswith(".voucher")), None)
-                            local_cover = next((f for f in files if f.endswith(".jpg") or f.endswith(".png")), None)
-
-                            # Update DB
-                            stmt = select(Book).where(Book.asin == asin)
-                            result = await session.execute(stmt)
-                            book = result.scalar_one_or_none()
-
-                            # Get title from book record or result
-                            book_title = (book.title if book else None) or res.get("title") or asin
-
-                            # Update download manifest
-                            self._update_download_manifest(
-                                asin=asin,
-                                title=book_title,
-                                aaxc_path=local_aax,
-                                voucher_path=local_voucher,
-                                cover_path=local_cover,
-                            )
-
-                            if book:
-                                if local_aax: book.local_path_aax = str(local_aax)
-                                if local_voucher: book.local_path_voucher = str(local_voucher)
-                                if local_cover: book.local_path_cover = str(local_cover)
-                                book.status = BookStatus.DOWNLOADED
-                                session.add(book)
-                    
-                    await session.commit()
-
             else:
                 await self._notify_status(
                     job_id,
-                    "COMPLETED",  # Still completed, but with failures
+                    "FAILED",
                     100,
                     f"Downloaded {successful_count}/{total} items (some failed)",
+                    error=f"{len(failed_results)} item(s) failed. See logs for details.",
                 )
                 logger.warning(
                     "Download job %s completed with failures: %d/%d succeeded",
@@ -839,12 +895,36 @@ class JobManager:
                 logger.info("Job %s was cancelled before starting", job_id)
                 return {"success": False, "cancelled": True}
 
+            await self._wait_if_paused(job_id)
             await self._notify_status(job_id, "RUNNING", 0, "Starting conversion")
 
             callback = self._progress_callbacks.get(job_id)
 
             # Find input file
-            input_file = self._find_input_file(asin)
+            # 1. Try to find input file using DB info first
+            input_file = None
+            book_title = None
+            
+            try:
+                async for session in get_session():
+                    stmt = select(Book).where(Book.asin == asin)
+                    result = await session.execute(stmt)
+                    book = result.scalar_one_or_none()
+                    if book:
+                        book_title = book.title
+                        if book.local_path_aax:
+                            p = Path(book.local_path_aax)
+                            if p.exists():
+                                input_file = p
+                                logger.info("Using local_path_aax from DB: %s", input_file)
+                    break
+            except Exception as e:
+                logger.warning("Failed to fetch book info for %s: %s", asin, e)
+
+            # 2. Fallback to standard search if not found in DB or file missing
+            if not input_file:
+                input_file = self._find_input_file(asin, title=book_title)
+
             if not input_file:
                 error_msg = f"Input file not found for {asin}"
                 logger.error(error_msg)
@@ -1003,8 +1083,8 @@ class JobManager:
                 await self._notify_status(job_id, "FAILED", 0, error=str(e))
                 return {"success": False, "error": str(e)}
 
-    def _find_input_file(self, asin: str) -> Path | None:
-        """Find downloaded AAX/AAXC file for an ASIN."""
+    def _find_input_file(self, asin: str, title: str | None = None) -> Path | None:
+        """Find downloaded AAX/AAXC file for an ASIN (or title fallback)."""
         # Check downloads directory
         for ext in [".aaxc", ".aax"]:
             # Try with ASIN prefix
@@ -1018,6 +1098,26 @@ class JobManager:
             matches = list(self.settings.completed_dir.rglob(f"*{asin}*{ext}"))
             if matches:
                 return matches[0]
+        
+        # Fallback: Search by title if provided
+        if title:
+            logger.info("ASIN not found, trying fallback search by title: %s", title)
+            # Basic sanitation for glob matching
+            clean_title = title.replace("/", "_").replace(":", "_")
+            
+            # Check downloads directory (flat)
+            for f in self.settings.downloads_dir.glob("*"):
+                if f.suffix.lower() in [".aax", ".aaxc"]:
+                    if clean_title in f.name:
+                        logger.info("Found file by title in downloads: %s", f)
+                        return f
+            
+            # Check completed directory (recursive)
+            for f in self.settings.completed_dir.rglob("*"):
+                if f.suffix.lower() in [".aax", ".aaxc"]:
+                    if clean_title in f.name:
+                        logger.info("Found file by title in completed: %s", f)
+                        return f
 
         return None
 

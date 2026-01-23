@@ -8,6 +8,7 @@ export type JobStatus =
   | "PENDING"
   | "QUEUED"
   | "RUNNING"
+  | "PAUSED"
   | "COMPLETED"
   | "FAILED"
   | "CANCELLED";
@@ -21,9 +22,11 @@ export interface Job {
   status_message: string | null;
   log_file_path: string | null;
   error_message: string | null;
+  result_json?: string | null;
   started_at: string | null;
   completed_at: string | null;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface JobLogEntry {
@@ -65,6 +68,7 @@ export const JOB_STATUS_COLORS: Record<JobStatus, string> = {
   PENDING: "gray",
   QUEUED: "blue",
   RUNNING: "yellow",
+  PAUSED: "gray",
   COMPLETED: "green",
   FAILED: "red",
   CANCELLED: "gray",
@@ -83,7 +87,8 @@ export function isJobActive(job: Job): boolean {
   return (
     job.status === "PENDING" ||
     job.status === "QUEUED" ||
-    job.status === "RUNNING"
+    job.status === "RUNNING" ||
+    job.status === "PAUSED"
   );
 }
 

@@ -2261,5 +2261,2660 @@
     "discovered_at": "2026-01-23T02:40:13.664782",
     "source": "filesystem_scan",
     "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.K. Rowling/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)",
+    "output_path": "/data/converted/Audiobook/J.K. Rowling/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition)/Harry Potter and the Sorcerer’s Stone (Full-Cast Edition).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.K. Rowling/Harry Potter and the Chamber of Secrets (Full-Cast Edition)/Harry Potter and the Chamber of Secrets (Full-Cast Edition).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Harry Potter and the Chamber of Secrets (Full-Cast Edition)",
+    "output_path": "/data/converted/Audiobook/J.K. Rowling/Harry Potter and the Chamber of Secrets (Full-Cast Edition)/Harry Potter and the Chamber of Secrets (Full-Cast Edition).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/A. F. Kay/The Tenth Muse Divine Apostasy, Book 10/The Tenth Muse Divine Apostasy, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Tenth Muse Divine Apostasy, Book 10",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/The Tenth Muse Divine Apostasy, Book 10/The Tenth Muse Divine Apostasy, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/A. F. Kay/Tarot's Ninth Harbinger Divine Apostasy, Book 9/Tarot's Ninth Harbinger Divine Apostasy, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tarot's Ninth Harbinger Divine Apostasy, Book 9",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Tarot's Ninth Harbinger Divine Apostasy, Book 9/Tarot's Ninth Harbinger Divine Apostasy, Book 9.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Aaron Oster/Land of the Elementals, Books 1-3 Box Set/Land of the Elementals, Books 1-3 Box Set.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Land of the Elementals, Books 1-3 Box Set",
+    "output_path": "/data/converted/Audiobook/Aaron Oster/Land of the Elementals, Books 1-3 Box Set/Land of the Elementals, Books 1-3 Box Set.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/Return of the Runebound Professor A Progression Fantasy Epic/Return of the Runebound Professor A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor A Progression Fantasy Epic",
+    "output_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor A Progression Fantasy Epic/Return of the Runebound Professor A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/Return of the Runebound Professor 3/Return of the Runebound Professor 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 3",
+    "output_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor 3/Return of the Runebound Professor 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/Return of the Runebound Professor 4/Return of the Runebound Professor 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 4",
+    "output_path": "/data/converted/Audiobook/Actus/Return of the Runebound Professor 4/Return of the Runebound Professor 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus/My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure/My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/Actus/My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure/My Best Friend Is an Eldritch Horror Books 1-6 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Actus Actus/Return of the Runebound Professor 2/Return of the Runebound Professor 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 2",
+    "output_path": "/data/converted/Audiobook/Actus Actus/Return of the Runebound Professor 2/Return of the Runebound Professor 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Adara Wolf, R. Phoenix/The Monster's Pet Collection of Books 1-3/The Monster's Pet Collection of Books 1-3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Monster's Pet Collection of Books 1-3",
+    "output_path": "/data/converted/Audiobook/Adara Wolf, R. Phoenix/The Monster's Pet Collection of Books 1-3/The Monster's Pet Collection of Books 1-3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 4 The Hedge Wizard, Book 4/The Hedge Wizard 4 The Hedge Wizard, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hedge Wizard 4 The Hedge Wizard, Book 4",
+    "output_path": "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 4 The Hedge Wizard, Book 4/The Hedge Wizard 4 The Hedge Wizard, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3",
+    "output_path": "/data/converted/Audiobook/Alex Maher/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexander Olson/Antimage Ends of Magic, Book 1/Antimage Ends of Magic, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Antimage Ends of Magic, Book 1",
+    "output_path": "/data/converted/Audiobook/Alexander Olson/Antimage Ends of Magic, Book 1/Antimage Ends of Magic, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexander Olson/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)",
+    "output_path": "/data/converted/Audiobook/Alexander Olson/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexander Olson/Adventurer Ends of Magic, Book 2/Adventurer Ends of Magic, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Adventurer Ends of Magic, Book 2",
+    "output_path": "/data/converted/Audiobook/Alexander Olson/Adventurer Ends of Magic, Book 2/Adventurer Ends of Magic, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk/Blood Ties Last Life, Book 3/Blood Ties Last Life, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Blood Ties Last Life, Book 3",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk/Blood Ties Last Life, Book 3/Blood Ties Last Life, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Frontier Last Life, Book 2/The Frontier Last Life, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Frontier Last Life, Book 2",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Frontier Last Life, Book 2/The Frontier Last Life, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/Bastard Last Life Series, Book 1/Bastard Last Life Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Bastard Last Life Series, Book 1",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/Bastard Last Life Series, Book 1/Bastard Last Life Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Flame of the North Last Life, Book 4/The Flame of the North Last Life, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Flame of the North Last Life, Book 4",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Flame of the North Last Life, Book 4/The Flame of the North Last Life, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translated by/The Edges of Power Last Life, Book 5/The Edges of Power Last Life, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Edges of Power Last Life, Book 5",
+    "output_path": "/data/converted/Audiobook/Alexey Osadchuk, Zachary J. Lorang - translated by/The Edges of Power Last Life, Book 5/The Edges of Power Last Life, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/B.T. Narro/Reign of Havoc Legends of The Tainted, Book 2/Reign of Havoc Legends of The Tainted, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Reign of Havoc Legends of The Tainted, Book 2",
+    "output_path": "/data/converted/Audiobook/B.T. Narro/Reign of Havoc Legends of The Tainted, Book 2/Reign of Havoc Legends of The Tainted, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/B.T. Narro/The Mage from Nowhere Legends of the Tainted, Book 1/The Mage from Nowhere Legends of the Tainted, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Mage from Nowhere Legends of the Tainted, Book 1",
+    "output_path": "/data/converted/Audiobook/B.T. Narro/The Mage from Nowhere Legends of the Tainted, Book 1/The Mage from Nowhere Legends of the Tainted, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Rhythm of War Book Four of the Stormlight Archive/Rhythm of War Book Four of the Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rhythm of War Book Four of the Stormlight Archive",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Rhythm of War Book Four of the Stormlight Archive/Rhythm of War Book Four of the Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/The Well of Ascension Mistborn, Book 2/The Well of Ascension Mistborn, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Well of Ascension Mistborn, Book 2",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Well of Ascension Mistborn, Book 2/The Well of Ascension Mistborn, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/The Alloy of Law A Mistborn Novel/The Alloy of Law A Mistborn Novel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Alloy of Law A Mistborn Novel",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Alloy of Law A Mistborn Novel/The Alloy of Law A Mistborn Novel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Oathbringer/Oathbringer.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Oathbringer",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Oathbringer/Oathbringer.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/Edgedancer Stormlight Archive/Edgedancer Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Edgedancer Stormlight Archive",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Edgedancer Stormlight Archive/Edgedancer Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/The Final Empire Mistborn Book 1/The Final Empire Mistborn Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Final Empire Mistborn Book 1",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Final Empire Mistborn Book 1/The Final Empire Mistborn Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Brandon Sanderson/The Hero of Ages Mistborn, Book 3/The Hero of Ages Mistborn, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hero of Ages Mistborn, Book 3",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Hero of Ages Mistborn, Book 3/The Hero of Ages Mistborn, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. Mantis/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. Mantis/The Path of Ascension 4 A LitRPG Adventure/The Path of Ascension 4 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension 4 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension 4 A LitRPG Adventure/The Path of Ascension 4 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. Mantis/The Path of Ascension 6/The Path of Ascension 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension 6",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension 6/The Path of Ascension 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. Mantis/The Path of Ascension 7/The Path of Ascension 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension 7",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension 7/The Path of Ascension 7.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/C. S. Pacat/Dark Heir/Dark Heir.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dark Heir",
+    "output_path": "/data/converted/Audiobook/C. S. Pacat/Dark Heir/Dark Heir.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Casey McQuiston/Red, White & Royal Blue A Novel/Red, White & Royal Blue A Novel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Red, White & Royal Blue A Novel",
+    "output_path": "/data/converted/Audiobook/Casey McQuiston/Red, White & Royal Blue A Novel/Red, White & Royal Blue A Novel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Charles Kindinger/Chapter One/Chapter One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chapter One",
+    "output_path": "/data/converted/Audiobook/Charles Kindinger/Chapter One/Chapter One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Chloe Archer/The Orc and the Manny Monsters Hollow, Book 1/The Orc and the Manny Monsters Hollow, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Orc and the Manny Monsters Hollow, Book 1",
+    "output_path": "/data/converted/Audiobook/Chloe Archer/The Orc and the Manny Monsters Hollow, Book 1/The Orc and the Manny Monsters Hollow, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Craig Montgomery/A Circle of Stars The Stardust Duology, Book One/A Circle of Stars The Stardust Duology, Book One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "A Circle of Stars The Stardust Duology, Book One",
+    "output_path": "/data/converted/Audiobook/Craig Montgomery/A Circle of Stars The Stardust Duology, Book One/A Circle of Stars The Stardust Duology, Book One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/D. K. Holmberg/The Spirit Binds Elemental Academy, Book 5/The Spirit Binds Elemental Academy, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Spirit Binds Elemental Academy, Book 5",
+    "output_path": "/data/converted/Audiobook/D. K. Holmberg/The Spirit Binds Elemental Academy, Book 5/The Spirit Binds Elemental Academy, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/D.E. Sherman/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)",
+    "output_path": "/data/converted/Audiobook/D.E. Sherman/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/D.K. Holmberg/Elemental Academy Boxset Books 1-3/Elemental Academy Boxset Books 1-3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Elemental Academy Boxset Books 1-3",
+    "output_path": "/data/converted/Audiobook/D.K. Holmberg/Elemental Academy Boxset Books 1-3/Elemental Academy Boxset Books 1-3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/D.K. Holmberg/The Wind Rages  Elemental Academy, Book 4/The Wind Rages  Elemental Academy, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Wind Rages  Elemental Academy, Book 4",
+    "output_path": "/data/converted/Audiobook/D.K. Holmberg/The Wind Rages  Elemental Academy, Book 4/The Wind Rages  Elemental Academy, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Dakota Krout/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daman/The Desolate Mountains The Divine Elements, Book 2/The Desolate Mountains The Divine Elements, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Desolate Mountains The Divine Elements, Book 2",
+    "output_path": "/data/converted/Audiobook/Daman/The Desolate Mountains The Divine Elements, Book 2/The Desolate Mountains The Divine Elements, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daman/Scion of Raizel The Divine Elements, Book 3/Scion of Raizel The Divine Elements, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Scion of Raizel The Divine Elements, Book 3",
+    "output_path": "/data/converted/Audiobook/Daman/Scion of Raizel The Divine Elements, Book 3/Scion of Raizel The Divine Elements, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daman/The Blood Legacy The Divine Elements, Book 1/The Blood Legacy The Divine Elements, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Blood Legacy The Divine Elements, Book 1",
+    "output_path": "/data/converted/Audiobook/Daman/The Blood Legacy The Divine Elements, Book 1/The Blood Legacy The Divine Elements, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Daniel Suarez/Daemon/Daemon.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Daemon",
+    "output_path": "/data/converted/Audiobook/Daniel Suarez/Daemon/Daemon.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/David Estes, Ben Galley/Demon's Rage The Bloodwood Saga, Book 2/Demon's Rage The Bloodwood Saga, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Demon's Rage The Bloodwood Saga, Book 2",
+    "output_path": "/data/converted/Audiobook/David Estes, Ben Galley/Demon's Rage The Bloodwood Saga, Book 2/Demon's Rage The Bloodwood Saga, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/David Estes, G.D. Penman/Shadebound The Last King, Book 1/Shadebound The Last King, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shadebound The Last King, Book 1",
+    "output_path": "/data/converted/Audiobook/David Estes, G.D. Penman/Shadebound The Last King, Book 1/Shadebound The Last King, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Derrick Smythe/To Wield a Plague Passage to Dawn, Book 2.5/To Wield a Plague Passage to Dawn, Book 2.5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "To Wield a Plague Passage to Dawn, Book 2.5",
+    "output_path": "/data/converted/Audiobook/Derrick Smythe/To Wield a Plague Passage to Dawn, Book 2.5/To Wield a Plague Passage to Dawn, Book 2.5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Eden Finley, Saxon James/The Bastard and the Heir/The Bastard and the Heir.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Bastard and the Heir",
+    "output_path": "/data/converted/Audiobook/Eden Finley, Saxon James/The Bastard and the Heir/The Bastard and the Heir.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Edward W. Robertson/The Red Sea The Cycle of Galand, Book 1/The Red Sea The Cycle of Galand, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Red Sea The Cycle of Galand, Book 1",
+    "output_path": "/data/converted/Audiobook/Edward W. Robertson/The Red Sea The Cycle of Galand, Book 1/The Red Sea The Cycle of Galand, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Eliot Grayson/Corin and the Courtier Beautiful Beasts, Book 1/Corin and the Courtier Beautiful Beasts, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Corin and the Courtier Beautiful Beasts, Book 1",
+    "output_path": "/data/converted/Audiobook/Eliot Grayson/Corin and the Courtier Beautiful Beasts, Book 1/Corin and the Courtier Beautiful Beasts, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Ellen Vora/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response",
+    "output_path": "/data/converted/Audiobook/Ellen Vora/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume One/Unintended Cultivator, Volume One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Unintended Cultivator, Volume One",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume One/Unintended Cultivator, Volume One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Honour Rae/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2",
+    "output_path": "/data/converted/Audiobook/Honour Rae/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Honour Rae/All the Skills A Deck-Building LitRPG All the Skills, Book 1/All the Skills A Deck-Building LitRPG All the Skills, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills A Deck-Building LitRPG All the Skills, Book 1",
+    "output_path": "/data/converted/Audiobook/Honour Rae/All the Skills A Deck-Building LitRPG All the Skills, Book 1/All the Skills A Deck-Building LitRPG All the Skills, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Honour Rae/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4",
+    "output_path": "/data/converted/Audiobook/Honour Rae/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Honour Rae/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3",
+    "output_path": "/data/converted/Audiobook/Honour Rae/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Hugo Huesca/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1",
+    "output_path": "/data/converted/Audiobook/Hugo Huesca/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J. R. R. Tolkien, Christopher Tolkien/The Silmarillion/The Silmarillion.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Silmarillion",
+    "output_path": "/data/converted/Audiobook/J. R. R. Tolkien, Christopher Tolkien/The Silmarillion/The Silmarillion.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 5/Mark of the Fool 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 5",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 5/Mark of the Fool 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 4 A Progression Fantasy Epic",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 6/Mark of the Fool 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 6",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 6/Mark of the Fool 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 8/Mark of the Fool 8.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 8",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 8/Mark of the Fool 8.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.M. Clarke, C.J. Thompson/Rune Seeker A LitRPG Adventure/Rune Seeker A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rune Seeker A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke, C.J. Thompson/Rune Seeker A LitRPG Adventure/Rune Seeker A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 3 Home Sweet Home/Jake's Magical Market 3 Home Sweet Home.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market 3 Home Sweet Home",
+    "output_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 3 Home Sweet Home/Jake's Magical Market 3 Home Sweet Home.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 2 A Trek Through Time/Jake's Magical Market 2 A Trek Through Time.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market 2 A Trek Through Time",
+    "output_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market 2 A Trek Through Time/Jake's Magical Market 2 A Trek Through Time.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market/Jake's Magical Market.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market",
+    "output_path": "/data/converted/Audiobook/J.R. Mathews/Jake's Magical Market/Jake's Magical Market.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Jaclyn Osborn/Sent to a Fantasy World and Now All the Men Want Me, Volume 1/Sent to a Fantasy World and Now All the Men Want Me, Volume 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Sent to a Fantasy World and Now All the Men Want Me, Volume 1",
+    "output_path": "/data/converted/Audiobook/Jaclyn Osborn/Sent to a Fantasy World and Now All the Men Want Me, Volume 1/Sent to a Fantasy World and Now All the Men Want Me, Volume 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Jennifer Aaker, Naomi Bagdonas/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)",
+    "output_path": "/data/converted/Audiobook/Jennifer Aaker, Naomi Bagdonas/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Jez Cajiao/Age of Stone Rise of Mankind Series, Book 1/Age of Stone Rise of Mankind Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Stone Rise of Mankind Series, Book 1",
+    "output_path": "/data/converted/Audiobook/Jez Cajiao/Age of Stone Rise of Mankind Series, Book 1/Age of Stone Rise of Mankind Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Keira Andrews/The Barbarian's Vow  Barbarian Duet, Book 2/The Barbarian's Vow  Barbarian Duet, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Barbarian's Vow  Barbarian Duet, Book 2",
+    "output_path": "/data/converted/Audiobook/Keira Andrews/The Barbarian's Vow  Barbarian Duet, Book 2/The Barbarian's Vow  Barbarian Duet, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Keira Andrews/Wed to the Barbarian Barbarian Duet, Book 1/Wed to the Barbarian Barbarian Duet, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wed to the Barbarian Barbarian Duet, Book 1",
+    "output_path": "/data/converted/Audiobook/Keira Andrews/Wed to the Barbarian Barbarian Duet, Book 1/Wed to the Barbarian Barbarian Duet, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)",
+    "output_path": "/data/converted/Audiobook/Krazekode/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)",
+    "output_path": "/data/converted/Audiobook/Krazekode/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/The Second Law of Cultivation Qi=MC^2, Book 2/The Second Law of Cultivation Qi=MC^2, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Second Law of Cultivation Qi=MC^2, Book 2",
+    "output_path": "/data/converted/Audiobook/Krazekode/The Second Law of Cultivation Qi=MC^2, Book 2/The Second Law of Cultivation Qi=MC^2, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/Rise of the Devourer Voidborne A LitRPG Adventure/Rise of the Devourer Voidborne A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rise of the Devourer Voidborne A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/Krazekode/Rise of the Devourer Voidborne A LitRPG Adventure/Rise of the Devourer Voidborne A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/Dragon Warrior Rise of the Devourer, Book 3/Dragon Warrior Rise of the Devourer, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dragon Warrior Rise of the Devourer, Book 3",
+    "output_path": "/data/converted/Audiobook/Krazekode/Dragon Warrior Rise of the Devourer, Book 3/Dragon Warrior Rise of the Devourer, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Krazekode/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)",
+    "output_path": "/data/converted/Audiobook/Krazekode/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Kyle Kirrin/Emperor's End The Ripple System, Book 5/Emperor's End The Ripple System, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Emperor's End The Ripple System, Book 5",
+    "output_path": "/data/converted/Audiobook/Kyle Kirrin/Emperor's End The Ripple System, Book 5/Emperor's End The Ripple System, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wizard in Exile Wrath of the Stormking, Book 1",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/Age of Swords The Legends of the First Empire, Book 2/Age of Swords The Legends of the First Empire, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Swords The Legends of the First Empire, Book 2",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Swords The Legends of the First Empire, Book 2/Age of Swords The Legends of the First Empire, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/Nolyn The Rise and Fall, Book 1/Nolyn The Rise and Fall, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nolyn The Rise and Fall, Book 1",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Nolyn The Rise and Fall, Book 1/Nolyn The Rise and Fall, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/Age of Myth Book One of The Legends of the First Empire/Age of Myth Book One of The Legends of the First Empire.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Myth Book One of The Legends of the First Empire",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Myth Book One of The Legends of the First Empire/Age of Myth Book One of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/Age of Legend Book Four of The Legends of the First Empire/Age of Legend Book Four of The Legends of the First Empire.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Legend Book Four of The Legends of the First Empire",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Age of Legend Book Four of The Legends of the First Empire/Age of Legend Book Four of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Michael J. Sullivan/The Disappearance of Winter's Daughter/The Disappearance of Winter's Daughter.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Disappearance of Winter's Daughter",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/The Disappearance of Winter's Daughter/The Disappearance of Winter's Daughter.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/ML Spencer/Chains of Blood The Chaos Cycle, Book 1/Chains of Blood The Chaos Cycle, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chains of Blood The Chaos Cycle, Book 1",
+    "output_path": "/data/converted/Audiobook/ML Spencer/Chains of Blood The Chaos Cycle, Book 1/Chains of Blood The Chaos Cycle, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/ML Spencer/The Complete Rhenwars Saga An Epic Fantasy Pentalogy/The Complete Rhenwars Saga An Epic Fantasy Pentalogy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Complete Rhenwars Saga An Epic Fantasy Pentalogy",
+    "output_path": "/data/converted/Audiobook/ML Spencer/The Complete Rhenwars Saga An Epic Fantasy Pentalogy/The Complete Rhenwars Saga An Epic Fantasy Pentalogy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Nameless Author/Nameless Sovereign A Cultivation Progression Fantasy/Nameless Sovereign A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Audiobook/Nameless Author/Nameless Sovereign A Cultivation Progression Fantasy/Nameless Sovereign A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Nicoli Gonnella/Dissonance A LitRPG Adventure (Unbound Book 1)/Dissonance A LitRPG Adventure (Unbound Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dissonance A LitRPG Adventure (Unbound Book 1)",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Dissonance A LitRPG Adventure (Unbound Book 1)/Dissonance A LitRPG Adventure (Unbound Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Nicoli Gonnella/Threshold Unbound, Book 5/Threshold Unbound, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Threshold Unbound, Book 5",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Threshold Unbound, Book 5/Threshold Unbound, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way Healer's Way, Book 1/The Healer's Way Healer's Way, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Healer's Way Healer's Way, Book 1",
+    "output_path": "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way Healer's Way, Book 1/The Healer's Way Healer's Way, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Orson Scott Card/Stonefather/Stonefather.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Stonefather",
+    "output_path": "/data/converted/Audiobook/Orson Scott Card/Stonefather/Stonefather.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick G. Laplante/Pendulum of Fate, Part 2 Painting the Mists, Book 15/Pendulum of Fate, Part 2 Painting the Mists, Book 15.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pendulum of Fate, Part 2 Painting the Mists, Book 15",
+    "output_path": "/data/converted/Audiobook/Patrick G. Laplante/Pendulum of Fate, Part 2 Painting the Mists, Book 15/Pendulum of Fate, Part 2 Painting the Mists, Book 15.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick G. Laplante/Pendulum of Fate, Part 1 Painting the Mists, Book 14/Pendulum of Fate, Part 1 Painting the Mists, Book 14.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pendulum of Fate, Part 1 Painting the Mists, Book 14",
+    "output_path": "/data/converted/Audiobook/Patrick G. Laplante/Pendulum of Fate, Part 1 Painting the Mists, Book 14/Pendulum of Fate, Part 1 Painting the Mists, Book 14.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick G. Laplante/Heartforge Painting the Mists, Book 16/Heartforge Painting the Mists, Book 16.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Heartforge Painting the Mists, Book 16",
+    "output_path": "/data/converted/Audiobook/Patrick G. Laplante/Heartforge Painting the Mists, Book 16/Heartforge Painting the Mists, Book 16.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick G. Laplante/Bloodstorm Painting the Mists, Book 17/Bloodstorm Painting the Mists, Book 17.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Bloodstorm Painting the Mists, Book 17",
+    "output_path": "/data/converted/Audiobook/Patrick G. Laplante/Bloodstorm Painting the Mists, Book 17/Bloodstorm Painting the Mists, Book 17.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick G. Laplante/Planesfall Painting the Mists, Book 18/Planesfall Painting the Mists, Book 18.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Planesfall Painting the Mists, Book 18",
+    "output_path": "/data/converted/Audiobook/Patrick G. Laplante/Planesfall Painting the Mists, Book 18/Planesfall Painting the Mists, Book 18.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Claddings of Light Painting the Mists, Book 12/Claddings of Light Painting the Mists, Book 12.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Claddings of Light Painting the Mists, Book 12",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Claddings of Light Painting the Mists, Book 12/Claddings of Light Painting the Mists, Book 12.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Echoes of Divinity Painting the Mists, Book 13/Echoes of Divinity Painting the Mists, Book 13.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Echoes of Divinity Painting the Mists, Book 13",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Echoes of Divinity Painting the Mists, Book 13/Echoes of Divinity Painting the Mists, Book 13.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Words of Creation Painting the Mists, Book 10/Words of Creation Painting the Mists, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Words of Creation Painting the Mists, Book 10",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Words of Creation Painting the Mists, Book 10/Words of Creation Painting the Mists, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Shattered Lands Painting the Mists, Book 8/Shattered Lands Painting the Mists, Book 8.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shattered Lands Painting the Mists, Book 8",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Shattered Lands Painting the Mists, Book 8/Shattered Lands Painting the Mists, Book 8.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Clear Sky Painting the Mists, Book 1/Clear Sky Painting the Mists, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Clear Sky Painting the Mists, Book 1",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Clear Sky Painting the Mists, Book 1/Clear Sky Painting the Mists, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Crown of the Starry Sky Painting the Mists, Book 11/Crown of the Starry Sky Painting the Mists, Book 11.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Crown of the Starry Sky Painting the Mists, Book 11",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Crown of the Starry Sky Painting the Mists, Book 11/Crown of the Starry Sky Painting the Mists, Book 11.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Edge of Oblivion Painting the Mists, Book 9/Edge of Oblivion Painting the Mists, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Edge of Oblivion Painting the Mists, Book 9",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Edge of Oblivion Painting the Mists, Book 9/Edge of Oblivion Painting the Mists, Book 9.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Corrupted Crimson Painting the Mists, Book 5/Corrupted Crimson Painting the Mists, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Corrupted Crimson Painting the Mists, Book 5",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Corrupted Crimson Painting the Mists, Book 5/Corrupted Crimson Painting the Mists, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Shifting Tides Painting the Mists, Book 7/Shifting Tides Painting the Mists, Book 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shifting Tides Painting the Mists, Book 7",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Shifting Tides Painting the Mists, Book 7/Shifting Tides Painting the Mists, Book 7.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Kindling Painting the Mists, Book 6/Kindling Painting the Mists, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Kindling Painting the Mists, Book 6",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Kindling Painting the Mists, Book 6/Kindling Painting the Mists, Book 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Pure Jade Painting the Mists, Book 4/Pure Jade Painting the Mists, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pure Jade Painting the Mists, Book 4",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Pure Jade Painting the Mists, Book 4/Pure Jade Painting the Mists, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Laplante/Light in the Darkness Painting the Mists, Book 3/Light in the Darkness Painting the Mists, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Light in the Darkness Painting the Mists, Book 3",
+    "output_path": "/data/converted/Audiobook/Patrick Laplante/Light in the Darkness Painting the Mists, Book 3/Light in the Darkness Painting the Mists, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Patrick Rothfuss/The Narrow Road Between Desires Kingkiller Chronicle/The Narrow Road Between Desires Kingkiller Chronicle.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Narrow Road Between Desires Kingkiller Chronicle",
+    "output_path": "/data/converted/Audiobook/Patrick Rothfuss/The Narrow Road Between Desires Kingkiller Chronicle/The Narrow Road Between Desires Kingkiller Chronicle.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Peter A. Flannery/Decimus Fate and the Talisman of Dreams/Decimus Fate and the Talisman of Dreams.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Decimus Fate and the Talisman of Dreams",
+    "output_path": "/data/converted/Audiobook/Peter A. Flannery/Decimus Fate and the Talisman of Dreams/Decimus Fate and the Talisman of Dreams.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Peter A. Flannery/Battle Mage/Battle Mage.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Battle Mage",
+    "output_path": "/data/converted/Audiobook/Peter A. Flannery/Battle Mage/Battle Mage.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Phil Tucker/LastRock Immortal Great Souls, Book 3/LastRock Immortal Great Souls, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "LastRock Immortal Great Souls, Book 3",
+    "output_path": "/data/converted/Audiobook/Phil Tucker/LastRock Immortal Great Souls, Book 3/LastRock Immortal Great Souls, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Pierce Brown/Golden Son Book II of the Red Rising Trilogy/Golden Son Book II of the Red Rising Trilogy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Golden Son Book II of the Red Rising Trilogy",
+    "output_path": "/data/converted/Audiobook/Pierce Brown/Golden Son Book II of the Red Rising Trilogy/Golden Son Book II of the Red Rising Trilogy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Pierce Brown/Red Rising/Red Rising.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Red Rising",
+    "output_path": "/data/converted/Audiobook/Pierce Brown/Red Rising/Red Rising.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Pierce Brown/Iron Gold/Iron Gold.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Iron Gold",
+    "output_path": "/data/converted/Audiobook/Pierce Brown/Iron Gold/Iron Gold.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Pierce Brown/Morning Star Book III of the Red Rising Trilogy/Morning Star Book III of the Red Rising Trilogy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Morning Star Book III of the Red Rising Trilogy",
+    "output_path": "/data/converted/Audiobook/Pierce Brown/Morning Star Book III of the Red Rising Trilogy/Morning Star Book III of the Red Rising Trilogy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Rick Riordan/The Lost Hero/The Lost Hero.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Lost Hero",
+    "output_path": "/data/converted/Audiobook/Rick Riordan/The Lost Hero/The Lost Hero.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Robbie Couch/Another First Chance/Another First Chance.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Another First Chance",
+    "output_path": "/data/converted/Audiobook/Robbie Couch/Another First Chance/Another First Chance.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Robert Jordan/The Great Hunt Book Two of 'The Wheel of Time'/The Great Hunt Book Two of 'The Wheel of Time'.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Great Hunt Book Two of 'The Wheel of Time'",
+    "output_path": "/data/converted/Audiobook/Robert Jordan/The Great Hunt Book Two of 'The Wheel of Time'/The Great Hunt Book Two of 'The Wheel of Time'.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Robert Jordan/The Shadow Rising Book Four of 'The Wheel of Time'/The Shadow Rising Book Four of 'The Wheel of Time'.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Shadow Rising Book Four of 'The Wheel of Time'",
+    "output_path": "/data/converted/Audiobook/Robert Jordan/The Shadow Rising Book Four of 'The Wheel of Time'/The Shadow Rising Book Four of 'The Wheel of Time'.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/S.M. Boyce/Wraithblade The Wraithblade Saga, Book 1/Wraithblade The Wraithblade Saga, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wraithblade The Wraithblade Saga, Book 1",
+    "output_path": "/data/converted/Audiobook/S.M. Boyce/Wraithblade The Wraithblade Saga, Book 1/Wraithblade The Wraithblade Saga, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sam Burns/The Elemental Keyes Circle the Square, Book 1/The Elemental Keyes Circle the Square, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Elemental Keyes Circle the Square, Book 1",
+    "output_path": "/data/converted/Audiobook/Sam Burns/The Elemental Keyes Circle the Square, Book 1/The Elemental Keyes Circle the Square, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sam Burns/The Elemental Ruins  Circle the Square, Book 2/The Elemental Ruins  Circle the Square, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Elemental Ruins  Circle the Square, Book 2",
+    "output_path": "/data/converted/Audiobook/Sam Burns/The Elemental Ruins  Circle the Square, Book 2/The Elemental Ruins  Circle the Square, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sam Burns, W.M. Fawkes/Pool of Dreams/Pool of Dreams.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pool of Dreams",
+    "output_path": "/data/converted/Audiobook/Sam Burns, W.M. Fawkes/Pool of Dreams/Pool of Dreams.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarah A. Parker/When the Moon Hatched A Novel/When the Moon Hatched A Novel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "When the Moon Hatched A Novel",
+    "output_path": "/data/converted/Audiobook/Sarah A. Parker/When the Moon Hatched A Novel/When the Moon Hatched A Novel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarah Lin/Bondsfungi The Weirkey Chronicles, Book 5/Bondsfungi The Weirkey Chronicles, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Bondsfungi The Weirkey Chronicles, Book 5",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/Bondsfungi The Weirkey Chronicles, Book 5/Bondsfungi The Weirkey Chronicles, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Seth Haddon/Reborn/Reborn.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Reborn",
+    "output_path": "/data/converted/Audiobook/Seth Haddon/Reborn/Reborn.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10)/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10)",
+    "output_path": "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10)/He Who Fights with Monsters 10 A LitRPG Adventure (He Who Fights with Monsters, Book 10).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11",
+    "output_path": "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11/He Who Fights with Monsters 11 A LitRPG Adventure He Who Fights with Monsters, Book 11.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/System Interference System Universe, Book 5/System Interference System Universe, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "System Interference System Universe, Book 5",
+    "output_path": "/data/converted/Audiobook/SunriseCV/System Interference System Universe, Book 5/System Interference System Universe, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/Savannah A LitRPG Adventure (System Universe, Book 3)/Savannah A LitRPG Adventure (System Universe, Book 3).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Savannah A LitRPG Adventure (System Universe, Book 3)",
+    "output_path": "/data/converted/Audiobook/SunriseCV/Savannah A LitRPG Adventure (System Universe, Book 3)/Savannah A LitRPG Adventure (System Universe, Book 3).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/Indaria System Universe, Book 6/Indaria System Universe, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Indaria System Universe, Book 6",
+    "output_path": "/data/converted/Audiobook/SunriseCV/Indaria System Universe, Book 6/Indaria System Universe, Book 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/Torith System Universe, Book 2/Torith System Universe, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Torith System Universe, Book 2",
+    "output_path": "/data/converted/Audiobook/SunriseCV/Torith System Universe, Book 2/Torith System Universe, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SunriseCV/Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)/Trials of Cydaria A LitRPG Adventure (System Universe, Book 4).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)",
+    "output_path": "/data/converted/Audiobook/SunriseCV/Trials of Cydaria A LitRPG Adventure (System Universe, Book 4)/Trials of Cydaria A LitRPG Adventure (System Universe, Book 4).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/T.C. Edge/The Song of the First Blade The Bladeborn Saga, Book 1/The Song of the First Blade The Bladeborn Saga, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Song of the First Blade The Bladeborn Saga, Book 1",
+    "output_path": "/data/converted/Audiobook/T.C. Edge/The Song of the First Blade The Bladeborn Saga, Book 1/The Song of the First Blade The Bladeborn Saga, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/T.C. Edge/Ghost of the Shadowfort The Bladeborn Saga, Book 2/Ghost of the Shadowfort The Bladeborn Saga, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Ghost of the Shadowfort The Bladeborn Saga, Book 2",
+    "output_path": "/data/converted/Audiobook/T.C. Edge/Ghost of the Shadowfort The Bladeborn Saga, Book 2/Ghost of the Shadowfort The Bladeborn Saga, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/T.C. Edge/The Winds of War The Bladeborn Saga, Book 4/The Winds of War The Bladeborn Saga, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Winds of War The Bladeborn Saga, Book 4",
+    "output_path": "/data/converted/Audiobook/T.C. Edge/The Winds of War The Bladeborn Saga, Book 4/The Winds of War The Bladeborn Saga, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/T.C. Edge/The Fetters of Fate The Bladeborn Saga, Book 5/The Fetters of Fate The Bladeborn Saga, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Fetters of Fate The Bladeborn Saga, Book 5",
+    "output_path": "/data/converted/Audiobook/T.C. Edge/The Fetters of Fate The Bladeborn Saga, Book 5/The Fetters of Fate The Bladeborn Saga, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/T.C. Edge/An Echo of Titans The Bladeborn Saga, Book 3/An Echo of Titans The Bladeborn Saga, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "An Echo of Titans The Bladeborn Saga, Book 3",
+    "output_path": "/data/converted/Audiobook/T.C. Edge/An Echo of Titans The Bladeborn Saga, Book 3/An Echo of Titans The Bladeborn Saga, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 11 A LitRPG Adventure/Defiance of the Fall 11 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Defiance of the Fall 11 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 11 A LitRPG Adventure/Defiance of the Fall 11 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 13/Defiance of the Fall 13.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Defiance of the Fall 13",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 13/Defiance of the Fall 13.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall, Book 10/Defiance of the Fall, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Defiance of the Fall, Book 10",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall, Book 10/Defiance of the Fall, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 12/Defiance of the Fall 12.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Defiance of the Fall 12",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 12/Defiance of the Fall 12.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/ToraAKR/Rise of the Density God Density God, Book 2/Rise of the Density God Density God, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rise of the Density God Density God, Book 2",
+    "output_path": "/data/converted/Audiobook/ToraAKR/Rise of the Density God Density God, Book 2/Rise of the Density God Density God, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/ToraAKR/Dawn of the Density God Density God, Book 1/Dawn of the Density God Density God, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dawn of the Density God Density God, Book 1",
+    "output_path": "/data/converted/Audiobook/ToraAKR/Dawn of the Density God Density God, Book 1/Dawn of the Density God Density God, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial 2/Ashborn Primordial 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Ashborn Primordial 2",
+    "output_path": "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial 2/Ashborn Primordial 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Winter Solstice The Wandering Inn, Book 4/Winter Solstice The Wandering Inn, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Winter Solstice The Wandering Inn, Book 4",
+    "output_path": "/data/converted/Audiobook/pirateaba/Winter Solstice The Wandering Inn, Book 4/Winter Solstice The Wandering Inn, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Wandering Inn The Wandering Inn, Book 1/The Wandering Inn The Wandering Inn, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Wandering Inn The Wandering Inn, Book 1",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Wandering Inn The Wandering Inn, Book 1/The Wandering Inn The Wandering Inn, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Flowers of Esthelm The Wandering Inn, Book 3/Flowers of Esthelm The Wandering Inn, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Flowers of Esthelm The Wandering Inn, Book 3",
+    "output_path": "/data/converted/Audiobook/pirateaba/Flowers of Esthelm The Wandering Inn, Book 3/Flowers of Esthelm The Wandering Inn, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Last Light The Wandering Inn, Book 5/The Last Light The Wandering Inn, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Last Light The Wandering Inn, Book 5",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Last Light The Wandering Inn, Book 5/The Last Light The Wandering Inn, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The General of Izril The Wandering Inn, Book 6/The General of Izril The Wandering Inn, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The General of Izril The Wandering Inn, Book 6",
+    "output_path": "/data/converted/Audiobook/pirateaba/The General of Izril The Wandering Inn, Book 6/The General of Izril The Wandering Inn, Book 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Rains of Liscor The Wandering Inn, Book 7/Rains of Liscor The Wandering Inn, Book 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rains of Liscor The Wandering Inn, Book 7",
+    "output_path": "/data/converted/Audiobook/pirateaba/Rains of Liscor The Wandering Inn, Book 7/Rains of Liscor The Wandering Inn, Book 7.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Blood of Liscor The Wandering Inn, Book 8/Blood of Liscor The Wandering Inn, Book 8.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Blood of Liscor The Wandering Inn, Book 8",
+    "output_path": "/data/converted/Audiobook/pirateaba/Blood of Liscor The Wandering Inn, Book 8/Blood of Liscor The Wandering Inn, Book 8.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Tears of Liscor The Wandering Inn, Book 9/Tears of Liscor The Wandering Inn, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tears of Liscor The Wandering Inn, Book 9",
+    "output_path": "/data/converted/Audiobook/pirateaba/Tears of Liscor The Wandering Inn, Book 9/Tears of Liscor The Wandering Inn, Book 9.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Wind Runner The Wandering Inn, Book 10/The Wind Runner The Wandering Inn, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Wind Runner The Wandering Inn, Book 10",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Wind Runner The Wandering Inn, Book 10/The Wind Runner The Wandering Inn, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Titan of Baleros The Wandering Inn, Book 11/The Titan of Baleros The Wandering Inn, Book 11.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Titan of Baleros The Wandering Inn, Book 11",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Titan of Baleros The Wandering Inn, Book 11/The Titan of Baleros The Wandering Inn, Book 11.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/Gravesong Singer of Terandria Series, Book 1/Gravesong Singer of Terandria Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Gravesong Singer of Terandria Series, Book 1",
+    "output_path": "/data/converted/Audiobook/pirateaba/Gravesong Singer of Terandria Series, Book 1/Gravesong Singer of Terandria Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Witch of Webs The Wandering Inn, Book 12/The Witch of Webs The Wandering Inn, Book 12.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Witch of Webs The Wandering Inn, Book 12",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Witch of Webs The Wandering Inn, Book 12/The Witch of Webs The Wandering Inn, Book 12.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/pirateaba/The Empress of Beasts The Wandering Inn, Book 13/The Empress of Beasts The Wandering Inn, Book 13.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Empress of Beasts The Wandering Inn, Book 13",
+    "output_path": "/data/converted/Audiobook/pirateaba/The Empress of Beasts The Wandering Inn, Book 13/The Empress of Beasts The Wandering Inn, Book 13.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TurtleMe/The Beginning After the End Publisher's Pack/The Beginning After the End Publisher's Pack.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Beginning After the End Publisher's Pack",
+    "output_path": "/data/converted/Audiobook/TurtleMe/The Beginning After the End Publisher's Pack/The Beginning After the End Publisher's Pack.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TurtleMe/The Beginning After the End Publisher's Pack 2 The Beginning After the End, Books 3-4/The Beginning After the End Publisher's Pack 2 The Beginning After the End, Books 3-4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Beginning After the End Publisher's Pack 2 The Beginning After the End, Books 3-4",
+    "output_path": "/data/converted/Audiobook/TurtleMe/The Beginning After the End Publisher's Pack 2 The Beginning After the End, Books 3-4/The Beginning After the End Publisher's Pack 2 The Beginning After the End, Books 3-4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Jaime Castle, Troy Osgood/Manufacturing Magic A LitRPG Adventure Jeff the Game Master, Book 1/Manufacturing Magic A LitRPG Adventure Jeff the Game Master, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Manufacturing Magic A LitRPG Adventure Jeff the Game Master, Book 1",
+    "output_path": "/data/converted/Audiobook/Jaime Castle, Troy Osgood/Manufacturing Magic A LitRPG Adventure Jeff the Game Master, Book 1/Manufacturing Magic A LitRPG Adventure Jeff the Game Master, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Jaime Castle, Troy Osgood/Manipulating Magic Jeff the Game Master, Book 2/Manipulating Magic Jeff the Game Master, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Manipulating Magic Jeff the Game Master, Book 2",
+    "output_path": "/data/converted/Audiobook/Jaime Castle, Troy Osgood/Manipulating Magic Jeff the Game Master, Book 2/Manipulating Magic Jeff the Game Master, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Dr. Joe Dispenza/Becoming Supernatural How Common People Are Doing the Uncommon/Becoming Supernatural How Common People Are Doing the Uncommon.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Becoming Supernatural How Common People Are Doing the Uncommon",
+    "output_path": "/data/converted/Audiobook/Dr. Joe Dispenza/Becoming Supernatural How Common People Are Doing the Uncommon/Becoming Supernatural How Common People Are Doing the Uncommon.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Sarina Bowen, Elle Kennedy/Top Secret/Top Secret.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Top Secret",
+    "output_path": "/data/converted/Audiobook/Sarina Bowen, Elle Kennedy/Top Secret/Top Secret.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2",
+    "output_path": "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Casualfarmer/Beware of Chicken A Xianxia Cultivation Novel Book 1/Beware of Chicken A Xianxia Cultivation Novel Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Beware of Chicken A Xianxia Cultivation Novel Book 1",
+    "output_path": "/data/converted/Audiobook/Casualfarmer/Beware of Chicken A Xianxia Cultivation Novel Book 1/Beware of Chicken A Xianxia Cultivation Novel Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Travis Baldree/Legends & Lattes A Novel of High Fantasy and Low Stakes/Legends & Lattes A Novel of High Fantasy and Low Stakes.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Legends & Lattes A Novel of High Fantasy and Low Stakes",
+    "output_path": "/data/converted/Audiobook/Travis Baldree/Legends & Lattes A Novel of High Fantasy and Low Stakes/Legends & Lattes A Novel of High Fantasy and Low Stakes.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/nobody103, Domagoj Kurmaic/Mother of Learning Arc 4 Mother of Learning, Book 4/Mother of Learning Arc 4 Mother of Learning, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mother of Learning Arc 4 Mother of Learning, Book 4",
+    "output_path": "/data/converted/Audiobook/nobody103, Domagoj Kurmaic/Mother of Learning Arc 4 Mother of Learning, Book 4/Mother of Learning Arc 4 Mother of Learning, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Kerberos/A Summoner Awakens Origin (A Deck Building LitRPG)/A Summoner Awakens Origin (A Deck Building LitRPG).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "A Summoner Awakens Origin (A Deck Building LitRPG)",
+    "output_path": "/data/converted/Audiobook/Kerberos/A Summoner Awakens Origin (A Deck Building LitRPG)/A Summoner Awakens Origin (A Deck Building LitRPG).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Andrew Rowe/Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1/Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1",
+    "output_path": "/data/converted/Audiobook/Andrew Rowe/Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1/Edge of the Woods An Epic Fantasy Adventure The Lost Edge, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Tommy Kerper, SourpatchHero/I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1/I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1",
+    "output_path": "/data/converted/Audiobook/Tommy Kerper, SourpatchHero/I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1/I'm Not the Hero An Isekai LitRPG I'm Not the Hero, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/SourpatchHero, Tommy Kerper/Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2/Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2",
+    "output_path": "/data/converted/Audiobook/SourpatchHero, Tommy Kerper/Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2/Secrets and Strife An Isekai LitRPG I'm Not the Hero, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Gregory Allanther/Wizard's Tower, Books 1-3 A LitRPG Series Bundle/Wizard's Tower, Books 1-3 A LitRPG Series Bundle.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wizard's Tower, Books 1-3 A LitRPG Series Bundle",
+    "output_path": "/data/converted/Audiobook/Gregory Allanther/Wizard's Tower, Books 1-3 A LitRPG Series Bundle/Wizard's Tower, Books 1-3 A LitRPG Series Bundle.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/RinoZ/Chrysalis, Books 1-3 A LitRPG Adventure Box Set/Chrysalis, Books 1-3 A LitRPG Adventure Box Set.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chrysalis, Books 1-3 A LitRPG Adventure Box Set",
+    "output_path": "/data/converted/Audiobook/RinoZ/Chrysalis, Books 1-3 A LitRPG Adventure Box Set/Chrysalis, Books 1-3 A LitRPG Adventure Box Set.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/TJ Klune/The House in the Cerulean Sea/The House in the Cerulean Sea.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The House in the Cerulean Sea",
+    "output_path": "/data/converted/Audiobook/TJ Klune/The House in the Cerulean Sea/The House in the Cerulean Sea.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Lisa Ladew/One True Mate Series Bundle Books 1-4/One True Mate Series Bundle Books 1-4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "One True Mate Series Bundle Books 1-4",
+    "output_path": "/data/converted/Audiobook/Lisa Ladew/One True Mate Series Bundle Books 1-4/One True Mate Series Bundle Books 1-4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Mumble Media, Audible Sleep/The Sleeping World Singing with a Humpback Whale/The Sleeping World Singing with a Humpback Whale.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Sleeping World Singing with a Humpback Whale",
+    "output_path": "/data/converted/Audiobook/Mumble Media, Audible Sleep/The Sleeping World Singing with a Humpback Whale/The Sleeping World Singing with a Humpback Whale.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Mumble Media, Audible Sleep/The Sleeping World Dune Vibrations with a Fennec Fox/The Sleeping World Dune Vibrations with a Fennec Fox.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Sleeping World Dune Vibrations with a Fennec Fox",
+    "output_path": "/data/converted/Audiobook/Mumble Media, Audible Sleep/The Sleeping World Dune Vibrations with a Fennec Fox/The Sleeping World Dune Vibrations with a Fennec Fox.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Kennit Kenway/Sylver Seeker, Books 1-4 A LitRPG Adventure/Sylver Seeker, Books 1-4 A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Sylver Seeker, Books 1-4 A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/Kennit Kenway/Sylver Seeker, Books 1-4 A LitRPG Adventure/Sylver Seeker, Books 1-4 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Audiobook/Maulik Pancholy, Zackary Grady, Achilles Stamatelaky/Murder at the Patel Motel/Murder at the Patel Motel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Murder at the Patel Motel",
+    "output_path": "/data/converted/Audiobook/Maulik Pancholy, Zackary Grady, Achilles Stamatelaky/Murder at the Patel Motel/Murder at the Patel Motel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/A. F. Kay/Tarot's Ninth Harbinger Divine Apostasy, Book 9/Tarot's Ninth Harbinger Divine Apostasy, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tarot's Ninth Harbinger Divine Apostasy, Book 9",
+    "output_path": "/data/converted/A. F. Kay/Tarot's Ninth Harbinger Divine Apostasy, Book 9/Tarot's Ninth Harbinger Divine Apostasy, Book 9.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/A. F. Kay/The Tenth Muse Divine Apostasy, Book 10/The Tenth Muse Divine Apostasy, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Tenth Muse Divine Apostasy, Book 10",
+    "output_path": "/data/converted/A. F. Kay/The Tenth Muse Divine Apostasy, Book 10/The Tenth Muse Divine Apostasy, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Aaron Oster/Land of the Elementals, Books 1-3 Box Set/Land of the Elementals, Books 1-3 Box Set.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Land of the Elementals, Books 1-3 Box Set",
+    "output_path": "/data/converted/Aaron Oster/Land of the Elementals, Books 1-3 Box Set/Land of the Elementals, Books 1-3 Box Set.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Actus Actus/Return of the Runebound Professor 2/Return of the Runebound Professor 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 2",
+    "output_path": "/data/converted/Actus Actus/Return of the Runebound Professor 2/Return of the Runebound Professor 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Actus/Return of the Runebound Professor 3/Return of the Runebound Professor 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor 3",
+    "output_path": "/data/converted/Actus/Return of the Runebound Professor 3/Return of the Runebound Professor 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Actus/Return of the Runebound Professor A Progression Fantasy Epic/Return of the Runebound Professor A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Return of the Runebound Professor A Progression Fantasy Epic",
+    "output_path": "/data/converted/Actus/Return of the Runebound Professor A Progression Fantasy Epic/Return of the Runebound Professor A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Adara Wolf, R. Phoenix/The Monster's Pet Collection of Books 1-3/The Monster's Pet Collection of Books 1-3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Monster's Pet Collection of Books 1-3",
+    "output_path": "/data/converted/Adara Wolf, R. Phoenix/The Monster's Pet Collection of Books 1-3/The Monster's Pet Collection of Books 1-3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alex Maher/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3",
+    "output_path": "/data/converted/Alex Maher/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3/The Hedge Wizard 3 A GameLitLitRPG Adventure The Hedge Wizard, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alex Maher/The Hedge Wizard 4 The Hedge Wizard, Book 4/The Hedge Wizard 4 The Hedge Wizard, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hedge Wizard 4 The Hedge Wizard, Book 4",
+    "output_path": "/data/converted/Alex Maher/The Hedge Wizard 4 The Hedge Wizard, Book 4/The Hedge Wizard 4 The Hedge Wizard, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexander Olson/Adventurer Ends of Magic, Book 2/Adventurer Ends of Magic, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Adventurer Ends of Magic, Book 2",
+    "output_path": "/data/converted/Alexander Olson/Adventurer Ends of Magic, Book 2/Adventurer Ends of Magic, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexander Olson/Antimage Ends of Magic, Book 1/Antimage Ends of Magic, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Antimage Ends of Magic, Book 1",
+    "output_path": "/data/converted/Alexander Olson/Antimage Ends of Magic, Book 1/Antimage Ends of Magic, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexander Olson/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)",
+    "output_path": "/data/converted/Alexander Olson/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3)/Assassin An Isekai LitRPG Adventure (Ends of Magic, Book 3).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/Bastard Last Life Series, Book 1/Bastard Last Life Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Bastard Last Life Series, Book 1",
+    "output_path": "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/Bastard Last Life Series, Book 1/Bastard Last Life Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Flame of the North Last Life, Book 4/The Flame of the North Last Life, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Flame of the North Last Life, Book 4",
+    "output_path": "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Flame of the North Last Life, Book 4/The Flame of the North Last Life, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Frontier Last Life, Book 2/The Frontier Last Life, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Frontier Last Life, Book 2",
+    "output_path": "/data/converted/Alexey Osadchuk, Andrew Douglas Schmitt - translator/The Frontier Last Life, Book 2/The Frontier Last Life, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk, Zachary J. Lorang - translated by/The Edges of Power Last Life, Book 5/The Edges of Power Last Life, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Edges of Power Last Life, Book 5",
+    "output_path": "/data/converted/Alexey Osadchuk, Zachary J. Lorang - translated by/The Edges of Power Last Life, Book 5/The Edges of Power Last Life, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Alexey Osadchuk/Blood Ties Last Life, Book 3/Blood Ties Last Life, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Blood Ties Last Life, Book 3",
+    "output_path": "/data/converted/Alexey Osadchuk/Blood Ties Last Life, Book 3/Blood Ties Last Life, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/B.T. Narro/Reign of Havoc Legends of The Tainted, Book 2/Reign of Havoc Legends of The Tainted, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Reign of Havoc Legends of The Tainted, Book 2",
+    "output_path": "/data/converted/B.T. Narro/Reign of Havoc Legends of The Tainted, Book 2/Reign of Havoc Legends of The Tainted, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/B.T. Narro/The Mage from Nowhere Legends of the Tainted, Book 1/The Mage from Nowhere Legends of the Tainted, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Mage from Nowhere Legends of the Tainted, Book 1",
+    "output_path": "/data/converted/B.T. Narro/The Mage from Nowhere Legends of the Tainted, Book 1/The Mage from Nowhere Legends of the Tainted, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Edgedancer Stormlight Archive/Edgedancer Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Edgedancer Stormlight Archive",
+    "output_path": "/data/converted/Brandon Sanderson/Edgedancer Stormlight Archive/Edgedancer Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Oathbringer/Oathbringer.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Oathbringer",
+    "output_path": "/data/converted/Brandon Sanderson/Oathbringer/Oathbringer.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Rhythm of War Book Four of the Stormlight Archive/Rhythm of War Book Four of the Stormlight Archive.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rhythm of War Book Four of the Stormlight Archive",
+    "output_path": "/data/converted/Brandon Sanderson/Rhythm of War Book Four of the Stormlight Archive/Rhythm of War Book Four of the Stormlight Archive.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/The Alloy of Law A Mistborn Novel/The Alloy of Law A Mistborn Novel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Alloy of Law A Mistborn Novel",
+    "output_path": "/data/converted/Brandon Sanderson/The Alloy of Law A Mistborn Novel/The Alloy of Law A Mistborn Novel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/The Final Empire Mistborn Book 1/The Final Empire Mistborn Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Final Empire Mistborn Book 1",
+    "output_path": "/data/converted/Brandon Sanderson/The Final Empire Mistborn Book 1/The Final Empire Mistborn Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/The Hero of Ages Mistborn, Book 3/The Hero of Ages Mistborn, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Hero of Ages Mistborn, Book 3",
+    "output_path": "/data/converted/Brandon Sanderson/The Hero of Ages Mistborn, Book 3/The Hero of Ages Mistborn, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/The Well of Ascension Mistborn, Book 2/The Well of Ascension Mistborn, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Well of Ascension Mistborn, Book 2",
+    "output_path": "/data/converted/Brandon Sanderson/The Well of Ascension Mistborn, Book 2/The Well of Ascension Mistborn, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Brandon Sanderson/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1",
+    "output_path": "/data/converted/Brandon Sanderson/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1/Tress of the Emerald Sea A Cosmere Novel (Dramatized Adaptation) Secret Projects, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/C. Mantis/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set",
+    "output_path": "/data/converted/C. Mantis/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set/The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/C. S. Pacat/Dark Heir/Dark Heir.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dark Heir",
+    "output_path": "/data/converted/C. S. Pacat/Dark Heir/Dark Heir.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Casey McQuiston/Red, White & Royal Blue A Novel/Red, White & Royal Blue A Novel.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Red, White & Royal Blue A Novel",
+    "output_path": "/data/converted/Casey McQuiston/Red, White & Royal Blue A Novel/Red, White & Royal Blue A Novel.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Charles Kindinger/Chapter One/Chapter One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chapter One",
+    "output_path": "/data/converted/Charles Kindinger/Chapter One/Chapter One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Chloe Archer/The Orc and the Manny Monsters Hollow, Book 1/The Orc and the Manny Monsters Hollow, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Orc and the Manny Monsters Hollow, Book 1",
+    "output_path": "/data/converted/Chloe Archer/The Orc and the Manny Monsters Hollow, Book 1/The Orc and the Manny Monsters Hollow, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Craig Montgomery/A Circle of Stars The Stardust Duology, Book One/A Circle of Stars The Stardust Duology, Book One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "A Circle of Stars The Stardust Duology, Book One",
+    "output_path": "/data/converted/Craig Montgomery/A Circle of Stars The Stardust Duology, Book One/A Circle of Stars The Stardust Duology, Book One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/D. K. Holmberg/The Spirit Binds Elemental Academy, Book 5/The Spirit Binds Elemental Academy, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Spirit Binds Elemental Academy, Book 5",
+    "output_path": "/data/converted/D. K. Holmberg/The Spirit Binds Elemental Academy, Book 5/The Spirit Binds Elemental Academy, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/D.E. Sherman/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)",
+    "output_path": "/data/converted/D.E. Sherman/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1)/The Faded Land A Progression Fantasy Epic (Keiran The Eternal Mage Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/D.K. Holmberg/Elemental Academy Boxset Books 1-3/Elemental Academy Boxset Books 1-3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Elemental Academy Boxset Books 1-3",
+    "output_path": "/data/converted/D.K. Holmberg/Elemental Academy Boxset Books 1-3/Elemental Academy Boxset Books 1-3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/D.K. Holmberg/The Wind Rages  Elemental Academy, Book 4/The Wind Rages  Elemental Academy, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Wind Rages  Elemental Academy, Book 4",
+    "output_path": "/data/converted/D.K. Holmberg/The Wind Rages  Elemental Academy, Book 4/The Wind Rages  Elemental Academy, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Dakota Krout/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)",
+    "output_path": "/data/converted/Dakota Krout/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11)/Thunderplump An Epic Fantasy LitRPG Adventure (The Completionist Chronicles, Book 11).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daman/Scion of Raizel The Divine Elements, Book 3/Scion of Raizel The Divine Elements, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Scion of Raizel The Divine Elements, Book 3",
+    "output_path": "/data/converted/Daman/Scion of Raizel The Divine Elements, Book 3/Scion of Raizel The Divine Elements, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daman/The Blood Legacy The Divine Elements, Book 1/The Blood Legacy The Divine Elements, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Blood Legacy The Divine Elements, Book 1",
+    "output_path": "/data/converted/Daman/The Blood Legacy The Divine Elements, Book 1/The Blood Legacy The Divine Elements, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daman/The Desolate Mountains The Divine Elements, Book 2/The Desolate Mountains The Divine Elements, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Desolate Mountains The Divine Elements, Book 2",
+    "output_path": "/data/converted/Daman/The Desolate Mountains The Divine Elements, Book 2/The Desolate Mountains The Divine Elements, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Daniel Suarez/Daemon/Daemon.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Daemon",
+    "output_path": "/data/converted/Daniel Suarez/Daemon/Daemon.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/David Estes, Ben Galley/Demon's Rage The Bloodwood Saga, Book 2/Demon's Rage The Bloodwood Saga, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Demon's Rage The Bloodwood Saga, Book 2",
+    "output_path": "/data/converted/David Estes, Ben Galley/Demon's Rage The Bloodwood Saga, Book 2/Demon's Rage The Bloodwood Saga, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/David Estes, G.D. Penman/Shadebound The Last King, Book 1/Shadebound The Last King, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shadebound The Last King, Book 1",
+    "output_path": "/data/converted/David Estes, G.D. Penman/Shadebound The Last King, Book 1/Shadebound The Last King, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Derrick Smythe/To Wield a Plague Passage to Dawn, Book 2.5/To Wield a Plague Passage to Dawn, Book 2.5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "To Wield a Plague Passage to Dawn, Book 2.5",
+    "output_path": "/data/converted/Derrick Smythe/To Wield a Plague Passage to Dawn, Book 2.5/To Wield a Plague Passage to Dawn, Book 2.5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eden Finley, Saxon James/The Bastard and the Heir/The Bastard and the Heir.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Bastard and the Heir",
+    "output_path": "/data/converted/Eden Finley, Saxon James/The Bastard and the Heir/The Bastard and the Heir.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Edward W. Robertson/The Red Sea The Cycle of Galand, Book 1/The Red Sea The Cycle of Galand, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Red Sea The Cycle of Galand, Book 1",
+    "output_path": "/data/converted/Edward W. Robertson/The Red Sea The Cycle of Galand, Book 1/The Red Sea The Cycle of Galand, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eliot Grayson/Corin and the Courtier Beautiful Beasts, Book 1/Corin and the Courtier Beautiful Beasts, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Corin and the Courtier Beautiful Beasts, Book 1",
+    "output_path": "/data/converted/Eliot Grayson/Corin and the Courtier Beautiful Beasts, Book 1/Corin and the Courtier Beautiful Beasts, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Ellen Vora/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response",
+    "output_path": "/data/converted/Ellen Vora/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response/The Anatomy of Anxiety Understanding and Overcoming the Body's Fear Response.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eric Dontigney/Unintended Cultivator, Volume 2/Unintended Cultivator, Volume 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Unintended Cultivator, Volume 2",
+    "output_path": "/data/converted/Eric Dontigney/Unintended Cultivator, Volume 2/Unintended Cultivator, Volume 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eric Dontigney/Unintended Cultivator, Volume Four/Unintended Cultivator, Volume Four.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Unintended Cultivator, Volume Four",
+    "output_path": "/data/converted/Eric Dontigney/Unintended Cultivator, Volume Four/Unintended Cultivator, Volume Four.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eric Dontigney/Unintended Cultivator, Volume One/Unintended Cultivator, Volume One.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Unintended Cultivator, Volume One",
+    "output_path": "/data/converted/Eric Dontigney/Unintended Cultivator, Volume One/Unintended Cultivator, Volume One.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Eric Dontigney/Unintended Cultivator Volume 3/Unintended Cultivator Volume 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Unintended Cultivator Volume 3",
+    "output_path": "/data/converted/Eric Dontigney/Unintended Cultivator Volume 3/Unintended Cultivator Volume 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Honour Rae/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2",
+    "output_path": "/data/converted/Honour Rae/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2/All the Skill 2 A Deck-Building LitRPG All the Skills, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Honour Rae/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3",
+    "output_path": "/data/converted/Honour Rae/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3/All the Skills 3 A Deck-Building LitRPG All the Skills, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Honour Rae/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4",
+    "output_path": "/data/converted/Honour Rae/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4/All the Skills 4 A Deck-Building LitRPG All the Skills, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Honour Rae/All the Skills A Deck-Building LitRPG All the Skills, Book 1/All the Skills A Deck-Building LitRPG All the Skills, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "All the Skills A Deck-Building LitRPG All the Skills, Book 1",
+    "output_path": "/data/converted/Honour Rae/All the Skills A Deck-Building LitRPG All the Skills, Book 1/All the Skills A Deck-Building LitRPG All the Skills, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Hugo Huesca/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1",
+    "output_path": "/data/converted/Hugo Huesca/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1/Dungeon Lord The Wraith's Haunt A LitRPG Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J. R. R. Tolkien, Christopher Tolkien/The Silmarillion/The Silmarillion.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Silmarillion",
+    "output_path": "/data/converted/J. R. R. Tolkien, Christopher Tolkien/The Silmarillion/The Silmarillion.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.M. Clarke, C.J. Thompson/Rune Seeker A LitRPG Adventure/Rune Seeker A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rune Seeker A LitRPG Adventure",
+    "output_path": "/data/converted/J.M. Clarke, C.J. Thompson/Rune Seeker A LitRPG Adventure/Rune Seeker A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 4 A Progression Fantasy Epic",
+    "output_path": "/data/converted/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.M. Clarke/Mark of the Fool 5/Mark of the Fool 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 5",
+    "output_path": "/data/converted/J.M. Clarke/Mark of the Fool 5/Mark of the Fool 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.M. Clarke/Mark of the Fool 6/Mark of the Fool 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Mark of the Fool 6",
+    "output_path": "/data/converted/J.M. Clarke/Mark of the Fool 6/Mark of the Fool 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.R. Mathews/Jake's Magical Market 2 A Trek Through Time/Jake's Magical Market 2 A Trek Through Time.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market 2 A Trek Through Time",
+    "output_path": "/data/converted/J.R. Mathews/Jake's Magical Market 2 A Trek Through Time/Jake's Magical Market 2 A Trek Through Time.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.R. Mathews/Jake's Magical Market 3 Home Sweet Home/Jake's Magical Market 3 Home Sweet Home.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market 3 Home Sweet Home",
+    "output_path": "/data/converted/J.R. Mathews/Jake's Magical Market 3 Home Sweet Home/Jake's Magical Market 3 Home Sweet Home.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/J.R. Mathews/Jake's Magical Market/Jake's Magical Market.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Jake's Magical Market",
+    "output_path": "/data/converted/J.R. Mathews/Jake's Magical Market/Jake's Magical Market.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Jaclyn Osborn/Sent to a Fantasy World and Now All the Men Want Me, Volume 1/Sent to a Fantasy World and Now All the Men Want Me, Volume 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Sent to a Fantasy World and Now All the Men Want Me, Volume 1",
+    "output_path": "/data/converted/Jaclyn Osborn/Sent to a Fantasy World and Now All the Men Want Me, Volume 1/Sent to a Fantasy World and Now All the Men Want Me, Volume 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Jennifer Aaker, Naomi Bagdonas/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)",
+    "output_path": "/data/converted/Jennifer Aaker, Naomi Bagdonas/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.)/Humor, Seriously Why Humor Is a Secret Weapon in Business and Life (And How Anyone Can Harness It. Even You.).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Jez Cajiao/Age of Stone Rise of Mankind Series, Book 1/Age of Stone Rise of Mankind Series, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Stone Rise of Mankind Series, Book 1",
+    "output_path": "/data/converted/Jez Cajiao/Age of Stone Rise of Mankind Series, Book 1/Age of Stone Rise of Mankind Series, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Keira Andrews/The Barbarian's Vow  Barbarian Duet, Book 2/The Barbarian's Vow  Barbarian Duet, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Barbarian's Vow  Barbarian Duet, Book 2",
+    "output_path": "/data/converted/Keira Andrews/The Barbarian's Vow  Barbarian Duet, Book 2/The Barbarian's Vow  Barbarian Duet, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Keira Andrews/Wed to the Barbarian Barbarian Duet, Book 1/Wed to the Barbarian Barbarian Duet, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wed to the Barbarian Barbarian Duet, Book 1",
+    "output_path": "/data/converted/Keira Andrews/Wed to the Barbarian Barbarian Duet, Book 1/Wed to the Barbarian Barbarian Duet, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)",
+    "output_path": "/data/converted/Krazekode/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2)/Abyssal Rift A LitRPG Adventure (Rise of the Devourer, Book 2).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/Dragon Warrior Rise of the Devourer, Book 3/Dragon Warrior Rise of the Devourer, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dragon Warrior Rise of the Devourer, Book 3",
+    "output_path": "/data/converted/Krazekode/Dragon Warrior Rise of the Devourer, Book 3/Dragon Warrior Rise of the Devourer, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/Rise of the Devourer Voidborne A LitRPG Adventure/Rise of the Devourer Voidborne A LitRPG Adventure.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Rise of the Devourer Voidborne A LitRPG Adventure",
+    "output_path": "/data/converted/Krazekode/Rise of the Devourer Voidborne A LitRPG Adventure/Rise of the Devourer Voidborne A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)",
+    "output_path": "/data/converted/Krazekode/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1)/The First Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/The Second Law of Cultivation Qi=MC^2, Book 2/The Second Law of Cultivation Qi=MC^2, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Second Law of Cultivation Qi=MC^2, Book 2",
+    "output_path": "/data/converted/Krazekode/The Second Law of Cultivation Qi=MC^2, Book 2/The Second Law of Cultivation Qi=MC^2, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Krazekode/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)",
+    "output_path": "/data/converted/Krazekode/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3)/The Third Law of Cultivation A Xianxia Progression Fantasy (Qi=MC^2, Book 3).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Kyle Kirrin/Emperor's End The Ripple System, Book 5/Emperor's End The Ripple System, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Emperor's End The Ripple System, Book 5",
+    "output_path": "/data/converted/Kyle Kirrin/Emperor's End The Ripple System, Book 5/Emperor's End The Ripple System, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/ML Spencer/Chains of Blood The Chaos Cycle, Book 1/Chains of Blood The Chaos Cycle, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Chains of Blood The Chaos Cycle, Book 1",
+    "output_path": "/data/converted/ML Spencer/Chains of Blood The Chaos Cycle, Book 1/Chains of Blood The Chaos Cycle, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/ML Spencer/The Complete Rhenwars Saga An Epic Fantasy Pentalogy/The Complete Rhenwars Saga An Epic Fantasy Pentalogy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Complete Rhenwars Saga An Epic Fantasy Pentalogy",
+    "output_path": "/data/converted/ML Spencer/The Complete Rhenwars Saga An Epic Fantasy Pentalogy/The Complete Rhenwars Saga An Epic Fantasy Pentalogy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Wizard in Exile Wrath of the Stormking, Book 1",
+    "output_path": "/data/converted/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michael J. Sullivan/Age of Legend Book Four of The Legends of the First Empire/Age of Legend Book Four of The Legends of the First Empire.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Legend Book Four of The Legends of the First Empire",
+    "output_path": "/data/converted/Michael J. Sullivan/Age of Legend Book Four of The Legends of the First Empire/Age of Legend Book Four of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michael J. Sullivan/Age of Myth Book One of The Legends of the First Empire/Age of Myth Book One of The Legends of the First Empire.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Myth Book One of The Legends of the First Empire",
+    "output_path": "/data/converted/Michael J. Sullivan/Age of Myth Book One of The Legends of the First Empire/Age of Myth Book One of The Legends of the First Empire.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michael J. Sullivan/Age of Swords The Legends of the First Empire, Book 2/Age of Swords The Legends of the First Empire, Book 2.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Age of Swords The Legends of the First Empire, Book 2",
+    "output_path": "/data/converted/Michael J. Sullivan/Age of Swords The Legends of the First Empire, Book 2/Age of Swords The Legends of the First Empire, Book 2.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Michael J. Sullivan/Nolyn The Rise and Fall, Book 1/Nolyn The Rise and Fall, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nolyn The Rise and Fall, Book 1",
+    "output_path": "/data/converted/Michael J. Sullivan/Nolyn The Rise and Fall, Book 1/Nolyn The Rise and Fall, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Nameless Author/Nameless Sovereign A Cultivation Progression Fantasy/Nameless Sovereign A Cultivation Progression Fantasy.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Nameless Sovereign A Cultivation Progression Fantasy",
+    "output_path": "/data/converted/Nameless Author/Nameless Sovereign A Cultivation Progression Fantasy/Nameless Sovereign A Cultivation Progression Fantasy.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Nicoli Gonnella/Dissonance A LitRPG Adventure (Unbound Book 1)/Dissonance A LitRPG Adventure (Unbound Book 1).m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Dissonance A LitRPG Adventure (Unbound Book 1)",
+    "output_path": "/data/converted/Nicoli Gonnella/Dissonance A LitRPG Adventure (Unbound Book 1)/Dissonance A LitRPG Adventure (Unbound Book 1).m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way Healer's Way, Book 1/The Healer's Way Healer's Way, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Healer's Way Healer's Way, Book 1",
+    "output_path": "/data/converted/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way Healer's Way, Book 1/The Healer's Way Healer's Way, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Orson Scott Card/Stonefather/Stonefather.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Stonefather",
+    "output_path": "/data/converted/Orson Scott Card/Stonefather/Stonefather.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick G. Laplante/Bloodstorm Painting the Mists, Book 17/Bloodstorm Painting the Mists, Book 17.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Bloodstorm Painting the Mists, Book 17",
+    "output_path": "/data/converted/Patrick G. Laplante/Bloodstorm Painting the Mists, Book 17/Bloodstorm Painting the Mists, Book 17.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick G. Laplante/Heartforge Painting the Mists, Book 16/Heartforge Painting the Mists, Book 16.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Heartforge Painting the Mists, Book 16",
+    "output_path": "/data/converted/Patrick G. Laplante/Heartforge Painting the Mists, Book 16/Heartforge Painting the Mists, Book 16.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick G. Laplante/Pendulum of Fate, Part 1 Painting the Mists, Book 14/Pendulum of Fate, Part 1 Painting the Mists, Book 14.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pendulum of Fate, Part 1 Painting the Mists, Book 14",
+    "output_path": "/data/converted/Patrick G. Laplante/Pendulum of Fate, Part 1 Painting the Mists, Book 14/Pendulum of Fate, Part 1 Painting the Mists, Book 14.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick G. Laplante/Pendulum of Fate, Part 2 Painting the Mists, Book 15/Pendulum of Fate, Part 2 Painting the Mists, Book 15.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pendulum of Fate, Part 2 Painting the Mists, Book 15",
+    "output_path": "/data/converted/Patrick G. Laplante/Pendulum of Fate, Part 2 Painting the Mists, Book 15/Pendulum of Fate, Part 2 Painting the Mists, Book 15.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick G. Laplante/Planesfall Painting the Mists, Book 18/Planesfall Painting the Mists, Book 18.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Planesfall Painting the Mists, Book 18",
+    "output_path": "/data/converted/Patrick G. Laplante/Planesfall Painting the Mists, Book 18/Planesfall Painting the Mists, Book 18.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Claddings of Light Painting the Mists, Book 12/Claddings of Light Painting the Mists, Book 12.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Claddings of Light Painting the Mists, Book 12",
+    "output_path": "/data/converted/Patrick Laplante/Claddings of Light Painting the Mists, Book 12/Claddings of Light Painting the Mists, Book 12.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Clear Sky Painting the Mists, Book 1/Clear Sky Painting the Mists, Book 1.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Clear Sky Painting the Mists, Book 1",
+    "output_path": "/data/converted/Patrick Laplante/Clear Sky Painting the Mists, Book 1/Clear Sky Painting the Mists, Book 1.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Corrupted Crimson Painting the Mists, Book 5/Corrupted Crimson Painting the Mists, Book 5.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Corrupted Crimson Painting the Mists, Book 5",
+    "output_path": "/data/converted/Patrick Laplante/Corrupted Crimson Painting the Mists, Book 5/Corrupted Crimson Painting the Mists, Book 5.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Crown of the Starry Sky Painting the Mists, Book 11/Crown of the Starry Sky Painting the Mists, Book 11.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Crown of the Starry Sky Painting the Mists, Book 11",
+    "output_path": "/data/converted/Patrick Laplante/Crown of the Starry Sky Painting the Mists, Book 11/Crown of the Starry Sky Painting the Mists, Book 11.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Echoes of Divinity Painting the Mists, Book 13/Echoes of Divinity Painting the Mists, Book 13.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Echoes of Divinity Painting the Mists, Book 13",
+    "output_path": "/data/converted/Patrick Laplante/Echoes of Divinity Painting the Mists, Book 13/Echoes of Divinity Painting the Mists, Book 13.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Edge of Oblivion Painting the Mists, Book 9/Edge of Oblivion Painting the Mists, Book 9.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Edge of Oblivion Painting the Mists, Book 9",
+    "output_path": "/data/converted/Patrick Laplante/Edge of Oblivion Painting the Mists, Book 9/Edge of Oblivion Painting the Mists, Book 9.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Kindling Painting the Mists, Book 6/Kindling Painting the Mists, Book 6.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Kindling Painting the Mists, Book 6",
+    "output_path": "/data/converted/Patrick Laplante/Kindling Painting the Mists, Book 6/Kindling Painting the Mists, Book 6.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Light in the Darkness Painting the Mists, Book 3/Light in the Darkness Painting the Mists, Book 3.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Light in the Darkness Painting the Mists, Book 3",
+    "output_path": "/data/converted/Patrick Laplante/Light in the Darkness Painting the Mists, Book 3/Light in the Darkness Painting the Mists, Book 3.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Pure Jade Painting the Mists, Book 4/Pure Jade Painting the Mists, Book 4.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Pure Jade Painting the Mists, Book 4",
+    "output_path": "/data/converted/Patrick Laplante/Pure Jade Painting the Mists, Book 4/Pure Jade Painting the Mists, Book 4.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Shattered Lands Painting the Mists, Book 8/Shattered Lands Painting the Mists, Book 8.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shattered Lands Painting the Mists, Book 8",
+    "output_path": "/data/converted/Patrick Laplante/Shattered Lands Painting the Mists, Book 8/Shattered Lands Painting the Mists, Book 8.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Shifting Tides Painting the Mists, Book 7/Shifting Tides Painting the Mists, Book 7.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Shifting Tides Painting the Mists, Book 7",
+    "output_path": "/data/converted/Patrick Laplante/Shifting Tides Painting the Mists, Book 7/Shifting Tides Painting the Mists, Book 7.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Laplante/Words of Creation Painting the Mists, Book 10/Words of Creation Painting the Mists, Book 10.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Words of Creation Painting the Mists, Book 10",
+    "output_path": "/data/converted/Patrick Laplante/Words of Creation Painting the Mists, Book 10/Words of Creation Painting the Mists, Book 10.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Patrick Rothfuss/The Narrow Road Between Desires Kingkiller Chronicle/The Narrow Road Between Desires Kingkiller Chronicle.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "The Narrow Road Between Desires Kingkiller Chronicle",
+    "output_path": "/data/converted/Patrick Rothfuss/The Narrow Road Between Desires Kingkiller Chronicle/The Narrow Road Between Desires Kingkiller Chronicle.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Peter A. Flannery/Battle Mage/Battle Mage.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Battle Mage",
+    "output_path": "/data/converted/Peter A. Flannery/Battle Mage/Battle Mage.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
+  },
+  "/data/converted/Peter A. Flannery/Decimus Fate and the Talisman of Dreams/Decimus Fate and the Talisman of Dreams.m4b": {
+    "status": "success",
+    "asin": null,
+    "title": "Decimus Fate and the Talisman of Dreams",
+    "output_path": "/data/converted/Peter A. Flannery/Decimus Fate and the Talisman of Dreams/Decimus Fate and the Talisman of Dreams.m4b",
+    "discovered_at": "2026-01-23T08:24:52.848374",
+    "source": "filesystem_scan",
+    "matched_by": "unknown"
   }
 }

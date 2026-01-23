@@ -137,7 +137,8 @@ class MetadataExtractor:
         # Chapters
         chapters = []
         raw_chapters = data.get("chapters", [])
-        
+        logger.info("ffprobe returned %d raw chapters for %s", len(raw_chapters), file_path)
+
         if not raw_chapters and tech.duration_ms:
             # Create a single implicit chapter if none exist
             chapters.append(ChapterMetadata(

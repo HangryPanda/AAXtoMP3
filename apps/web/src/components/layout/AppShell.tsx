@@ -1,10 +1,13 @@
 /**
  * AppShell - Main application wrapper with sidebar and sticky player area
  */
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
+import { ConnectedStickyPlayer } from "@/components/domain/ConnectedStickyPlayer";
 
 export interface AppShellProps {
   children: React.ReactNode;
@@ -22,7 +25,10 @@ export interface AppShellProps {
     onSearch?: (value: string) => void;
     actions?: React.ReactNode;
   };
-  playerContent?: React.ReactNode;
+  /** Override default sticky player. Pass `null` to hide the player area entirely. */
+  playerContent?: React.ReactNode | null;
+  /** Hide the sticky player area (useful for the main player page) */
+  hidePlayer?: boolean;
 }
 
 export function AppShell({
@@ -31,7 +37,22 @@ export function AppShell({
   sidebarProps = {},
   headerProps = { title: "Library" },
   playerContent,
+  hidePlayer = false,
 }: AppShellProps) {
+  // Determine what to render in the player area
+  const renderPlayerArea = () => {
+    if (hidePlayer || playerContent === null) {
+      return null;
+    }
+    if (playerContent !== undefined) {
+      return playerContent;
+    }
+    // Default: use the connected sticky player
+    return <ConnectedStickyPlayer />;
+  };
+
+  const playerAreaContent = renderPlayerArea();
+
   return (
     <div
       data-testid="app-shell"
@@ -49,16 +70,14 @@ export function AppShell({
         <main className="flex-1 overflow-auto p-6">{children}</main>
 
         {/* Sticky Player Area */}
-        <div
-          data-testid="player-area"
-          className="border-t border-border bg-card"
-        >
-          {playerContent || (
-            <div className="h-20 flex items-center justify-center text-muted-foreground">
-              No track playing
-            </div>
-          )}
-        </div>
+        {playerAreaContent && (
+          <div
+            data-testid="player-area"
+            className="border-t border-border bg-card"
+          >
+            {playerAreaContent}
+          </div>
+        )}
       </div>
     </div>
   );

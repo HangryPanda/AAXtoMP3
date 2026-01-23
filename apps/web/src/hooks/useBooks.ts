@@ -11,7 +11,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from "@tanstack/react-query";
-import { getBooks, getBookDetails, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair, getContinueListening } from "@/services/books";
+import { getBooks, getBookDetails, getBookDetailsEnriched, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair, getContinueListening } from "@/services/books";
 import {
   getAllBooks,
   bulkPutBooks,
@@ -29,6 +29,7 @@ import type {
   PaginatedLocalItems,
   LocalItem,
   RepairPreview,
+  BookDetailsResponse,
 } from "@/types";
 
 /**
@@ -40,6 +41,8 @@ export const bookKeys = {
   list: (params: BookListParams) => [...bookKeys.lists(), params] as const,
   details: () => [...bookKeys.all, "detail"] as const,
   detail: (asin: string) => [...bookKeys.details(), asin] as const,
+  detailsEnriched: () => [...bookKeys.all, "detailEnriched"] as const,
+  detailEnriched: (asin: string) => [...bookKeys.detailsEnriched(), asin] as const,
   series: () => [...bookKeys.all, "series"] as const,
   syncStatus: () => [...bookKeys.all, "syncStatus"] as const,
   local: () => [...bookKeys.all, "local"] as const,
@@ -190,6 +193,33 @@ export function useBookDetails(
     enabled: !!asin,
     staleTime,
     ...queryOptions,
+  });
+}
+
+/**
+ * Hook for fetching enriched book details (chapters/technical/etc).
+ * When the API returns synthetic chapters, poll briefly for real chapters.
+ */
+export function useBookDetailsEnriched(
+  asin: string | null | undefined,
+  options?: Omit<UseQueryOptions<BookDetailsResponse | null>, "queryKey" | "queryFn">
+) {
+  return useQuery({
+    queryKey: asin ? bookKeys.detailEnriched(asin) : ["disabled"],
+    queryFn: async () => {
+      if (!asin) return null;
+      return getBookDetailsEnriched(asin);
+    },
+    enabled: !!asin,
+    staleTime: 0,
+    refetchInterval: (query) => {
+      const data = query.state.data as BookDetailsResponse | null | undefined;
+      if (!data) return false;
+      if (data.chapters_synthetic) return 3000;
+      if (Array.isArray(data.chapters) && data.chapters.length === 0) return 3000;
+      return false;
+    },
+    ...options,
   });
 }
 

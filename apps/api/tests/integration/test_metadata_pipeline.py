@@ -109,6 +109,29 @@ async def test_metadata_pipeline_end_to_end(
     assert data["cover_url"] == f"/api/library/{asin}/cover"
 
 @pytest.mark.asyncio
+async def test_details_synthetic_chapter_when_db_chapters_missing(client, test_session):
+    asin = "B00SYNTH123"
+    book = Book(
+        asin=asin,
+        title="Synthetic Chapters Book",
+        status=BookStatus.COMPLETED,
+        runtime_length_min=60,
+    )
+    test_session.add(book)
+    await test_session.commit()
+
+    response = await client.get(f"/library/{asin}/details")
+    assert response.status_code == 200
+    data = response.json()
+
+    assert data["chapters_synthetic"] is True
+    assert data["duration_total_ms"] == 60 * 60 * 1000
+    assert len(data["chapters"]) == 1
+    assert data["chapters"][0]["title"] == "Full Duration"
+    assert data["chapters"][0]["start_offset_ms"] == 0
+    assert data["chapters"][0]["end_offset_ms"] == 60 * 60 * 1000
+
+@pytest.mark.asyncio
 async def test_progress_update(client, test_session):
     asin = "B00PROGRESS"
     book = Book(asin=asin, title="Progress Test", status=BookStatus.COMPLETED)

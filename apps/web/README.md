@@ -16,6 +16,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Notes (Network Filesystems)
+
+If your repo is on a network filesystem (NFS/SMB) and `next dev`/`next build` fails with errors like:
+
+- `Failed to open database` / `Loading persistence directory failed`
+- `ENOTEMPTY ... rmdir ... .next/...`
+
+run with a local `distDir` (e.g. under `/tmp`) and remove the existing `.next` directory after stopping the dev server:
+
+```bash
+rm -rf .next
+NEXT_DIST_DIR=/tmp/audible-library-web-next npm run dev
+```
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

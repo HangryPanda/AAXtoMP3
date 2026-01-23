@@ -229,6 +229,17 @@ export class WebSocketClient {
     // Handle batch messages
     if (message.type === "batch") {
       const batchMsg = message as WSBatchMessage;
+      // Allow consumers to treat the batch as an authoritative snapshot.
+      const batchHandlers = this.handlers.get("batch");
+      if (batchHandlers) {
+        for (const handler of batchHandlers) {
+          try {
+            handler(batchMsg);
+          } catch (error) {
+            console.error("Error in batch message handler:", error);
+          }
+        }
+      }
       for (const msg of batchMsg.messages) {
         this.dispatchMessage(msg);
       }

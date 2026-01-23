@@ -1,6 +1,26 @@
-# AAXtoMP3
-The purpose of this software is to convert AAX (or AAXC) files to common MP3, M4A, M4B, flac and ogg formats
-through a basic bash script frontend to FFMPEG.
+# AAXtoMP3 & Audible Library React
+
+This project provides a robust ecosystem for archiving your Audible library. It consists of the core conversion engine and a modern web-based management suite.
+
+## 🏗️ Project Structure
+
+### 1. Modern Web Application (`apps/`) - **ACTIVE**
+The primary interface for managing your library, providing a rich UI for downloading, validating, and converting audiobooks.
+- **[Frontend (React/Next.js)](apps/web/README.md)**: Modern UI with real-time progress.
+- **[Backend (FastAPI)](apps/api/README.md)**: High-performance API and job manager.
+
+### 2. Core Conversion Engine (`AAXtoMP3`) - **ENGINE**
+The battle-tested Bash script that powers the conversions. Used directly via CLI or called by the API.
+- See **[CLI Usage](#usage-s)** below for direct script interaction.
+
+### 3. Legacy Streamlit GUI (`app/`) - **DEPRECATED**
+The previous iteration of the web interface. Flagged as legacy and replaced by the React/FastAPI suite.
+- See **[Legacy README](app/README.md)**.
+
+---
+
+## AAXtoMP3 (Core Engine)
+The purpose of this software is to convert AAX (or AAXC) files to common MP3, M4A, M4B, flac and ogg formats through a basic bash script frontend to FFMPEG.
 
 Audible uses the AAX file format to maintain DRM restrictions on their audio
 books and if you download your book through your library it will be

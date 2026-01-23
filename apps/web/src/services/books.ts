@@ -16,6 +16,7 @@ import type {
   LocalItem,
   RepairPreview,
   PlaybackProgressResponse,
+  BookDetailsResponse,
 } from "@/types";
 
 /**
@@ -36,6 +37,16 @@ export async function getBookDetails(asin: string): Promise<Book> {
   return apiRequest<Book>({
     method: "GET",
     url: `/library/${asin}`,
+  });
+}
+
+/**
+ * Get enriched book details (normalized metadata, chapters, technical info).
+ */
+export async function getBookDetailsEnriched(asin: string): Promise<BookDetailsResponse> {
+  return apiRequest<BookDetailsResponse>({
+    method: "GET",
+    url: `/library/${asin}/details`,
   });
 }
 
@@ -167,6 +178,18 @@ export async function applyRepair(): Promise<QueuedJobResponse> {
   return apiRequest<QueuedJobResponse>({
     method: "POST",
     url: "/library/repair/apply",
+  });
+}
+
+/**
+ * Get playback progress for a book from the server
+ */
+export async function getPlaybackProgress(
+  asin: string
+): Promise<PlaybackProgressResponse | null> {
+  return apiRequest<PlaybackProgressResponse | null>({
+    method: "GET",
+    url: `/library/${asin}/progress`,
   });
 }
 

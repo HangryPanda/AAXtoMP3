@@ -4567,5 +4567,95 @@
     "m4b_path": "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial 2/Ashborn Primordial 2.m4b",
     "discovered_at": "2026-01-23T02:40:13.664782",
     "source": "inferred"
+  },
+  "b09rx4lqtl": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 11 A LitRPG Adventure/Defiance of the Fall 11 A LitRPG Adventure.m4b",
+    "discovered_at": "2026-01-23T08:50:03.628012",
+    "source": "inferred"
+  },
+  "adventurer": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Adventurer_Ends_of_Magic_Book_2-AAX_44_128.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "antimage": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Antimage_Ends_of_Magic_Book_1-AAX_44_128.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "assassin": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Assassin_An_Isekai_LitRPG_Adventure_(Ends_of_Magic_Book_3)-AAX_44_128.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "bloodstorm": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Bloodstorm_Painting_the_Mists_Book_17-AAX_22_64.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "bondsfungi": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Bondsfungi_The_Weirkey_Chronicles_Book_5-AAX_44_128.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "campaign": {
+    "status": "success",
+    "aaxc_path": "/data/completed/Campaign_Last_Life_Book_6-AAX_44_128.aaxc",
+    "voucher_path": null,
+    "cover_path": null,
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "filesystem_scan"
+  },
+  "b0b6jpqxr6": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 4 A Progression Fantasy Epic/Mark of the Fool 4 A Progression Fantasy Epic.m4b",
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "inferred"
+  },
+  "b00bwsi8a8": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Michael G. Manning/Wizard in Exile Wrath of the Stormking, Book 1/Wizard in Exile Wrath of the Stormking, Book 1.m4b",
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "inferred"
+  },
+  "b09lr4gd8m": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Nicoli Gonnella/Dissonance A LitRPG Adventure (Unbound Book 1)/Dissonance A LitRPG Adventure (Unbound Book 1).m4b",
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "inferred"
+  },
+  "b094jzmcjx": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall, Book 10/Defiance of the Fall, Book 10.m4b",
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "inferred"
+  },
+  "b08v8b2cgv": {
+    "status": "success",
+    "inferred_from": "m4b_exists",
+    "m4b_path": "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2.m4b",
+    "discovered_at": "2026-01-23T18:45:40.467992",
+    "source": "inferred"
   }
 }

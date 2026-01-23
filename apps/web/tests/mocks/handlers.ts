@@ -116,6 +116,10 @@ export const mockSettings: Settings = {
   max_retries: 3,
   author_override: "",
   keep_author_index: 0,
+  repair_extract_metadata: true,
+  repair_delete_duplicates: false,
+  repair_update_manifests: true,
+  move_files_policy: "report_only",
 };
 
 // Handler state for testing

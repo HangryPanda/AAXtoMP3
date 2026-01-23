@@ -5,13 +5,13 @@ import { JobDrawer } from "@/components/domain/JobDrawer";
 import { JobLogsModal } from "@/components/domain/JobLogsModal";
 import { ProgressPopover } from "@/components/domain/ProgressPopover";
 import { useUIStore } from "@/store/uiStore";
-import { useActiveJobs, useJobs, useCancelJob } from "@/hooks/useJobs";
+import { useActiveJobs, useJobs, useCancelJob, usePauseJob, useResumeJob } from "@/hooks/useJobs";
 import { useJobsFeedWebSocket } from "@/hooks/useJobsFeedWebSocket";
 import { isJobActive } from "@/types";
 import type { Job } from "@/types";
 
 export function GlobalUI() {
-  useJobsFeedWebSocket();
+  const jobsFeed = useJobsFeedWebSocket();
 
   const isJobDrawerOpen = useUIStore((state) => state.isJobDrawerOpen);
   const setJobDrawerOpen = useUIStore((state) => state.setJobDrawerOpen);
@@ -63,6 +63,8 @@ export function GlobalUI() {
   });
   
   const { mutate: cancelJob } = useCancelJob();
+  const { mutate: pauseJob } = usePauseJob();
+  const { mutate: resumeJob } = useResumeJob();
 
   return (
     <>
@@ -71,9 +73,16 @@ export function GlobalUI() {
         jobs={jobsData?.items ?? []}
         onClose={() => setJobDrawerOpen(false)}
         onCancelJob={(job) => cancelJob(job.id)}
+        onPauseJob={(job) => pauseJob(job.id)}
+        onResumeJob={(job) => resumeJob(job.id)}
         onViewLogs={(job) => setLogJob(job)}
       />
-      <ProgressPopover />
+      <ProgressPopover
+        jobsFeedConnectionState={jobsFeed.connectionState}
+        onOpenJobs={() => setJobDrawerOpen(true)}
+        onViewLogs={(job) => setLogJob(job)}
+        onCancelJob={(jobId) => cancelJob(jobId)}
+      />
       
       <JobLogsModal 
         job={logJob} 

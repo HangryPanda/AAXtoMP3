@@ -1,4 +1,13 @@
-# Audible Library Manager
+# [LEGACY] Audible Library Manager (Streamlit)
+
+**⚠️ NOTICE: This Streamlit-based application is deprecated and no longer maintained. It has been replaced by the modern FastAPI + React/Next.js architecture in the `apps/` directory.**
+
+## Current Architecture
+Please refer to:
+- `apps/api/`: FastAPI Backend
+- `apps/web/`: Next.js/React Frontend
+
+---
 
 A web UI to manage your Audible library. Download, validate, and convert audiobooks with full feature parity to the AAXtoMP3 command line tool.
 

@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { WebSocketClient, ConnectionState } from "@/services/websocket";
 import { WS_URL } from "@/lib/env";
-import type { Job, JobListResponse, WSStatusMessage } from "@/types";
+import type { Job, JobListResponse, WSBatchMessage, WSStatusMessage } from "@/types";
 import { isJobActive } from "@/types";
 import { jobKeys } from "./useJobs";
 
@@ -33,6 +33,52 @@ export function useJobsFeedWebSocket() {
   const wsRef = useRef<WebSocketClient | null>(null);
   const [state, setState] = useState<ConnectionState>(ConnectionState.DISCONNECTED);
 
+  const applyStatusToJob = useCallback(
+    (existing: Job | undefined, msg: WSStatusMessage): Job => {
+      return {
+        id: msg.job_id,
+        task_type: (existing?.task_type ?? "SYNC") as Job["task_type"],
+        book_asin: existing?.book_asin ?? null,
+        status: msg.status as Job["status"],
+        progress_percent: msg.progress,
+        status_message: msg.message ?? existing?.status_message ?? null,
+        log_file_path: existing?.log_file_path ?? null,
+        error_message: msg.error ?? existing?.error_message ?? null,
+        updated_at: msg.updated_at ?? existing?.updated_at,
+        started_at: existing?.started_at ?? null,
+        completed_at: existing?.completed_at ?? null,
+        created_at: existing?.created_at ?? new Date().toISOString(),
+      };
+    },
+    []
+  );
+
+  const handleBatch = useCallback(
+    (batch: WSBatchMessage) => {
+      // Treat batch as an authoritative snapshot of active jobs at connect time.
+      const statuses = batch.messages.filter(
+        (m): m is WSStatusMessage => m.type === "status"
+      );
+
+      queryClient.setQueryData<JobListResponse>(jobKeys.active(), (old) => {
+        const existingById = new Map((old?.items ?? []).map((j) => [j.id, j]));
+        const nextItems: Job[] = [];
+
+        for (const msg of statuses) {
+          const existing = existingById.get(msg.job_id);
+          const nextJob = applyStatusToJob(existing, msg);
+          if (isJobActive(nextJob)) nextItems.push(nextJob);
+        }
+
+        // If the client had cached active jobs that are not in the server snapshot, drop them.
+        // This avoids "dead-but-still-running" UI after API restarts or reconnects.
+        // (We intentionally do not preserve unknown jobs that are missing from the snapshot.)
+        return { items: nextItems, total: nextItems.length };
+      });
+    },
+    [applyStatusToJob, queryClient]
+  );
+
   const handleStatus = useCallback(
     (msg: WSStatusMessage) => {
       const jobId = msg.job_id;
@@ -48,7 +94,9 @@ export function useJobsFeedWebSocket() {
                   ...j,
                   status: msg.status as Job["status"],
                   progress_percent: msg.progress,
+                  status_message: msg.message ?? j.status_message,
                   error_message: msg.error ?? j.error_message,
+                  updated_at: msg.updated_at ?? j.updated_at,
                 }
               : j
           ),
@@ -58,18 +106,7 @@ export function useJobsFeedWebSocket() {
       // Maintain the active jobs cache so components can use useActiveJobs without polling.
       queryClient.setQueryData<JobListResponse>(jobKeys.active(), (old) => {
         const existing = old?.items.find((j) => j.id === jobId);
-        const next: Job = {
-          id: jobId,
-          task_type: (existing?.task_type ?? "SYNC") as Job["task_type"],
-          book_asin: existing?.book_asin ?? null,
-          status: msg.status as Job["status"],
-          progress_percent: msg.progress,
-          log_file_path: existing?.log_file_path ?? null,
-          error_message: msg.error ?? existing?.error_message ?? null,
-          started_at: existing?.started_at ?? null,
-          completed_at: existing?.completed_at ?? null,
-          created_at: existing?.created_at ?? new Date().toISOString(),
-        } as Job;
+        const next = applyStatusToJob(existing, msg);
 
         if (isJobActive(next)) {
           return upsertJob(old, next);
@@ -77,7 +114,7 @@ export function useJobsFeedWebSocket() {
         return removeJob(old, jobId);
       });
     },
-    [queryClient]
+    [applyStatusToJob, queryClient]
   );
 
   const connect = useCallback(() => {
@@ -89,10 +126,11 @@ export function useJobsFeedWebSocket() {
       onStateChange: setState,
       onError: () => setState(ConnectionState.FAILED),
     });
+    ws.subscribe("batch", handleBatch);
     ws.subscribe("status", handleStatus);
     ws.connect();
     wsRef.current = ws;
-  }, [handleStatus]);
+  }, [handleBatch, handleStatus]);
 
   const disconnect = useCallback(() => {
     wsRef.current?.disconnect();
