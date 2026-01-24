@@ -948,6 +948,33 @@ class JobManager:
                 else:
                     logger.info("Using voucher file: %s", voucher_file)
 
+                # Self-healing: Check for chapters.json
+                # AAXtoMP3 expects Title-chapters.json. 
+                # If filename has hyphens, it strips extension. If not, it relies on our fix.
+                # Here we assume standard naming convention matching the .aaxc file.
+                chapters_file = Path(str(input_file).replace(".aaxc", "-chapters.json"))
+                if not chapters_file.exists():
+                    logger.warning("Chapters file missing at %s", chapters_file)
+                    
+                    # 1. Try to find it in downloads if we are in completed
+                    if self.settings.completed_dir in input_file.parents:
+                        fallback = self.settings.downloads_dir / chapters_file.name
+                        if fallback.exists():
+                            logger.info("Found orphaned chapters file in downloads, rescuing to: %s", chapters_file)
+                            try:
+                                shutil.move(str(fallback), str(chapters_file))
+                            except Exception as e:
+                                logger.error("Failed to rescue chapters file: %s", e)
+                    
+                    # 2. If still missing (or rescue failed), try to extract from AAXC
+                    if not chapters_file.exists():
+                         logger.info("Attempting to extract chapters from AAXC file...")
+                         if await self._extract_chapters_from_aax(input_file, chapters_file):
+                             logger.info("Successfully extracted chapters to %s", chapters_file)
+                         else:
+                             logger.warning("Could not recover chapters file.")
+
+
             last_progress = 0
 
             def progress_wrapper(percent: int, line: str) -> None:
@@ -984,6 +1011,7 @@ class JobManager:
                     format=format,
                     single_file=True,
                     voucher_file=voucher_file,
+                    chapters_file=chapters_file,
                     dir_naming_scheme=naming_scheme,
                     progress_callback=progress_wrapper,
                 )
@@ -1065,6 +1093,21 @@ class JobManager:
                     )
                     logger.error("Conversion job %s failed: %s", job_id, str(error_msg)[:200])
 
+                    # Update Book status to FAILED
+                    async for session in get_session():
+                        try:
+                            stmt = select(Book).where(Book.asin == asin)
+                            db_res = await session.execute(stmt)
+                            book = db_res.scalar_one_or_none()
+                            if book:
+                                book.status = BookStatus.FAILED
+                                session.add(book)
+                                await session.commit()
+                        except Exception as e:
+                            logger.error(f"Failed to update book status to FAILED for {asin}: {e}")
+                        finally:
+                            break
+
                     # Update converted manifest with failure
                     self._update_converted_manifest(
                         source_path=str(input_file),
@@ -1082,6 +1125,82 @@ class JobManager:
                 logger.exception("Exception during conversion job %s", job_id)
                 await self._notify_status(job_id, "FAILED", 0, error=str(e))
                 return {"success": False, "error": str(e)}
+
+    async def _extract_chapters_from_aax(self, input_file: Path, output_json: Path) -> bool:
+        """
+        Extract chapter metadata from AAX/AAXC file using ffprobe.
+        
+        Args:
+            input_file: Path to the audio file.
+            output_json: Path to write the JSON metadata to.
+            
+        Returns:
+            True if successful, False otherwise.
+        """
+        try:
+            # Run ffprobe to get chapters
+            cmd = [
+                "ffprobe",
+                "-v", "quiet",
+                "-print_format", "json",
+                "-show_chapters",
+                str(input_file)
+            ]
+            
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+            stdout, stderr = await process.communicate()
+            
+            if process.returncode != 0:
+                logger.error("ffprobe failed to extract chapters: %s", stderr.decode())
+                return False
+                
+            try:
+                data = json.loads(stdout.decode())
+            except json.JSONDecodeError:
+                logger.error("Failed to parse ffprobe output as JSON")
+                return False
+
+            chapters = data.get("chapters", [])
+            
+            if not chapters:
+                logger.warning("No chapters found in file %s", input_file)
+                return False
+                
+            normalized_chapters = []
+            for ch in chapters:
+                # ffprobe uses seconds in float for start_time/end_time.
+                # ConverterEngine._fix_chapters expects:
+                # title, and (start_offset_ms + length_ms) OR (start + length).
+                
+                start_ms = int(float(ch.get("start_time", 0)) * 1000)
+                end_ms = int(float(ch.get("end_time", 0)) * 1000)
+                length_ms = end_ms - start_ms
+                
+                # Try to get title from tags
+                title = ch.get("tags", {}).get("title")
+                # If title is empty or missing, generate one
+                if not title:
+                    title = f"Chapter {ch.get('id', 0) + 1}"
+                
+                normalized_chapters.append({
+                    "title": title,
+                    "start_offset_ms": start_ms,
+                    "length_ms": length_ms
+                })
+                
+            with open(output_json, "w", encoding="utf-8") as f:
+                json.dump(normalized_chapters, f, indent=2)
+                
+            logger.info("Extracted %d chapters to %s", len(normalized_chapters), output_json)
+            return True
+            
+        except Exception as e:
+            logger.exception("Exception extracting chapters: %s", e)
+            return False
 
     def _find_input_file(self, asin: str, title: str | None = None) -> Path | None:
         """Find downloaded AAX/AAXC file for an ASIN (or title fallback)."""

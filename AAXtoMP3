@@ -454,7 +454,11 @@ validate_extra_files() {
   local extra_media_file extra_find_command
   extra_media_file="$1"
   # Bash trick to delete, non greedy, from the end up until the first '-'
-  extra_title="${extra_media_file%-*}"
+  if [[ "${extra_media_file}" == *"-"* ]]; then
+    extra_title="${extra_media_file%-*}"
+  else
+    extra_title="${extra_media_file%.*}"
+  fi
 
   # Using this is not ideal, because if the naming scheme is changed then
   # this part of the script will break
@@ -970,14 +974,14 @@ do
   if [ -f "${cover_file}" ]; then
     log "Adding cover art"
     # FFMPEG does not support MPEG-4 containers fully #
-    if [ "${container}" == "mp4" ] ; then
+    if [[ "${container}" == "mp4" && -n "$(type -P mp4art)" ]] ; then
       mp4art --add "${cover_file}" "${output_file}"
     # FFMPEG for everything else #
     else
       # Create temporary output file name - ensure extention matches previous appropriate output file to keep ffmpeg happy
       cover_output_file="${output_file%.*}.cover.${output_file##*.}"
       # Copy audio stream from current output, and video stream from cover file, setting appropriate metadata
-      </dev/null "$FFMPEG" -loglevel quiet \
+      </dev/null "$FFMPEG" -loglevel error \
         -nostats \
         -i "${output_file}" \
         -i "${cover_file}" \
@@ -985,6 +989,7 @@ do
         -map 1:v:0 \
         -acodec copy \
         -vcodec copy \
+        -disposition:v:0 attached_pic \
         -id3v2_version 3 \
         -metadata:s:v title="Album cover" \
         -metadata:s:v comment="Cover (front)" \

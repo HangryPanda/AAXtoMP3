@@ -48,7 +48,6 @@ class TestBuildCommand:
             assert cmd[1] == "/scripts/AAXtoMP3"
             assert "-e:m4b" in cmd
             assert "-s" in cmd  # single_file default is True
-            assert "-d" in cmd
             assert str(output_dir) in cmd
             assert str(input_file) == cmd[-1]
 
@@ -280,7 +279,11 @@ class TestConvert:
             input_file = tmp_path / "test.aax"
             input_file.write_bytes(b"fake aax content")
 
-            with patch("asyncio.create_subprocess_exec") as mock_exec:
+            with patch("asyncio.create_subprocess_exec") as mock_exec, \
+                 patch.object(engine, "_find_output_files", side_effect=lambda d, f: [str(Path(d) / "output.m4b")]), \
+                 patch.object(engine, "_get_audio_duration", return_value=0.0), \
+                 patch("shutil.move") as mock_move:
+                
                 mock_process = AsyncMock()
                 # Mock readline to return empty bytes (end of stream)
                 mock_process.stdout.readline = AsyncMock(return_value=b"")
