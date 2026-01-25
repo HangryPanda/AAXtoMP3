@@ -17,6 +17,7 @@ import type {
   RepairPreview,
   PlaybackProgressResponse,
   BookDetailsResponse,
+  PartialDownloadsResponse,
 } from "@/types";
 
 /**
@@ -176,20 +177,22 @@ export async function getNewBooks(
 /**
  * Delete a book by ASIN
  */
-export async function deleteBook(asin: string): Promise<void> {
+export async function deleteBook(asin: string, deleteFiles: boolean = false): Promise<void> {
   return apiRequest<void>({
     method: "DELETE",
     url: `/library/${asin}`,
+    params: { delete_files: deleteFiles },
   });
 }
 
 /**
  * Batch delete books
  */
-export async function deleteBooks(asins: string[]): Promise<{ deleted: number }> {
+export async function deleteBooks(asins: string[], deleteFiles: boolean = false): Promise<{ deleted: number }> {
   return apiRequest<{ deleted: number }>({
     method: "POST",
     url: "/library/delete",
+    params: { delete_files: deleteFiles },
     data: { asins },
   });
 }
@@ -286,5 +289,16 @@ export async function getContinueListening(limit = 5): Promise<PlaybackProgressR
     method: "GET",
     url: "/library/continue-listening",
     params: { limit },
+  });
+}
+
+/**
+ * Get partial downloads (cover downloaded but no aaxc file).
+ * These need to be re-downloaded before conversion is possible.
+ */
+export async function getIncompleteDownloads(): Promise<PartialDownloadsResponse> {
+  return apiRequest<PartialDownloadsResponse>({
+    method: "GET",
+    url: "/library/downloads/incomplete",
   });
 }

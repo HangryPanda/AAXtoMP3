@@ -295,7 +295,7 @@ Each agent MUST deliver exactly what is listed here, and MUST NOT expand scope.
 
 ---
 
-## Execution Order (MUST FOLLOW)
+## Execution Order (MUST FOLLOW) - USER INSTSTRUCTIONS
 
 Follow this sequence to minimize conflicts and ensure there is always clear evidence of progress.
 
@@ -310,7 +310,7 @@ Agents MUST NOT start working outside their scoped files, even if blocked. If bl
 
 ---
 
-## Agent Evidence (MUST PROVIDE)
+## Agent Evidence (MUST PROVIDE) - AGENT INSTRUCTIONS
 
 Agents must paste the following artifacts into:
 

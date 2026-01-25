@@ -501,12 +501,49 @@ class ConverterEngine:
     async def _read_lines(
         self, stream: asyncio.StreamReader
     ) -> AsyncGenerator[str, None]:
-        """Read lines from async stream."""
+        """Read lines from async stream, handling both \\n and \\r delimiters.
+
+        FFmpeg's -stats output uses carriage return (\\r) to overwrite the same line,
+        so we need to split on both \\r and \\n to capture progress updates.
+        """
+        buffer = b""
         while True:
-            line = await stream.readline()
-            if not line:
+            chunk = await stream.read(1024)
+            if not chunk:
+                # Flush remaining buffer
+                if buffer:
+                    for line in buffer.decode("utf-8", errors="replace").split("\r"):
+                        line = line.strip()
+                        if line:
+                            yield line
                 break
-            yield line.decode("utf-8", errors="replace").rstrip()
+
+            buffer += chunk
+
+            # Split on both \r and \n to handle ffmpeg stats output
+            # First split on \n to get complete lines
+            while b"\n" in buffer or b"\r" in buffer:
+                # Find the earliest delimiter
+                n_pos = buffer.find(b"\n")
+                r_pos = buffer.find(b"\r")
+
+                if n_pos == -1:
+                    split_pos = r_pos
+                elif r_pos == -1:
+                    split_pos = n_pos
+                else:
+                    split_pos = min(n_pos, r_pos)
+
+                line_bytes = buffer[:split_pos]
+                buffer = buffer[split_pos + 1:]
+
+                # Skip \n if it follows \r (Windows line ending)
+                if buffer and buffer[0:1] == b"\n":
+                    buffer = buffer[1:]
+
+                line = line_bytes.decode("utf-8", errors="replace").strip()
+                if line:
+                    yield line
 
     def _parse_progress(self, line: str, total_duration: float) -> int | None:
         """
@@ -527,20 +564,16 @@ class ConverterEngine:
             return None
 
         time_str = match.group(1)
-        parts = time_str.split(":")
-        if len(parts) != 3:
+        current_ms = self._parse_hhmmss_to_ms(time_str)
+        if current_ms is None:
             return None
 
-        try:
-            hours = int(parts[0])
-            minutes = int(parts[1])
-            seconds = float(parts[2])
-            current_seconds = hours * 3600 + minutes * 60 + seconds
-
-            progress = int((current_seconds / total_duration) * 100)
-            return min(100, max(0, progress))
-        except (ValueError, ZeroDivisionError):
+        total_ms = int(round(total_duration * 1000))
+        if total_ms <= 0:
             return None
+
+        progress = (current_ms * 100) // total_ms
+        return min(100, max(0, int(progress)))
 
     def _parse_speed(self, line: str) -> float | None:
         """
@@ -619,19 +652,12 @@ class ConverterEngine:
         if not match:
             return None
 
-        time_str = match.group(1)
-        parts = time_str.split(":")
-        if len(parts) != 3:
-            return None
-
         try:
-            hours = int(parts[0])
-            minutes = int(parts[1])
-            seconds = float(parts[2])
-            current_seconds = hours * 3600 + minutes * 60 + seconds
+            time_str = match.group(1)
+            current_ms = self._parse_hhmmss_to_ms(time_str)
+            if current_ms is None:
+                return None
 
-            # Use integer math to avoid float precision edge-cases (e.g., 1.4/10.0 -> 13.999999...)
-            current_ms = int(round(current_seconds * 1000))
             total_ms = int(round(total_duration_seconds * 1000))
             if total_ms <= 0:
                 return None
@@ -656,9 +682,33 @@ class ConverterEngine:
                 telemetry["convert_bitrate_kbps"] = bitrate
 
             return telemetry
-
-        except (ValueError, ZeroDivisionError):
+        except Exception:
             # Malformed line - do not crash
+            return None
+
+    def _parse_hhmmss_to_ms(self, time_str: str) -> int | None:
+        """
+        Parse an ffmpeg time string (HH:MM:SS[.fraction]) into milliseconds.
+
+        This avoids float precision edge-cases by parsing the fractional seconds
+        component as a string.
+        """
+        parts = time_str.split(":")
+        if len(parts) != 3:
+            return None
+        try:
+            hours = int(parts[0])
+            minutes = int(parts[1])
+            sec_part = parts[2]
+            if "." in sec_part:
+                sec_s, frac_s = sec_part.split(".", 1)
+            else:
+                sec_s, frac_s = sec_part, ""
+            seconds = int(sec_s)
+            # Interpret fractional seconds as milliseconds (pad/truncate to 3 digits).
+            frac_ms = int((frac_s + "000")[:3]) if frac_s else 0
+            return ((hours * 3600 + minutes * 60 + seconds) * 1000) + frac_ms
+        except ValueError:
             return None
 
     def estimate_remaining_time(

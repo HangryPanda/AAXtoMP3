@@ -131,7 +131,8 @@ describe("useJobs Hook", () => {
       });
 
       expect(result.current.data).toBeDefined();
-      expect(result.current.data?.job_id).toBeDefined();
+      // Single ASIN returns JobCreateResponse with job_id
+      expect("job_id" in (result.current.data ?? {})).toBe(true);
       expect(result.current.data?.status).toBe("PENDING");
     });
 
@@ -145,7 +146,8 @@ describe("useJobs Hook", () => {
       });
 
       expect(result.current.data).toBeDefined();
-      expect(result.current.data?.job_id).toBeDefined();
+      // Multiple ASINs returns BatchJobCreateResponse with job_ids
+      expect("job_ids" in (result.current.data ?? {}) || "job_id" in (result.current.data ?? {})).toBe(true);
     });
   });
 

@@ -277,3 +277,17 @@ export function getSeriesInfo(book: Book): string | null {
     ? `${primary.title}, Book ${primary.sequence}`
     : primary.title;
 }
+
+// Partial download types (cover downloaded but no aaxc file)
+export interface PartialDownloadItem {
+  asin: string;
+  title: string;
+  cover_path: string | null;
+  downloaded_at: string | null;
+  book: Book | null;
+}
+
+export interface PartialDownloadsResponse {
+  items: PartialDownloadItem[];
+  total: number;
+}

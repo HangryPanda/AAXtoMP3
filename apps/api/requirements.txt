@@ -29,3 +29,4 @@ aiosqlite>=0.20.0
 
 # Type Checking
 mypy>=1.13.0
+watchfiles>=0.21.0  # Reliable file watching for uvicorn --reload on macOS/Docker

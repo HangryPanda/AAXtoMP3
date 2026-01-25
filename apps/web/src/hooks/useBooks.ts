@@ -11,7 +11,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from "@tanstack/react-query";
-import { getBooks, getBookDetails, getBookDetailsEnriched, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair, getContinueListening } from "@/services/books";
+import { getBooks, getBookDetails, getBookDetailsEnriched, syncLibrary, deleteBook, deleteBooks, getSeriesOptions, getLibrarySyncStatus, getLocalItems, getLocalItemDetails, getRepairPreview, applyRepair, getContinueListening, getIncompleteDownloads } from "@/services/books";
 import {
   getAllBooks,
   bulkPutBooks,
@@ -30,6 +30,7 @@ import type {
   LocalItem,
   RepairPreview,
   BookDetailsResponse,
+  PartialDownloadsResponse,
 } from "@/types";
 
 /**
@@ -50,6 +51,7 @@ export const bookKeys = {
     [...bookKeys.local(), "list", params] as const,
   localDetail: (id: string) => [...bookKeys.local(), "detail", id] as const,
   repairPreview: () => [...bookKeys.all, "repairPreview"] as const,
+  incompleteDownloads: () => [...bookKeys.all, "incompleteDownloads"] as const,
 };
 
 /**
@@ -431,9 +433,9 @@ export function useBooksByStatus(
 export function useDeleteBook() {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, string>({
-    mutationFn: (asin) => deleteBook(asin),
-    onSuccess: (_, asin) => {
+  return useMutation<void, Error, { asin: string; deleteFiles?: boolean }>({
+    mutationFn: ({ asin, deleteFiles }) => deleteBook(asin, deleteFiles),
+    onSuccess: (_, { asin }) => {
       queryClient.invalidateQueries({ queryKey: bookKeys.all });
       queryClient.removeQueries({ queryKey: bookKeys.detail(asin) });
     },
@@ -446,10 +448,26 @@ export function useDeleteBook() {
 export function useDeleteBooks() {
   const queryClient = useQueryClient();
 
-  return useMutation<{ deleted: number }, Error, string[]>({
-    mutationFn: (asins) => deleteBooks(asins),
+  return useMutation<{ deleted: number }, Error, { asins: string[]; deleteFiles?: boolean }>({
+    mutationFn: ({ asins, deleteFiles }) => deleteBooks(asins, deleteFiles),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: bookKeys.all });
     },
+  });
+}
+
+/**
+ * Hook for fetching incomplete downloads (cover only, no aaxc file).
+ * These need to be re-downloaded before conversion is possible.
+ */
+export function useIncompleteDownloads(
+  options?: Omit<UseQueryOptions<PartialDownloadsResponse>, "queryKey" | "queryFn">
+) {
+  return useQuery({
+    queryKey: bookKeys.incompleteDownloads(),
+    queryFn: getIncompleteDownloads,
+    staleTime: 30 * 1000,
+    refetchInterval: 30 * 1000,
+    ...options,
   });
 }

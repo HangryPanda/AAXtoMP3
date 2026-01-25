@@ -27,6 +27,7 @@ import type {
   Job,
   JobStatus,
   JobCreateResponse,
+  BatchJobCreateResponse,
   JobListResponse,
   JobType,
   Settings,
@@ -115,7 +116,7 @@ export function useJob(
 export function useCreateDownloadJob() {
   const queryClient = useQueryClient();
 
-  return useMutation<JobCreateResponse, Error, string | string[], { previousJobs: JobListResponse | undefined }>({
+  return useMutation<JobCreateResponse | BatchJobCreateResponse, Error, string | string[], { previousJobs: JobListResponse | undefined }>({
     mutationFn: (asins) => createDownloadJob(asins),
     onMutate: async (asins) => {
       // Cancel any outgoing refetches
@@ -128,7 +129,7 @@ export function useCreateDownloadJob() {
 
       // Optimistically add a pending job
       const tempJob: Job = {
-        id: `temp-${Date.now()}`,
+        id: `temp-${crypto.randomUUID()}`,
         task_type: "DOWNLOAD",
         book_asin: Array.isArray(asins) ? asins[0] : asins,
         status: "PENDING",
@@ -186,7 +187,7 @@ export function useCreateConvertJob() {
 
       // Optimistically add a pending job
       const tempJob: Job = {
-        id: `temp-${Date.now()}`,
+        id: `temp-${crypto.randomUUID()}`,
         task_type: "CONVERT",
         book_asin: asin,
         status: "PENDING",

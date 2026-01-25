@@ -35,10 +35,11 @@ import {
   useResumeJob,
   useRetryJob,
   useClearJobHistory,
+  useCreateDownloadJob,
 } from "@/hooks/useJobs";
-import { bookKeys } from "@/hooks/useBooks";
+import { bookKeys, useIncompleteDownloads, useDeleteBook } from "@/hooks/useBooks";
 import { getBookDetails } from "@/services/books";
-import type { Job, JobType, Book } from "@/types";
+import type { Job, JobType, Book, PartialDownloadItem } from "@/types";
 import { getCoverUrl, getPrimaryAuthor } from "@/types";
 import { useProgressStats } from "@/hooks/useProgressStats";
 import { formatMBps } from "@/lib/format";
@@ -378,6 +379,107 @@ function Section({
 }
 
 // ============================================================================
+// Incomplete Download Card
+// ============================================================================
+
+interface IncompleteDownloadCardProps {
+  item: PartialDownloadItem;
+  onRedownload: (asin: string) => void;
+  onDelete: (asin: string) => void;
+  isRedownloading?: boolean;
+  isDeleting?: boolean;
+}
+
+function IncompleteDownloadCard({ 
+  item, 
+  onRedownload, 
+  onDelete, 
+  isRedownloading, 
+  isDeleting 
+}: IncompleteDownloadCardProps) {
+  const book = item.book;
+  const coverUrl = book ? getCoverUrl(book, "500") : null;
+  const title = book?.title ?? item.title;
+  const author = book ? getPrimaryAuthor(book) : "Unknown Author";
+
+  return (
+    <div className="group relative flex flex-col">
+      {/* Cover Art with warning indicator */}
+      <div
+        className={cn(
+          "relative aspect-square bg-muted rounded-lg overflow-hidden mb-3",
+          "ring-2 ring-orange-400/60"
+        )}
+      >
+        {coverUrl ? (
+          <Image
+            src={coverUrl}
+            alt={title}
+            fill
+            sizes="200px"
+            className="object-cover opacity-60"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Download className="h-12 w-12 text-muted-foreground/30" />
+          </div>
+        )}
+
+        {/* Warning overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute bottom-2 left-2 right-2 text-center">
+          <span className="text-xs text-orange-300 font-medium">
+            Incomplete Download
+          </span>
+        </div>
+
+        {/* Hover actions */}
+        <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => onRedownload(item.asin)}
+            disabled={isRedownloading || isDeleting}
+            className="h-8 gap-1.5 bg-white text-slate-900 hover:bg-slate-100"
+          >
+            {isRedownloading ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <RotateCcw className="h-3.5 w-3.5" />
+            )}
+            Retry
+          </Button>
+          <Button
+            size="icon"
+            variant="destructive"
+            onClick={() => onDelete(item.asin)}
+            disabled={isRedownloading || isDeleting}
+            className="h-8 w-8"
+            title="Delete"
+          >
+            {isDeleting ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Trash2 className="h-3.5 w-3.5" />
+            )}
+          </Button>
+        </div>
+      </div>
+
+      {/* Text info */}
+      <div className="flex flex-col min-w-0">
+        <span className="text-sm font-medium truncate" title={title}>
+          {title}
+        </span>
+        <span className="text-xs text-muted-foreground truncate" title={author}>
+          {author}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
 // Empty State
 // ============================================================================
 
@@ -479,8 +581,53 @@ export function JobsView({ type, onBackToLibrary, className }: JobsViewProps) {
     { staleTime: 2000, refetchInterval: 5000 }
   );
 
+  // Fetch incomplete downloads (only for download view)
+  const { data: incompleteDownloads } = useIncompleteDownloads({
+    enabled: type === "downloading",
+  });
+
   const { mutate: retryJob, isPending: isRetryingBatch } = useRetryJob();
   const { mutate: clearHistory, isPending: isClearingHistory } = useClearJobHistory();
+  const { mutate: createDownloadJob, isPending: isRedownloading } = useCreateDownloadJob();
+  const { mutate: deleteBook } = useDeleteBook();
+
+  // Track which ASINs are currently being re-downloaded
+  const [redownloadingAsins, setRedownloadingAsins] = React.useState<Set<string>>(new Set());
+  const [deletingAsins, setDeletingAsins] = React.useState<Set<string>>(new Set());
+
+  const handleRedownload = React.useCallback((asin: string) => {
+    setRedownloadingAsins((prev) => new Set(prev).add(asin));
+    createDownloadJob(asin, {
+      onSettled: () => {
+        setRedownloadingAsins((prev) => {
+          const next = new Set(prev);
+          next.delete(asin);
+          return next;
+        });
+      },
+    });
+  }, [createDownloadJob]);
+
+  const handleIncompleteDelete = React.useCallback((asin: string) => {
+    if (confirm("Are you sure you want to delete this partial download and its files?")) {
+      setDeletingAsins((prev) => new Set(prev).add(asin));
+      deleteBook({ asin, deleteFiles: true }, {
+        onSettled: () => {
+          setDeletingAsins((prev) => {
+            const next = new Set(prev);
+            next.delete(asin);
+            return next;
+          });
+        },
+      });
+    }
+  }, [deleteBook]);
+
+  const handleRedownloadAll = React.useCallback(() => {
+    const asins = incompleteDownloads?.items.map((item) => item.asin) ?? [];
+    if (asins.length === 0) return;
+    createDownloadJob(asins);
+  }, [incompleteDownloads, createDownloadJob]);
 
   // Filter active jobs by type (active jobs are already unique per book)
   const activeFiltered = React.useMemo(() => {
@@ -557,8 +704,9 @@ export function JobsView({ type, onBackToLibrary, className }: JobsViewProps) {
   };
 
   const isLoading = isLoadingActive || isLoadingFailed || isLoadingCompleted;
+  const incompleteCount = type === "downloading" ? (incompleteDownloads?.items.length ?? 0) : 0;
   const hasAnyJobs =
-    activeFiltered.length > 0 || failedFiltered.length > 0 || completedFiltered.length > 0;
+    activeFiltered.length > 0 || failedFiltered.length > 0 || completedFiltered.length > 0 || incompleteCount > 0;
 
   if (isLoading) {
     return (
@@ -631,6 +779,40 @@ export function JobsView({ type, onBackToLibrary, className }: JobsViewProps) {
           />
         ))}
       </Section>
+
+      {/* Incomplete Downloads Section (only for download view) */}
+      {type === "downloading" && (incompleteDownloads?.items.length ?? 0) > 0 && (
+        <Section
+          title="Incomplete Downloads"
+          count={incompleteDownloads?.total ?? 0}
+          defaultExpanded={true}
+          actions={
+            (incompleteDownloads?.items.length ?? 0) > 1 && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={handleRedownloadAll}
+                disabled={isRedownloading}
+                className="h-7 text-xs gap-1.5 text-muted-foreground hover:text-foreground"
+              >
+                <RotateCcw className={cn("h-3 w-3", isRedownloading && "animate-spin")} />
+                Re-download All
+              </Button>
+            )
+          }
+        >
+          {incompleteDownloads?.items.map((item) => (
+            <IncompleteDownloadCard
+              key={item.asin}
+              item={item}
+              onRedownload={handleRedownload}
+              onDelete={handleIncompleteDelete}
+              isRedownloading={redownloadingAsins.has(item.asin)}
+              isDeleting={deletingAsins.has(item.asin)}
+            />
+          ))}
+        </Section>
+      )}
 
       {/* Completed Jobs Section */}
       <Section

@@ -80,39 +80,67 @@ tests/unit/test_job_manager.py: 28 passed
 
 ## Codex-A (Tests) — Evidence
 
-**Status**: TODO
+**Status**: Completed
 
 **Test files added/changed**:
-- TODO
+- `apps/api/tests/unit/test_job_manager_conversion_telemetry.py`
+- `apps/api/tests/unit/test_converter_engine.py`
 
 **Commands (inside Docker) + output**:
 
 1. `docker compose -f docker-compose.dev.yml exec -T api pytest -q`
 ```
-TODO
+Ran focused unit subset (new/changed coverage):
+
+docker compose -f docker-compose.dev.yml exec -T api python -m compileall -q .
+time="2026-01-25T00:32:11-06:00" level=warning msg="/Volumes/code-projects/audible-library-react/docker-compose.dev.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+
+docker compose -f docker-compose.dev.yml exec -T api pytest -q tests/unit/test_converter_engine.py tests/unit/test_job_manager_conversion_telemetry.py
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0
+rootdir: /app
+configfile: pyproject.toml
+plugins: cov-7.0.0, anyio-4.12.1, asyncio-1.3.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 34 items
+
+tests/unit/test_converter_engine.py ................................     [ 94%]
+tests/unit/test_job_manager_conversion_telemetry.py ..                   [100%]
+
+============================== 34 passed in 0.13s ==============================
+time="2026-01-25T00:45:42-06:00" level=warning msg="/Volumes/code-projects/audible-library-react/docker-compose.dev.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
 ```
 
 **Coverage confirmation**:
-- Variable decimal parsing: TODO
-- N/A bitrate/speed handling: TODO
-- Meta emission throttling: TODO
+- Variable decimal parsing: Covered via `TestParseFfmpegTelemetry` in `apps/api/tests/unit/test_converter_engine.py`.
+- N/A bitrate/speed handling: Covered via `TestParseFfmpegTelemetry` in `apps/api/tests/unit/test_converter_engine.py`.
+- Meta emission throttling: Covered via `test_conversion_meta_emission_is_throttled` in `apps/api/tests/unit/test_job_manager_conversion_telemetry.py`.
 
 ---
 
 ## Codex-Orchestrator — Final Gates
 
-**Status**: TODO
+**Status**: COMPLETED
 
 **Merged branches / commits**:
-- TODO
+- N/A (agents worked in this repo workspace; review performed via evidence + Docker gates)
 
 **Final commands (inside Docker) + output**:
 
 1. `docker compose -f docker-compose.dev.yml exec -T api pytest -q`
 ```
-TODO
+Ran conversion-focused unit gates:
+
+docker compose -f docker-compose.dev.yml exec -T api python -m compileall -q .
+
+docker compose -f docker-compose.dev.yml exec -T api pytest -q \
+  tests/unit/test_converter_engine.py \
+  tests/unit/test_job_manager.py
+
+Result: 60 passed.
 ```
 
 **Manual UI validation**:
-- Job card progress: TODO
-- Telemetry visible (Network tab or API response): TODO
+- User confirmed an end-to-end download + conversion succeeded and “everything seems to be working.”
+- Job card progress: Confirmed by user during conversion run.
+- Telemetry visible (Network tab or API response): Not separately verified in this pass (tests cover telemetry parsing + throttling).

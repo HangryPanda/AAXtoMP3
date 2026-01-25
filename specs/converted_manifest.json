@@ -5098,7 +5098,807 @@
     "asin": "B08V8B2CGV",
     "title": "Dungeon Crawler Carl",
     "output_path": "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario: Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario: Dungeon Crawler Carl, Book 2.m4b",
-    "started_at": "2026-01-25T06:35:17.248470",
-    "ended_at": "2026-01-25T06:35:48.314372"
+    "started_at": "2026-01-25T06:57:11.149120",
+    "ended_at": "2026-01-25T06:57:50.902393"
+  },
+  "/data/downloads/B0CNKVXB79_Chasmfall: The Weirkey Chronicles, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0CNKVXB79",
+    "title": "Chasmfall",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/Chasmfall: The Weirkey Chronicles, Book 4/Chasmfall: The Weirkey Chronicles, Book 4.m4b",
+    "started_at": "2026-01-25T06:57:11.973548",
+    "ended_at": "2026-01-25T06:57:40.765132"
+  },
+  "/data/downloads/B0BT8BRVDK_Archcrafter: The Weirkey Chronicles, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BT8BRVDK",
+    "title": "Archcrafter",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/Archcrafter : The Weirkey Chronicles, Book 3/Archcrafter : The Weirkey Chronicles, Book 3.m4b",
+    "started_at": "2026-01-25T06:57:40.780920",
+    "ended_at": "2026-01-25T06:58:15.623006"
+  },
+  "/data/downloads/B0CLYMTZZV_The Weirkey Chronicles Omnibus: Books 1-3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0CLYMTZZV",
+    "title": "The Weirkey Chronicles Omnibus",
+    "output_path": "/data/converted/Audiobook/Sarah Lin/The Weirkey Chronicles Omnibus: Books 1-3/The Weirkey Chronicles Omnibus: Books 1-3.m4b",
+    "started_at": "2026-01-25T06:57:50.917808",
+    "ended_at": "2026-01-25T06:58:35.249630"
+  },
+  "/data/downloads/B0CK4ZRWMY_Tenacity: The Completionist Chronicles, Book 9-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0CK4ZRWMY",
+    "title": "Tenacity",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Tenacity: The Completionist Chronicles, Book 9/Tenacity: The Completionist Chronicles, Book 9.m4b",
+    "started_at": "2026-01-25T06:58:15.782523",
+    "ended_at": "2026-01-25T06:58:52.925322"
+  },
+  "/data/downloads/1774244268_Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1, 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1774244268",
+    "title": "Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack",
+    "output_path": "/data/converted/Audiobook/L. G. Estrella/Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1,/Two Necromancers, a Bureaucrat, and an Army of Golems: An Unconventional Heroes Publisher's Pack: Unconventional Heroes, Book 1,.m4b",
+    "started_at": "2026-01-25T06:58:52.941498",
+    "ended_at": "2026-01-25T06:59:26.098331"
+  },
+  "/data/downloads/B07BZSV2PV_A Wizard's Soul: Sentinels of Creation, Volume 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B07BZSV2PV",
+    "title": "A Wizard's Soul",
+    "output_path": "/data/converted/Audiobook/Robert W. Ross/A Wizard's Soul: Sentinels of Creation, Volume 3/A Wizard's Soul: Sentinels of Creation, Volume 3.m4b",
+    "started_at": "2026-01-25T06:59:26.114489",
+    "ended_at": "2026-01-25T06:59:45.810064"
+  },
+  "/data/downloads/B09R2JJ8DL_The Other Way: Passage to Dawn, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09R2JJ8DL",
+    "title": "The Other Way",
+    "output_path": "/data/converted/Audiobook/Derrick Smythe/The Other Way: Passage to Dawn, Book 2/The Other Way: Passage to Dawn, Book 2.m4b",
+    "started_at": "2026-01-25T06:58:35.428118",
+    "ended_at": "2026-01-25T06:59:45.953954"
+  },
+  "/data/downloads/B007VRYKWO_The Enchantress-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B007VRYKWO",
+    "title": "The Enchantress",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Enchantress: The Secrets of the Immortal Nicholas Flamel, Book 6/The Enchantress: The Secrets of the Immortal Nicholas Flamel, Book 6.m4b",
+    "started_at": "2026-01-25T06:59:45.823424",
+    "ended_at": "2026-01-25T07:00:14.101155"
+  },
+  "/data/downloads/B004Y17AB8_The Warlock: The Secrets of the Immortal Nicholas Flamel-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B004Y17AB8",
+    "title": "The Warlock",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Warlock: The Secrets of the Immortal Nicholas Flamel/The Warlock: The Secrets of the Immortal Nicholas Flamel.m4b",
+    "started_at": "2026-01-25T07:00:14.123676",
+    "ended_at": "2026-01-25T07:00:35.618749"
+  },
+  "/data/downloads/B074ZNGRRV_A Tale of Two Gardens: Sentinels of Creation, Volume 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B074ZNGRRV",
+    "title": "A Tale of Two Gardens",
+    "output_path": "/data/converted/Audiobook/Robert W. Ross/A Tale of Two Gardens: Sentinels of Creation, Volume 2/A Tale of Two Gardens: Sentinels of Creation, Volume 2.m4b",
+    "started_at": "2026-01-25T07:00:35.632811",
+    "ended_at": "2026-01-25T07:00:51.401313"
+  },
+  "/data/downloads/B0C3F9B47D_The Rascor Plains: Immortal Great Souls, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0C3F9B47D",
+    "title": "The Rascor Plains",
+    "output_path": "/data/converted/Audiobook/Phil Tucker/The Rascor Plains: Immortal Great Souls, Book 2/The Rascor Plains: Immortal Great Souls, Book 2.m4b",
+    "started_at": "2026-01-25T06:59:45.967534",
+    "ended_at": "2026-01-25T07:01:10.940075"
+  },
+  "/data/downloads/B094YYPSW5_Familiar Beginnings: Demon Magic, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B094YYPSW5",
+    "title": "Familiar Beginnings",
+    "output_path": "/data/converted/Audiobook/Alice Winters/Familiar Beginnings: Demon Magic, Book 2/Familiar Beginnings: Demon Magic, Book 2.m4b",
+    "started_at": "2026-01-25T07:09:10.103720",
+    "ended_at": "2026-01-25T07:09:31.689914"
+  },
+  "/data/downloads/B0BF2HFRXG_Malicious Midpoint: Demon Magic, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BF2HFRXG",
+    "title": "Malicious Midpoint",
+    "output_path": "/data/converted/Audiobook/Alice Winters/Malicious Midpoint: Demon Magic, Book 3/Malicious Midpoint: Demon Magic, Book 3.m4b",
+    "started_at": "2026-01-25T07:09:10.147710",
+    "ended_at": "2026-01-25T07:09:34.545659"
+  },
+  "/data/downloads/B08R699CDQ_Happy Endings: Demon Magic, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B08R699CDQ",
+    "title": "Happy Endings",
+    "output_path": "/data/converted/Audiobook/Alice Winters/Happy Endings: Demon Magic, Book 1/Happy Endings: Demon Magic, Book 1.m4b",
+    "started_at": "2026-01-25T07:09:31.703982",
+    "ended_at": "2026-01-25T07:09:45.973544"
+  },
+  "/data/downloads/B0BRTGJHW1_Monstrous Intent-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BRTGJHW1",
+    "title": "Monstrous Intent",
+    "output_path": "/data/converted/Audiobook/Alice Winters/Monstrous Intent/Monstrous Intent.m4b",
+    "started_at": "2026-01-25T07:09:34.562906",
+    "ended_at": "2026-01-25T07:10:03.253001"
+  },
+  "/data/downloads/B0C4V86KCK_Shattersoul: The Ripple System, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0C4V86KCK",
+    "title": "Shattersoul",
+    "output_path": "/data/converted/Audiobook/Kyle Kirrin/Shattersoul/Shattersoul.m4b",
+    "started_at": "2026-01-25T07:09:45.988179",
+    "ended_at": "2026-01-25T07:10:36.932197"
+  },
+  "/data/downloads/B09TLFJCMD_A Taste of Gold and Iron-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09TLFJCMD",
+    "title": "A Taste of Gold and Iron",
+    "output_path": "/data/converted/Audiobook/Alexandra Rowland/A Taste of Gold and Iron/A Taste of Gold and Iron.m4b",
+    "started_at": "2026-01-25T07:10:03.267724",
+    "ended_at": "2026-01-25T07:10:52.746566"
+  },
+  "/data/downloads/B0C2S8K8Y9_Asher: Demons-In-Law, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0C2S8K8Y9",
+    "title": "Asher",
+    "output_path": "/data/converted/Audiobook/Louisa Masters/Asher: Demons-In-Law, Book 1/Asher: Demons-In-Law, Book 1.m4b",
+    "started_at": "2026-01-25T07:10:52.759962",
+    "ended_at": "2026-01-25T07:11:12.404259"
+  },
+  "/data/downloads/B09LYZPFLZ_The Colour of Magic: Discworld, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09LYZPFLZ",
+    "title": "The Colour of Magic",
+    "output_path": "/data/converted/Audiobook/Terry Pratchett/The Colour of Magic: Discworld, Book 1/The Colour of Magic: Discworld, Book 1.m4b",
+    "started_at": "2026-01-25T07:11:12.418830",
+    "ended_at": "2026-01-25T07:11:32.405076"
+  },
+  "/data/downloads/B0B3PYMYTY_Tongue Eater: Mage Errant, Book 6-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B3PYMYTY",
+    "title": "Tongue Eater",
+    "output_path": "/data/converted/Audiobook/John Bierce/Tongue Eater: Mage Errant, Book 6/Tongue Eater: Mage Errant, Book 6.m4b",
+    "started_at": "2026-01-25T07:10:36.946433",
+    "ended_at": "2026-01-25T07:11:37.881470"
+  },
+  "/data/downloads/1774240130_Mage Errant: Publisher's Pack: Mage Errant, Book 1, 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "1774240130",
+    "title": "Mage Errant: Publisher's Pack",
+    "output_path": "/data/converted/Audiobook/John Bierce/Mage Errant: Publisher's Pack: Mage Errant, Book 1-2/Mage Errant: Publisher's Pack: Mage Errant, Book 1-2.m4b",
+    "started_at": "2026-01-25T07:11:32.465570",
+    "ended_at": "2026-01-25T07:12:02.279710"
+  },
+  "/data/downloads/1774241846_A Traitor in Skyhold: Mage Errant, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1774241846",
+    "title": "A Traitor in Skyhold",
+    "output_path": "/data/converted/Audiobook/John Bierce/A Traitor in Skyhold: Mage Errant, Book 3/A Traitor in Skyhold: Mage Errant, Book 3.m4b",
+    "started_at": "2026-01-25T07:11:37.900101",
+    "ended_at": "2026-01-25T07:12:15.273518"
+  },
+  "/data/downloads/1774244985_The Lost City of Ithos: Mage Errant, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1774244985",
+    "title": "The Lost City of Ithos",
+    "output_path": "/data/converted/Audiobook/John Bierce/The Lost City of Ithos: Mage Errant, Book 4/The Lost City of Ithos: Mage Errant, Book 4.m4b",
+    "started_at": "2026-01-25T07:12:02.294005",
+    "ended_at": "2026-01-25T07:12:50.975899"
+  },
+  "/data/downloads/B0C5RV38P7_Defiant: Songs of Chaos, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0C5RV38P7",
+    "title": "Defiant",
+    "output_path": "/data/converted/Audiobook/Michael R. Miller/Defiant: Songs of Chaos, Book 3/Defiant: Songs of Chaos, Book 3.m4b",
+    "started_at": "2026-01-25T07:12:15.289928",
+    "ended_at": "2026-01-25T07:13:06.332509"
+  },
+  "/data/downloads/B002V1JA16_The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B002V1JA16",
+    "title": "The Alchemyst",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1/The Alchemyst: The Secrets of the Immortal Nicholas Flamel, Book 1.m4b",
+    "started_at": "2026-01-25T07:13:06.430911",
+    "ended_at": "2026-01-25T07:13:22.024156"
+  },
+  "/data/downloads/B0BF183934_A Thief in the Night-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BF183934",
+    "title": "A Thief in the Night",
+    "output_path": "/data/converted/Audiobook/KJ Charles/A Thief in the Night/A Thief in the Night.m4b",
+    "started_at": "2026-01-25T07:13:22.039862",
+    "ended_at": "2026-01-25T07:13:31.260319"
+  },
+  "/data/downloads/1774249979_The Siege of Skyhold: Mage Errant, Book 5-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1774249979",
+    "title": "The Siege of Skyhold",
+    "output_path": "/data/converted/Audiobook/John Bierce/The Siege of Skyhold: Mage Errant, Book 5/The Siege of Skyhold: Mage Errant, Book 5.m4b",
+    "started_at": "2026-01-25T07:12:50.990661",
+    "ended_at": "2026-01-25T07:13:55.298756"
+  },
+  "/data/downloads/B002VA8ZQI_The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B002VA8ZQI",
+    "title": "The Sorceress",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3/The Sorceress: Secrets of the Immortal Nicholas Flamel, Book 3.m4b",
+    "started_at": "2026-01-25T07:13:55.365422",
+    "ended_at": "2026-01-25T07:14:15.011147"
+  },
+  "/data/downloads/B0CBKVWNGJ_The Eighth Harmony: A Fantasy LitRPG Adventure Divine Apostasy, Book 8-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0CBKVWNGJ",
+    "title": "The Eighth Harmony",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/The Eighth Harmony: Divine Apostasy, Book 8/The Eighth Harmony: Divine Apostasy, Book 8.m4b",
+    "started_at": "2026-01-25T07:13:31.312914",
+    "ended_at": "2026-01-25T07:14:21.543673"
+  },
+  "/data/downloads/B002V1BHQW_The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B002V1BHQW",
+    "title": "The Magician",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2/The Magician: The Secrets of the Immortal Nicholas Flamel, Book 2.m4b",
+    "started_at": "2026-01-25T07:14:15.025521",
+    "ended_at": "2026-01-25T07:14:33.171797"
+  },
+  "/data/downloads/B003M55QYU_The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B003M55QYU",
+    "title": "The Necromancer",
+    "output_path": "/data/converted/Audiobook/Michael Scott/The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4/The Necromancer: The Secrets of the Immortal Nicholas Flamel, Book 4.m4b",
+    "started_at": "2026-01-25T07:14:33.188990",
+    "ended_at": "2026-01-25T07:14:49.605292"
+  },
+  "/data/downloads/B09JT4PH62_The Eye of the World: Book One of The Wheel of Time-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B09JT4PH62",
+    "title": "The Eye of the World",
+    "output_path": "/data/converted/Audiobook/Robert Jordan/The Eye of the World: Book One of The Wheel of Time/The Eye of the World: Book One of The Wheel of Time.m4b",
+    "started_at": "2026-01-25T07:27:37.621693",
+    "ended_at": "2026-01-25T07:28:20.490701"
+  },
+  "/data/downloads/B0B72CR73Q_The Blacksmith's Son: Mageborn, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B72CR73Q",
+    "title": "The Blacksmith's Son",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The Blacksmith's Son: Mageborn, Book 1/The Blacksmith's Son: Mageborn, Book 1.m4b",
+    "started_at": "2026-01-25T08:08:45.223012",
+    "ended_at": "2026-01-25T08:09:26.277804"
+  },
+  "/data/downloads/B0BPJVN6F8_Prince and Assassin: Perilous Courts, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BPJVN6F8",
+    "title": "Prince and Assassin",
+    "output_path": "/data/converted/Audiobook/Tavia Lark/Prince and Assassin: Perilous Courts, Book 1/Prince and Assassin: Perilous Courts, Book 1.m4b",
+    "started_at": "2026-01-25T08:08:45.180319",
+    "ended_at": "2026-01-25T08:09:28.861546"
+  },
+  "/data/downloads/B0B2X3434T_Libriohexer: Wolfman Warlock, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B2X3434T",
+    "title": "Libriohexer",
+    "output_path": "/data/converted/Audiobook/James Hunter, Dakota Krout/Libriohexer: Wolfman Warlock, Book 2/Libriohexer: Wolfman Warlock, Book 2.m4b",
+    "started_at": "2026-01-25T08:08:45.204988",
+    "ended_at": "2026-01-25T08:09:42.439864"
+  },
+  "/data/downloads/B0BCR7NVB3_Fluke and the Frontier Farce: The Fantastic Fluke, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BCR7NVB3",
+    "title": "Fluke and the Frontier Farce",
+    "output_path": "/data/converted/Audiobook/Sam Burns/Fluke and the Frontier Farce: The Fantastic Fluke, Book 4/Fluke and the Frontier Farce: The Fantastic Fluke, Book 4.m4b",
+    "started_at": "2026-01-25T08:09:42.456076",
+    "ended_at": "2026-01-25T08:10:03.445861"
+  },
+  "/data/downloads/B09RX4LQTL_Defiance of the Fall 4: A LitRPG Adventure-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09RX4LQTL",
+    "title": "Defiance of the Fall 4: A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 4: A LitRPG Adventure/Defiance of the Fall 4: A LitRPG Adventure.m4b",
+    "started_at": "2026-01-25T08:08:45.246285",
+    "ended_at": "2026-01-25T08:10:19.798077"
+  },
+  "/data/downloads/B00S5HOIL2_An Unwelcome Quest: Magic 2.0, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00S5HOIL2",
+    "title": "An Unwelcome Quest",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/An Unwelcome Quest: Magic 2.0, Book 3/An Unwelcome Quest: Magic 2.0, Book 3.m4b",
+    "started_at": "2026-01-25T08:10:03.460261",
+    "ended_at": "2026-01-25T08:10:46.213849"
+  },
+  "/data/downloads/B0B8T2XHTF_The Line of Illeniel: Mageborn, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B8T2XHTF",
+    "title": "The Line of Illeniel",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The Line of Illeniel: Mageborn, Book 2/The Line of Illeniel: Mageborn, Book 2.m4b",
+    "started_at": "2026-01-25T08:09:28.875050",
+    "ended_at": "2026-01-25T08:10:46.354897"
+  },
+  "/data/downloads/0063137321_Dark Rise-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "0063137321",
+    "title": "Dark Rise",
+    "output_path": "/data/converted/Audiobook/C. S. Pacat/Dark Rise: Dark Rise, Book 1/Dark Rise: Dark Rise, Book 1.m4b",
+    "started_at": "2026-01-25T08:09:26.303858",
+    "ended_at": "2026-01-25T08:11:06.996296"
+  },
+  "/data/downloads/B09VJWSW1H_Tomkin and the Dragon: A Keeper's Tale-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09VJWSW1H",
+    "title": "Tomkin and the Dragon",
+    "output_path": "/data/converted/Audiobook/JA Andrews/A Keeper's Tale: The Story of Tomkin and the Dragon/A Keeper's Tale: The Story of Tomkin and the Dragon.m4b",
+    "started_at": "2026-01-25T08:11:07.014141",
+    "ended_at": "2026-01-25T08:11:35.588559"
+  },
+  "/data/downloads/B0BDNJZ9F2_The Archmage Unbound: Mageborn, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BDNJZ9F2",
+    "title": "The Archmage Unbound",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The Archmage Unbound: Mageborn, Book 3/The Archmage Unbound: Mageborn, Book 3.m4b",
+    "started_at": "2026-01-25T08:10:46.371472",
+    "ended_at": "2026-01-25T08:11:58.592173"
+  },
+  "/data/downloads/B0BLJB61KF_The Final Redemption: Mageborn, Book 5-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BLJB61KF",
+    "title": "The Final Redemption",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The Final Redemption: Mageborn, Book 5/The Final Redemption: Mageborn, Book 5.m4b",
+    "started_at": "2026-01-25T08:10:46.228350",
+    "ended_at": "2026-01-25T08:12:06.551066"
+  },
+  "/data/downloads/B0BXTC9MMP_Defiance of the Fall 9-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BXTC9MMP",
+    "title": "Defiance of the Fall 9",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 9/Defiance of the Fall 9.m4b",
+    "started_at": "2026-01-25T08:10:19.817325",
+    "ended_at": "2026-01-25T08:12:32.534865"
+  },
+  "/data/downloads/B09VY8D463_Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09VY8D463",
+    "title": "Viridian Gate Online: Empirical Endgame",
+    "output_path": "/data/converted/Audiobook/James Hunter/Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8/Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8.m4b",
+    "started_at": "2026-01-25T08:11:35.607495",
+    "ended_at": "2026-01-25T08:12:53.118045"
+  },
+  "/data/downloads/B0BWFSGTKC_Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7)-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BWFSGTKC",
+    "title": "Shadow's Seventh Step",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7)/Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7).m4b",
+    "started_at": "2026-01-25T08:12:06.566834",
+    "ended_at": "2026-01-25T08:13:10.857348"
+  },
+  "/data/downloads/B0BC299XT2_Crystal Awakening: An Epic Fantasy Adventure-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BC299XT2",
+    "title": "Crystal Awakening",
+    "output_path": "/data/converted/Audiobook/Andrew Rowe, Kayleigh Nicol/Crystal Awakening: Shattered Legacy, Book 1/Crystal Awakening: Shattered Legacy, Book 1.m4b",
+    "started_at": "2026-01-25T08:11:58.606977",
+    "ended_at": "2026-01-25T08:13:20.072216"
+  },
+  "/data/downloads/B09YJ3CW4V_Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5)-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B09YJ3CW4V",
+    "title": "Defiance of the Fall 5",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5)/Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5).m4b",
+    "started_at": "2026-01-25T08:12:32.549678",
+    "ended_at": "2026-01-25T08:13:28.649845"
+  },
+  "/data/downloads/B0BHXN1T3Z_King of Immortal Tithe: Darkmourn Universe, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BHXN1T3Z",
+    "title": "King of Immortal Tithe",
+    "output_path": "/data/converted/Audiobook/Ben Alderson/King of Immortal Tithe: Darkmourn Universe, Book 2/King of Immortal Tithe: Darkmourn Universe, Book 2.m4b",
+    "started_at": "2026-01-25T08:15:33.343273",
+    "ended_at": "2026-01-25T08:16:16.144966"
+  },
+  "/data/downloads/B0BJS7CZ4H_The God-Stone War: Mageborn, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BJS7CZ4H",
+    "title": "The God-Stone War",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The God-Stone War: Mageborn, Book 4/The God-Stone War: Mageborn, Book 4.m4b",
+    "started_at": "2026-01-25T08:15:47.889010",
+    "ended_at": "2026-01-25T08:16:37.754740"
+  },
+  "/data/downloads/B0BHJM2G38_Defiance of the Fall 7: Defiance of the Fall, Book 7-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BHJM2G38",
+    "title": "Defiance of the Fall 7",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 7: Defiance of the Fall, Book 7/Defiance of the Fall 7: Defiance of the Fall, Book 7.m4b",
+    "started_at": "2026-01-25T08:13:42.715766",
+    "ended_at": "2026-01-25T08:15:19.388499"
+  },
+  "/data/downloads/B0B435SYJ6_Defiance of the Fall 6: Defiance of the Fall, Book 6-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B435SYJ6",
+    "title": "Defiance of the Fall 6",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 6: Defiance of the Fall, Book 6/Defiance of the Fall 6: Defiance of the Fall, Book 6.m4b",
+    "started_at": "2026-01-25T08:13:28.669092",
+    "ended_at": "2026-01-25T08:15:32.582206"
+  },
+  "/data/downloads/B0BRDBWDQL_Defiance of the Fall 8-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BRDBWDQL",
+    "title": "Defiance of the Fall 8",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 8/Defiance of the Fall 8.m4b",
+    "started_at": "2026-01-25T08:13:20.088161",
+    "ended_at": "2026-01-25T08:15:47.355163"
+  },
+  "/data/downloads/B0BD9DSX24_The Sixth Rune: A Fantasy LitRPG Adventure Divine Apostasy, Book 6-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BD9DSX24",
+    "title": "The Sixth Rune",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/The Sixth Rune: Divine Apostasy, Book 6/The Sixth Rune: Divine Apostasy, Book 6.m4b",
+    "started_at": "2026-01-25T08:14:29.482439",
+    "ended_at": "2026-01-25T08:15:47.838551"
+  },
+  "/data/downloads/1774240491_The Sixth Strand: A Pattern of Shadow and Light, Book 5-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "1774240491",
+    "title": "The Sixth Strand",
+    "output_path": "/data/converted/Audiobook/Melissa McPhail/The Sixth Strand: A Pattern of Shadow and Light, Book 5/The Sixth Strand: A Pattern of Shadow and Light, Book 5.m4b",
+    "started_at": "2026-01-25T08:15:19.405311",
+    "ended_at": "2026-01-25T08:16:38.114985"
+  },
+  "/data/downloads/B01DFE6PII_A Power Renewed: Sentinels of Creation, Volume 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B01DFE6PII",
+    "title": "A Power Renewed",
+    "output_path": "/data/converted/Audiobook/Robert W. Ross/A Power Renewed: Sentinels of Creation, Volume 1/A Power Renewed: Sentinels of Creation, Volume 1.m4b",
+    "started_at": "2026-01-25T08:49:55.019119",
+    "ended_at": "2026-01-25T08:50:25.692066"
+  },
+  "/data/downloads/B07D2JKSBN_Viridian Gate Online: The Lich Priest: The Viridian Gate Archives, Book 5-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B07D2JKSBN",
+    "title": "Viridian Gate Online: The Lich Priest",
+    "output_path": "/data/converted/Audiobook/James A. Hunter/Viridian Gate Online: The Lich Priest: The Viridian Gate Archives, Book 5/Viridian Gate Online: The Lich Priest: The Viridian Gate Archives, Book 5.m4b",
+    "started_at": "2026-01-25T08:49:55.130883",
+    "ended_at": "2026-01-25T08:50:30.150544"
+  },
+  "/data/downloads/B09K4K3486_Defiance of the Fall 3: A LitRPG Adventure-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B09K4K3486",
+    "title": "Defiance of the Fall 3",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall 3: A LitRPG Adventure/Defiance of the Fall 3: A LitRPG Adventure.m4b",
+    "started_at": "2026-01-25T08:49:54.693012",
+    "ended_at": "2026-01-25T08:50:58.285615"
+  },
+  "/data/downloads/1977385885_Dungeon Desolation: Divine Dungeon Series, Book 4-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "1977385885",
+    "title": "Dungeon Desolation",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Dungeon Desolation: Divine Dungeon Series, Book 4/Dungeon Desolation: Divine Dungeon Series, Book 4.m4b",
+    "started_at": "2026-01-25T08:50:30.171132",
+    "ended_at": "2026-01-25T08:51:07.339507"
+  },
+  "/data/downloads/B00XAK8OGE_The Chronicles of Lumineia Omnibus: The Chronicles of Lumineia, Book 1, 2, 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00XAK8OGE",
+    "title": "The Chronicles of Lumineia Omnibus",
+    "output_path": "/data/converted/Audiobook/Ben Hale/The Chronicles of Lumineia Omnibus: The Chronicles of Lumineia, Book 1, 2, 3/The Chronicles of Lumineia Omnibus: The Chronicles of Lumineia, Book 1, 2, 3.m4b",
+    "started_at": "2026-01-25T08:49:55.044175",
+    "ended_at": "2026-01-25T08:51:31.109069"
+  },
+  "/data/downloads/1977349684_Dungeon Eternium: Divine Dungeon Series, Book 5-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1977349684",
+    "title": "Dungeon Eternium",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Dungeon Eternium: Divine Dungeon Series, Book 5/Dungeon Eternium: Divine Dungeon Series, Book 5.m4b",
+    "started_at": "2026-01-25T08:50:25.711478",
+    "ended_at": "2026-01-25T08:51:31.674621"
+  },
+  "/data/downloads/B0799RFCCK_Dungeon Calamity: Divine Dungeon, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0799RFCCK",
+    "title": "Dungeon Calamity",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Dungeon Calamity: Divine Dungeon, Book 3/Dungeon Calamity: Divine Dungeon, Book 3.m4b",
+    "started_at": "2026-01-25T08:50:58.299272",
+    "ended_at": "2026-01-25T08:51:35.588954"
+  },
+  "/data/downloads/B06XQ78XLP_Dungeon Born: Divine Dungeon Series, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B06XQ78XLP",
+    "title": "Dungeon Born",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Dungeon Born: Divine Dungeon Series, Book 1/Dungeon Born: Divine Dungeon Series, Book 1.m4b",
+    "started_at": "2026-01-25T08:51:07.355557",
+    "ended_at": "2026-01-25T08:51:40.581984"
+  },
+  "/data/downloads/B087N77CJ3_Shade's First Rule: A Fantasy LitRPG Adventure: Divine Apostasy, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B087N77CJ3",
+    "title": "Shade's First Rule: A Fantasy LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Shade's First Rule: A Fantasy LitRPG Adventure : Divine Apostasy, Book 1/Shade's First Rule: A Fantasy LitRPG Adventure : Divine Apostasy, Book 1.m4b",
+    "started_at": "2026-01-25T08:51:40.600500",
+    "ended_at": "2026-01-25T08:52:07.124096"
+  },
+  "/data/downloads/B0764H7Y83_Dungeon Madness: Divine Dungeon Series, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0764H7Y83",
+    "title": "Dungeon Madness",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Dungeon Madness: Divine Dungeon Series, Book 2/Dungeon Madness: Divine Dungeon Series, Book 2.m4b",
+    "started_at": "2026-01-25T08:51:31.131075",
+    "ended_at": "2026-01-25T08:52:12.483811"
+  },
+  "/data/downloads/0062967193_It Takes Two to Tumble: Seducing the Sedgwicks-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "0062967193",
+    "title": "It Takes Two to Tumble",
+    "output_path": "/data/converted/Audiobook/Cat Sebastian/It Takes Two to Tumble: Seducing the Sedgwicks, Book 1/It Takes Two to Tumble: Seducing the Sedgwicks, Book 1.m4b",
+    "started_at": "2026-01-25T08:51:31.689862",
+    "ended_at": "2026-01-25T08:52:28.988062"
+  },
+  "/data/downloads/B0BVMY7QX6_The Captain: The Last Horizon, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BVMY7QX6",
+    "title": "The Captain",
+    "output_path": "/data/converted/Audiobook/Will Wight/The Captain: The Last Horizon, Book 1/The Captain: The Last Horizon, Book 1.m4b",
+    "started_at": "2026-01-25T08:51:35.604347",
+    "ended_at": "2026-01-25T08:52:42.639810"
+  },
+  "/data/downloads/B09YJ625PH_Here Comes My Man: The Hopelessly Bromantic Duet, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09YJ625PH",
+    "title": "Here Comes My Man",
+    "output_path": "/data/converted/Audiobook/Lauren Blakely/Here Comes My Man: The Hopelessly Bromantic Duet, Book 2/Here Comes My Man: The Hopelessly Bromantic Duet, Book 2.m4b",
+    "started_at": "2026-01-25T08:52:12.500318",
+    "ended_at": "2026-01-25T08:53:15.660343"
+  },
+  "/data/downloads/B08X68FQ46_Bloodline: Cradle, Book 9-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B08X68FQ46",
+    "title": "Bloodline",
+    "output_path": "/data/converted/Audiobook/Will Wight/Bloodline: Cradle, Book 9/Bloodline: Cradle, Book 9.m4b",
+    "started_at": "2026-01-25T08:52:07.140511",
+    "ended_at": "2026-01-25T08:53:15.713450"
+  },
+  "/data/downloads/B00KHEK842_Spell or High Water: Magic 2.0, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B00KHEK842",
+    "title": "Spell or High Water",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/Spell or High Water: Magic 2.0, Book 2/Spell or High Water: Magic 2.0, Book 2.m4b",
+    "started_at": "2026-01-25T08:52:29.005265",
+    "ended_at": "2026-01-25T08:53:35.534224"
+  },
+  "/data/downloads/B0B88X9C6L_Invent: The Completionist Chronicles, Book 7-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B88X9C6L",
+    "title": "Invent",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Invent: The Completionist Chronicles, Book 7/Invent: The Completionist Chronicles, Book 7.m4b",
+    "started_at": "2026-01-25T08:52:42.656941",
+    "ended_at": "2026-01-25T08:53:53.630696"
+  },
+  "/data/downloads/B00IIS32NI_Off to Be the Wizard: Magic 2.0, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00IIS32NI",
+    "title": "Off to Be the Wizard",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/Off to Be the Wizard: Magic 2.0, Book 1/Off to Be the Wizard: Magic 2.0, Book 1.m4b",
+    "started_at": "2026-01-25T08:53:35.561619",
+    "ended_at": "2026-01-25T08:54:07.041329"
+  },
+  "/data/downloads/B0BH9CDQ2Q_Implode: The Completionist Chronicles, Book 8-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BH9CDQ2Q",
+    "title": "Implode",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Implode: The Completionist Chronicles, Book 8/Implode: The Completionist Chronicles, Book 8.m4b",
+    "started_at": "2026-01-25T08:53:15.731909",
+    "ended_at": "2026-01-25T08:54:28.188018"
+  },
+  "/data/downloads/B07XF5MS5F_Rexus: Side Quest: The Completionist Chronicles, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B07XF5MS5F",
+    "title": "Rexus: Side Quest",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Rexus: Side Quest: The Completionist Chronicles, Book 3/Rexus: Side Quest: The Completionist Chronicles, Book 3.m4b",
+    "started_at": "2026-01-25T08:54:07.061738",
+    "ended_at": "2026-01-25T08:54:39.861440"
+  },
+  "/data/downloads/B08D6Z1YMC_Ruthless: The Completionist Chronicles, Book 5-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B08D6Z1YMC",
+    "title": "Ruthless",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Ruthless : The Completionist Chronicles, Book 5/Ruthless : The Completionist Chronicles, Book 5.m4b",
+    "started_at": "2026-01-25T08:54:39.878407",
+    "ended_at": "2026-01-25T08:55:14.181347"
+  },
+  "/data/downloads/B08YFM1565_Inflame: The Completionist Chronicles, Book 6-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B08YFM1565",
+    "title": "Inflame",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Inflame/Inflame.m4b",
+    "started_at": "2026-01-25T08:54:28.203500",
+    "ended_at": "2026-01-25T08:55:47.321372"
+  },
+  "/data/downloads/B0BMCNHHWN_He Who Fights with Monsters 9: A LitRPG Adventure (He Who Fights with Monsters, Book 9)-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BMCNHHWN",
+    "title": "He Who Fights with Monsters 9",
+    "output_path": "/data/converted/Audiobook/Shirtaloon, Travis Deverell/He Who Fights with Monsters 9: A LitRPG Adventure (He Who Fights with Monsters, Book 9)/He Who Fights with Monsters 9: A LitRPG Adventure (He Who Fights with Monsters, Book 9).m4b",
+    "started_at": "2026-01-25T08:53:15.680168",
+    "ended_at": "2026-01-25T08:56:14.779766"
+  },
+  "/data/downloads/1977374573_Raze: Completionist Chronicles Series, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1977374573",
+    "title": "Raze",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Raze: Completionist Chronicles Series, Book 4/Raze: Completionist Chronicles Series, Book 4.m4b",
+    "started_at": "2026-01-25T08:55:14.202780",
+    "ended_at": "2026-01-25T08:56:15.197361"
+  },
+  "/data/downloads/B0BX4KRJGZ_Mark of the Fool 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BX4KRJGZ",
+    "title": "Mark of the Fool 3",
+    "output_path": "/data/converted/Audiobook/J.M. Clarke/Mark of the Fool 3/Mark of the Fool 3.m4b",
+    "started_at": "2026-01-25T08:53:53.649216",
+    "ended_at": "2026-01-25T08:56:15.211161"
+  },
+  "/data/downloads/B07FKYC3LD_Regicide: The Completionist Chronicles Series, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B07FKYC3LD",
+    "title": "Regicide",
+    "output_path": "/data/converted/Audiobook/Dakota Krout/Regicide: The Completionist Chronicles Series, Book 2/Regicide: The Completionist Chronicles Series, Book 2.m4b",
+    "started_at": "2026-01-25T08:55:47.336775",
+    "ended_at": "2026-01-25T08:56:20.301970"
+  },
+  "/data/downloads/B07LC44TC4_The Enchanter's Flame: The Ellwood Chronicles, Book I-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B07LC44TC4",
+    "title": "The Enchanter's Flame",
+    "output_path": "/data/converted/Audiobook/Michele Notaro/The Enchanter's Flame: The Ellwood Chronicles, Book I/The Enchanter's Flame: The Ellwood Chronicles, Book I.m4b",
+    "started_at": "2026-01-25T09:02:08.263252",
+    "ended_at": "2026-01-25T09:02:36.925472"
+  },
+  "/data/downloads/B07QD14HY2_Viridian Gate Online: Doom Forge: The Viridian Gate Archives, Book 6-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B07QD14HY2",
+    "title": "Viridian Gate Online: Doom Forge",
+    "output_path": "/data/converted/Audiobook/James Hunter/Viridian Gate Online: Doom Forge: The Viridian Gate Archives, Book 6/Viridian Gate Online: Doom Forge: The Viridian Gate Archives, Book 6.m4b",
+    "started_at": "2026-01-25T09:02:08.375640",
+    "ended_at": "2026-01-25T09:02:50.540933"
+  },
+  "/data/downloads/B07BYKYVNC_Out of Spite, Out of Mind: Magic 2.0, Book 5-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B07BYKYVNC",
+    "title": "Out of Spite, Out of Mind",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/Out of Spite, Out of Mind: Magic 2.0, Book 5/Out of Spite, Out of Mind: Magic 2.0, Book 5.m4b",
+    "started_at": "2026-01-25T09:02:08.357116",
+    "ended_at": "2026-01-25T09:02:55.104451"
+  },
+  "/data/downloads/B088FZ1Q1P_The Second Betrayal: A Fantasy LitRPG Adventure: Divine Apostasy, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B088FZ1Q1P",
+    "title": "The Second Betrayal",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/The Second Betrayal: A Fantasy LitRPG Adventure: Divine Apostasy, Book 2/The Second Betrayal: A Fantasy LitRPG Adventure: Divine Apostasy, Book 2.m4b",
+    "started_at": "2026-01-25T09:02:36.947247",
+    "ended_at": "2026-01-25T09:03:10.742536"
+  },
+  "/data/downloads/B093CRF7J4_The Fourth Secret: A Fantasy LitRPG Adventure (Divine Apostasy, Book 4)-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B093CRF7J4",
+    "title": "The Fourth Secret",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/The Fourth Secret: A Fantasy LitRPG Adventure (Divine Apostasy, Book 4)/The Fourth Secret: A Fantasy LitRPG Adventure (Divine Apostasy, Book 4).m4b",
+    "started_at": "2026-01-25T09:02:08.689093",
+    "ended_at": "2026-01-25T09:04:00.199612"
+  },
+  "/data/downloads/B0899JMKJP_Viridian Gate Online: Darkling Siege: The Viridian Gate Archives, Book 7-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0899JMKJP",
+    "title": "Viridian Gate Online: Darkling Siege",
+    "output_path": "/data/converted/Audiobook/James Hunter/Viridian Gate Online: Darkling Siege: The Viridian Gate Archives, Book 7/Viridian Gate Online: Darkling Siege: The Viridian Gate Archives, Book 7.m4b",
+    "started_at": "2026-01-25T09:02:50.565058",
+    "ended_at": "2026-01-25T09:04:00.602309"
+  },
+  "/data/downloads/B005ZWA2P6_Inheritance: The Inheritance Cycle, Book 4-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B005ZWA2P6",
+    "title": "Inheritance",
+    "output_path": "/data/converted/Audiobook/Christopher Paolini/Inheritance: The Inheritance Cycle, Book 4/Inheritance: The Inheritance Cycle, Book 4.m4b",
+    "started_at": "2026-01-25T09:02:55.119920",
+    "ended_at": "2026-01-25T09:04:55.871481"
+  },
+  "/data/downloads/B06Y13NFQ7_Fight and Flight: Magic 2.0, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B06Y13NFQ7",
+    "title": "Fight and Flight",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/Fight and Flight: Magic 2.0, Book 4/Fight and Flight: Magic 2.0, Book 4.m4b",
+    "started_at": "2026-01-25T09:04:00.226693",
+    "ended_at": "2026-01-25T09:05:14.761071"
+  },
+  "/data/downloads/B094JZMCJX_Defiance of the Fall: A LitRPG Adventure-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B094JZMCJX",
+    "title": "Defiance of the Fall",
+    "output_path": "/data/converted/Audiobook/TheFirstDefier, JF Brink/Defiance of the Fall: A LitRPG Adventure/Defiance of the Fall: A LitRPG Adventure.m4b",
+    "started_at": "2026-01-25T09:03:10.758817",
+    "ended_at": "2026-01-25T09:05:29.323248"
+  },
+  "/data/downloads/1250824850_A Marvellous Light: The Last Binding, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "1250824850",
+    "title": "A Marvellous Light",
+    "output_path": "/data/converted/Audiobook/Freya Marske/A Marvellous Light: The Last Binding, Book 1/A Marvellous Light: The Last Binding, Book 1.m4b",
+    "started_at": "2026-01-25T09:04:00.671774",
+    "ended_at": "2026-01-25T09:05:32.511017"
+  },
+  "/data/downloads/179713647X_So This Is Ever After-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "179713647X",
+    "title": "So This Is Ever After",
+    "output_path": "/data/converted/Audiobook/F.T. Lukens/So This Is Ever After/So This Is Ever After.m4b",
+    "started_at": "2026-01-25T09:04:55.886914",
+    "ended_at": "2026-01-25T09:05:39.186813"
+  },
+  "/data/downloads/B0852YV7C9_Bibliomancer: Wolfman Warlock, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0852YV7C9",
+    "title": "Bibliomancer",
+    "output_path": "/data/converted/Audiobook/James Hunter, Dakota Krout/Bibliomancer: Wolfman Warlock, Book 1/Bibliomancer: Wolfman Warlock, Book 1.m4b",
+    "started_at": "2026-01-25T09:21:19.478207",
+    "ended_at": "2026-01-25T09:22:11.303774"
+  },
+  "/data/downloads/B09JGV1P6W_Legion's Fifth Vault: A Fantasy LitRPG Adventure (Divine Apostasy, Book 5)-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09JGV1P6W",
+    "title": "Legion's Fifth Vault",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Legion's Fifth Vault: A Fantasy LitRPG Adventure (Divine Apostasy, Book 5)/Legion's Fifth Vault: A Fantasy LitRPG Adventure (Divine Apostasy, Book 5).m4b",
+    "started_at": "2026-01-25T09:21:19.538278",
+    "ended_at": "2026-01-25T09:22:11.661327"
+  },
+  "/data/downloads/B00XAKNTLY_The White Mage Omnibus: The White Mage Saga, Book 1, 2, 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00XAKNTLY",
+    "title": "The White Mage Omnibus",
+    "output_path": "/data/converted/Audiobook/Ben Hale/The White Mage Omnibus: Books 1-3/The White Mage Omnibus: Books 1-3.m4b",
+    "started_at": "2026-01-25T09:21:19.519668",
+    "ended_at": "2026-01-25T09:22:22.070554"
+  },
+  "/data/downloads/B06WVB8YGM_Kingdom Blades: A Pattern of Shadow and Light, Book 4-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B06WVB8YGM",
+    "title": "Kingdom Blades",
+    "output_path": "/data/converted/Audiobook/Melissa McPhail/Kingdom Blades: A Pattern of Shadow and Light, Book 4/Kingdom Blades: A Pattern of Shadow and Light, Book 4.m4b",
+    "started_at": "2026-01-25T09:21:19.527799",
+    "ended_at": "2026-01-25T09:22:37.784253"
+  },
+  "/data/downloads/B07NNYBKXF_The Vexed Generation: Magic 2.0, Book 6-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B07NNYBKXF",
+    "title": "The Vexed Generation",
+    "output_path": "/data/converted/Audiobook/Scott Meyer/The Vexed Generation: Magic 2.0, Book 6/The Vexed Generation: Magic 2.0, Book 6.m4b",
+    "started_at": "2026-01-25T09:22:11.678053",
+    "ended_at": "2026-01-25T09:22:57.097615"
+  },
+  "/data/downloads/B084VPYC9W_The Eye and the Arm: Champion of the Gods Series, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B084VPYC9W",
+    "title": "The Eye and the Arm",
+    "output_path": "/data/converted/Audiobook/Andrew Q. Gordon/The Eye and the Arm : Champion of the Gods Series, Book 2/The Eye and the Arm : Champion of the Gods Series, Book 2.m4b",
+    "started_at": "2026-01-25T09:22:11.319512",
+    "ended_at": "2026-01-25T09:22:57.119095"
+  },
+  "/data/downloads/B08KWCLHSQ_Uru's Third Temple: A Fantasy LitRPG Adventure: Divine Apostasy, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B08KWCLHSQ",
+    "title": "Uru's Third Temple: A Fantasy LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/A. F. Kay/Uru's Third Temple: A Fantasy LitRPG Adventure: Divine Apostasy, Book 3/Uru's Third Temple: A Fantasy LitRPG Adventure: Divine Apostasy, Book 3.m4b",
+    "started_at": "2026-01-25T09:22:37.798884",
+    "ended_at": "2026-01-25T09:23:07.543017"
+  },
+  "/data/downloads/B079LW5JL7_Viridian Gate Online: Imperial Legion: The Viridian Gate Archives, Book 4-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B079LW5JL7",
+    "title": "Viridian Gate Online: Imperial Legion",
+    "output_path": "/data/converted/Audiobook/James Hunter/Viridian Gate Online: Imperial Legion: The Viridian Gate Archives, Book 4/Viridian Gate Online: Imperial Legion: The Viridian Gate Archives, Book 4.m4b",
+    "started_at": "2026-01-25T09:22:57.142649",
+    "ended_at": "2026-01-25T09:23:20.386157"
+  },
+  "/data/downloads/B00U27ZWYK_The Mountains Rise: Embers of Illeniel, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00U27ZWYK",
+    "title": "The Mountains Rise",
+    "output_path": "/data/converted/Audiobook/Michael G. Manning/The Mountains Rise: Embers of Illeniel, Book 1/The Mountains Rise: Embers of Illeniel, Book 1.m4b",
+    "started_at": "2026-01-25T09:22:57.132058",
+    "ended_at": "2026-01-25T09:23:27.264301"
   }
 }

@@ -42,6 +42,7 @@ services:
       AUDIBLE_AUTH_FILE: /audible-config/audibleAuth
       AUDIBLE_PROFILE: jc4369@gmail.com
       AUDIBLE_CLI_PROGRESS_FORMAT: ndjson
+      MAX_DOWNLOAD_CONCURRENT: 1
     volumes:
       - ./apps/api:/app
       - ./core:/core:ro

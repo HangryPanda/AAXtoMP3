@@ -5,7 +5,7 @@ This document is the **implementation plan and handoff checklist** for hardening
 Repair is the pipeline that reconciles:
 
 - the PostgreSQL DB state,
-- legacy manifests (interop),
+- legacy manifests (interop; configured via `MANIFEST_DIR`, typically mounted from `./specs`),
 - and the **actual filesystem state** (bind-mounted media directories).
 
 **Scope (this plan)**: make Repair behavior explicit, stable, testable, and aligned with product invariants (“Truth From Disk”).
@@ -49,7 +49,7 @@ Repair is the pipeline that reconciles:
 3. **JobManager** runs Repair (async):
    - scans filesystem under configured dirs
    - normalizes mixed host/container paths
-   - updates manifests (if enabled)
+   - updates manifests **only when enabled** by the DB setting `repair_update_manifests=true`
    - updates DB Book paths/statuses
    - inserts “local-only” items when converted files exist but no Book row exists
    - generates duplicates report TSV (non-destructive; no deletion)
@@ -65,8 +65,8 @@ Repair is the pipeline that reconciles:
   - Repair MUST NOT delete files automatically.
   - Duplicates are reported as `DELETE_CANDIDATE` only.
 - **Path normalization MUST be robust**:
-  - Must handle Windows/macOS/Linux host paths and container paths.
-  - Must normalize legacy manifests (mixed formats) into consistent container-resolvable paths.
+  - MUST handle Windows/macOS/Linux host paths and container paths.
+  - MUST normalize legacy manifests (mixed formats) into consistent container-resolvable paths.
 - **Settings govern Repair behavior** (stored in DB and editable via Web UI):
   - `repair_extract_metadata` (default true)
   - `repair_update_manifests` (default true)
@@ -160,7 +160,9 @@ MUST validate in the dev stack:
 - apply repair and confirm:
   - job completes
   - duplicates TSV exists
-  - local-only item playback endpoint works for at least one item (if present)
+  - local-only playback validation:
+    - if there is at least one local-only item, MUST successfully load `GET /library/local` and stream one item via `GET /stream/local/{local_id}`
+    - if there are zero local-only items, MUST record “no local-only items present” and skip streaming validation
 
 ---
 
@@ -185,9 +187,10 @@ These commands call the running FastAPI inside the `api` container at `http://12
 
 3) Confirm job completion:
 
-- Use the UI Jobs view OR poll the jobs API until the REPAIR job reaches `COMPLETED/FAILED`.
-- If polling via API, use:
-  - `GET /jobs?task_type=REPAIR` and check the most recent job’s status.
+- MUST do at least one of the following until the REPAIR job reaches `COMPLETED` or `FAILED`:
+  1) Use the UI Jobs view, OR
+  2) Poll the jobs API:
+     - `GET /jobs?task_type=REPAIR` and check the most recent job’s status.
 
 ---
 

@@ -179,8 +179,8 @@ start_application() {
     local uvicorn_args=("uvicorn" "main:app" "--host" "$API_HOST" "--port" "$API_PORT")
 
     if [ "$DEBUG" = "true" ]; then
-        log_info "Debug mode enabled - using --reload"
-        uvicorn_args+=("--reload")
+        log_info "Debug mode enabled - using --reload with polling (macOS compatible)"
+        uvicorn_args+=("--reload" "--reload-dir" "/app")
     else
         log_info "Production mode - using $WORKERS worker(s)"
         uvicorn_args+=("--workers" "$WORKERS")

@@ -39,8 +39,8 @@ export function useLibraryActions() {
 
   const handleBatchDelete = (selectedBooks: string[]) => {
     if (selectedBooks.length > 0) {
-      if (confirm(`Are you sure you want to delete ${selectedBooks.length} books?`)) {
-        deleteBooks(selectedBooks, {
+      if (confirm(`Are you sure you want to delete ${selectedBooks.length} books and their files?`)) {
+        deleteBooks({ asins: selectedBooks, deleteFiles: true }, {
           onSuccess: (data) => {
             addToast({
               type: "success",
@@ -62,8 +62,8 @@ export function useLibraryActions() {
   };
 
   const handleDeleteBook = (asin: string) => {
-      if (confirm("Are you sure you want to delete this book?")) {
-        deleteBook(asin, {
+      if (confirm("Are you sure you want to delete this book and its files?")) {
+        deleteBook({ asin, deleteFiles: true }, {
            onSuccess: () => {
             addToast({
               type: "success",

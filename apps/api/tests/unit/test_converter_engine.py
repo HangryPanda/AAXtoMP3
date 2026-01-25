@@ -279,15 +279,20 @@ class TestConvert:
             input_file = tmp_path / "test.aax"
             input_file.write_bytes(b"fake aax content")
 
+            # Mock _read_lines to return empty (no output) - tests behavior, not implementation
+            async def empty_read_lines(stream: Any) -> Any:
+                return
+                yield  # Make it a generator
+
             with patch("asyncio.create_subprocess_exec") as mock_exec, \
+                 patch.object(engine, "_read_lines", side_effect=empty_read_lines), \
                  patch.object(engine, "_find_output_files", side_effect=lambda d, f: [str(Path(d) / "output.m4b")]), \
                  patch.object(engine, "_get_audio_duration", return_value=0.0), \
                  patch("shutil.move") as mock_move:
-                
-                mock_process = AsyncMock()
-                # Mock readline to return empty bytes (end of stream)
-                mock_process.stdout.readline = AsyncMock(return_value=b"")
-                mock_process.stderr.readline = AsyncMock(return_value=b"")
+
+                mock_process = MagicMock()
+                mock_process.stdout = MagicMock()
+                mock_process.stderr = MagicMock()
                 mock_process.wait = AsyncMock(return_value=0)
                 mock_process.returncode = 0
                 mock_exec.return_value = mock_process
@@ -313,11 +318,17 @@ class TestConvert:
             input_file = tmp_path / "test.aax"
             input_file.write_bytes(b"fake aax content")
 
-            with patch("asyncio.create_subprocess_exec") as mock_exec:
-                mock_process = AsyncMock()
-                # Mock readline to return empty bytes (end of stream)
-                mock_process.stdout.readline = AsyncMock(return_value=b"")
-                mock_process.stderr.readline = AsyncMock(return_value=b"")
+            # Mock _read_lines to return empty - tests behavior, not implementation
+            async def empty_read_lines(stream: Any) -> Any:
+                return
+                yield  # Make it a generator
+
+            with patch("asyncio.create_subprocess_exec") as mock_exec, \
+                 patch.object(engine, "_read_lines", side_effect=empty_read_lines):
+
+                mock_process = MagicMock()
+                mock_process.stdout = MagicMock()
+                mock_process.stderr = MagicMock()
                 mock_process.wait = AsyncMock(return_value=1)
                 mock_process.returncode = 1
                 mock_exec.return_value = mock_process
@@ -653,3 +664,94 @@ class TestParseFfmpegTelemetry:
             engine = ConverterEngine()
 
         assert engine.parse_ffmpeg_telemetry("not ffmpeg", 10.0) is None
+
+
+class TestReadLines:
+    """Tests for _read_lines method - verifies it handles \\r delimiters for ffmpeg stats."""
+
+    @pytest.mark.asyncio
+    async def test_read_lines_handles_carriage_return_delimiters(self) -> None:
+        """Test that _read_lines splits on \\r (ffmpeg stats format)."""
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        # Simulate ffmpeg stats output with \r delimiters (how ffmpeg actually outputs)
+        ffmpeg_output = (
+            b"size=    100kB time=00:00:10.00 speed=2.0x\r"
+            b"size=    200kB time=00:00:20.00 speed=2.1x\r"
+            b"size=    300kB time=00:00:30.00 speed=2.2x\n"
+        )
+
+        # Create a mock stream that returns this data
+        class MockStream:
+            def __init__(self, data: bytes):
+                self.data = data
+                self.pos = 0
+
+            async def read(self, n: int) -> bytes:
+                chunk = self.data[self.pos:self.pos + n]
+                self.pos += n
+                return chunk
+
+        stream = MockStream(ffmpeg_output)
+        lines = [line async for line in engine._read_lines(stream)]
+
+        # Should get 3 separate lines, one for each progress update
+        assert len(lines) == 3
+        assert "time=00:00:10.00" in lines[0]
+        assert "time=00:00:20.00" in lines[1]
+        assert "time=00:00:30.00" in lines[2]
+
+    @pytest.mark.asyncio
+    async def test_read_lines_handles_newline_delimiters(self) -> None:
+        """Test that _read_lines still works with normal \\n delimiters."""
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        output = b"line1\nline2\nline3\n"
+
+        class MockStream:
+            def __init__(self, data: bytes):
+                self.data = data
+                self.pos = 0
+
+            async def read(self, n: int) -> bytes:
+                chunk = self.data[self.pos:self.pos + n]
+                self.pos += n
+                return chunk
+
+        stream = MockStream(output)
+        lines = [line async for line in engine._read_lines(stream)]
+
+        assert lines == ["line1", "line2", "line3"]
+
+    @pytest.mark.asyncio
+    async def test_read_lines_handles_mixed_delimiters(self) -> None:
+        """Test that _read_lines handles mixed \\r and \\n delimiters."""
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        # Mix of \r (stats) and \n (log messages)
+        output = b"progress1\rprogress2\rlog message\nprogress3\r"
+
+        class MockStream:
+            def __init__(self, data: bytes):
+                self.data = data
+                self.pos = 0
+
+            async def read(self, n: int) -> bytes:
+                chunk = self.data[self.pos:self.pos + n]
+                self.pos += n
+                return chunk
+
+        stream = MockStream(output)
+        lines = [line async for line in engine._read_lines(stream)]
+
+        assert len(lines) == 4
+        assert "progress1" in lines[0]
+        assert "progress2" in lines[1]
+        assert "log message" in lines[2]
+        assert "progress3" in lines[3]

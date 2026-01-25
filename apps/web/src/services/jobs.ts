@@ -9,6 +9,7 @@ import type {
   JobType,
   JobStatus,
   JobCreateResponse,
+  BatchJobCreateResponse,
   JobListResponse,
   CreateDownloadJobRequest,
   CreateConvertJobRequest,
@@ -53,12 +54,12 @@ export async function getJob(jobId: string): Promise<Job> {
  */
 export async function createDownloadJob(
   asins: string | string[]
-): Promise<JobCreateResponse> {
+): Promise<JobCreateResponse | BatchJobCreateResponse> {
   const request: CreateDownloadJobRequest = Array.isArray(asins)
     ? { asins }
     : { asin: asins };
 
-  return apiRequest<JobCreateResponse>({
+  return apiRequest<JobCreateResponse | BatchJobCreateResponse>({
     method: "POST",
     url: "/jobs/download",
     data: request,

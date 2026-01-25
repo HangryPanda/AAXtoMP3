@@ -64,6 +64,7 @@ export function ConnectedStickyPlayer({
     isMuted,
     currentBookId,
     currentBookTitle,
+    currentAudioUrl,
     chapters,
     currentChapterIndex,
     sleepTimer,
@@ -77,10 +78,18 @@ export function ConnectedStickyPlayer({
     setVolume,
     toggleMute,
     setSleepTimer,
+    loadBook,
     unloadBook,
     smartResumeMessage,
     clearSmartResumeMessage,
   } = usePlayerStore();
+
+  // Re-initialize player on mount if state persists but instance is lost (e.g. refresh)
+  React.useEffect(() => {
+    if (currentBookId && currentAudioUrl && currentBookTitle) {
+      loadBook(currentBookId, currentAudioUrl, currentBookTitle);
+    }
+  }, [currentBookId, currentAudioUrl, currentBookTitle, loadBook]);
 
   // Fetch book details if we have an ASIN (not a local item)
   const isLocalItem = currentBookId?.startsWith("local:");

@@ -77,8 +77,8 @@ class Settings(BaseSettings):
     )
 
     # Job Concurrency
-    max_download_concurrent: int = Field(default=5, ge=1, le=10, description="Max concurrent downloads")
-    max_convert_concurrent: int = Field(default=2, ge=1, le=4, description="Max concurrent conversions")
+    max_download_concurrent: int = Field(default=5, ge=1, le=20, description="Max concurrent downloads")
+    max_convert_concurrent: int = Field(default=4, ge=1, le=8, description="Max concurrent conversions")
 
     # JIT Streaming
     max_jit_streams: int = Field(default=2, ge=1, le=4, description="Max concurrent JIT streams")

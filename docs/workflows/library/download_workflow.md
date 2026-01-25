@@ -54,7 +54,10 @@ This section describes the data flow from UI → API → background execution �
 ## What This Workflow Guarantees (MUST-FOLLOW)
 
 1. **Batch semantics are per-request:** `POST /jobs/download` creates **one** `DOWNLOAD` job record for the whole request (1..N ASINs) and queues it once.
-2. **Global download concurrency is enforced:** the system supports up to `max_download_concurrent` concurrent *file downloads* (default `5`) **globally**, not “1 at a time”.
+2. **Global download concurrency is enforced:**
+   - The system supports up to `max_download_concurrent` concurrent *file downloads* globally.
+   - **Preference:** `max_download_concurrent` MUST be set to `1` (sequential).
+   - **Reason:** Audible enforces a **per-account bandwidth cap** (approx. 10MB/s). Parallel downloads divide this bandwidth, slowing down individual book completion and delaying conversion pipelining.
 3. **Download progress is bytes-based (not item-count-based):**
    - `Job.progress_percent` for `DOWNLOAD` jobs is computed from actual bytes transferred (parsed from `audible-cli` progress output).
    - This is **not** “completed ASINs / total ASINs”.

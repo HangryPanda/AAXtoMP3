@@ -682,11 +682,12 @@ class JobManager:
                 if book:
                     if local_aax:
                         book.local_path_aax = str(local_aax)
+                        # Only mark as DOWNLOADED if we actually have the aaxc file
+                        book.status = BookStatus.DOWNLOADED
                     if local_voucher:
                         book.local_path_voucher = str(local_voucher)
                     if local_cover:
                         book.local_path_cover = str(local_cover)
-                    book.status = BookStatus.DOWNLOADED
                     session.add(book)
 
             await session.commit()
@@ -1563,7 +1564,11 @@ class JobManager:
         cover_path: str | None,
     ) -> None:
         """
-        Update download manifest after successful download.
+        Update download manifest after download attempt.
+
+        Status is set based on what was actually downloaded:
+        - "success": AAXC file was downloaded (conversion-ready)
+        - "partial": Only cover/voucher downloaded (needs re-download)
 
         Args:
             asin: The book ASIN.
@@ -1587,6 +1592,15 @@ class JobManager:
                 manifest = {}
 
         # Add/update entry
+        # Only mark as "success" if the aaxc file was actually downloaded.
+        # If only cover/voucher downloaded, mark as "partial" so conversion won't be attempted.
+        status = "success" if aaxc_path else "partial"
+        if status == "partial":
+            logger.warning(
+                "Partial download for ASIN %s: no AAXC file downloaded (cover_path=%s)",
+                asin,
+                cover_path,
+            )
         manifest[asin] = {
             "asin": asin,
             "title": title,
@@ -1594,7 +1608,7 @@ class JobManager:
             "voucher_path": voucher_path or "",
             "cover_path": cover_path or "",
             "downloaded_at": datetime.utcnow().isoformat(),
-            "status": "success",
+            "status": status,
         }
 
         # Ensure directory exists

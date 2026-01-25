@@ -185,9 +185,78 @@ async def repair_dry_run(asin: str, session: AsyncSession = Depends(get_session)
     book = result.scalar_one_or_none()
     if not book or not book.local_path_converted:
         raise HTTPException(status_code=404, detail="Book or converted file not found")
-        
+
     metadata = await metadata_extractor.extract(book.local_path_converted)
     return metadata.dict()
+
+
+class PartialDownloadItem(BaseModel):
+    """A book with partial download (cover only, no aaxc file)."""
+    asin: str
+    title: str
+    cover_path: str | None
+    downloaded_at: str | None
+    book: BookRead | None  # Full book data if available in DB
+
+
+class PartialDownloadsResponse(BaseModel):
+    """Response for partial downloads endpoint."""
+    items: list[PartialDownloadItem]
+    total: int
+
+
+@router.get("/downloads/incomplete", response_model=PartialDownloadsResponse)
+async def get_incomplete_downloads(
+    session: AsyncSession = Depends(get_session),
+) -> PartialDownloadsResponse:
+    """
+    Get books with partial downloads (cover downloaded but no aaxc file).
+
+    These need to be re-downloaded before conversion is possible.
+    """
+    from core.config import get_settings
+
+    settings = get_settings()
+    manifest_path = settings.manifest_dir / "download_manifest.json"
+
+    if not manifest_path.exists():
+        return PartialDownloadsResponse(items=[], total=0)
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, IOError) as e:
+        logger.warning("Failed to read download manifest: %s", e)
+        return PartialDownloadsResponse(items=[], total=0)
+
+    # Find entries with partial status
+    partial_asins = [
+        asin for asin, entry in manifest.items()
+        if entry.get("status") == "partial"
+    ]
+
+    if not partial_asins:
+        return PartialDownloadsResponse(items=[], total=0)
+
+    # Fetch book data for these ASINs
+    result = await session.execute(
+        select(Book).where(Book.asin.in_(partial_asins))
+    )
+    books_by_asin = {book.asin: book for book in result.scalars().all()}
+
+    items = []
+    for asin in partial_asins:
+        entry = manifest[asin]
+        book = books_by_asin.get(asin)
+        items.append(PartialDownloadItem(
+            asin=asin,
+            title=entry.get("title", asin),
+            cover_path=entry.get("cover_path") or None,
+            downloaded_at=entry.get("downloaded_at"),
+            book=BookRead.model_validate(book) if book else None,
+        ))
+
+    return PartialDownloadsResponse(items=items, total=len(items))
+
 
 @router.get("")
 async def get_books(
@@ -326,6 +395,24 @@ async def update_book(
     await session.refresh(book)
     return book
 
+def _delete_book_files(book: Book) -> None:
+    """Delete local files associated with a book."""
+    paths = [
+        book.local_path_aax,
+        book.local_path_voucher,
+        book.local_path_cover,
+        book.local_path_converted,
+    ]
+    for p in paths:
+        if p:
+            try:
+                path_obj = Path(p)
+                if path_obj.exists() and path_obj.is_file():
+                    path_obj.unlink()
+                    logger.info(f"Deleted file for {book.asin}: {p}")
+            except Exception as e:
+                logger.warning(f"Failed to delete file {p}: {e}")
+
 @router.delete("/{asin}")
 async def delete_book(
     asin: str,
@@ -338,6 +425,9 @@ async def delete_book(
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
         
+    if delete_files:
+        _delete_book_files(book)
+
     await session.delete(book)
     await session.commit()
     return {"message": "Book deleted"}
@@ -353,6 +443,8 @@ async def delete_books(
         result = await session.execute(select(Book).where(Book.asin == asin))
         book = result.scalar_one_or_none()
         if book:
+            if delete_files:
+                _delete_book_files(book)
             await session.delete(book)
             
     await session.commit()

@@ -46,39 +46,100 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _normalize_path_separators(path: str) -> str:
+    """
+    Normalize Windows backslashes to forward slashes for consistent matching.
+
+    This is the first step in path normalization, ensuring we can match
+    paths regardless of the host OS that created them.
+    """
+    return path.replace("\\", "/")
+
+
 def _map_path_to_runtime(path: str | None) -> str | None:
     """
     Normalize legacy manifest paths into the current runtime's container paths.
 
     Supports:
-    - legacy absolute host paths (e.g. /Volumes/Media/Audiobooks/Downloads/...) in download manifest
+    - Windows paths (C:\\Users\\...\\Downloads, D:\\Media\\Audiobooks\\...)
+    - macOS paths (/Volumes/Media/Audiobooks/..., /Users/.../)
+    - Linux paths (/home/.../, /mnt/.../)
     - legacy container roots (/downloads, /converted, /completed)
     - current runtime roots as configured in Settings (/data/downloads, etc)
+
+    Idempotency: paths already in the configured runtime format are returned unchanged.
     """
     if not isinstance(path, str) or not path:
         return None
 
     settings = get_settings()
+    downloads_dir = str(settings.downloads_dir)
+    converted_dir = str(settings.converted_dir)
+    completed_dir = str(settings.completed_dir)
+
+    # Idempotency: if path already starts with configured runtime dirs, return as-is
+    for runtime_dir in [downloads_dir, converted_dir, completed_dir]:
+        if path == runtime_dir or path.startswith(runtime_dir + "/"):
+            return path
+
+    # Normalize Windows backslashes for consistent matching
+    normalized = _normalize_path_separators(path)
 
     # Normalize legacy container roots to configured roots.
     legacy_to_runtime = {
-        "/downloads": str(settings.downloads_dir),
-        "/converted": str(settings.converted_dir),
-        "/completed": str(settings.completed_dir),
+        "/downloads": downloads_dir,
+        "/converted": converted_dir,
+        "/completed": completed_dir,
     }
     for legacy_prefix, runtime_prefix in legacy_to_runtime.items():
-        if path == legacy_prefix or path.startswith(legacy_prefix + "/"):
-            return runtime_prefix + path[len(legacy_prefix) :]
+        if normalized == legacy_prefix or normalized.startswith(legacy_prefix + "/"):
+            return runtime_prefix + normalized[len(legacy_prefix):]
 
-    # Map known host paths to runtime roots when running on host (optional).
-    host_to_runtime = [
-        ("/Volumes/Media/Audiobooks/Downloads", str(settings.downloads_dir)),
-        ("/Volumes/Media/Audiobooks/Converted", str(settings.converted_dir)),
-        ("/Volumes/Media/Audiobooks/Completed", str(settings.completed_dir)),
+    # Build a list of known host path patterns to match.
+    # These patterns map host-specific directories to their runtime equivalents.
+    # Format: (host_pattern, runtime_dir, dir_type)
+    # dir_type is used to identify which directory segment to look for
+    host_patterns: list[tuple[str, str, str]] = [
+        # macOS Volumes paths
+        ("/Volumes/Media/Audiobooks/Downloads", downloads_dir, "downloads"),
+        ("/Volumes/Media/Audiobooks/Converted", converted_dir, "converted"),
+        ("/Volumes/Media/Audiobooks/Completed", completed_dir, "completed"),
     ]
-    for host_prefix, runtime_prefix in host_to_runtime:
-        if path == host_prefix or path.startswith(host_prefix + "/"):
-            return runtime_prefix + path[len(host_prefix) :]
+
+    # Match explicit host patterns first
+    for host_prefix, runtime_prefix, _dir_type in host_patterns:
+        if normalized == host_prefix or normalized.startswith(host_prefix + "/"):
+            return runtime_prefix + normalized[len(host_prefix):]
+
+    # Generic pattern matching for common host path structures.
+    # This handles paths like:
+    #   C:/Users/john/Audiobooks/Downloads/...
+    #   /home/john/audiobooks/downloads/...
+    #   /Users/john/Music/Audiobooks/converted/...
+    #
+    # We look for directory segments that indicate downloads/converted/completed
+    # and map them to the runtime directories.
+    dir_type_mappings = {
+        "downloads": downloads_dir,
+        "download": downloads_dir,
+        "converted": converted_dir,
+        "convert": converted_dir,
+        "completed": completed_dir,
+        "complete": completed_dir,
+    }
+
+    # Split path into segments and look for known directory type indicators
+    segments = normalized.split("/")
+    for i, segment in enumerate(segments):
+        seg_lower = segment.lower()
+        if seg_lower in dir_type_mappings:
+            runtime_dir = dir_type_mappings[seg_lower]
+            # Everything after this segment is the relative path
+            relative_parts = segments[i + 1:]
+            if relative_parts:
+                return runtime_dir + "/" + "/".join(relative_parts)
+            else:
+                return runtime_dir
 
     return path
 
@@ -104,6 +165,35 @@ def _normalize_asin(raw: Any) -> str | None:
 
 _AUDIBLE_SAFE_REPLACEMENT = "\uf022"  # "" (PUA) seen in some audible-cli filenames
 _NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
+
+# System files and directories to skip during scanning
+_SKIP_FILENAMES = frozenset({".DS_Store", "Thumbs.db", "._.DS_Store"})
+
+
+def _should_skip_path(path: Path) -> bool:
+    """
+    Check if a path should be skipped during scanning.
+
+    Skips:
+    - AppleDouble files (starting with '._')
+    - macOS .DS_Store files
+    - Windows Thumbs.db files
+    - Files in hidden directories (any parent starting with '.')
+    """
+    # Skip AppleDouble files (resource forks on macOS)
+    if path.name.startswith("._"):
+        return True
+
+    # Skip known system files
+    if path.name in _SKIP_FILENAMES:
+        return True
+
+    # Skip files inside hidden directories
+    for parent in path.parents:
+        if parent.name.startswith(".") and parent.name not in {".", ".."}:
+            return True
+
+    return False
 
 
 def _candidate_paths(runtime_path: str) -> list[str]:
@@ -168,6 +258,9 @@ def _build_download_file_index(*, settings: Any) -> dict[str, dict[str, str]]:
             if not Path(base_dir).exists():
                 continue
             for p in Path(base_dir).rglob("*"):
+                # Skip system files FIRST (before is_file() which can fail on AppleDouble)
+                if _should_skip_path(p):
+                    continue
                 if not p.is_file():
                     continue
                 asin = _extract_asin_prefix(p.name)
@@ -209,7 +302,8 @@ def _scan_converted_m4b(settings: Any) -> tuple[int, int, int, int]:
     audiobook_dir = root / "Audiobook"
 
     try:
-        files = [p for p in root.rglob("*.m4b") if p.is_file()]
+        # Filter out system files FIRST (before is_file() which can fail on AppleDouble)
+        files = [p for p in root.rglob("*.m4b") if not _should_skip_path(p) and p.is_file()]
     except Exception:
         files = []
 
@@ -375,6 +469,9 @@ async def _scan_m4b_with_asin(settings: Settings, session: AsyncSession) -> list
         m4b_files = []
 
     for m4b_path in m4b_files:
+        # Skip system files FIRST (before is_file() which can fail on AppleDouble)
+        if _should_skip_path(m4b_path):
+            continue
         if not m4b_path.is_file():
             continue
 
@@ -458,6 +555,9 @@ def _detect_misplaced_files(settings: Settings) -> list[dict[str, Any]]:
     if converted_dir.exists():
         try:
             for m4b_path in converted_dir.rglob("*.m4b"):
+                # Skip system files FIRST (before is_file() which can fail on AppleDouble)
+                if _should_skip_path(m4b_path):
+                    continue
                 if not m4b_path.is_file():
                     continue
                 # Check if it's inside the Audiobook directory
@@ -481,6 +581,9 @@ def _detect_misplaced_files(settings: Settings) -> list[dict[str, Any]]:
     if downloads_dir.exists():
         try:
             for m4b_path in downloads_dir.rglob("*.m4b"):
+                # Skip system files FIRST (before is_file() which can fail on AppleDouble)
+                if _should_skip_path(m4b_path):
+                    continue
                 if not m4b_path.is_file():
                     continue
                 misplaced.append(
@@ -856,6 +959,11 @@ async def apply_repair(session: AsyncSession, *, job_id: UUID | None = None) -> 
 
     now = datetime.utcnow()
 
+    # Fetch DB settings early to check repair behavior flags
+    db_settings_result = await session.execute(select(SettingsModel).where(SettingsModel.id == 1))
+    db_settings = db_settings_result.scalar_one_or_none()
+    repair_update_manifests = db_settings.repair_update_manifests if db_settings else True
+
     updated_books = 0
     inserted_local = 0
     duplicate_asins = 0
@@ -874,65 +982,70 @@ async def apply_repair(session: AsyncSession, *, job_id: UUID | None = None) -> 
     }
 
     # === Manifest reconciliation: sync manifests with filesystem ===
+    # Only update manifests when repair_update_manifests=true (DB setting)
 
     # A. Update download_manifest from filesystem index
-    for asin, files in download_index.items():
-        aax_path = files.get("aaxc_path") or files.get("aax_path")
-        if aax_path:
-            existing = download_raw.get(asin)
-            if not existing or not isinstance(existing, dict) or existing.get("status") != "success":
-                download_raw[asin] = {
+    if repair_update_manifests:
+        for asin, files in download_index.items():
+            aax_path = files.get("aaxc_path") or files.get("aax_path")
+            if aax_path:
+                existing = download_raw.get(asin)
+                if not existing or not isinstance(existing, dict) or existing.get("status") != "success":
+                    download_raw[asin] = {
+                        "status": "success",
+                        "aaxc_path": aax_path,
+                        "voucher_path": files.get("voucher_path"),
+                        "cover_path": files.get("cover_path"),
+                        "discovered_at": now.isoformat(),
+                        "source": "filesystem_scan",
+                    }
+                    manifest_updates_download += 1
+
+    # B. Scan M4B files (always needed for conversion matching)
+    m4b_scan_results = await _scan_m4b_with_asin(settings, session)
+
+    # Update converted_manifest only when repair_update_manifests=true
+    if repair_update_manifests:
+        for m4b_info in m4b_scan_results:
+            asin = m4b_info.get("asin")
+            output_path = m4b_info.get("path")
+            if output_path and not _manifest_has_conversion(converted_raw, asin or "", output_path):
+                key = output_path  # Use path as key
+                converted_raw[key] = {
                     "status": "success",
-                    "aaxc_path": aax_path,
-                    "voucher_path": files.get("voucher_path"),
-                    "cover_path": files.get("cover_path"),
+                    "asin": asin,
+                    "title": m4b_info.get("title"),
+                    "output_path": output_path,
                     "discovered_at": now.isoformat(),
                     "source": "filesystem_scan",
+                    "matched_by": m4b_info.get("matched_by"),
                 }
-                manifest_updates_download += 1
+                manifest_updates_converted += 1
 
-    # B. Scan M4B files and update converted_manifest
-    m4b_scan_results = await _scan_m4b_with_asin(settings, session)
-    for m4b_info in m4b_scan_results:
-        asin = m4b_info.get("asin")
-        output_path = m4b_info.get("path")
-        if output_path and not _manifest_has_conversion(converted_raw, asin or "", output_path):
-            key = output_path  # Use path as key
-            converted_raw[key] = {
-                "status": "success",
-                "asin": asin,
-                "title": m4b_info.get("title"),
-                "output_path": output_path,
-                "discovered_at": now.isoformat(),
-                "source": "filesystem_scan",
-                "matched_by": m4b_info.get("matched_by"),
-            }
-            manifest_updates_converted += 1
+        # C. Infer download status from M4B existence (if M4B exists, download must have happened)
+        for m4b_info in m4b_scan_results:
+            asin = m4b_info.get("asin")
+            if asin:
+                asin_norm = _normalize_asin(asin)
+                # Check if not already in download manifest
+                has_download = False
+                for k in download_raw:
+                    if _normalize_asin(k) == asin_norm:
+                        has_download = True
+                        break
+                if not has_download:
+                    download_raw[asin] = {
+                        "status": "success",
+                        "inferred_from": "m4b_exists",
+                        "m4b_path": m4b_info.get("path"),
+                        "discovered_at": now.isoformat(),
+                        "source": "inferred",
+                    }
+                    inferred_downloads += 1
 
-    # C. Infer download status from M4B existence (if M4B exists, download must have happened)
-    for m4b_info in m4b_scan_results:
-        asin = m4b_info.get("asin")
-        if asin:
-            asin_norm = _normalize_asin(asin)
-            # Check if not already in download manifest
-            has_download = False
-            for k in download_raw:
-                if _normalize_asin(k) == asin_norm:
-                    has_download = True
-                    break
-            if not has_download:
-                download_raw[asin] = {
-                    "status": "success",
-                    "inferred_from": "m4b_exists",
-                    "m4b_path": m4b_info.get("path"),
-                    "discovered_at": now.isoformat(),
-                    "source": "inferred",
-                }
-                inferred_downloads += 1
-
-    # D. Write updated manifests
-    download_manifest_path.write_text(json.dumps(download_raw, indent=2, ensure_ascii=False), encoding="utf-8")
-    converted_manifest_path.write_text(json.dumps(converted_raw, indent=2, ensure_ascii=False), encoding="utf-8")
+        # D. Write updated manifests
+        download_manifest_path.write_text(json.dumps(download_raw, indent=2, ensure_ascii=False), encoding="utf-8")
+        converted_manifest_path.write_text(json.dumps(converted_raw, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # Precompute conversions per asin with file existence.
     conversions_by_asin: dict[str, list[dict[str, Any]]] = {}
@@ -1117,9 +1230,8 @@ async def apply_repair(session: AsyncSession, *, job_id: UUID | None = None) -> 
         inserted_local += 1
 
     # === Metadata extraction (controlled by settings flag) ===
+    # Note: db_settings was already fetched earlier for repair_update_manifests check
     metadata_scanned = 0
-    db_settings_result = await session.execute(select(SettingsModel).where(SettingsModel.id == 1))
-    db_settings = db_settings_result.scalar_one_or_none()
 
     if db_settings and db_settings.repair_extract_metadata:
         # Import here to avoid circular dependency

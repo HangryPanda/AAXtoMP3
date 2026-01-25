@@ -132,38 +132,62 @@ async def get_job(
     return JobRead.model_validate(job)
 
 
-@router.post("/download", response_model=JobCreateResponse, status_code=202)
+class BatchJobCreateResponse(BaseModel):
+    """Response for batch job creation."""
+
+    job_ids: list[UUID]
+    status: JobStatus
+    message: str
+
+
+@router.post("/download", response_model=JobCreateResponse | BatchJobCreateResponse, status_code=202)
 async def create_download_job(
     request: JobCreateRequest,
     session: AsyncSession = Depends(get_session),
-) -> JobCreateResponse:
+) -> JobCreateResponse | BatchJobCreateResponse:
     """Queue download job(s) for one or more ASINs.
 
-    Uses a single job record for a batch download.
+    Creates individual job records for each ASIN to enable proper book metadata display.
     """
     asins = request.asins or ([request.asin] if request.asin else [])
 
     if not asins:
         raise HTTPException(status_code=400, detail="At least one ASIN is required")
 
-    payload: dict[str, Any] = {"asins": asins}
-    job = Job(
-        task_type=JobType.DOWNLOAD,
-        book_asin=asins[0] if len(asins) == 1 else None,
-        status=JobStatus.PENDING,
-        payload_json=json.dumps(payload, ensure_ascii=False),
-        updated_at=datetime.utcnow(),
-    )
-    session.add(job)
+    now = datetime.utcnow()
+    job_ids: list[UUID] = []
+
+    # Create individual jobs for each ASIN
+    for asin in asins:
+        payload: dict[str, Any] = {"asins": [asin]}
+        job = Job(
+            task_type=JobType.DOWNLOAD,
+            book_asin=asin,
+            status=JobStatus.PENDING,
+            payload_json=json.dumps(payload, ensure_ascii=False),
+            updated_at=now,
+        )
+        session.add(job)
+        await session.flush()  # Get the ID without committing
+        job_ids.append(job.id)
+
     await session.commit()
-    await session.refresh(job)
 
-    await job_manager.queue_download(job.id, asins)
+    # Queue all download jobs
+    for job_id, asin in zip(job_ids, asins):
+        await job_manager.queue_download(job_id, [asin])
 
-    return JobCreateResponse(
-        job_id=job.id,
+    if len(job_ids) == 1:
+        return JobCreateResponse(
+            job_id=job_ids[0],
+            status=JobStatus.QUEUED,
+            message="Download job queued",
+        )
+
+    return BatchJobCreateResponse(
+        job_ids=job_ids,
         status=JobStatus.QUEUED,
-        message=f"Download job queued for {len(asins)} item(s)",
+        message=f"Download jobs queued for {len(asins)} item(s)",
     )
 
 

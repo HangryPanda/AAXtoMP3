@@ -59,6 +59,12 @@ export interface JobCreateResponse {
   message: string;
 }
 
+export interface BatchJobCreateResponse {
+  job_ids: string[];
+  status: JobStatus;
+  message: string;
+}
+
 export interface QueuedJobResponse {
   job_id: string;
   status: string;
