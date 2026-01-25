@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## CRITICAL: AI Agent Memory Files
+
+The following files are **custom AI agent memory files** and must **NEVER be deleted**:
+- `CLAUDE.md` - Memory/instructions for Claude Code
+- `AGENTS.md` - Memory/instructions for Codex
+- `gemini.md` - Memory/instructions for Gemini
+
+These files contain project-specific context and instructions that persist across sessions. Treat them as sacred configuration.
+
 ## Project Overview
 
 AAXtoMP3 is a bash script that converts Audible AAX/AAXC audiobook files to common audio formats (MP3, M4A, M4B, FLAC, Ogg/Opus) using ffmpeg. It handles DRM decryption using the user's personal authcode and supports chapter splitting, custom naming schemes, and integration with audible-cli for enhanced metadata.
@@ -92,3 +101,28 @@ The authcode is a personal decryption key for AAX files. It can be provided via:
 3. `~/.authcode` file (global default)
 
 Not needed for AAXC files (uses voucher-based decryption instead).
+
+## Custom audible-cli Fork (IMPORTANT)
+
+This project uses a **custom fork** of audible-cli, NOT the PyPI version. The custom fork includes:
+- `--progress-format ndjson` for structured progress events (required by the download job manager)
+- Filename sanitization to replace problematic characters (`/`, `\`, `:`, etc.) in titles
+
+**Repository:** `git+https://github.com/HangryPanda/audible-cli.git@feature/machine-readable-progress`
+
+**After rebuilding the API Docker container, you MUST reinstall the custom fork:**
+```bash
+# Install git if not present
+docker exec audible-api-dev apt-get update && docker exec audible-api-dev apt-get install -y git
+
+# Install custom audible-cli
+docker exec audible-api-dev pip install --force-reinstall git+https://github.com/HangryPanda/audible-cli.git@feature/machine-readable-progress
+```
+
+**Verification:**
+```bash
+docker exec audible-api-dev audible download --help | grep "progress-format"
+# Should show: --progress-format [tqdm|json|ndjson]
+```
+
+The `AUDIBLE_CLI_PROGRESS_FORMAT: ndjson` env var in `docker-compose.dev.yml` requires this custom fork. If downloads fail with `No such option: --progress-format`, the custom fork needs to be reinstalled.

@@ -141,12 +141,16 @@ class TestStreamEndpoints:
         self,
         client: AsyncClient,
         test_session: AsyncSession,
+        tmp_path: Path,
     ) -> None:
         """Test streaming returns 400 for book not in COMPLETED status."""
+        audio_file = tmp_path / "not_ready.m4b"
+        audio_file.write_bytes(b"fake")
         book = Book(
             asin="B00NOTREADY",
             title="Incomplete Book",
             status=BookStatus.DOWNLOADING,
+            local_path_converted=str(audio_file),
         )
         test_session.add(book)
         await test_session.commit()
@@ -163,12 +167,16 @@ class TestStreamEndpoints:
         self,
         client: AsyncClient,
         test_session: AsyncSession,
+        tmp_path: Path,
     ) -> None:
         """Test streaming returns 400 for NEW status book."""
+        audio_file = tmp_path / "new_status.m4b"
+        audio_file.write_bytes(b"fake")
         book = Book(
             asin="B00NEWBOOK",
             title="New Book",
             status=BookStatus.NEW,
+            local_path_converted=str(audio_file),
         )
         test_session.add(book)
         await test_session.commit()
@@ -182,12 +190,16 @@ class TestStreamEndpoints:
         self,
         client: AsyncClient,
         test_session: AsyncSession,
+        tmp_path: Path,
     ) -> None:
         """Test streaming returns 400 for CONVERTING status book."""
+        audio_file = tmp_path / "converting_status.m4b"
+        audio_file.write_bytes(b"fake")
         book = Book(
             asin="B00CONVERTING",
             title="Converting Book",
             status=BookStatus.CONVERTING,
+            local_path_converted=str(audio_file),
         )
         test_session.add(book)
         await test_session.commit()
@@ -201,13 +213,17 @@ class TestStreamEndpoints:
         self,
         client: AsyncClient,
         test_session: AsyncSession,
+        tmp_path: Path,
     ) -> None:
         """Test streaming returns 400 for FAILED status book."""
+        audio_file = tmp_path / "failed_status.m4b"
+        audio_file.write_bytes(b"fake")
         book = Book(
             asin="B00FAILED",
             title="Failed Book",
             status=BookStatus.FAILED,
             error_message="Conversion failed",
+            local_path_converted=str(audio_file),
         )
         test_session.add(book)
         await test_session.commit()

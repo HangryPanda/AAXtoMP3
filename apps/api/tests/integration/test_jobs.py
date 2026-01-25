@@ -185,7 +185,7 @@ class TestDownloadJobEndpoint:
 
             assert "job_id" in data
             assert data["status"] == "QUEUED"
-            assert "1 item" in data["message"]
+            assert "queued" in data["message"].lower()
 
             # Verify job was queued
             mock_manager.queue_download.assert_called_once()
@@ -211,14 +211,15 @@ class TestDownloadJobEndpoint:
             assert response.status_code == 202
             data = response.json()
 
-            assert "job_id" in data
+            assert "job_ids" in data
+            assert len(data["job_ids"]) == 3
             assert data["status"] == "QUEUED"
             assert "3 item" in data["message"]
 
-            # Batch is queued as a single job with all ASINs.
-            mock_manager.queue_download.assert_called_once()
-            call_args = mock_manager.queue_download.call_args
-            assert call_args.args[1] == asins
+            # Batch is queued as multiple jobs (one per ASIN).
+            assert mock_manager.queue_download.call_count == 3
+            queued_asins = [c.args[1][0] for c in mock_manager.queue_download.call_args_list]
+            assert queued_asins == asins
 
     @pytest.mark.asyncio
     async def test_create_download_job_no_asin(

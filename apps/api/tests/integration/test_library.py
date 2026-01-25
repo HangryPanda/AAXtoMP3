@@ -229,17 +229,15 @@ class TestLibraryEndpoints:
     @pytest.mark.asyncio
     async def test_sync_library(self, client: AsyncClient) -> None:
         """Test triggering library sync."""
-        with patch("api.routes.library.AudibleClient") as mock_client_class:
-            # Mock the AudibleClient instance
-            mock_client = MagicMock()
-            mock_client.is_authenticated = AsyncMock(return_value=True)
-            mock_client.get_library = AsyncMock(return_value=[])
-            mock_client_class.return_value = mock_client
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_sync = AsyncMock()
 
             response = await client.post("/library/sync")
 
             assert response.status_code == 202
             data = response.json()
 
-            assert data["status"] == "started"
-            assert "message" in data
+            assert "job_id" in data
+            assert data["status"] == "QUEUED"
+            assert "queued" in data["message"].lower()
+            mock_manager.queue_sync.assert_called_once()

@@ -261,16 +261,49 @@ async def get_incomplete_downloads(
 @router.get("")
 async def get_books(
     session: AsyncSession = Depends(get_session),
-    skip: int = 0,
-    limit: int = 100,
+    skip: int | None = Query(default=None, ge=0),
+    limit: int | None = Query(default=None, ge=1, le=500),
+    page: int | None = Query(default=None, ge=1),
+    page_size: int | None = Query(default=None, ge=1, le=500),
     q: str | None = None,
+    search: str | None = None,
     author: str | None = None,
     series: str | None = None,
+    series_title: str | None = None,
     status: BookStatus | None = None,
-    sort_by: Literal["title", "author", "release_date", "purchase_date", "runtime", "created_at"] = "title",
-    sort_dir: Literal["asc", "desc"] = "asc"
+    content_type: Literal["audiobook", "podcast"] | None = None,
+    has_local: bool | None = None,
+    since: str | None = None,
+    sort_by: Literal[
+        "title",
+        "author",
+        "release_date",
+        "purchase_date",
+        "runtime",
+        "runtime_length_min",
+        "created_at",
+        "updated_at",
+    ] = "title",
+    sort_dir: Literal["asc", "desc"] = "asc",
 ):
     """List books with filtering, search, and pagination."""
+    # Back-compat aliases for older/front-end params
+    if q is None and search:
+        q = search
+    if series is None and series_title:
+        series = series_title
+
+    # Pagination: support either (skip, limit) or (page, page_size)
+    effective_limit = limit if limit is not None else 100
+    effective_skip = skip if skip is not None else 0
+    effective_page = 1
+    effective_page_size = effective_limit
+    if page is not None or page_size is not None:
+        effective_page = page or 1
+        effective_page_size = page_size or 100
+        effective_limit = effective_page_size
+        effective_skip = (effective_page - 1) * effective_page_size
+
     statement = select(Book)
     
     # 1. Filters
@@ -289,6 +322,34 @@ async def get_books(
         statement = statement.where(Book.status == status)
     if series:
         statement = statement.where(Book.series_json.ilike(f"%{series}%"))
+    if has_local is not None:
+        has_any_local = or_(
+            Book.local_path_aax.is_not(None),
+            Book.local_path_converted.is_not(None),
+        )
+        statement = statement.where(has_any_local if has_local else ~has_any_local)
+
+    if content_type is not None:
+        ct_expr = func.coalesce(
+            Book.metadata_json["content_type"].as_string(),
+            Book.metadata_json["contentType"].as_string(),
+        )
+        if content_type == "podcast":
+            statement = statement.where(func.lower(ct_expr) == "podcast")
+        else:
+            statement = statement.where(or_(ct_expr.is_(None), func.lower(ct_expr) != "podcast"))
+
+    if since:
+        since_dt: datetime | None = None
+        try:
+            raw = since.strip()
+            if raw.endswith("Z"):
+                raw = raw[:-1] + "+00:00"
+            since_dt = datetime.fromisoformat(raw)
+        except Exception:
+            since_dt = None
+        if since_dt is not None:
+            statement = statement.where(Book.updated_at >= since_dt)
 
     # 2. Total Count (before pagination)
     count_statement = select(func.count()).select_from(statement.subquery())
@@ -296,22 +357,31 @@ async def get_books(
     total = total_result.scalar() or 0
 
     # 3. Sorting
-    order_col = getattr(Book, sort_by if sort_by != "runtime" else "runtime_length_min")
+    if sort_by in ("runtime", "runtime_length_min"):
+        order_col = Book.runtime_length_min
+    else:
+        order_col = getattr(Book, sort_by)
     if sort_dir == "desc":
         statement = statement.order_by(order_col.desc())
     else:
         statement = statement.order_by(order_col.asc())
 
     # 4. Pagination
-    statement = statement.offset(skip).limit(limit)
+    statement = statement.offset(effective_skip).limit(effective_limit)
     
     result = await session.execute(statement)
     books = result.scalars().all()
 
+    total_pages = int((total + effective_limit - 1) / effective_limit) if effective_limit else 0
+
     return {
         "total": total,
-        "skip": skip,
-        "limit": limit,
+        "skip": effective_skip,
+        "limit": effective_limit,
+        # Convenience pagination fields (safe to ignore for clients that use skip/limit)
+        "page": effective_page,
+        "page_size": effective_page_size,
+        "total_pages": total_pages,
         "items": [BookRead.model_validate(book) for book in books]
     }
 
@@ -333,7 +403,12 @@ async def get_local_item(
 ):
     """Get details for a standalone local audiobook."""
     from db.models import LocalItem
-    result = await session.execute(select(LocalItem).where(LocalItem.id == local_id))
+    try:
+        uid = UUID(local_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid local_id")
+
+    result = await session.execute(select(LocalItem).where(LocalItem.id == uid))
     item = result.scalar_one_or_none()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -450,7 +525,7 @@ async def delete_books(
     await session.commit()
     return {"message": f"{len(asins)} books deleted"}
 
-@router.post("/sync")
+@router.post("/sync", status_code=202)
 async def sync_library(
     background_tasks: BackgroundTasks,
     session: AsyncSession = Depends(get_session)
@@ -471,9 +546,9 @@ async def sync_library(
     await job_manager.queue_sync(job.id)
 
     return {
-        "job_id": job.id,
+        "job_id": str(job.id),
+        "status": JobStatus.QUEUED.value,
         "message": "Library sync queued. Check /jobs for progress.",
-        "books_found": 0
     }
 
 @router.post("/{asin}/scan")

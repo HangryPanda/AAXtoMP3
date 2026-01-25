@@ -93,6 +93,10 @@ class JobManager:
         self.library_manager = LibraryManager(self.metadata_extractor)
         self.settings = settings
 
+        # Shutdown coordination
+        self._shutdown_event = asyncio.Event()
+        self._shutting_down = False
+
         logger.info(
             "JobManager initialized with download_concurrent=%d, convert_concurrent=%d",
             settings.max_download_concurrent,
@@ -449,6 +453,75 @@ class JobManager:
             "conversions": conversions,
             "total": downloads + conversions,
         }
+
+    async def shutdown(self, timeout: float = 30.0) -> None:
+        """
+        Gracefully shutdown all running jobs.
+
+        This method:
+        1. Signals all jobs to stop accepting new work
+        2. Cancels all running tasks
+        3. Waits for tasks to complete (with timeout)
+        4. Closes any open file handles
+
+        Args:
+            timeout: Maximum time to wait for jobs to complete (seconds).
+        """
+        if self._shutting_down:
+            logger.warning("Shutdown already in progress")
+            return
+
+        self._shutting_down = True
+        self._shutdown_event.set()
+
+        running_count = len(self._tasks)
+        if running_count == 0:
+            logger.info("No running jobs to shutdown")
+            return
+
+        logger.info("Shutting down %d running job(s)...", running_count)
+
+        # Mark all jobs as cancelled
+        for job_id in list(self._tasks.keys()):
+            self._cancelled.add(job_id)
+            # Resume any paused jobs so they can exit
+            ev = self._pause_events.get(job_id)
+            if ev:
+                ev.set()
+
+        # Cancel all tasks
+        for job_id, task in list(self._tasks.items()):
+            if not task.done():
+                logger.info("Cancelling job %s (%s)", job_id, task.get_name())
+                task.cancel()
+
+        # Wait for all tasks to complete with timeout
+        if self._tasks:
+            tasks = list(self._tasks.values())
+            try:
+                await asyncio.wait_for(
+                    asyncio.gather(*tasks, return_exceptions=True),
+                    timeout=timeout,
+                )
+                logger.info("All jobs completed gracefully")
+            except asyncio.TimeoutError:
+                logger.warning(
+                    "Timeout waiting for jobs to complete. %d job(s) still running.",
+                    sum(1 for t in tasks if not t.done()),
+                )
+
+        # Clear internal state
+        self._tasks.clear()
+        self._cancelled.clear()
+        self._pause_events.clear()
+        self._progress_callbacks.clear()
+
+        logger.info("Job manager shutdown complete")
+
+    @property
+    def is_shutting_down(self) -> bool:
+        """Check if shutdown is in progress."""
+        return self._shutting_down
 
     async def _execute_download(
         self,

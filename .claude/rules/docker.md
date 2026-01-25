@@ -55,6 +55,40 @@ To run commands inside a running container:
 *   `docker system prune -a` - Remove all unused containers, networks, images (both dangling and unreferenced). **Use with caution.**
 *   `docker volume prune` - Remove all unused local volumes. **WARNING: Deletes database data.**
 
+### NFS Stale File Cleanup
+
+When containers are stopped while processes have NFS-mounted files open, `.nfs*` temp files can be left behind. Use the cleanup script to remove them:
+
+```bash
+# Preview what would be deleted (dry run)
+./scripts/cleanup-nfs-files.sh --dry-run
+
+# Clean files older than 1 day (default)
+./scripts/cleanup-nfs-files.sh
+
+# Clean files of any age
+./scripts/cleanup-nfs-files.sh --age 0
+
+# Clean specific directories
+./scripts/cleanup-nfs-files.sh /Volumes/Media/Audiobooks/Downloads /Volumes/Media/Audiobooks/Converted
+
+# Combine options
+./scripts/cleanup-nfs-files.sh --dry-run --age 0 /custom/path
+```
+
+**Cron job** (run daily at 3am):
+```bash
+0 3 * * * /path/to/scripts/cleanup-nfs-files.sh >> /var/log/nfs-cleanup.log 2>&1
+```
+
+## Graceful Shutdown
+
+All services are configured with:
+- `init: true` - Uses tini as PID 1 for proper signal forwarding
+- `stop_grace_period: 30s` - Allows 30 seconds for graceful shutdown
+
+This ensures file handles are released properly on NFS mounts when stopping containers.
+
 ## Service details
 
 ### API Service (`api`)

@@ -5,6 +5,8 @@ services:
     image: postgres:16-alpine
     container_name: audible-postgres
     restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-audible}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
@@ -25,6 +27,8 @@ services:
       dockerfile: apps/api/Dockerfile
     container_name: audible-api
     restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
     depends_on:
       postgres:
         condition: service_healthy
@@ -63,6 +67,8 @@ services:
       dockerfile: apps/web/Dockerfile
     container_name: audible-web
     restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
     depends_on:
       api:
         condition: service_healthy
@@ -82,6 +88,8 @@ services:
     image: nginx:alpine
     container_name: audible-nginx
     restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
     depends_on:
       - web
       - api

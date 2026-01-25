@@ -1,0 +1,14 @@
+[run]
+# The repository includes a number of one-off backfill/debug scripts. They are
+# useful for operations but aren't part of the request/response API surface and
+# would otherwise dominate the coverage percentage.
+omit =
+    tests/*
+    alembic/*
+    audible_library_api.egg-info/*
+    backfill_*.py
+    debug_*.py
+    test_fetch.py
+    scripts/*
+    tmp/*
+    data/*

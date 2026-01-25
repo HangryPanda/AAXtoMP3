@@ -7,6 +7,8 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: audible-postgres-dev
+    init: true
+    stop_grace_period: 30s
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-audible}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
@@ -26,6 +28,8 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile.dev
     container_name: audible-api-dev
+    init: true
+    stop_grace_period: 30s
     depends_on:
       postgres:
         condition: service_healthy
@@ -61,6 +65,8 @@ services:
       context: .
       dockerfile: apps/web/Dockerfile.dev
     container_name: audible-web-dev
+    init: true
+    stop_grace_period: 30s
     depends_on:
       - api
     environment:

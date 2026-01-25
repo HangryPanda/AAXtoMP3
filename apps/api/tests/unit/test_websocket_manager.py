@@ -69,7 +69,7 @@ class TestConnect:
             await manager.connect(mock_ws, "resource-123")
 
             assert "resource-123" in manager._connections
-            assert manager._connections["resource-123"] == mock_ws
+            assert mock_ws in manager._connections["resource-123"]
 
     @pytest.mark.asyncio
     async def test_connect_initializes_buffer(self) -> None:
@@ -103,7 +103,7 @@ class TestDisconnect:
             mock_ws.accept = AsyncMock()
 
             await manager.connect(mock_ws, "resource-123")
-            manager.disconnect("resource-123")
+            manager.disconnect(mock_ws, "resource-123")
 
             assert "resource-123" not in manager._connections
 
@@ -119,7 +119,7 @@ class TestDisconnect:
             mock_ws.accept = AsyncMock()
 
             await manager.connect(mock_ws, "resource-123")
-            manager.disconnect("resource-123")
+            manager.disconnect(mock_ws, "resource-123")
 
             assert "resource-123" not in manager._buffers
 
@@ -140,7 +140,7 @@ class TestDisconnect:
             mock_task = MagicMock()
             manager._flush_tasks["resource-123"] = mock_task
 
-            manager.disconnect("resource-123")
+            manager.disconnect(mock_ws, "resource-123")
 
             mock_task.cancel.assert_called_once()
             assert "resource-123" not in manager._flush_tasks
@@ -153,7 +153,7 @@ class TestDisconnect:
             manager = WebSocketManager()
 
             # Should not raise
-            manager.disconnect("nonexistent")
+            manager.disconnect(MagicMock(), "nonexistent")
 
 
 class TestIsConnected:
@@ -265,8 +265,9 @@ class TestBroadcast:
             await manager.broadcast(message)
 
             # Verify all received the message
-            for resource_id, ws in manager._connections.items():
-                ws.send_json.assert_called_once_with(message)
+            for _resource_id, websockets in manager._connections.items():
+                for ws in websockets:
+                    ws.send_json.assert_called_once_with(message)
 
     @pytest.mark.asyncio
     async def test_broadcast_removes_failed_connections(self) -> None:

@@ -97,6 +97,31 @@ If your repo lives on a network filesystem and Next.js fails with `.next/` persi
 - PRs should include: what changed, how you validated (exact commands + OS), and any user-visible behavior changes.
 - Do not commit secrets or local config: `.authcode`, `apps/api/.env`, `apps/web/.env*`, and `~/.audible/*`.
 
+## Custom audible-cli Fork
+
+This project uses a **custom fork** of audible-cli with additional features:
+- `--progress-format ndjson` for structured progress events (used by the download job manager)
+- Filename sanitization to replace problematic characters (`/`, `\`, `:`, etc.) in titles
+
+**Repository:** `git+https://github.com/HangryPanda/audible-cli.git@feature/machine-readable-progress`
+
+**Important:** After rebuilding the API Docker container, the custom fork must be reinstalled manually:
+```bash
+# Install git if not present
+docker exec audible-api-dev apt-get update && docker exec audible-api-dev apt-get install -y git
+
+# Install custom audible-cli
+docker exec audible-api-dev pip install --force-reinstall git+https://github.com/HangryPanda/audible-cli.git@feature/machine-readable-progress
+```
+
+**Verification:**
+```bash
+docker exec audible-api-dev audible download --help | grep "progress-format"
+# Should show: --progress-format [tqdm|json|ndjson]
+```
+
+The `AUDIBLE_CLI_PROGRESS_FORMAT: ndjson` env var in `docker-compose.dev.yml` requires this custom fork. If you see errors like `No such option: --progress-format`, the custom fork needs to be reinstalled.
+
 ## Security & Configuration Tips
 
 - `--{dir,file,chapter}-naming-scheme` strings can evaluate shell command substitutions; treat untrusted input as code.

@@ -149,7 +149,9 @@ class TestJobManagerExecution:
         # Mock library scan
         manager.library_manager.scan_book = AsyncMock(return_value=True)
 
-        with patch("services.job_manager.get_session") as mock_get_session:
+        with patch("services.job_manager.get_session") as mock_get_session, patch.object(
+            manager, "_extract_chapters_from_aax", AsyncMock(return_value=False)
+        ):
             async def yield_session():
                 yield mock_session
             mock_get_session.side_effect = yield_session
@@ -162,7 +164,9 @@ class TestJobManagerExecution:
             mock_session.execute.side_effect = [
                 # First check for input file
                 MagicMock(scalar_one_or_none=lambda: book),
-                # Second check for update
+                # Cover art fallback fetch (no-op for this test)
+                MagicMock(scalar_one_or_none=lambda: book),
+                # Update after conversion
                 MagicMock(scalar_one_or_none=lambda: book),
             ]
 
@@ -259,7 +263,9 @@ class TestJobManagerExecution:
         # Setup book object
         book = Book(asin=asin, title="Fail Book", status=BookStatus.NEW)
         
-        with patch("services.job_manager.get_session") as mock_get_session:
+        with patch("services.job_manager.get_session") as mock_get_session, patch.object(
+            manager, "_extract_chapters_from_aax", AsyncMock(return_value=False)
+        ):
             async def yield_session():
                 yield mock_session
             mock_get_session.side_effect = lambda: yield_session()
@@ -267,7 +273,8 @@ class TestJobManagerExecution:
             # Mock DB behavior
             mock_session.execute.side_effect = [
                 MagicMock(scalar_one_or_none=lambda: book),  # 1. Fetch to find file
-                MagicMock(scalar_one_or_none=lambda: book),  # 2. Fetch to update status
+                MagicMock(scalar_one_or_none=lambda: book),  # 2. Cover art fallback fetch
+                MagicMock(scalar_one_or_none=lambda: book),  # 3. Fetch to update status (FAILED)
             ]
 
             await manager._execute_conversion(job_id, asin, "m4b", None)

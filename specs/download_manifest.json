@@ -4798,11 +4798,11 @@
   "B0CD8BL81K": {
     "asin": "B0CD8BL81K",
     "title": "The Hedge Wizard 3: A GameLit/LitRPG Adventure",
-    "aaxc_path": "",
-    "voucher_path": "",
-    "cover_path": "",
-    "downloaded_at": "2026-01-24T09:52:37.586602",
-    "status": "partial"
+    "aaxc_path": "/data/downloads/B0CD8BL81K_The Hedge Wizard 3- A GameLit-LitRPG Adventure- The Hedge Wizard, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0CD8BL81K_The Hedge Wizard 3- A GameLit-LitRPG Adventure- The Hedge Wizard, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0CD8BL81K_The Hedge Wizard 3- A GameLit-LitRPG Adventure- The Hedge Wizard, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-25T18:56:52.439880",
+    "status": "success"
   },
   "B09T94QHK6": {
     "asin": "B09T94QHK6",
@@ -4810,7 +4810,7 @@
     "aaxc_path": "",
     "voucher_path": "",
     "cover_path": "",
-    "downloaded_at": "2026-01-24T09:52:38.367006",
+    "downloaded_at": "2026-01-25T17:40:01.489141",
     "status": "partial"
   },
   "B0B2DZBVRR": {
@@ -4828,7 +4828,7 @@
     "aaxc_path": "",
     "voucher_path": "",
     "cover_path": "",
-    "downloaded_at": "2026-01-24T09:52:40.660202",
+    "downloaded_at": "2026-01-25T17:39:59.431884",
     "status": "partial"
   },
   "B0BH4QB5NN": {
@@ -6513,5 +6513,14 @@
     "cover_path": "/data/downloads/B099SH77S4_Defiance of the Fall 2: A LitRPG Adventure_(1215).jpg",
     "discovered_at": "2026-01-25T09:19:39.493373",
     "source": "filesystem_scan"
+  },
+  "B0BWKRS8DV": {
+    "asin": "B0BWKRS8DV",
+    "title": "Saffron Wilds",
+    "aaxc_path": "/data/downloads/B0BWKRS8DV_Saffron Wilds: San Amaro Investigations, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BWKRS8DV_Saffron Wilds: San Amaro Investigations, Book 6-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BWKRS8DV_Saffron Wilds: San Amaro Investigations, Book 6_(1215).jpg",
+    "downloaded_at": "2026-01-25T18:36:22.403704",
+    "status": "success"
   }
 }

@@ -157,7 +157,19 @@ async def stream_audio(
                 detail=f"Failed to start JIT stream: {e}",
             )
 
-    # No audio source available
+    # No audio source available. Provide a more specific 404 when the book is marked
+    # COMPLETED but the converted file is missing/misconfigured.
+    if book.status == BookStatus.COMPLETED:
+        if not book.local_path_converted:
+            raise HTTPException(
+                status_code=404,
+                detail="Converted file not found (path not set)",
+            )
+        raise HTTPException(
+            status_code=404,
+            detail="Converted file not found on disk",
+        )
+
     raise HTTPException(status_code=404, detail="No audio source available for streaming")
 
 

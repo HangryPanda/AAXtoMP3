@@ -233,6 +233,49 @@ async def create_convert_job(
     )
 
 
+@router.delete("/history", response_model=JobHistoryClearResponse)
+async def clear_job_history(
+    session: AsyncSession = Depends(get_session),
+    status: str | None = Query(
+        default="COMPLETED,FAILED,CANCELLED",
+        description="Comma-separated statuses to delete (defaults to completed/failed/cancelled)",
+    ),
+    older_than: datetime | None = Query(default=None, description="Only delete jobs created before this time"),
+    delete_logs: bool = Query(default=False, description="Also delete job log files on disk"),
+) -> JobHistoryClearResponse:
+    """Delete completed job history records (optionally deleting log files)."""
+    status_list = [s.strip() for s in (status or "").split(",") if s.strip()]
+    if not status_list:
+        raise HTTPException(status_code=400, detail="At least one status is required")
+
+    active = {JobStatus.RUNNING.value, JobStatus.PENDING.value, JobStatus.QUEUED.value}
+    if any(s in active for s in status_list):
+        raise HTTPException(status_code=400, detail="Cannot clear active job statuses")
+
+    stmt = select(Job.id).where(Job.status.in_(status_list))
+    if older_than:
+        stmt = stmt.where(Job.created_at < older_than)
+
+    res = await session.execute(stmt)
+    ids = [row[0] for row in res.all()]
+    if not ids:
+        return JobHistoryClearResponse(deleted=0, message="No matching jobs to delete")
+
+    await session.execute(delete(Job).where(Job.id.in_(ids)))
+    await session.commit()
+
+    if delete_logs:
+        settings = get_settings()
+        log_dir = settings.downloads_dir / ".job_logs"
+        for job_id_val in ids:
+            try:
+                (log_dir / f"{job_id_val}.log").unlink(missing_ok=True)  # type: ignore[arg-type]
+            except Exception:
+                pass
+
+    return JobHistoryClearResponse(deleted=len(ids), message=f"Deleted {len(ids)} job(s)")
+
+
 @router.delete("/{job_id}", response_model=JobCancelResponse)
 async def cancel_job(
     job_id: UUID,
@@ -463,48 +506,6 @@ async def retry_job(
 
     raise HTTPException(status_code=400, detail=f"Retry not supported for job type {job.task_type.value}")
 
-
-@router.delete("/history", response_model=JobHistoryClearResponse)
-async def clear_job_history(
-    session: AsyncSession = Depends(get_session),
-    status: str | None = Query(
-        default="COMPLETED,FAILED,CANCELLED",
-        description="Comma-separated statuses to delete (defaults to completed/failed/cancelled)",
-    ),
-    older_than: datetime | None = Query(default=None, description="Only delete jobs created before this time"),
-    delete_logs: bool = Query(default=False, description="Also delete job log files on disk"),
-) -> JobHistoryClearResponse:
-    """Delete completed job history records (optionally deleting log files)."""
-    status_list = [s.strip() for s in (status or "").split(",") if s.strip()]
-    if not status_list:
-        raise HTTPException(status_code=400, detail="At least one status is required")
-
-    active = {JobStatus.RUNNING.value, JobStatus.PENDING.value, JobStatus.QUEUED.value}
-    if any(s in active for s in status_list):
-        raise HTTPException(status_code=400, detail="Cannot clear active job statuses")
-
-    stmt = select(Job.id).where(Job.status.in_(status_list))
-    if older_than:
-        stmt = stmt.where(Job.created_at < older_than)
-
-    res = await session.execute(stmt)
-    ids = [row[0] for row in res.all()]
-    if not ids:
-        return JobHistoryClearResponse(deleted=0, message="No matching jobs to delete")
-
-    await session.execute(delete(Job).where(Job.id.in_(ids)))
-    await session.commit()
-
-    if delete_logs:
-        settings = get_settings()
-        log_dir = settings.downloads_dir / ".job_logs"
-        for job_id_val in ids:
-            try:
-                (log_dir / f"{job_id_val}.log").unlink(missing_ok=True)  # type: ignore[arg-type]
-            except Exception:
-                pass
-
-    return JobHistoryClearResponse(deleted=len(ids), message=f"Deleted {len(ids)} job(s)")
 
 
 @router.websocket("/ws/{job_id}")
