@@ -52,7 +52,7 @@ class TestIsAuthenticated:
         self,
         tmp_path: Path,
     ) -> None:
-        """Test returns True when auth check succeeds."""
+        """Test returns True when Audible API probe succeeds."""
         auth_file = tmp_path / "auth.json"
         auth_file.write_text("{}")
 
@@ -64,12 +64,14 @@ class TestIsAuthenticated:
 
             client = AudibleClient()
 
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                return_value={"returncode": 0, "stdout": "", "stderr": ""},
-            ):
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.return_value = {"items": []}
+                mock_client_cls.return_value = mock_client
+
                 result = await client.is_authenticated()
 
             assert result is True
@@ -79,7 +81,7 @@ class TestIsAuthenticated:
         self,
         tmp_path: Path,
     ) -> None:
-        """Test returns False when audible command fails."""
+        """Test returns False when Audible API probe fails."""
         auth_file = tmp_path / "auth.json"
         auth_file.write_text("{}")
 
@@ -91,12 +93,14 @@ class TestIsAuthenticated:
 
             client = AudibleClient()
 
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                return_value={"returncode": 1, "stdout": "", "stderr": "Auth failed"},
-            ):
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.side_effect = Exception("Auth failed")
+                mock_client_cls.return_value = mock_client
+
                 result = await client.is_authenticated()
 
             assert result is False
@@ -106,7 +110,7 @@ class TestIsAuthenticated:
         self,
         tmp_path: Path,
     ) -> None:
-        """Test returns False when exception occurs."""
+        """Test returns False when auth parsing or API throws."""
         auth_file = tmp_path / "auth.json"
         auth_file.write_text("{}")
 
@@ -118,12 +122,8 @@ class TestIsAuthenticated:
 
             client = AudibleClient()
 
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                side_effect=Exception("Connection error"),
-            ):
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file:
+                mock_from_file.side_effect = Exception("Connection error")
                 result = await client.is_authenticated()
 
             assert result is False
@@ -133,135 +133,127 @@ class TestGetLibrary:
     """Tests for get_library method."""
 
     @pytest.mark.asyncio
-    async def test_get_library_success(self) -> None:
-        """Test successfully fetching library."""
+    async def test_get_library_success(self, tmp_path: Path) -> None:
+        """Test successfully fetching library via audible-python."""
         library_data = [
             {"asin": "B001", "title": "Book 1"},
             {"asin": "B002", "title": "Book 2"},
         ]
 
+        auth_file = tmp_path / "auth.json"
+        auth_file.write_text("{}")
+
         with patch("services.audible_client.get_settings") as mock_settings:
             mock_settings.return_value = MagicMock(
-                audible_auth_file=Path("/mock/auth.json"),
+                audible_auth_file=auth_file,
                 audible_profile="default",
             )
 
             client = AudibleClient()
 
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                return_value={
-                    "returncode": 0,
-                    "stdout": json.dumps(library_data),
-                    "stderr": "",
-                },
-            ):
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.return_value = {"items": library_data}
+                mock_client_cls.return_value = mock_client
+
                 result = await client.get_library()
 
             assert result == library_data
 
     @pytest.mark.asyncio
-    async def test_get_library_with_limit(self) -> None:
-        """Test fetching library with limit parameter (applied post-fetch)."""
+    async def test_get_library_with_limit(self, tmp_path: Path) -> None:
+        """Limit is applied to the returned list."""
+        auth_file = tmp_path / "auth.json"
+        auth_file.write_text("{}")
+
         with patch("services.audible_client.get_settings") as mock_settings:
             mock_settings.return_value = MagicMock(
-                audible_auth_file=Path("/mock/auth.json"),
+                audible_auth_file=auth_file,
                 audible_profile="default",
             )
 
             client = AudibleClient()
-            mock_run = AsyncMock(
-                return_value={
-                    "returncode": 0,
-                    "stdout": "[]",
-                    "stderr": "",
-                }
-            )
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.return_value = {"items": [{"asin": "B001"}, {"asin": "B002"}]}
+                mock_client_cls.return_value = mock_client
 
-            with patch.object(client, "_run_command", mock_run):
-                await client.get_library(limit=10)
+                result = await client.get_library(limit=1)
 
-            # Verify library export command is used (limit is applied post-fetch)
-            call_args = mock_run.call_args[0][0]
-            assert "library" in call_args
-            assert "export" in call_args
-            assert "--format" in call_args
+            assert len(result) == 1
+            assert result[0]["asin"] == "B001"
 
     @pytest.mark.asyncio
-    async def test_get_library_with_response_groups(self) -> None:
-        """Test fetching library with response groups (not supported by CLI export)."""
+    async def test_get_library_with_response_groups(self, tmp_path: Path) -> None:
+        """Response groups are passed to the Audible API request."""
+        auth_file = tmp_path / "auth.json"
+        auth_file.write_text("{}")
+
         with patch("services.audible_client.get_settings") as mock_settings:
             mock_settings.return_value = MagicMock(
-                audible_auth_file=Path("/mock/auth.json"),
+                audible_auth_file=auth_file,
                 audible_profile="default",
             )
 
             client = AudibleClient()
-            mock_run = AsyncMock(
-                return_value={
-                    "returncode": 0,
-                    "stdout": "[]",
-                    "stderr": "",
-                }
-            )
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.return_value = {"items": []}
+                mock_client_cls.return_value = mock_client
 
-            with patch.object(client, "_run_command", mock_run):
-                # response_groups parameter is accepted but not passed to CLI
-                await client.get_library(response_groups=["product_desc", "media"])
+                groups = ["product_desc", "media"]
+                await client.get_library(response_groups=groups)
 
-            # Verify library export command is used
-            call_args = mock_run.call_args[0][0]
-            assert "library" in call_args
-            assert "export" in call_args
+            # Ensure response_groups are passed as comma-separated string.
+            _args, kwargs = mock_client.get.call_args
+            assert kwargs["params"]["response_groups"] == ",".join(groups)
 
     @pytest.mark.asyncio
-    async def test_get_library_raises_on_failure(self) -> None:
-        """Test raises RuntimeError when command fails."""
+    async def test_get_library_raises_on_failure(self, tmp_path: Path) -> None:
+        """Missing auth file raises a library error."""
+        auth_file = tmp_path / "missing.json"
+
         with patch("services.audible_client.get_settings") as mock_settings:
             mock_settings.return_value = MagicMock(
-                audible_auth_file=Path("/mock/auth.json"),
+                audible_auth_file=auth_file,
                 audible_profile="default",
             )
 
             client = AudibleClient()
+            with pytest.raises(AudibleLibraryError, match="Auth file not found"):
+                await client.get_library()
 
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                return_value={
-                    "returncode": 1,
-                    "stdout": "",
-                    "stderr": "Authentication failed",
-                },
-            ):
+    @pytest.mark.asyncio
+    async def test_get_library_raises_on_invalid_response(self, tmp_path: Path) -> None:
+        """Non-dict API responses raise a library error (defensive)."""
+        auth_file = tmp_path / "auth.json"
+        auth_file.write_text("{}")
+
+        with patch("services.audible_client.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(
+                audible_auth_file=auth_file,
+                audible_profile="default",
+            )
+
+            client = AudibleClient()
+            with patch("services.audible_client.audible.Authenticator.from_file") as mock_from_file, patch(
+                "services.audible_client.audible.Client"
+            ) as mock_client_cls:
+                mock_from_file.return_value = MagicMock()
+                mock_client = MagicMock()
+                mock_client.get.return_value = None
+                mock_client_cls.return_value = mock_client
+
                 with pytest.raises(AudibleLibraryError, match="Failed to fetch library"):
-                    await client.get_library()
-
-    @pytest.mark.asyncio
-    async def test_get_library_raises_on_invalid_json(self) -> None:
-        """Test raises RuntimeError when response is not valid JSON."""
-        with patch("services.audible_client.get_settings") as mock_settings:
-            mock_settings.return_value = MagicMock(
-                audible_auth_file=Path("/mock/auth.json"),
-                audible_profile="default",
-            )
-
-            client = AudibleClient()
-
-            with patch.object(
-                client,
-                "_run_command",
-                new_callable=AsyncMock,
-                return_value={
-                    "returncode": 0,
-                    "stdout": "not valid json{",
-                    "stderr": "",
-                },
-            ):
-                with pytest.raises(AudibleLibraryError, match="Failed to parse library"):
                     await client.get_library()
 
 
@@ -281,7 +273,7 @@ class TestDownload:
 
             with patch.object(
                 client,
-                "_run_command",
+                "_run_command_streaming",
                 new_callable=AsyncMock,
                 return_value={
                     "returncode": 0,
@@ -318,7 +310,7 @@ class TestDownload:
 
             with patch.object(
                 client,
-                "_run_command",
+                "_run_command_streaming",
                 new_callable=AsyncMock,
                 return_value={
                     "returncode": 0,
@@ -348,7 +340,7 @@ class TestDownload:
 
             with patch.object(
                 client,
-                "_run_command",
+                "_run_command_streaming",
                 new_callable=AsyncMock,
                 return_value={
                     "returncode": 0,
@@ -380,7 +372,7 @@ class TestDownload:
 
             with patch.object(
                 client,
-                "_run_command",
+                "_run_command_streaming",
                 new_callable=AsyncMock,
                 return_value={
                     "returncode": 1,

@@ -18,6 +18,17 @@ class MoveFilesPolicy(str, Enum):
     ASK_EACH = "ask_each"  # Return list for user confirmation
 
 
+class AudibleCliProgressFormat(str, Enum):
+    """Progress format for audible-cli downloads.
+
+    - TQDM: Parse tqdm progress bar output (default, current behavior)
+    - NDJSON: Use --progress-format ndjson for structured progress events
+    """
+
+    TQDM = "tqdm"
+    NDJSON = "ndjson"
+
+
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
@@ -60,6 +71,10 @@ class Settings(BaseSettings):
         description="Audible authentication file",
     )
     audible_profile: str = Field(default="default", description="Audible profile name")
+    audible_cli_progress_format: AudibleCliProgressFormat = Field(
+        default=AudibleCliProgressFormat.TQDM,
+        description="Progress format for audible-cli downloads: 'tqdm' (default) or 'ndjson'",
+    )
 
     # Job Concurrency
     max_download_concurrent: int = Field(default=5, ge=1, le=10, description="Max concurrent downloads")

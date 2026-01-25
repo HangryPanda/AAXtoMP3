@@ -1,11 +1,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { type SortField, type SortOrder } from "@/components/domain/LibraryToolbar";
+import type { LibraryViewType } from "@/components/domain/LibraryViewSwitcher";
 import type { BookStatus } from "@/types";
 
 export function useLibraryUrlParams() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const libraryView = (searchParams.get("view") as LibraryViewType) || "library";
   const searchQuery = searchParams.get("search") || "";
   const filterStatus = (searchParams.get("status") as BookStatus) || undefined;
   const contentType =
@@ -37,6 +39,8 @@ export function useLibraryUrlParams() {
     router.push(`?${params.toString()}`);
   };
 
+  const handleViewChange = (view: LibraryViewType) =>
+    updateUrl({ view: view === "library" ? undefined : view });
   const handleSearch = (value: string) => updateUrl({ search: value });
   const handleFilter = (status: BookStatus | undefined) => updateUrl({ status });
   const handleContentType = (value: "audiobook" | "podcast") =>
@@ -63,6 +67,7 @@ export function useLibraryUrlParams() {
     contentType === "podcast";
 
   return {
+    libraryView,
     searchQuery,
     filterStatus,
     contentType,
@@ -72,6 +77,7 @@ export function useLibraryUrlParams() {
     sortOrder,
     page,
     hasActiveFilters,
+    setView: handleViewChange,
     setSearch: handleSearch,
     setFilter: handleFilter,
     setContentType: handleContentType,

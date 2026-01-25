@@ -210,7 +210,8 @@ async def get_books(
             or_(
                 Book.title.ilike(f"%{q}%"),
                 Book.subtitle.ilike(f"%{q}%"),
-                Book.authors_json.ilike(f"%{q}%")
+                Book.authors_json.ilike(f"%{q}%"),
+                Book.narrators_json.ilike(f"%{q}%")
             )
         )
     if author:

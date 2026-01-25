@@ -20,3 +20,19 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
+
+/**
+ * Safe localStorage wrapper for SSR compatibility.
+ * Returns a no-op storage during server-side rendering.
+ */
+export const safeLocalStorage: Storage =
+  typeof window !== "undefined"
+    ? localStorage
+    : {
+        length: 0,
+        clear: () => {},
+        getItem: () => null,
+        key: () => null,
+        removeItem: () => {},
+        setItem: () => {},
+      };

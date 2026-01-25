@@ -23,11 +23,77 @@ import type {
  * Get paginated list of books with optional filtering
  */
 export async function getBooks(params?: BookListParams): Promise<PaginatedBooks> {
-  return apiRequest<PaginatedBooks>({
+  // Map frontend parameter names to backend API parameter names
+  const apiParams: Record<string, string | number | boolean | undefined> = {};
+
+  if (params) {
+    // Pagination: convert page/page_size to skip/limit
+    const page = params.page ?? 1;
+    const pageSize = params.page_size ?? 100;
+    apiParams.skip = (page - 1) * pageSize;
+    apiParams.limit = pageSize;
+
+    // Search: frontend uses 'search', backend expects 'q'
+    if (params.search) {
+      apiParams.q = params.search;
+    }
+
+    // Status filter
+    if (params.status) {
+      apiParams.status = params.status;
+    }
+
+    // Series filter: frontend uses 'series_title', backend expects 'series'
+    if (params.series_title) {
+      apiParams.series = params.series_title;
+    }
+
+    // Sorting: frontend uses 'sort_order', backend expects 'sort_dir'
+    if (params.sort_by) {
+      apiParams.sort_by = params.sort_by;
+    }
+    if (params.sort_order) {
+      apiParams.sort_dir = params.sort_order;
+    }
+
+    // Has local filter
+    if (params.has_local !== undefined) {
+      apiParams.has_local = params.has_local;
+    }
+
+    // Content type filter
+    if (params.content_type) {
+      apiParams.content_type = params.content_type;
+    }
+
+    // Since filter (for incremental sync)
+    if (params.since) {
+      apiParams.since = params.since;
+    }
+  }
+
+  const response = await apiRequest<{
+    items: Book[];
+    total: number;
+    skip: number;
+    limit: number;
+  }>({
     method: "GET",
     url: "/library",
-    params: params as Record<string, string | number | boolean | undefined>,
+    params: apiParams,
   });
+
+  // Transform backend response to frontend format
+  const page = params?.page ?? 1;
+  const pageSize = params?.page_size ?? 100;
+
+  return {
+    items: response.items,
+    total: response.total,
+    page: page,
+    page_size: pageSize,
+    total_pages: Math.ceil(response.total / pageSize),
+  };
 }
 
 /**

@@ -23,6 +23,8 @@ export interface BookCardProps {
   book: Book;
   selectable?: boolean;
   selected?: boolean;
+  isCurrent?: boolean;
+  isPlaying?: boolean;
   onSelect?: (book: Book, selected: boolean) => void;
   onPlay?: (book: Book) => void;
   onAction?: (action: string, book: Book) => void;
@@ -36,6 +38,8 @@ export function BookCard({
   book,
   selectable = false,
   selected = false,
+  isCurrent = false,
+  isPlaying = false,
   onSelect,
   onPlay,
   onAction,
@@ -50,6 +54,9 @@ export function BookCard({
   const duration = formatRuntime(book.runtime_length_min);
   const isPlayable = canPlay(book);
   const isDimmed = useBookDimmedState(book.asin);
+  
+  // Show playing state if this is the current book
+  const showPlaying = isCurrent && isPlaying;
 
   const handlePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -86,7 +93,10 @@ export function BookCard({
       )}
 
       {/* Cover Image */}
-      <div className="relative aspect-square bg-muted">
+      <div className={cn(
+        "relative aspect-square bg-muted transition-all",
+        showPlaying && "ring-4 ring-primary ring-offset-2 ring-offset-background"
+      )}>
         {coverUrl ? (
           <Image
             src={coverUrl}
@@ -104,17 +114,29 @@ export function BookCard({
           </div>
         )}
 
-        {/* Overlay with play button */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
+        {/* Overlay with play button - always show if playing, otherwise hover */}
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity",
+          showPlaying || isCurrent ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+        )}>
           <Button
             size="icon"
             variant="secondary"
-            className="h-14 w-14 rounded-full"
+            className={cn("h-14 w-14 rounded-full shadow-lg", showPlaying && "scale-110")}
             onClick={handlePlay}
             disabled={!isPlayable}
-            aria-label={`Play ${book.title}`}
+            aria-label={showPlaying ? `Pause ${book.title}` : `Play ${book.title}`}
           >
-            <Play className="h-6 w-6" fill="currentColor" />
+            {showPlaying ? (
+              // Simple equalizer-like animation or pause icon
+              <div className="flex gap-1 items-end h-6 pb-1">
+                <span className="w-1 bg-current animate-[bounce_1s_infinite] h-3"></span>
+                <span className="w-1 bg-current animate-[bounce_1.2s_infinite] h-5"></span>
+                <span className="w-1 bg-current animate-[bounce_0.8s_infinite] h-4"></span>
+              </div>
+            ) : (
+              <Play className="h-6 w-6 ml-1" fill="currentColor" />
+            )}
           </Button>
         </div>
 

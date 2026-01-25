@@ -4,8 +4,12 @@ import asyncio
 import json
 import logging
 import shutil
+import re
+import glob
+import httpx
 from collections.abc import Callable
 from datetime import datetime
+from time import monotonic
 from pathlib import Path
 from typing import Any, Protocol
 from uuid import UUID
@@ -33,6 +37,7 @@ class StatusUpdateCallback(Protocol):
         progress: int,
         message: str | None = None,
         error: str | None = None,
+        meta: dict[str, Any] | None = None,
     ) -> None:
         """
         Called when job status changes.
@@ -43,6 +48,7 @@ class StatusUpdateCallback(Protocol):
             progress: Progress percentage (0-100).
             message: Optional status message.
             error: Optional error message.
+            meta: Optional structured metadata for UI (not logged).
         """
         ...
 
@@ -140,7 +146,9 @@ class JobManager:
         return True
 
     def _job_log_dir(self) -> Path:
-        d = self.settings.data_dir / "job_logs"
+        # Persist logs on the same volume as downloads so container recreation
+        # doesn't wipe job logs (dev/prod bind-mount `/data/downloads`).
+        d = self.settings.downloads_dir / ".job_logs"
         d.mkdir(parents=True, exist_ok=True)
         return d
 
@@ -174,6 +182,7 @@ class JobManager:
         progress: int,
         message: str | None = None,
         error: str | None = None,
+        meta: dict[str, Any] | None = None,
     ) -> None:
         """
         Notify status update via callback if set.
@@ -198,6 +207,7 @@ class JobManager:
                     progress=progress,
                     message=message,
                     error=error,
+                    meta=meta,
                 )
             except Exception as e:
                 logger.warning(
@@ -455,201 +465,271 @@ class JobManager:
         Returns:
             Dictionary with success status and results.
         """
-        async with self.download_semaphore:
-            logger.info("Starting download execution for job %s", job_id)
+        logger.info("Starting download execution for job %s", job_id)
 
-            if self.is_cancelled(job_id):
-                logger.info("Job %s was cancelled before starting", job_id)
-                return {"success": False, "cancelled": True}
+        if self.is_cancelled(job_id):
+            logger.info("Job %s was cancelled before starting", job_id)
+            return {"success": False, "cancelled": True}
 
-            await self._wait_if_paused(job_id)
-            await self._notify_status(job_id, "RUNNING", 0, "Starting download")
+        await self._wait_if_paused(job_id)
+        await self._notify_status(job_id, "RUNNING", 0, "Starting download")
 
-            # Pre-fetch book titles for better progress messages
-            titles: dict[str, str] = {}
-            try:
-                async for session in get_session():
-                    stmt = select(Book).where(Book.asin.in_(asins))
-                    result = await session.execute(stmt)
-                    books = result.scalars().all()
-                    titles = {book.asin: book.title for book in books}
-                    break
-            except Exception as e:
-                logger.warning("Could not fetch book titles: %s", e)
+        # Pre-fetch book titles for better progress messages
+        titles: dict[str, str] = {}
+        try:
+            async for session in get_session():
+                stmt = select(Book).where(Book.asin.in_(asins))
+                result = await session.execute(stmt)
+                books = result.scalars().all()
+                titles = {book.asin: book.title for book in books}
+                break
+        except Exception as e:
+            logger.warning("Could not fetch book titles: %s", e)
 
-            callback = self._progress_callbacks.get(job_id)
-            results: list[dict[str, Any]] = []
-            total = len(asins)
-            completed_count = 0
-            results_lock = asyncio.Lock()
+        callback = self._progress_callbacks.get(job_id)
+        total = len(asins)
+        completed_count = 0
+        results_lock = asyncio.Lock()
 
-            # Semaphore to limit parallel downloads to 5
-            download_limit = asyncio.Semaphore(5)
+        # Byte-level progress per ASIN: (current_bytes, total_bytes)
+        progress_bytes: dict[str, tuple[int, int]] = {}
+        progress_dirty = asyncio.Event()
+        last_emit_at = 0.0
+        last_emit_progress = -1
 
-            async def download_one(asin: str) -> dict[str, Any]:
-                nonlocal completed_count
-                title = titles.get(asin, asin)
+        async def _publish_progress_loop() -> None:
+            nonlocal last_emit_at, last_emit_progress
+            last_bytes_sum = 0
+            last_bytes_at = monotonic()
+            while True:
+                await progress_dirty.wait()
+                progress_dirty.clear()
+                await self._wait_if_paused(job_id)
+                if self.is_cancelled(job_id):
+                    return
 
-                async with download_limit:
-                    await self._wait_if_paused(job_id)
-                    if self.is_cancelled(job_id):
-                        return {"success": False, "asin": asin, "cancelled": True}
+                now = monotonic()
+                if now - last_emit_at < 0.5:
+                    continue
 
-                    # Log start
-                    formatted = self._append_job_log(job_id, "INFO", f"Downloading: {title}")
-                    if callback:
-                        callback(-1, formatted)
+                totals = [v for v in progress_bytes.values() if v[1] > 0]
+                if totals:
+                    cur_sum = sum(v[0] for v in totals)
+                    tot_sum = sum(v[1] for v in totals)
+                    pct = int((cur_sum / tot_sum) * 100) if tot_sum > 0 else 0
+                else:
+                    cur_sum = 0
+                    tot_sum = 0
+                    pct = int((completed_count / total) * 100) if total else 0
 
-                    try:
-                        result = await self.audible_client.download(
-                            asin=asin,
-                            output_dir=self.settings.downloads_dir,
-                            cover_size="1215",
-                        )
+                if pct == last_emit_progress:
+                    continue
 
-                        async with results_lock:
-                            completed_count += 1
-                            progress = int((completed_count / total) * 100)
-                            message = f"Downloading: {completed_count}/{total} completed"
-                            await self._notify_status(job_id, "RUNNING", progress, message)
-                            if callback:
-                                callback(progress, message)
+                # Avoid spamming logs: keep status_message sparse, but always send meta for UI.
+                message = f"Downloading: {completed_count}/{total} completed" if pct % 5 == 0 else None
 
-                        if not result.get("success"):
-                            error_msg = result.get("stderr") or result.get("error") or "Unknown error"
-                            error_log = f"Failed: {title} - {error_msg[:400]}"
-                            logger.warning(
-                                "Download failed for ASIN %s in job %s: %s",
-                                asin,
-                                job_id,
-                                error_msg[:200],
-                            )
-                            formatted = self._append_job_log(job_id, "ERROR", error_log)
-                            if callback:
-                                callback(-1, formatted)
-                        else:
-                            formatted = self._append_job_log(job_id, "INFO", f"Completed: {title}")
-                            if callback:
-                                callback(-1, formatted)
+                bytes_per_sec = 0.0
+                dt = max(0.001, now - last_bytes_at)
+                if cur_sum >= last_bytes_sum:
+                    bytes_per_sec = (cur_sum - last_bytes_sum) / dt
+                last_bytes_sum = cur_sum
+                last_bytes_at = now
 
-                        return result
+                meta = None
+                if tot_sum > 0:
+                    meta = {
+                        "download_bytes_current": cur_sum,
+                        "download_bytes_total": tot_sum,
+                        "download_bytes_per_sec": bytes_per_sec,
+                    }
 
-                    except Exception as e:
-                        logger.exception(
-                            "Exception downloading ASIN %s in job %s",
+                await self._notify_status(job_id, "RUNNING", pct, message, meta=meta)
+                if callback and message:
+                    callback(pct, message)
+
+                last_emit_progress = pct
+                last_emit_at = now
+
+        progress_task = asyncio.create_task(_publish_progress_loop(), name=f"dl-progress-{job_id}")
+
+        async def download_one(asin: str) -> dict[str, Any]:
+            nonlocal completed_count
+            title = titles.get(asin, asin)
+
+            async with self.download_semaphore:
+                await self._wait_if_paused(job_id)
+                if self.is_cancelled(job_id):
+                    return {"success": False, "asin": asin, "cancelled": True}
+
+                formatted = self._append_job_log(job_id, "INFO", f"Downloading: {title}")
+                if callback:
+                    callback(-1, formatted)
+
+                def _progress_cb(cur_b: int, tot_b: int) -> None:
+                    if tot_b <= 0:
+                        return
+                    progress_bytes[asin] = (cur_b, tot_b)
+                    progress_dirty.set()
+
+                try:
+                    result = await self.audible_client.download(
+                        asin=asin,
+                        output_dir=self.settings.downloads_dir,
+                        cover_size="1215",
+                        progress_callback=_progress_cb,
+                    )
+
+                    async with results_lock:
+                        completed_count += 1
+                        cur_tot = progress_bytes.get(asin)
+                        if cur_tot and cur_tot[1] > 0:
+                            progress_bytes[asin] = (cur_tot[1], cur_tot[1])
+                        progress_dirty.set()
+
+                    if not result.get("success"):
+                        error_msg = result.get("stderr") or result.get("error") or "Unknown error"
+                        error_log = f"Failed: {title} - {error_msg[:400]}"
+                        logger.warning(
+                            "Download failed for ASIN %s in job %s: %s",
                             asin,
                             job_id,
+                            error_msg[:200],
                         )
-                        async with results_lock:
-                            completed_count += 1
-                        formatted = self._append_job_log(job_id, "ERROR", f"Exception {title}: {str(e)[:500]}")
+                        formatted = self._append_job_log(job_id, "ERROR", error_log)
                         if callback:
                             callback(-1, formatted)
-                        return {"success": False, "asin": asin, "error": str(e)}
+                    else:
+                        formatted = self._append_job_log(job_id, "INFO", f"Completed: {title}")
+                        if callback:
+                            callback(-1, formatted)
 
-            # Run all downloads in parallel (limited by semaphore)
-            tasks = [download_one(asin) for asin in asins]
+                    return result
+
+                except Exception as e:
+                    logger.exception("Exception downloading ASIN %s in job %s", asin, job_id)
+                    async with results_lock:
+                        completed_count += 1
+                        progress_dirty.set()
+                    formatted = self._append_job_log(job_id, "ERROR", f"Exception {title}: {str(e)[:500]}")
+                    if callback:
+                        callback(-1, formatted)
+                    return {"success": False, "asin": asin, "error": str(e)}
+
+        try:
+            tasks = [asyncio.create_task(download_one(asin), name=f"download-one-{asin}") for asin in asins]
             results = await asyncio.gather(*tasks)
+        finally:
+            progress_task.cancel()
+            try:
+                await progress_task
+            except asyncio.CancelledError:
+                pass
+            except Exception:
+                pass
 
-            # Final status
-            success = all(r.get("success", False) for r in results)
-            successful_count = sum(1 for r in results if r.get("success"))
-            failed_results = [r for r in results if not r.get("success", False)]
-            failed_asins = [r.get("asin") for r in failed_results if r.get("asin")]
+        success = all(r.get("success", False) for r in results)
+        successful_count = sum(1 for r in results if r.get("success"))
+        failed_results = [r for r in results if not r.get("success", False)]
+        failed_asins = [r.get("asin") for r in failed_results if r.get("asin")]
 
-            if callback:
-                callback(100, "Download complete")
-                callback(-1, self._format_log_line("INFO", "Download complete"))
+        if callback:
+            callback(100, "Download complete")
+            callback(-1, self._format_log_line("INFO", "Download complete"))
 
-            # Persist a result summary for the UI/debugging.
-            result_summary = {
-                "task_type": "DOWNLOAD",
-                "total": total,
-                "successful": successful_count,
-                "failed": len(failed_results),
-                "failed_asins": failed_asins,
-            }
+        result_summary = {
+            "task_type": "DOWNLOAD",
+            "total": total,
+            "successful": successful_count,
+            "failed": len(failed_results),
+            "failed_asins": failed_asins,
+        }
 
-            # Update local paths in database for successful items (even if some failed).
-            async for session in get_session():
-                # Store result_json on the job record.
-                res_job = await session.execute(select(Job).where(Job.id == job_id))
-                job_row = res_job.scalar_one_or_none()
-                if job_row:
-                    job_row.result_json = json.dumps(result_summary, ensure_ascii=False)
-                    session.add(job_row)
+        # Update local paths in database for successful items (even if some failed).
+        async for session in get_session():
+            res_job = await session.execute(select(Job).where(Job.id == job_id))
+            job_row = res_job.scalar_one_or_none()
+            if job_row:
+                job_row.result_json = json.dumps(result_summary, ensure_ascii=False)
+                session.add(job_row)
 
-                for res in results:
-                    if res.get("success"):
-                        asin = res.get("asin")
-                        if not asin:
-                            continue
+            for res in results:
+                if not res.get("success"):
+                    continue
 
-                        # Find files
-                        files = res.get("files", [])
-                        local_aax = next((f for f in files if f.endswith(".aax") or f.endswith(".aaxc")), None)
-                        local_voucher = next((f for f in files if f.endswith(".voucher")), None)
-                        local_cover = next((f for f in files if f.endswith(".jpg") or f.endswith(".png")), None)
+                asin = res.get("asin")
+                if not asin:
+                    continue
 
-                        # Update DB
-                        stmt = select(Book).where(Book.asin == asin)
-                        result = await session.execute(stmt)
-                        book = result.scalar_one_or_none()
+                files = res.get("files", [])
+                local_aax = next((f for f in files if f.endswith(".aax") or f.endswith(".aaxc")), None)
+                local_voucher = next((f for f in files if f.endswith(".voucher")), None)
+                local_cover = next((f for f in files if f.endswith(".jpg") or f.endswith(".png")), None)
 
-                        # Get title from book record or result
-                        book_title = (book.title if book else None) or res.get("title") or asin
+                stmt = select(Book).where(Book.asin == asin)
+                result = await session.execute(stmt)
+                book = result.scalar_one_or_none()
 
-                        # Update download manifest
-                        self._update_download_manifest(
-                            asin=asin,
-                            title=book_title,
-                            aaxc_path=local_aax,
-                            voucher_path=local_voucher,
-                            cover_path=local_cover,
-                        )
+                book_title = (book.title if book else None) or res.get("title") or asin
 
-                        if book:
-                            if local_aax:
-                                book.local_path_aax = str(local_aax)
-                            if local_voucher:
-                                book.local_path_voucher = str(local_voucher)
-                            if local_cover:
-                                book.local_path_cover = str(local_cover)
-                            book.status = BookStatus.DOWNLOADED
-                            session.add(book)
-
-                await session.commit()
-                break
-
-            if success:
-                await self._notify_status(
-                    job_id,
-                    "COMPLETED",
-                    100,
-                    f"Downloaded {successful_count}/{total} items",
-                )
-                logger.info("Download job %s completed successfully", job_id)
-            else:
-                await self._notify_status(
-                    job_id,
-                    "FAILED",
-                    100,
-                    f"Downloaded {successful_count}/{total} items (some failed)",
-                    error=f"{len(failed_results)} item(s) failed. See logs for details.",
-                )
-                logger.warning(
-                    "Download job %s completed with failures: %d/%d succeeded",
-                    job_id,
-                    successful_count,
-                    total,
+                self._update_download_manifest(
+                    asin=asin,
+                    title=book_title,
+                    aaxc_path=local_aax,
+                    voucher_path=local_voucher,
+                    cover_path=local_cover,
                 )
 
-            return {
-                "success": success,
-                "results": results,
-                "successful_count": successful_count,
-                "total_count": total,
-            }
+                if book:
+                    if local_aax:
+                        book.local_path_aax = str(local_aax)
+                    if local_voucher:
+                        book.local_path_voucher = str(local_voucher)
+                    if local_cover:
+                        book.local_path_cover = str(local_cover)
+                    book.status = BookStatus.DOWNLOADED
+                    session.add(book)
+
+            await session.commit()
+            break
+
+        if success:
+            await self._notify_status(
+                job_id,
+                "COMPLETED",
+                100,
+                f"Downloaded {successful_count}/{total} items",
+            )
+            logger.info("Download job %s completed successfully", job_id)
+        else:
+            error_detail: str | None = None
+            if total == 1 and failed_results:
+                r0 = failed_results[0]
+                err0 = (r0.get("stderr") or r0.get("error") or "").strip()
+                asin0 = r0.get("asin") or (asins[0] if asins else "")
+                title0 = titles.get(str(asin0), str(asin0))
+                if err0:
+                    error_detail = f"Failed: {title0} - {err0[:400]}"
+
+            await self._notify_status(
+                job_id,
+                "FAILED",
+                100,
+                f"Downloaded {successful_count}/{total} items (some failed)",
+                error=error_detail or f"{len(failed_results)} item(s) failed. See logs for details.",
+            )
+            logger.warning(
+                "Download job %s completed with failures: %d/%d succeeded",
+                job_id,
+                successful_count,
+                total,
+            )
+
+        return {
+            "success": success,
+            "results": results,
+            "successful_count": successful_count,
+            "total_count": total,
+        }
 
     async def _execute_sync(self, job_id: UUID) -> dict[str, Any]:
         """
@@ -869,6 +949,76 @@ class JobManager:
             await self._notify_status(job_id, "FAILED", 0, error=str(e))
             return {"success": False, "error": str(e)}
 
+    def _make_conversion_progress_wrapper(
+        self,
+        job_id: UUID,
+        callback: Callable[[int, str], None] | None,
+    ) -> Callable[[int, str, dict[str, Any] | None], None]:
+        """
+        Create a conversion progress callback that:
+        - Treats negative percent as log lines (job log + callback(-1, ...))
+        - Emits sparse status messages (every 5%)
+        - Emits structured conversion telemetry in status.meta (throttled to <= 2/sec)
+        """
+        last_message_progress = 0
+        last_meta_time = 0.0
+        meta_throttle_interval = 0.5  # 500ms = 2 updates/sec max
+
+        def progress_wrapper(percent: int, line: str, telemetry: dict[str, Any] | None = None) -> None:
+            nonlocal last_message_progress, last_meta_time
+
+            if percent < 0:
+                if not line:
+                    return
+                trimmed = line if len(line) <= 2000 else (line[:2000] + "…")
+                formatted = self._append_job_log(job_id, "INFO", trimmed)
+                if callback:
+                    callback(-1, formatted)
+                return
+
+            if callback:
+                callback(percent, line)
+
+            significant_progress = percent >= last_message_progress + 5
+            if significant_progress:
+                last_message_progress = percent
+                asyncio.create_task(
+                    self._notify_status(
+                        job_id,
+                        "RUNNING",
+                        percent,
+                        f"Converting: {percent}%",
+                        meta=None,
+                    )
+                )
+
+            if telemetry is None:
+                return
+
+            meta: dict[str, Any] = {}
+            for k in ["convert_current_ms", "convert_total_ms", "convert_speed_x", "convert_bitrate_kbps"]:
+                if k in telemetry:
+                    meta[k] = telemetry[k]
+            if not meta:
+                return
+
+            now = monotonic()
+            if now - last_meta_time < meta_throttle_interval:
+                return
+            last_meta_time = now
+
+            asyncio.create_task(
+                self._notify_status(
+                    job_id,
+                    "RUNNING",
+                    percent,
+                    message=None,
+                    meta=meta,
+                )
+            )
+
+        return progress_wrapper
+
     async def _execute_conversion(
         self,
         job_id: UUID,
@@ -969,40 +1119,59 @@ class JobManager:
                     # 2. If still missing (or rescue failed), try to extract from AAXC
                     if not chapters_file.exists():
                          logger.info("Attempting to extract chapters from AAXC file...")
-                         if await self._extract_chapters_from_aax(input_file, chapters_file):
+                         if await self._extract_chapters_from_aax(input_file, chapters_file, asin):
                              logger.info("Successfully extracted chapters to %s", chapters_file)
                          else:
                              logger.warning("Could not recover chapters file.")
 
+                # Self-healing: Check for cover art
+                # AAXtoMP3 expects {stem}_{resolution}.jpg
+                # We check for any jpg starting with the stem
+                try:
+                    cover_candidates = list(input_file.parent.glob(f"{glob.escape(input_file.stem)}_*.jpg"))
+                    
+                    # Try to rescue from downloads if not found and we are in completed
+                    if not cover_candidates and self.settings.completed_dir in input_file.parents:
+                         dl_candidates = list(self.settings.downloads_dir.glob(f"{glob.escape(input_file.stem)}_*.jpg"))
+                         if dl_candidates:
+                             for c in dl_candidates:
+                                 try:
+                                     shutil.copy(str(c), str(input_file.parent / c.name))
+                                     cover_candidates.append(input_file.parent / c.name)
+                                     logger.info("Rescued cover art from downloads: %s", c.name)
+                                 except Exception:
+                                     pass
 
-            last_progress = 0
+                    if not cover_candidates:
+                        logger.warning("Cover art missing for %s. Attempting to download...", input_file.name)
+                        # Get book from DB to find URL
+                        async for session in get_session():
+                            stmt = select(Book).where(Book.asin == asin)
+                            res = await session.execute(stmt)
+                            book = res.scalar_one_or_none()
+                            if book and book.product_images_json:
+                                try:
+                                    images = json.loads(book.product_images_json)
+                                    if isinstance(images, dict):
+                                        # Get highest res
+                                        url = images.get("1215") or images.get("500") or list(images.values())[0]
+                                        if url:
+                                            # Save as _1215.jpg to match AAXtoMP3 expectation
+                                            target_cover = input_file.parent / f"{input_file.stem}_1215.jpg"
+                                            async with httpx.AsyncClient() as client:
+                                                resp = await client.get(url, follow_redirects=True)
+                                                if resp.status_code == 200:
+                                                    target_cover.write_bytes(resp.content)
+                                                    logger.info("Downloaded cover art to %s", target_cover)
+                                                else:
+                                                    logger.error("Failed to download cover: %s", resp.status_code)
+                                except Exception as e:
+                                    logger.error("Failed to parse image JSON or download: %s", e)
+                            break
+                except Exception as e:
+                    logger.error("Error checking/rescuing cover art: %s", e)
 
-            def progress_wrapper(percent: int, line: str) -> None:
-                nonlocal last_progress
-                if percent < 0:
-                    # Treat as log line.
-                    if not line:
-                        return
-                    trimmed = line if len(line) <= 2000 else (line[:2000] + "…")
-                    formatted = self._append_job_log(job_id, "INFO", trimmed)
-                    if callback:
-                        callback(-1, formatted)
-                    return
-
-                if callback:
-                    callback(percent, line)
-
-                # Also update via status callback for significant progress
-                if percent >= 0 and percent > last_progress + 5:  # Every 5%
-                    last_progress = percent
-                    asyncio.create_task(
-                        self._notify_status(
-                            job_id,
-                            "RUNNING",
-                            percent,
-                            f"Converting: {percent}%",
-                        )
-                    )
+            progress_wrapper = self._make_conversion_progress_wrapper(job_id, callback)
 
             try:
                 result = await self.converter.convert(
@@ -1079,19 +1248,35 @@ class JobManager:
                 else:
                     # Priority for error message: detected_errors[0] > error > stderr > Unknown error
                     detected = result.get("detected_errors", [])
-                    error_msg = (
+                    raw_error = (
                         (detected[0] if detected else None)
                         or result.get("error")
                         or result.get("stderr")
                         or "Unknown error"
                     )
+                    
+                    # Map to user-friendly error messages
+                    friendly_error = raw_error
+                    lower_err = str(raw_error).lower()
+                    
+                    if "file not found" in lower_err and "chapters.json" in lower_err:
+                        friendly_error = "Missing metadata file (chapters.json). Please delete this book and re-download it to fix."
+                    elif "cover file not found" in lower_err:
+                        friendly_error = "Cover art file missing. Please delete this book and re-download it to fix."
+                    elif "operation not permitted" in lower_err:
+                        friendly_error = "Permission error moving file. The destination file might be locked or owned by another user."
+                    elif "no output files generated" in lower_err:
+                        friendly_error = "Conversion produced no files. Check logs for ffmpeg errors."
+                    elif "duration mismatch" in lower_err:
+                        friendly_error = "Integrity check failed: Output duration does not match input."
+
                     await self._notify_status(
                         job_id,
                         "FAILED",
                         0,
-                        error=str(error_msg)[:500],  # Truncate long errors
+                        error=str(friendly_error)[:500],  # Truncate long errors
                     )
-                    logger.error("Conversion job %s failed: %s", job_id, str(error_msg)[:200])
+                    logger.error("Conversion job %s failed: %s", job_id, str(raw_error)[:200])
 
                     # Update Book status to FAILED
                     async for session in get_session():
@@ -1116,7 +1301,7 @@ class JobManager:
                         output_path=None,
                         success=False,
                         started_at=started_at,
-                        error=str(error_msg)[:500],
+                        error=str(raw_error)[:500],
                     )
 
                 return result
@@ -1126,13 +1311,14 @@ class JobManager:
                 await self._notify_status(job_id, "FAILED", 0, error=str(e))
                 return {"success": False, "error": str(e)}
 
-    async def _extract_chapters_from_aax(self, input_file: Path, output_json: Path) -> bool:
+    async def _extract_chapters_from_aax(self, input_file: Path, output_json: Path, asin: str | None = None) -> bool:
         """
         Extract chapter metadata from AAX/AAXC file using ffprobe.
         
         Args:
             input_file: Path to the audio file.
             output_json: Path to write the JSON metadata to.
+            asin: ASIN of the book (optional, for metadata).
             
         Returns:
             True if successful, False otherwise.
@@ -1191,9 +1377,21 @@ class JobManager:
                     "start_offset_ms": start_ms,
                     "length_ms": length_ms
                 })
+            
+            # Wrap in audible-cli structure required by AAXtoMP3
+            wrapper = {
+                "content_metadata": {
+                    "chapter_info": {
+                        "chapters": normalized_chapters
+                    },
+                    "content_reference": {
+                        "asin": asin or ""
+                    }
+                }
+            }
                 
             with open(output_json, "w", encoding="utf-8") as f:
-                json.dump(normalized_chapters, f, indent=2)
+                json.dump(wrapper, f, indent=2)
                 
             logger.info("Extracted %d chapters to %s", len(normalized_chapters), output_json)
             return True

@@ -9,4 +9,6 @@ export {
   formatDurationVerbose,
   formatBytes,
   formatPercentage,
+  formatTime,
+  formatMBps,
 } from "./format";

@@ -74,7 +74,9 @@ export function LibraryToolbar({
   className,
 }: LibraryToolbarProps) {
   const [localSearch, setLocalSearch] = React.useState(searchValue);
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(Boolean(searchValue));
   const debounceTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const searchInputRef = React.useRef<HTMLInputElement | null>(null);
 
   // Debounced search
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +104,18 @@ export function LibraryToolbar({
   // Sync local search with external value
   React.useEffect(() => {
     setLocalSearch(searchValue);
+    setIsSearchExpanded(Boolean(searchValue));
   }, [searchValue]);
+
+  const expandSearch = () => {
+    setIsSearchExpanded(true);
+    // Let the input mount/resize before focusing
+    requestAnimationFrame(() => searchInputRef.current?.focus());
+  };
+
+  const collapseSearch = () => {
+    setIsSearchExpanded(false);
+  };
 
   const handleFilterChange = (value: string) => {
     if (value === "all") {
@@ -141,26 +154,13 @@ export function LibraryToolbar({
         className
       )}
     >
-      {/* Search */}
-      <div className="relative flex-1 min-w-[200px] max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          type="search"
-          role="searchbox"
-          placeholder="Search books..."
-          value={localSearch}
-          onChange={handleSearchChange}
-          className="pl-9"
-        />
-      </div>
-
       {/* Filter */}
       <Select
         value={filterValue}
         onValueChange={handleFilterChange}
       >
         <SelectTrigger
-          className="w-[160px]"
+          className="w-[190px]"
           aria-label="Filter by status"
         >
           <Filter className="mr-2 h-4 w-4" />
@@ -292,6 +292,52 @@ export function LibraryToolbar({
           )}
         >
           <List className="h-4 w-4" />
+        </Button>
+      </div>
+
+      {/* Search (right-justified; expands left) */}
+      <div className="ml-auto flex items-center justify-end">
+        <div
+          className={cn(
+            "relative overflow-hidden transition-all duration-200 ease-out",
+            isSearchExpanded ? "w-[280px] opacity-100" : "w-0 opacity-0 pointer-events-none"
+          )}
+          aria-hidden={!isSearchExpanded}
+        >
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            ref={searchInputRef}
+            type="search"
+            role="searchbox"
+            placeholder="Search books..."
+            value={localSearch}
+            onChange={handleSearchChange}
+            tabIndex={isSearchExpanded ? 0 : -1}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                collapseSearch();
+                (e.currentTarget as HTMLInputElement).blur();
+              }
+            }}
+            onBlur={() => {
+              if (!localSearch.trim()) collapseSearch();
+            }}
+            className="pl-9 pr-3"
+          />
+        </div>
+
+        <Button
+          variant="outline"
+          size="icon"
+          className={cn("rounded-full", isSearchExpanded && "ml-2")}
+          aria-label={isSearchExpanded ? "Focus search" : "Open search"}
+          aria-expanded={isSearchExpanded}
+          onClick={() => {
+            if (!isSearchExpanded) expandSearch();
+            else searchInputRef.current?.focus();
+          }}
+        >
+          <Search className="h-4 w-4" />
         </Button>
       </div>
     </div>

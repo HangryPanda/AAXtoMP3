@@ -4,7 +4,7 @@
 # ===========================================
 # Stage 1: Install dependencies
 # ===========================================
-FROM node:20-alpine AS deps
+FROM node:24-alpine AS deps
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN npm ci --only=production
 # ===========================================
 # Stage 2: Build application
 # ===========================================
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -35,7 +35,7 @@ RUN npm run build
 # ===========================================
 # Stage 3: Production runner
 # ===========================================
-FROM node:20-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 

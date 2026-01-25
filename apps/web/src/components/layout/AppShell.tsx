@@ -17,6 +17,9 @@ export interface AppShellProps {
     activeJobCount?: number;
     collapsed?: boolean;
     onJobsClick?: () => void;
+    onTasksClick?: () => void;
+    showRepairProgressCard?: boolean;
+    onToggleRepairProgressCard?: () => void;
   };
   headerProps?: {
     title?: string;

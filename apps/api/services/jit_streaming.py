@@ -264,11 +264,16 @@ class JITStreamingService:
 
             try:
                 logger.debug("Launching FFmpeg: %s", " ".join(cmd[:5]) + "...")
-                process = await asyncio.create_subprocess_exec(
-                    *cmd,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE,
-                )
+                try:
+                    process = await asyncio.create_subprocess_exec(
+                        *cmd,
+                        stdout=asyncio.subprocess.PIPE,
+                        stderr=asyncio.subprocess.PIPE,
+                    )
+                except Exception as e:
+                    logger.error("Failed to launch FFmpeg for %s: %s", book.asin, e)
+                    raise JITStreamingError(f"Failed to launch FFmpeg: {e}") from e
+
                 self.active_processes[book.asin] = process
 
                 chunk_size = 8192

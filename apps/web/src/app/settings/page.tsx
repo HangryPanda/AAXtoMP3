@@ -25,6 +25,7 @@ export default function SettingsPage() {
   const resetSettingsMutation = useResetSettings();
   const addToast = useUIStore((state) => state.addToast);
   const setJobDrawerOpen = useUIStore((state) => state.setJobDrawerOpen);
+  const openProgressPopover = useUIStore((s) => s.openProgressPopover);
 
   const { data: remoteSettings, isLoading } = useSettings();
   const [draft, setDraft] = useState<SettingsUpdate>({});
@@ -96,6 +97,7 @@ export default function SettingsPage() {
           activePath: pathname, 
           activeJobCount: activeJobs?.total ?? 0,
           onJobsClick: () => setJobDrawerOpen(true),
+          onTasksClick: () => openProgressPopover("history"),
         }}
         headerProps={{ title: "Settings" }}
       >
@@ -112,6 +114,7 @@ export default function SettingsPage() {
         activePath: pathname, 
         activeJobCount: activeJobs?.total ?? 0,
         onJobsClick: () => setJobDrawerOpen(true),
+        onTasksClick: () => openProgressPopover("history"),
       }}
       headerProps={{ 
         title: "Settings",

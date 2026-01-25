@@ -41,6 +41,7 @@ services:
       MANIFEST_DIR: /specs
       AUDIBLE_AUTH_FILE: /audible-config/audibleAuth
       AUDIBLE_PROFILE: jc4369@gmail.com
+      AUDIBLE_CLI_PROGRESS_FORMAT: ndjson
     volumes:
       - ./apps/api:/app
       - ./core:/core:ro
@@ -49,6 +50,7 @@ services:
       - /Volumes/Media/Audiobooks/Converted:/data/converted
       - /Volumes/Media/Audiobooks/Completed:/data/completed
       - ~/.audible:/audible-config:ro
+      - ~/.audible:/root/.audible:ro
     ports:
       - "8000:8000"
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload

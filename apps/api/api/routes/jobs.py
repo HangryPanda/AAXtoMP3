@@ -137,15 +137,16 @@ async def create_download_job(
     request: JobCreateRequest,
     session: AsyncSession = Depends(get_session),
 ) -> JobCreateResponse:
-    """Queue a download job for one or more ASINs."""
+    """Queue download job(s) for one or more ASINs.
+
+    Uses a single job record for a batch download.
+    """
     asins = request.asins or ([request.asin] if request.asin else [])
 
     if not asins:
         raise HTTPException(status_code=400, detail="At least one ASIN is required")
 
-    # Create job record
     payload: dict[str, Any] = {"asins": asins}
-
     job = Job(
         task_type=JobType.DOWNLOAD,
         book_asin=asins[0] if len(asins) == 1 else None,
@@ -157,7 +158,6 @@ async def create_download_job(
     await session.commit()
     await session.refresh(job)
 
-    # Queue job for execution
     await job_manager.queue_download(job.id, asins)
 
     return JobCreateResponse(
@@ -364,29 +364,43 @@ async def retry_job(
     payload = _parse_payload(job.payload_json)
     now = datetime.utcnow()
 
+    # Determine original job and attempt number for retry tracking
+    original_id = job.original_job_id or job.id
+    next_attempt = job.attempt + 1
+
     if job.task_type == JobType.DOWNLOAD:
-        asins = payload.get("asins") or []
-        if not isinstance(asins, list) or not asins:
+        # Support both the current payload format ({asins:[...]})
+        # and legacy format ({asin:"..."}).
+        asins = payload.get("asins")
+        if isinstance(asins, list) and asins:
+            retry_asins = asins
+        else:
+            legacy_asin = payload.get("asin")
+            retry_asins = [legacy_asin] if isinstance(legacy_asin, str) and legacy_asin else []
+
+        if not retry_asins:
             raise HTTPException(status_code=400, detail="Download job has no ASINs to retry")
 
-        new_payload: dict[str, Any] = {"asins": asins}
+        new_payload: dict[str, Any] = {"asins": retry_asins}
         new_job = Job(
             task_type=JobType.DOWNLOAD,
-            book_asin=asins[0] if len(asins) == 1 else None,
+            book_asin=retry_asins[0] if len(retry_asins) == 1 else None,
             status=JobStatus.PENDING,
             payload_json=json.dumps(new_payload, ensure_ascii=False),
             updated_at=now,
+            attempt=next_attempt,
+            original_job_id=original_id,
         )
         session.add(new_job)
         await session.commit()
         await session.refresh(new_job)
 
-        await job_manager.queue_download(new_job.id, asins)
+        await job_manager.queue_download(new_job.id, retry_asins)
 
         return JobRetryResponse(
             job_id=new_job.id,
             status=JobStatus.QUEUED,
-            message=f"Retry download job queued for {len(asins)} item(s)",
+            message=f"Retry download job queued for {len(retry_asins)} item(s) (attempt #{next_attempt})",
         )
 
     if job.task_type == JobType.CONVERT:
@@ -403,6 +417,8 @@ async def retry_job(
             status=JobStatus.PENDING,
             payload_json=json.dumps(new_payload, ensure_ascii=False),
             updated_at=now,
+            attempt=next_attempt,
+            original_job_id=original_id,
         )
         session.add(new_job)
         await session.commit()
@@ -418,7 +434,7 @@ async def retry_job(
         return JobRetryResponse(
             job_id=new_job.id,
             status=JobStatus.QUEUED,
-            message=f"Retry conversion job queued for {asin}",
+            message=f"Retry conversion job queued for {asin} (attempt #{next_attempt})",
         )
 
     raise HTTPException(status_code=400, detail=f"Retry not supported for job type {job.task_type.value}")
@@ -457,7 +473,7 @@ async def clear_job_history(
 
     if delete_logs:
         settings = get_settings()
-        log_dir = settings.data_dir / "job_logs"
+        log_dir = settings.downloads_dir / ".job_logs"
         for job_id_val in ids:
             try:
                 (log_dir / f"{job_id_val}.log").unlink(missing_ok=True)  # type: ignore[arg-type]
@@ -500,7 +516,7 @@ async def job_websocket(
 
         # Replay tail of persisted logs (if present) so completed jobs show history.
         settings = get_settings()
-        log_path = str(settings.data_dir / "job_logs" / f"{job_id}.log")
+        log_path = str(settings.downloads_dir / ".job_logs" / f"{job_id}.log")
         for line in _tail_lines(log_path, max_lines=500):
             await ws_manager.send_personal_message(
                 {"type": "log", "job_id": str(job_id), "line": line},
@@ -595,12 +611,63 @@ async def handle_job_status_update(
     progress: int,
     message: str | None = None,
     error: str | None = None,
+    meta: dict[str, Any] | None = None,
 ) -> None:
     """
     Handle status updates from JobManager.
     Updates the database and broadcasts via WebSocket.
     """
-    # 1. Broadcast via WebSocket
+    now = datetime.utcnow()
+    now_iso = now.isoformat() + "Z"
+    settings = get_settings()
+
+    # Default values for WebSocket payload
+    task_type: str | None = None
+    book_asin: str | None = None
+    attempt: int = 1
+    original_job_id: str | None = None
+
+    # Update Database first to get job metadata
+    async for session in get_session():
+        try:
+            stmt = select(Job).where(Job.id == job_id)
+            result = await session.execute(stmt)
+            job = result.scalar_one_or_none()
+
+            if job:
+                # Capture job metadata for WebSocket payload
+                task_type = job.task_type.value if job.task_type else None
+                book_asin = job.book_asin
+                attempt = job.attempt or 1
+                original_job_id = str(job.original_job_id) if job.original_job_id else None
+
+                # Update job in database
+                job.status = JobStatus(status)
+                job.progress_percent = progress
+                job.updated_at = now
+                if message:
+                    job.status_message = message
+                if error:
+                    job.error_message = error
+                if not job.log_file_path:
+                    job.log_file_path = str(settings.downloads_dir / ".job_logs" / f"{job_id}.log")
+
+                if status == "RUNNING" and not job.started_at:
+                    job.started_at = now
+
+                if status in ["COMPLETED", "FAILED", "CANCELLED"]:
+                    job.completed_at = now
+
+                session.add(job)
+                await session.commit()
+        except Exception as e:
+            # Log error but don't crash the job runner
+            print(f"Error updating job status in DB: {e}")
+
+        # Only need one session
+        break
+
+    # Broadcast via WebSocket (includes job metadata for proper frontend caching)
     payload = {
         "type": "status",
         "job_id": str(job_id),
@@ -608,16 +675,20 @@ async def handle_job_status_update(
         "progress": progress,
         "message": message,
         "error": error,
-        "updated_at": datetime.utcnow().isoformat() + "Z",
+        "meta": meta,
+        "updated_at": now_iso,
+        "task_type": task_type,
+        "book_asin": book_asin,
+        "attempt": attempt,
+        "original_job_id": original_job_id,
     }
-    
+
     # Send to specific job channel
     await ws_manager.send_personal_message(payload, str(job_id))
     # And to global jobs feed
     await ws_manager.send_personal_message(payload, "jobs")
 
     # Also emit log lines so the "View logs" UI has something to display.
-    now_iso = datetime.utcnow().isoformat() + "Z"
     if message:
         await ws_manager.send_personal_message(
             {"type": "log", "line": f"{now_iso} [INFO] {message}"},
@@ -628,38 +699,6 @@ async def handle_job_status_update(
             {"type": "log", "line": f"{now_iso} [ERROR] {error}"},
             str(job_id),
         )
-
-    # 2. Update Database
-    # We need to manually manage the session here since we're outside a request context
-    async for session in get_session():
-        try:
-            stmt = select(Job).where(Job.id == job_id)
-            result = await session.execute(stmt)
-            job = result.scalar_one_or_none()
-
-            if job:
-                job.status = JobStatus(status)
-                job.progress_percent = progress
-                job.updated_at = datetime.utcnow()
-                if message:
-                    job.status_message = message
-                if error:
-                    job.error_message = error
-                
-                if status == "RUNNING" and not job.started_at:
-                    job.started_at = datetime.utcnow()
-                
-                if status in ["COMPLETED", "FAILED", "CANCELLED"]:
-                    job.completed_at = datetime.utcnow()
-                
-                session.add(job)
-                await session.commit()
-        except Exception as e:
-            # Log error but don't crash the job runner
-            print(f"Error updating job status in DB: {e}")
-        
-        # Only need one session
-        break
 
 # Register the callback
 job_manager.set_status_callback(handle_job_status_update)

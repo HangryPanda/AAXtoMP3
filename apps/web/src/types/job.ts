@@ -27,6 +27,13 @@ export interface Job {
   completed_at: string | null;
   created_at: string;
   updated_at?: string;
+  // Retry tracking
+  attempt?: number;
+  original_job_id?: string | null;
+  // Download telemetry (optional; delivered via WebSocket status meta)
+  download_bytes_current?: number;
+  download_bytes_total?: number;
+  download_bytes_per_sec?: number;
 }
 
 export interface JobLogEntry {

@@ -1,11 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { LibraryToolbar } from "@/components/domain/LibraryToolbar";
+import { LibraryViewSwitcher } from "@/components/domain/LibraryViewSwitcher";
+import { JobsView } from "@/components/domain/JobsView";
 import { RepairProgressCard } from "@/components/domain/RepairProgressCard";
 import { useUIStore, useViewMode } from "@/store/uiStore";
+import { usePlayerStore } from "@/store/playerStore";
 import { formatDate, formatRelativeDate } from "@/lib/format";
+import { API_URL } from "@/lib/env";
 
 // Hooks
 import { useLibraryUrlParams } from "../hooks/useLibraryUrlParams";
@@ -28,6 +32,7 @@ export function LibraryContainer() {
   
   // URL Params
   const {
+    libraryView,
     searchQuery,
     filterStatus,
     contentType,
@@ -37,6 +42,7 @@ export function LibraryContainer() {
     sortOrder,
     page,
     hasActiveFilters,
+    setView,
     setSearch,
     setFilter,
     setContentType,
@@ -80,13 +86,50 @@ export function LibraryContainer() {
     isSyncing,
     repairMutation,
     handleRepair,
-    downloadBooks,
-    convertBook,
+    downloadBooks: rawDownloadBooks,
+    convertBook: rawConvertBook,
     handleDeleteBook,
-    handleBatchDownload,
-    handleBatchConvert,
+    handleBatchDownload: rawBatchDownload,
+    handleBatchConvert: rawBatchConvert,
     handleBatchDelete,
   } = useLibraryActions();
+
+  // Wrap download/convert actions to auto-switch views
+  const downloadBooks = useCallback(
+    (asins: string | string[]) => {
+      rawDownloadBooks(asins);
+      setView("downloading");
+    },
+    [rawDownloadBooks, setView]
+  );
+
+  const convertBook = useCallback(
+    (params: { asin: string }) => {
+      rawConvertBook(params);
+      setView("converting");
+    },
+    [rawConvertBook, setView]
+  );
+
+  const handleBatchDownload = useCallback(
+    (selectedBooks: string[]) => {
+      rawBatchDownload(selectedBooks);
+      if (selectedBooks.length > 0) {
+        setView("downloading");
+      }
+    },
+    [rawBatchDownload, setView]
+  );
+
+  const handleBatchConvert = useCallback(
+    (selectedBooks: string[]) => {
+      rawBatchConvert(selectedBooks);
+      if (selectedBooks.length > 0) {
+        setView("converting");
+      }
+    },
+    [rawBatchConvert, setView]
+  );
 
   // Selection
   const {
@@ -104,6 +147,10 @@ export function LibraryContainer() {
   const setViewMode = useUIStore((state) => state.setViewMode);
   const openProgressPopover = useUIStore((state) => state.openProgressPopover);
   const isRepairProgressCardVisible = useUIStore((s) => s.isRepairProgressCardVisible);
+  const addToast = useUIStore((state) => state.addToast);
+
+  // Player Store
+  const { loadBook, currentBookId, toggle, play } = usePlayerStore();
 
   // Derived
   const sortedBooks = useMemo(() => {
@@ -116,13 +163,80 @@ export function LibraryContainer() {
     }
   };
 
-  const handleBookPlay = (asin: string) => router.push(`/player?asin=${asin}`);
-  const handleLocalPlay = (id: string) => router.push(`/player?local_id=${id}`);
+  const handleBookPlay = async (asin: string) => {
+    if (currentBookId === asin) {
+      toggle();
+      return;
+    }
+
+    const book = booksData?.items.find(b => b.asin === asin);
+    if (book) {
+      const audioUrl = `${API_URL}/stream/${asin}`;
+      await loadBook(asin, audioUrl, book.title);
+      play();
+      addToast({ 
+        type: "info", 
+        title: "Now Playing", 
+        message: book.title, 
+        duration: 3000 
+      });
+    }
+  };
+
+  const handleLocalPlay = async (id: string) => {
+    const localId = `local:${id}`;
+    if (currentBookId === localId) {
+      toggle();
+      return;
+    }
+
+    // Find in preview or full local items
+    const item = 
+      localPreviewData?.items.find(i => i.id === id) || 
+      localItemsData?.items.find(i => i.id === id);
+
+    if (item) {
+      const audioUrl = `${API_URL}/stream/local/${id}`;
+      await loadBook(localId, audioUrl, item.title);
+      play();
+      addToast({ 
+        type: "info", 
+        title: "Now Playing", 
+        message: item.title, 
+        duration: 3000 
+      });
+    }
+  };
+
+  const handleBackToLibrary = useCallback(() => setView("library"), [setView]);
+
+  // Determine if we're in a progress view
+  const isProgressView = libraryView === "downloading" || libraryView === "converting";
 
   return (
     <div className="flex flex-col h-full">
-      {/* Stats Bar */}
-      <LibraryStats
+      {/* View Switcher */}
+      <div className="mb-6">
+        <LibraryViewSwitcher
+          activeView={libraryView}
+          onViewChange={setView}
+          totalBooks={repairPreview?.remote_total ?? syncStatusData?.total_books ?? booksData?.total ?? 0}
+        />
+      </div>
+
+      {/* Progress Views (Downloading / Converting) */}
+      {isProgressView && (
+        <JobsView
+          type={libraryView as "downloading" | "converting"}
+          onBackToLibrary={handleBackToLibrary}
+        />
+      )}
+
+      {/* Library View */}
+      {!isProgressView && (
+        <>
+          {/* Stats Bar */}
+          <LibraryStats
         totalBooks={repairPreview?.remote_total ?? syncStatusData?.total_books ?? booksData?.total ?? 0}
         downloadedCount={repairPreview?.downloaded_db_total ?? repairPreview?.downloaded_on_disk_remote_total ?? repairPreview?.downloaded_total ?? 0}
         convertedCount={repairPreview?.converted_db_total ?? repairPreview?.converted_m4b_titles_on_disk_total ?? repairPreview?.converted_total ?? 0}
@@ -269,6 +383,8 @@ export function LibraryContainer() {
           </div>
         )}
       </main>
+        </>
+      )}
     </div>
   );
 }

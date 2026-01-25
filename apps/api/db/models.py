@@ -7,6 +7,7 @@ from enum import Enum
 from typing import Any
 from uuid import UUID, uuid4
 
+import sqlalchemy as sa
 from pydantic import BaseModel, field_validator, model_validator
 from sqlmodel import JSON, Column, Field, SQLModel
 
@@ -340,7 +341,7 @@ class BookTechnical(SQLModel, table=True):
     sample_rate: int | None = None
     channels: int | None = None
     duration_ms: int | None = None
-    file_size: int | None = None
+    file_size: int | None = Field(default=None, sa_type=sa.BigInteger)
     extracted_at: datetime = Field(default_factory=datetime.utcnow)
     extractor_version: str | None = None
 
@@ -365,7 +366,7 @@ class BookScanState(SQLModel, table=True):
     book_asin: str = Field(foreign_key="books.asin", primary_key=True) # Unique identifier for the book this scan state belongs to
     file_path: str = Field(index=True, unique=True) # The canonical path to the media file
     file_mtime: float # Last modification time of the file
-    file_size: int    # Size of the file
+    file_size: int = Field(sa_type=sa.BigInteger)    # Size of the file
     # Optional: A fast hash (e.g., first/last N MB) for stricter change detection
     fast_hash: str | None = None
     extracted_at: datetime = Field(default_factory=datetime.utcnow)
@@ -396,6 +397,9 @@ class Job(JobBase, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     payload_json: str | None = Field(default=None, description="JSON payload with job-specific config")
+    # Retry tracking
+    attempt: int = Field(default=1, description="Attempt number (1 = original, 2+ = retries)")
+    original_job_id: UUID | None = Field(default=None, description="ID of the original job if this is a retry")
 
 
 class JobCreate(JobBase):
@@ -418,6 +422,9 @@ class JobRead(JobBase):
     completed_at: datetime | None
     created_at: datetime
     updated_at: datetime
+    # Retry tracking
+    attempt: int = 1
+    original_job_id: UUID | None = None
 
 
 class LocalItem(SQLModel, table=True):

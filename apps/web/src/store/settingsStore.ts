@@ -5,6 +5,7 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { safeLocalStorage } from "@/lib/utils";
 import type { Settings, SettingsUpdate } from "@/types";
 import { DEFAULT_SETTINGS } from "@/types";
 import { apiRequest } from "@/services/api";
@@ -130,7 +131,7 @@ export const useSettingsStore = create<SettingsStore>()(
     }),
     {
       name: "settings-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => safeLocalStorage),
       // Persist settings and last synced time
       partialize: (state) => ({
         settings: state.settings,

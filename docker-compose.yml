@@ -47,6 +47,7 @@ services:
       - ./core:/core:ro
       - ./specs:/specs
       - ~/.audible:/audible-config:ro
+      - ~/.audible:/home/appuser/.audible:ro
     ports:
       - "8000:8000"
     healthcheck:

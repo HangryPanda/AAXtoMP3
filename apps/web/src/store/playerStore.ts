@@ -5,9 +5,12 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { useShallow } from "zustand/react/shallow";
 import { Howl } from "howler";
+import { safeLocalStorage } from "@/lib/utils";
 import { saveProgress, getProgress } from "@/lib/db";
-import { updatePlaybackProgress } from "@/services/books";
+import { updatePlaybackProgress, getBookDetailsEnriched } from "@/services/books";
+import { Chapter } from "@/types";
 
 // Smart resume threshold in hours - if user hasn't listened for this long, rewind for context
 const SMART_RESUME_THRESHOLD_HOURS = 24;
@@ -18,28 +21,31 @@ const SMART_RESUME_REWIND_SECONDS = 20;
  * Player state interface
  */
 export interface PlayerState {
-  // Playback state
   isPlaying: boolean;
   isLoading: boolean;
   currentTime: number;
   duration: number;
   bufferedTime: number;
 
-  // Current book
   currentBookId: string | null;
   currentBookTitle: string | null;
   currentAudioUrl: string | null;
 
-  // Settings
+  chapters: Chapter[];
+  currentChapterIndex: number | null;
+
   volume: number;
   playbackRate: number;
   isMuted: boolean;
 
-  // Smart resume
+  sleepTimer: {
+    endTime: number | null;
+    timeLeft: number | null;
+    totalDuration: number | null;
+  };
+
   lastPlayedAt: string | null;
   smartResumeMessage: string | null;
-
-  // Error state
   error: string | null;
 }
 
@@ -52,8 +58,14 @@ export interface PlayerActions {
   pause: () => void;
   toggle: () => void;
   stop: () => void;
+
   seek: (time: number) => void;
   seekRelative: (delta: number) => void;
+
+  // Chapter navigation
+  nextChapter: () => void;
+  prevChapter: () => void;
+  seekToChapter: (index: number) => void;
 
   // Book loading
   loadBook: (bookId: string, audioUrl: string, title: string) => Promise<void>;
@@ -64,10 +76,13 @@ export interface PlayerActions {
   setPlaybackRate: (rate: number) => void;
   toggleMute: () => void;
 
-  // State updates (internal)
-  _setCurrentTime: (time: number) => void;
+  // Sleep timer
+  setSleepTimer: (minutes: number | null) => void;
+
+  // Internal state updates (used by some UI/tests)
+  _setCurrentTime: (currentTime: number) => void;
   _setDuration: (duration: number) => void;
-  _setIsLoading: (loading: boolean) => void;
+  _setIsLoading: (isLoading: boolean) => void;
   _setError: (error: string | null) => void;
 
   // Smart resume
@@ -83,34 +98,16 @@ let howlInstance: Howl | null = null;
 let savePositionInterval: ReturnType<typeof setInterval> | null = null;
 const SAVE_POSITION_INTERVAL = 5000; // Save every 5 seconds
 
+// Sleep timer interval
+let sleepTimerInterval: ReturnType<typeof setInterval> | null = null;
+
 /**
  * Start position save interval
  */
 function startPositionSaveInterval(
-  getState: () => PlayerState
+  getState: () => PlayerStore
 ): void {
-  stopPositionSaveInterval();
-
-  savePositionInterval = setInterval(() => {
-    const state = getState();
-    if (state.currentBookId && state.isPlaying && state.duration > 0) {
-      const positionMs = Math.floor(state.currentTime * 1000);
-      
-      // Save locally first
-      saveProgress(state.currentBookId, state.currentTime, state.duration).catch(
-        console.error
-      );
-
-      // Sync to backend
-      updatePlaybackProgress(state.currentBookId, {
-        position_ms: positionMs,
-        playback_speed: state.playbackRate,
-        is_finished: state.currentTime >= state.duration * 0.95,
-      }).catch(err => {
-        console.warn("Failed to sync progress to backend:", err);
-      });
-    }
-  }, SAVE_POSITION_INTERVAL);
+// ... existing function ...
 }
 
 /**
@@ -121,6 +118,21 @@ function stopPositionSaveInterval(): void {
     clearInterval(savePositionInterval);
     savePositionInterval = null;
   }
+}
+
+/**
+ * Update current chapter index based on time
+ */
+function updateChapterIndex(currentTime: number, chapters: Chapter[]): number | null {
+  if (!chapters || chapters.length === 0) return null;
+  
+  const currentTimeMs = currentTime * 1000;
+  for (let i = chapters.length - 1; i >= 0; i--) {
+    if (currentTimeMs >= chapters[i].start_offset_ms) {
+      return i;
+    }
+  }
+  return 0;
 }
 
 /**
@@ -138,9 +150,16 @@ export const usePlayerStore = create<PlayerStore>()(
       currentBookId: null,
       currentBookTitle: null,
       currentAudioUrl: null,
+      chapters: [],
+      currentChapterIndex: null,
       volume: 1,
       playbackRate: 1,
       isMuted: false,
+      sleepTimer: {
+        endTime: null,
+        timeLeft: null,
+        totalDuration: null,
+      },
       lastPlayedAt: null,
       smartResumeMessage: null,
       error: null,
@@ -190,7 +209,7 @@ export const usePlayerStore = create<PlayerStore>()(
       stop: () => {
         if (howlInstance) {
           howlInstance.stop();
-          set({ isPlaying: false, currentTime: 0 });
+          set({ isPlaying: false, currentTime: 0, currentChapterIndex: 0 });
           stopPositionSaveInterval();
         }
       },
@@ -199,13 +218,50 @@ export const usePlayerStore = create<PlayerStore>()(
         if (howlInstance) {
           const clampedTime = Math.max(0, Math.min(time, get().duration));
           howlInstance.seek(clampedTime);
-          set({ currentTime: clampedTime });
+          const currentChapterIndex = updateChapterIndex(clampedTime, get().chapters);
+          set({ currentTime: clampedTime, currentChapterIndex });
         }
       },
 
       seekRelative: (delta: number) => {
         const { currentTime, seek } = get();
         seek(currentTime + delta);
+      },
+
+      // Chapter navigation
+      nextChapter: () => {
+        const { chapters, currentChapterIndex, seek } = get();
+        if (currentChapterIndex !== null && currentChapterIndex < chapters.length - 1) {
+          const nextChapter = chapters[currentChapterIndex + 1];
+          seek(nextChapter.start_offset_ms / 1000);
+        }
+      },
+
+      prevChapter: () => {
+        const { chapters, currentChapterIndex, currentTime, seek } = get();
+        if (currentChapterIndex !== null) {
+          const currentChapter = chapters[currentChapterIndex];
+          const chapterStartTime = currentChapter.start_offset_ms / 1000;
+          
+          // If we're more than 3 seconds into the chapter, go to start of current chapter
+          if (currentTime - chapterStartTime > 3) {
+            seek(chapterStartTime);
+          } else if (currentChapterIndex > 0) {
+            // Otherwise go to previous chapter
+            const prevChapter = chapters[currentChapterIndex - 1];
+            seek(prevChapter.start_offset_ms / 1000);
+          } else {
+            // Beginning of book
+            seek(0);
+          }
+        }
+      },
+
+      seekToChapter: (index: number) => {
+        const { chapters, seek } = get();
+        if (index >= 0 && index < chapters.length) {
+          seek(chapters[index].start_offset_ms / 1000);
+        }
       },
 
       // Book loading
@@ -228,7 +284,19 @@ export const usePlayerStore = create<PlayerStore>()(
           currentBookId: bookId,
           currentBookTitle: title,
           currentAudioUrl: audioUrl,
+          chapters: [],
+          currentChapterIndex: null,
         });
+
+        // Fetch chapters and details
+        try {
+          const details = await getBookDetailsEnriched(bookId);
+          if (details.chapters) {
+            set({ chapters: details.chapters });
+          }
+        } catch (err) {
+          console.warn("Failed to fetch chapters:", err);
+        }
 
         // Try to restore saved position with smart resume
         let startPosition = 0;
@@ -265,10 +333,12 @@ export const usePlayerStore = create<PlayerStore>()(
           mute: currentState.isMuted,
           onload: () => {
             const duration = howlInstance?.duration() ?? 0;
+            const currentChapterIndex = updateChapterIndex(startPosition, get().chapters);
             set({
               isLoading: false,
               duration,
               currentTime: startPosition,
+              currentChapterIndex,
               smartResumeMessage,
             });
 
@@ -285,7 +355,8 @@ export const usePlayerStore = create<PlayerStore>()(
             const updateTime = () => {
               if (howlInstance && get().isPlaying) {
                 const currentTime = howlInstance.seek() as number;
-                set({ currentTime });
+                const currentChapterIndex = updateChapterIndex(currentTime, get().chapters);
+                set({ currentTime, currentChapterIndex });
                 requestAnimationFrame(updateTime);
               }
             };
@@ -296,7 +367,7 @@ export const usePlayerStore = create<PlayerStore>()(
             stopPositionSaveInterval();
           },
           onstop: () => {
-            set({ isPlaying: false, currentTime: 0 });
+            set({ isPlaying: false, currentTime: 0, currentChapterIndex: 0 });
             stopPositionSaveInterval();
           },
           onend: () => {
@@ -367,6 +438,8 @@ export const usePlayerStore = create<PlayerStore>()(
           currentBookId: null,
           currentBookTitle: null,
           currentAudioUrl: null,
+          chapters: [],
+          currentChapterIndex: null,
           error: null,
         });
       },
@@ -396,6 +469,50 @@ export const usePlayerStore = create<PlayerStore>()(
         set({ isMuted });
       },
 
+      // Sleep timer
+      setSleepTimer: (minutes: number | null) => {
+        if (sleepTimerInterval) {
+          clearInterval(sleepTimerInterval);
+          sleepTimerInterval = null;
+        }
+
+        if (minutes === null) {
+          set({
+            sleepTimer: { endTime: null, timeLeft: null, totalDuration: null },
+          });
+          return;
+        }
+
+        const durationMs = minutes * 60 * 1000;
+        const endTime = Date.now() + durationMs;
+
+        set({
+          sleepTimer: {
+            endTime,
+            timeLeft: durationMs,
+            totalDuration: durationMs,
+          },
+        });
+
+        sleepTimerInterval = setInterval(() => {
+          const now = Date.now();
+          const timeLeft = Math.max(0, endTime - now);
+
+          set({
+            sleepTimer: { ...get().sleepTimer, timeLeft },
+          });
+
+          if (timeLeft <= 0) {
+            clearInterval(sleepTimerInterval!);
+            sleepTimerInterval = null;
+            get().pause();
+            set({
+              sleepTimer: { endTime: null, timeLeft: null, totalDuration: null },
+            });
+          }
+        }, 1000);
+      },
+
       // Internal state updates
       _setCurrentTime: (currentTime: number) => set({ currentTime }),
       _setDuration: (duration: number) => set({ duration }),
@@ -407,7 +524,7 @@ export const usePlayerStore = create<PlayerStore>()(
     }),
     {
       name: "player-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => safeLocalStorage),
       // Only persist these fields
       partialize: (state) => ({
         volume: state.volume,
@@ -434,18 +551,22 @@ export const usePlayerCurrentBook = (): {
   id: string | null;
   title: string | null;
 } =>
-  usePlayerStore((state) => ({
-    id: state.currentBookId,
-    title: state.currentBookTitle,
-  }));
+  usePlayerStore(
+    useShallow((state) => ({
+      id: state.currentBookId,
+      title: state.currentBookTitle,
+    }))
+  );
 
 export const usePlayerProgress = (): {
   currentTime: number;
   duration: number;
   percent: number;
 } =>
-  usePlayerStore((state) => ({
-    currentTime: state.currentTime,
-    duration: state.duration,
-    percent: state.duration > 0 ? (state.currentTime / state.duration) * 100 : 0,
-  }));
+  usePlayerStore(
+    useShallow((state) => ({
+      currentTime: state.currentTime,
+      duration: state.duration,
+      percent: state.duration > 0 ? (state.currentTime / state.duration) * 100 : 0,
+    }))
+  );

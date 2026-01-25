@@ -54,8 +54,18 @@ export interface BookDetailsResponse {
   language?: string | null;
   chapters: BookDetailsChapter[];
   chapters_synthetic?: boolean;
+  technical?: TechnicalResponse | null;
   cover_url?: string | null;
   duration_total_ms?: number | null;
+}
+
+export interface TechnicalResponse {
+  format?: string | null;
+  bitrate?: number | null;
+  sample_rate?: number | null;
+  channels?: number | null;
+  duration_ms?: number | null;
+  file_size?: number | null;
 }
 
 export interface ProductImages {
@@ -226,7 +236,9 @@ export function canConvert(book: Book): boolean {
 
 // Helper to check if a book can be played
 export function canPlay(book: Book): boolean {
-  return book.status === "COMPLETED" && !!book.local_path_converted;
+  const hasConverted = book.status === "COMPLETED" && !!book.local_path_converted;
+  const hasSource = !!book.local_path_aax;
+  return hasConverted || hasSource;
 }
 
 // Helper to format runtime

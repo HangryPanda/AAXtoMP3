@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { 
   X, 
   Minus, 
@@ -16,7 +17,8 @@ import {
   FileText,
   XCircle,
   Pause,
-  Play
+  Play,
+  MoreVertical
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -25,15 +27,14 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 import { useUIStore } from "@/store/uiStore";
 import {
   useActiveJobs,
-  useJobs,
   useJobsFiltered,
   useRetryJob,
   usePauseJob,
   useResumeJob,
-  useClearJobHistory,
 } from "@/hooks/useJobs";
 import { Job, JobStatus, JobType, isJobActive } from "@/types";
 import { ConnectionState } from "@/services/websocket";
+import { formatMBps } from "@/lib/format";
 
 // Icons for job types
 const JOB_TYPE_ICONS: Record<JobType, React.ElementType> = {
@@ -109,26 +110,24 @@ export function ProgressPopover({
     closeProgressPopover, 
     minimizeProgressPopover, 
     maximizeProgressPopover,
-    updateProgressPopoverPosition 
+    updateProgressPopoverPosition,
+    setProgressPopoverTab,
+    clearProgressPopoverUI,
   } = useUIStore();
 
-  const [activeTab, setActiveTab] = React.useState<"active" | "failed" | "history">("active");
+  const activeTab = progressPopover.activeTab;
   const shouldPoll = progressPopover.isOpen && !progressPopover.isMinimized;
   
   const { data: activeJobsData } = useActiveJobs({
     enabled: progressPopover.isOpen,
     refetchInterval: false,
   });
-  const { data: failedCountData } = useJobsFiltered(
-    { status: "FAILED" as JobStatus, limit: 1 },
+
+  const { data: failedJobsData } = useJobsFiltered(
+    { status: "FAILED" as JobStatus, limit: 50 },
     { enabled: progressPopover.isOpen, refetchInterval: 30000, staleTime: 15000 }
   );
-  const failedCount = failedCountData?.total ?? 0;
 
-  const { data: failedJobsData } = useJobs("FAILED", {
-    enabled: shouldPoll && activeTab === "failed",
-    refetchInterval: false,
-  });
   const { data: historyJobsData } = useJobsFiltered(
     { limit: 50 },
     {
@@ -141,20 +140,33 @@ export function ProgressPopover({
   const { mutate: retryJobById } = useRetryJob();
   const { mutate: pauseJobById } = usePauseJob();
   const { mutate: resumeJobById } = useResumeJob();
-  const { mutate: clearHistory } = useClearJobHistory();
 
   const activeJobs = React.useMemo(() => 
     activeJobsData?.items.filter(isJobActive) || [], 
     [activeJobsData]
   );
-  const failedJobs = failedJobsData?.items || [];
+  const isAfterClear = React.useCallback(
+    (job: Job) => {
+      if (!progressPopover.clearedBeforeMs) return true;
+      const t = Date.parse(job.created_at);
+      return Number.isFinite(t) && t > progressPopover.clearedBeforeMs;
+    },
+    [progressPopover.clearedBeforeMs]
+  );
+
+  const failedJobs = React.useMemo(
+    () => (failedJobsData?.items ?? []).filter(isAfterClear),
+    [failedJobsData?.items, isAfterClear]
+  );
+  const failedCount = failedJobs.length;
   const historyJobs = React.useMemo(() => {
     const items = historyJobsData?.items ?? [];
     const statuses: JobStatus[] = ["COMPLETED", "FAILED", "CANCELLED"];
     return items
       .filter((j) => statuses.includes(j.status))
+      .filter(isAfterClear)
       .sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
-  }, [historyJobsData]);
+  }, [historyJobsData, isAfterClear]);
 
   // Refs for performance optimizations
   const cardRef = React.useRef<HTMLDivElement>(null);
@@ -394,6 +406,37 @@ export function ProgressPopover({
               Cancel all
             </Button>
           )}
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6"
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                aria-label="Tasks menu"
+              >
+                <MoreVertical className="h-3.5 w-3.5" />
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content
+                className="z-50 min-w-[200px] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2"
+                align="end"
+                sideOffset={4}
+              >
+                <DropdownMenu.Item
+                  className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  onSelect={() => {
+                    if (!window.confirm("Clear tasks from the popover UI? This does not delete jobs or logs.")) return;
+                    clearProgressPopoverUI();
+                  }}
+                >
+                  Clear tasks (popover only)
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
           <Button variant="ghost" size="icon" className="h-6 w-6" onClick={(e) => { e.stopPropagation(); minimizeProgressPopover(); }}>
             <Minus className="h-3 w-3" />
           </Button>
@@ -410,7 +453,7 @@ export function ProgressPopover({
             "flex-1 text-[11px] font-medium py-1 px-2 rounded-sm transition-colors",
             activeTab === "active" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
-          onClick={() => setActiveTab("active")}
+          onClick={() => setProgressPopoverTab("active")}
           role="tab"
           aria-selected={activeTab === "active"}
         >
@@ -421,7 +464,7 @@ export function ProgressPopover({
             "flex-1 text-[11px] font-medium py-1 px-2 rounded-sm transition-colors",
             activeTab === "failed" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
-          onClick={() => setActiveTab("failed")}
+          onClick={() => setProgressPopoverTab("failed")}
           role="tab"
           aria-selected={activeTab === "failed"}
         >
@@ -432,7 +475,7 @@ export function ProgressPopover({
             "flex-1 text-[11px] font-medium py-1 px-2 rounded-sm transition-colors",
             activeTab === "history" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:bg-background/50"
           )}
-          onClick={() => setActiveTab("history")}
+          onClick={() => setProgressPopoverTab("history")}
           role="tab"
           aria-selected={activeTab === "history"}
         >
@@ -459,7 +502,12 @@ export function ProgressPopover({
                 const Icon = JOB_TYPE_ICONS[job.task_type];
                 const stats = displayStats[job.id];
                 const etr = stats ? formatDuration(stats.etr) : "--:--";
-                const speed = stats ? `${stats.speed.toFixed(1)}%/s` : "";
+                const speed =
+                  job.task_type === "DOWNLOAD"
+                    ? formatMBps(job.download_bytes_per_sec) ?? "— MB/s"
+                    : stats
+                      ? `${stats.speed.toFixed(1)}%/s`
+                      : "";
                 const secondsSinceUpdate = ageSeconds(job.updated_at);
                 const isStalled = (secondsSinceUpdate ?? 0) > 90 && job.status === "RUNNING" && !isDragging;
 
@@ -621,13 +669,13 @@ export function ProgressPopover({
               variant="ghost"
               size="sm"
               onClick={() => {
-                if (!window.confirm("Clear job history (completed/failed/cancelled)?")) return;
-                clearHistory({ delete_logs: false });
+                if (!window.confirm("Clear tasks from the popover UI? This does not delete jobs or logs.")) return;
+                clearProgressPopoverUI();
               }}
               className="text-[11px]"
-              title="Clear completed/failed/cancelled jobs"
+              title="Clear tasks shown in this popover"
             >
-              Clear history
+              Clear tasks
             </Button>
           </div>
         ) : (
@@ -641,12 +689,12 @@ export function ProgressPopover({
                 size="sm"
                 className="h-7 text-[11px]"
                 onClick={() => {
-                  if (!window.confirm("Clear job history (completed/failed/cancelled)?")) return;
-                  clearHistory({ delete_logs: false });
+                  if (!window.confirm("Clear tasks from the popover UI? This does not delete jobs or logs.")) return;
+                  clearProgressPopoverUI();
                 }}
-                title="Clear completed/failed/cancelled jobs"
+                title="Clear tasks shown in this popover"
               >
-                Clear history
+                Clear tasks
               </Button>
             </div>
             {historyJobs.map((job) => {

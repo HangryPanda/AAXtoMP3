@@ -3,12 +3,13 @@
  */
 
 import * as React from "react";
-import { AlertTriangle, CheckCircle2, Clock, Wrench } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Clock, RotateCw, Wrench, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Progress } from "@/components/ui/Progress";
 import { cn } from "@/lib/utils";
+import { useApplyRepair } from "@/hooks/useBooks";
 import { useJobsFiltered } from "@/hooks/useJobs";
 import { useUIStore } from "@/store/uiStore";
 import { isJobActive, type Job, type JobStatus } from "@/types";
@@ -44,6 +45,9 @@ function getSubtitle(job: Job): string {
 
 export function RepairProgressCard({ className }: { className?: string }) {
   const setJobDrawerOpen = useUIStore((s) => s.setJobDrawerOpen);
+  const addToast = useUIStore((s) => s.addToast);
+  const setRepairProgressCardVisible = useUIStore((s) => s.setRepairProgressCardVisible);
+  const repairMutation = useApplyRepair();
 
   const { data } = useJobsFiltered(
     { task_type: "REPAIR", limit: 1 },
@@ -61,17 +65,56 @@ export function RepairProgressCard({ className }: { className?: string }) {
   return (
     <Card className={cn("border-border/60", className)}>
       <CardHeader className="py-4">
-        <CardTitle className="flex items-center justify-between gap-2">
+        <CardTitle className="flex items-center justify-between gap-3">
           <span className="flex items-center gap-2 text-sm">
             <Icon className={cn("h-4 w-4", isActive && "animate-pulse")} />
             Repair
           </span>
+
           <div className="flex items-center gap-2">
-            <Badge variant={STATUS_BADGE_VARIANTS[job.status]}>
-              {job.status.toLowerCase()}
-            </Badge>
+            {job.status === "FAILED" && (
+              <Button
+                size="sm"
+                variant="default"
+                className="gap-2"
+                onClick={() => {
+                  repairMutation.mutate(undefined, {
+                    onSuccess: () => {
+                      addToast({
+                        type: "info",
+                        title: "Repair Queued",
+                        message: "Repair job queued. Check Jobs for progress.",
+                      });
+                      setJobDrawerOpen(true);
+                    },
+                    onError: (err) => {
+                      addToast({
+                        type: "error",
+                        title: "Repair Failed",
+                        message: err.message,
+                      });
+                    },
+                  });
+                }}
+                disabled={repairMutation.isPending}
+                aria-label="Retry repair"
+              >
+                <RotateCw className={cn("h-4 w-4", repairMutation.isPending && "animate-spin")} />
+                Retry
+              </Button>
+            )}
+
             <Button size="sm" variant="outline" onClick={() => setJobDrawerOpen(true)}>
               View Jobs
+            </Button>
+
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => setRepairProgressCardVisible(false)}
+              aria-label="Hide repair status card"
+            >
+              <X className="h-4 w-4" />
             </Button>
           </div>
         </CardTitle>
@@ -79,7 +122,12 @@ export function RepairProgressCard({ className }: { className?: string }) {
       <CardContent className="pt-0 pb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-sm text-muted-foreground">{getSubtitle(job)}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant={STATUS_BADGE_VARIANTS[job.status]}>
+                {job.status.toLowerCase()}
+              </Badge>
+              <p className="text-sm text-muted-foreground">{getSubtitle(job)}</p>
+            </div>
             <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground/80">
               <Clock className="h-3 w-3" />
               Created: {formatWhen(job.created_at)}

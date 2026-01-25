@@ -134,6 +134,28 @@ class TestJobModel:
         job.progress_percent = 100
         assert job.progress_percent == 100
 
+    def test_job_retry_tracking_defaults(self) -> None:
+        """Test job retry tracking fields have correct defaults."""
+        job = Job(task_type=JobType.CONVERT)
+
+        assert job.attempt == 1
+        assert job.original_job_id is None
+
+    def test_job_retry_tracking_with_values(self) -> None:
+        """Test job retry tracking fields can be set."""
+        from uuid import uuid4
+
+        original_id = uuid4()
+        job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            attempt=2,
+            original_job_id=original_id,
+        )
+
+        assert job.attempt == 2
+        assert job.original_job_id == original_id
+
 
 class TestSettingsModel:
     """Tests for Settings model."""

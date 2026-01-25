@@ -18,7 +18,16 @@ export interface WSStatusMessage {
   progress: number;
   message?: string;
   error?: string;
+  meta?: {
+    download_bytes_current?: number;
+    download_bytes_total?: number;
+    download_bytes_per_sec?: number;
+  };
   updated_at?: string;
+  task_type?: string;
+  book_asin?: string | null;
+  attempt?: number;
+  original_job_id?: string | null;
 }
 
 export interface WSProgressMessage {

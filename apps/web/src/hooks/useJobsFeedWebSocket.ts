@@ -37,17 +37,24 @@ export function useJobsFeedWebSocket() {
     (existing: Job | undefined, msg: WSStatusMessage): Job => {
       return {
         id: msg.job_id,
-        task_type: (existing?.task_type ?? "SYNC") as Job["task_type"],
-        book_asin: existing?.book_asin ?? null,
+        // Use task_type/book_asin from WebSocket message if provided, otherwise fall back to existing
+        task_type: (msg.task_type ?? existing?.task_type ?? "SYNC") as Job["task_type"],
+        book_asin: msg.book_asin !== undefined ? msg.book_asin : (existing?.book_asin ?? null),
         status: msg.status as Job["status"],
         progress_percent: msg.progress,
         status_message: msg.message ?? existing?.status_message ?? null,
+        download_bytes_current: msg.meta?.download_bytes_current ?? existing?.download_bytes_current,
+        download_bytes_total: msg.meta?.download_bytes_total ?? existing?.download_bytes_total,
+        download_bytes_per_sec: msg.meta?.download_bytes_per_sec ?? existing?.download_bytes_per_sec,
         log_file_path: existing?.log_file_path ?? null,
         error_message: msg.error ?? existing?.error_message ?? null,
         updated_at: msg.updated_at ?? existing?.updated_at,
         started_at: existing?.started_at ?? null,
         completed_at: existing?.completed_at ?? null,
         created_at: existing?.created_at ?? new Date().toISOString(),
+        // Retry tracking fields
+        attempt: msg.attempt ?? existing?.attempt ?? 1,
+        original_job_id: msg.original_job_id !== undefined ? msg.original_job_id : (existing?.original_job_id ?? null),
       };
     },
     []
@@ -95,8 +102,17 @@ export function useJobsFeedWebSocket() {
                   status: msg.status as Job["status"],
                   progress_percent: msg.progress,
                   status_message: msg.message ?? j.status_message,
+                  download_bytes_current: msg.meta?.download_bytes_current ?? j.download_bytes_current,
+                  download_bytes_total: msg.meta?.download_bytes_total ?? j.download_bytes_total,
+                  download_bytes_per_sec: msg.meta?.download_bytes_per_sec ?? j.download_bytes_per_sec,
                   error_message: msg.error ?? j.error_message,
                   updated_at: msg.updated_at ?? j.updated_at,
+                  // Update task_type and book_asin if provided in message
+                  task_type: (msg.task_type ?? j.task_type) as Job["task_type"],
+                  book_asin: msg.book_asin !== undefined ? msg.book_asin : j.book_asin,
+                  // Retry tracking fields
+                  attempt: msg.attempt ?? j.attempt,
+                  original_job_id: msg.original_job_id !== undefined ? msg.original_job_id : j.original_job_id,
                 }
               : j
           ),

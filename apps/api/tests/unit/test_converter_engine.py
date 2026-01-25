@@ -342,10 +342,12 @@ class TestConvert:
             input_file = tmp_path / "test.aax"
             input_file.write_bytes(b"fake content")
 
-            progress_calls: list[tuple[int, str]] = []
+            progress_calls: list[tuple[int, str, dict | None]] = []
 
-            def progress_callback(percent: int, line: str) -> None:
-                progress_calls.append((percent, line))
+            def progress_callback(
+                percent: int, line: str, telemetry: dict | None = None
+            ) -> None:
+                progress_calls.append((percent, line, telemetry))
 
             # Mock the stream reading with ffmpeg-like output
             async def mock_read_lines(stream: Any) -> Any:
@@ -612,3 +614,42 @@ class TestDurationPattern:
 
             assert match is not None
             assert match.group(1) == "01:15:30.50"
+
+
+class TestParseFfmpegTelemetry:
+    """Tests for ConverterEngine.parse_ffmpeg_telemetry robustness."""
+
+    def test_parse_ffmpeg_telemetry_parses_time_with_variable_decimals(self) -> None:
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        total = 10.0  # seconds
+        line = "size=    1234kB time=00:00:01.4 bitrate=128.0kbits/s speed=2.5x"
+        telemetry = engine.parse_ffmpeg_telemetry(line, total)
+        assert telemetry is not None
+        assert telemetry["convert_total_ms"] == 10_000
+        assert telemetry["convert_current_ms"] == 1_400
+        assert telemetry["convert_percent"] == 14
+        assert telemetry["convert_speed_x"] == pytest.approx(2.5)
+        assert telemetry["convert_bitrate_kbps"] == pytest.approx(128.0)
+
+    def test_parse_ffmpeg_telemetry_handles_na_values_safely(self) -> None:
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        total = 10.0
+        line = "size=    1234kB time=00:00:01.45 bitrate=N/A speed=N/A"
+        telemetry = engine.parse_ffmpeg_telemetry(line, total)
+        assert telemetry is not None
+        assert telemetry["convert_current_ms"] == 1_450
+        assert "convert_speed_x" not in telemetry
+        assert "convert_bitrate_kbps" not in telemetry
+
+    def test_parse_ffmpeg_telemetry_returns_none_on_non_progress_lines(self) -> None:
+        with patch("services.converter_engine.get_settings") as mock_settings:
+            mock_settings.return_value = MagicMock(aaxtomp3_path=Path("/scripts/AAXtoMP3"))
+            engine = ConverterEngine()
+
+        assert engine.parse_ffmpeg_telemetry("not ffmpeg", 10.0) is None

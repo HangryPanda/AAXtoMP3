@@ -8,7 +8,6 @@ from uuid import UUID
 
 from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlmodel import Session
 
 from db.models import (
     Book, Person, BookAuthor, BookNarrator, Series, BookSeries, 
@@ -97,8 +96,14 @@ class LibraryManager:
             scan_state.file_size = fingerprint["size"]
             scan_state.extracted_at = datetime.utcnow()
             scan_state.extractor_version = self.extractor.VERSION
-        
-        await session.commit()
+
+        try:
+            await session.commit()
+        except Exception:
+            logger.exception("Failed to commit scan results for book %s; rolling back session", asin)
+            await session.rollback()
+            return False
+
         logger.info("Successfully updated metadata for book %s", asin)
         return True
 

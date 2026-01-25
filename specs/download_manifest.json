@@ -4657,5 +4657,446 @@
     "m4b_path": "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2.m4b",
     "discovered_at": "2026-01-23T18:45:40.467992",
     "source": "inferred"
+  },
+  "0063137321": {
+    "asin": "0063137321",
+    "title": "Dark Rise",
+    "aaxc_path": "/data/downloads/0063137321_Dark Rise-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/0063137321_Dark Rise-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/0063137321_Dark Rise_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:50:57.806947",
+    "status": "success"
+  },
+  "B09RX4LQTL": {
+    "asin": "B09RX4LQTL",
+    "title": "Defiance of the Fall 4: A LitRPG Adventure",
+    "aaxc_path": "/data/downloads/B09RX4LQTL_Defiance of the Fall 4: A LitRPG Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09RX4LQTL_Defiance of the Fall 4: A LitRPG Adventure-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09RX4LQTL_Defiance of the Fall 4: A LitRPG Adventure_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:50:57.798323",
+    "status": "success"
+  },
+  "B0BPJVN6F8": {
+    "asin": "B0BPJVN6F8",
+    "title": "Prince and Assassin",
+    "aaxc_path": "/data/downloads/B0BPJVN6F8_Prince and Assassin: Perilous Courts, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BPJVN6F8_Prince and Assassin: Perilous Courts, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BPJVN6F8_Prince and Assassin: Perilous Courts, Book 1_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:42:17.466299",
+    "status": "success"
+  },
+  "B0B72CR73Q": {
+    "asin": "B0B72CR73Q",
+    "title": "The Blacksmith's Son",
+    "aaxc_path": "/data/downloads/B0B72CR73Q_The Blacksmith's Son: Mageborn, Book 1-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B72CR73Q_The Blacksmith's Son: Mageborn, Book 1-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B72CR73Q_The Blacksmith's Son: Mageborn, Book 1_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:43:00.425665",
+    "status": "success"
+  },
+  "B0BXTC9MMP": {
+    "asin": "B0BXTC9MMP",
+    "title": "Defiance of the Fall 9",
+    "aaxc_path": "/data/downloads/B0BXTC9MMP_Defiance of the Fall 9-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BXTC9MMP_Defiance of the Fall 9-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BXTC9MMP_Defiance of the Fall 9_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:45:13.163961",
+    "status": "success"
+  },
+  "B0B4F65T86": {
+    "asin": "B0B4F65T86",
+    "title": "The Crown Tower (Dramatized Adaptation)",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B0B4F65T86_The Crown Tower (Dramatized Adaptation): The Riyria Chronicles, Book 1_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:31.986723",
+    "status": "success"
+  },
+  "B0BLJ8WZKC": {
+    "asin": "B0BLJ8WZKC",
+    "title": "Sleep Sound with Noah Reid",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:32.064869",
+    "status": "success"
+  },
+  "B08V8B2CGV": {
+    "asin": "B08V8B2CGV",
+    "title": "Dungeon Crawler Carl",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:32.413805",
+    "status": "success"
+  },
+  "B0BNJSZ729": {
+    "asin": "B0BNJSZ729",
+    "title": "The Death of Dulgath (Dramatized Adaptation)",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B0BNJSZ729_The Death of Dulgath (Dramatized Adaptation): The Riyria Chronicles, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:34.016135",
+    "status": "success"
+  },
+  "B09GC8BJ4W": {
+    "asin": "B09GC8BJ4W",
+    "title": "ChronoTemplar",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B09GC8BJ4W_ChronoTemplar: A Crunchy LitRPG Adventure_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:34.043929",
+    "status": "success"
+  },
+  "B0BFTDKG4L": {
+    "asin": "B0BFTDKG4L",
+    "title": "The Rose and the Thorn (Dramatized Adaptation)",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B0BFTDKG4L_The Rose and the Thorn (Dramatized Adaptation): The Riyria Chronicles, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:34.437853",
+    "status": "success"
+  },
+  "B0BTV633WB": {
+    "asin": "B0BTV633WB",
+    "title": "Dungeon Devotee",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:34.836069",
+    "status": "success"
+  },
+  "1774241404": {
+    "asin": "1774241404",
+    "title": "Blood Moon",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/1774241404_Blood Moon: Painting the Mists, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:36.068393",
+    "status": "success"
+  },
+  "B09GL2DWPG": {
+    "asin": "B09GL2DWPG",
+    "title": "Realm Between Series # , The Realm Between",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B09GL2DWPG_Realm Between Series # , The Realm Between: A LitRPG Saga (Books 1-3)_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:36.313676",
+    "status": "success"
+  },
+  "1982595892": {
+    "asin": "1982595892",
+    "title": "God of War",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/1982595892_God of War_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:36.470011",
+    "status": "success"
+  },
+  "B0CD8BL81K": {
+    "asin": "B0CD8BL81K",
+    "title": "The Hedge Wizard 3: A GameLit/LitRPG Adventure",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:37.586602",
+    "status": "success"
+  },
+  "B09T94QHK6": {
+    "asin": "B09T94QHK6",
+    "title": "The Prophecy",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:38.367006",
+    "status": "success"
+  },
+  "B0B2DZBVRR": {
+    "asin": "B0B2DZBVRR",
+    "title": "Moriarty",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:40.285717",
+    "status": "success"
+  },
+  "B0C265FCZ2": {
+    "asin": "B0C265FCZ2",
+    "title": "The Space Within",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:40.660202",
+    "status": "success"
+  },
+  "B0BH4QB5NN": {
+    "asin": "B0BH4QB5NN",
+    "title": "Rachel Maddow Presents: Ultra",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "",
+    "downloaded_at": "2026-01-24T09:52:41.220325",
+    "status": "success"
+  },
+  "B0CF93V5F6": {
+    "asin": "B0CF93V5F6",
+    "title": "Introducing: Velshi Banned Book Club",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B0CF93V5F6_Introducing: Velshi Banned Book Club_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:42.336947",
+    "status": "success"
+  },
+  "B074QRLK3Z": {
+    "asin": "B074QRLK3Z",
+    "title": "Viridian Gate Online: Crimson Alliance",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B074QRLK3Z_Viridian Gate Online: Crimson Alliance: An litRPG Adventure - The Viridian Gate Archives, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:42.598491",
+    "status": "success"
+  },
+  "B005GFQ5WQ": {
+    "asin": "B005GFQ5WQ",
+    "title": "The Count of Monte Cristo",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B005GFQ5WQ_The Count of Monte Cristo_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:52:43.336358",
+    "status": "success"
+  },
+  "B0BRTGJHW1": {
+    "asin": "B0BRTGJHW1",
+    "title": "Monstrous Intent",
+    "aaxc_path": "/data/downloads/B0BRTGJHW1_Monstrous Intent-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BRTGJHW1_Monstrous Intent-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BRTGJHW1_Monstrous Intent_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:54:33.456956",
+    "status": "success"
+  },
+  "B094YYPSW5": {
+    "asin": "B094YYPSW5",
+    "title": "Familiar Beginnings",
+    "aaxc_path": "/data/downloads/B094YYPSW5_Familiar Beginnings: Demon Magic, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B094YYPSW5_Familiar Beginnings: Demon Magic, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B094YYPSW5_Familiar Beginnings: Demon Magic, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T09:56:28.868958",
+    "status": "success"
+  },
+  "B09TLFJCMD": {
+    "asin": "B09TLFJCMD",
+    "title": "A Taste of Gold and Iron",
+    "aaxc_path": "/data/downloads/B09TLFJCMD_A Taste of Gold and Iron-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09TLFJCMD_A Taste of Gold and Iron-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09TLFJCMD_A Taste of Gold and Iron_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:00:29.259543",
+    "status": "success"
+  },
+  "B0C5RV38P7": {
+    "asin": "B0C5RV38P7",
+    "title": "Defiant",
+    "aaxc_path": "/data/downloads/B0C5RV38P7_Defiant: Songs of Chaos, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B0C5RV38P7_Defiant: Songs of Chaos, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B0C5RV38P7_Defiant: Songs of Chaos, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:00:53.088865",
+    "status": "success"
+  },
+  "B0BF2HFRXG": {
+    "asin": "B0BF2HFRXG",
+    "title": "Malicious Midpoint",
+    "aaxc_path": "/data/downloads/B0BF2HFRXG_Malicious Midpoint: Demon Magic, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BF2HFRXG_Malicious Midpoint: Demon Magic, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BF2HFRXG_Malicious Midpoint: Demon Magic, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:02:07.211178",
+    "status": "success"
+  },
+  "B06ZZX8C3L": {
+    "asin": "B06ZZX8C3L",
+    "title": "Viridian Gate Online: Cataclysm",
+    "aaxc_path": "",
+    "voucher_path": "",
+    "cover_path": "/data/downloads/B06ZZX8C3L_Viridian Gate Online: Cataclysm: The Viridian Gate Archives, Book 1_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:02:10.854364",
+    "status": "success"
+  },
+  "B08R699CDQ": {
+    "asin": "B08R699CDQ",
+    "title": "Happy Endings",
+    "aaxc_path": "/data/downloads/B08R699CDQ_Happy Endings: Demon Magic, Book 1-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B08R699CDQ_Happy Endings: Demon Magic, Book 1-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B08R699CDQ_Happy Endings: Demon Magic, Book 1_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:04:05.704065",
+    "status": "success"
+  },
+  "B09YJ3CW4V": {
+    "asin": "B09YJ3CW4V",
+    "title": "Defiance of the Fall 5",
+    "aaxc_path": "/data/downloads/B09YJ3CW4V_Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5)-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B09YJ3CW4V_Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5)-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B09YJ3CW4V_Defiance of the Fall 5: A LitRPG Adventure (Defiance of the Fall, Book 5)_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:04:08.536351",
+    "status": "success"
+  },
+  "B0C4V86KCK": {
+    "asin": "B0C4V86KCK",
+    "title": "Shattersoul",
+    "aaxc_path": "/data/downloads/B0C4V86KCK_Shattersoul: The Ripple System, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0C4V86KCK_Shattersoul: The Ripple System, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0C4V86KCK_Shattersoul: The Ripple System, Book 4_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:05:32.657448",
+    "status": "success"
+  },
+  "B0B2X3434T": {
+    "asin": "B0B2X3434T",
+    "title": "Libriohexer",
+    "aaxc_path": "/data/downloads/B0B2X3434T_Libriohexer: Wolfman Warlock, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B2X3434T_Libriohexer: Wolfman Warlock, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B2X3434T_Libriohexer: Wolfman Warlock, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:06:58.733589",
+    "status": "success"
+  },
+  "B09VJWSW1H": {
+    "asin": "B09VJWSW1H",
+    "title": "Tomkin and the Dragon",
+    "aaxc_path": "/data/downloads/B09VJWSW1H_Tomkin and the Dragon: A Keeper's Tale-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09VJWSW1H_Tomkin and the Dragon: A Keeper's Tale-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09VJWSW1H_Tomkin and the Dragon: A Keeper's Tale_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:07:27.063839",
+    "status": "success"
+  },
+  "B00S5HOIL2": {
+    "asin": "B00S5HOIL2",
+    "title": "An Unwelcome Quest",
+    "aaxc_path": "/data/downloads/B00S5HOIL2_An Unwelcome Quest: Magic 2.0, Book 3-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/B00S5HOIL2_An Unwelcome Quest: Magic 2.0, Book 3-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/B00S5HOIL2_An Unwelcome Quest: Magic 2.0, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:07:53.421230",
+    "status": "success"
+  },
+  "B09VY8D463": {
+    "asin": "B09VY8D463",
+    "title": "Viridian Gate Online: Empirical Endgame",
+    "aaxc_path": "/data/downloads/B09VY8D463_Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B09VY8D463_Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B09VY8D463_Viridian Gate Online: Empirical Endgame: The Viridian Gate Archives, Book 8_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:08:50.069460",
+    "status": "success"
+  },
+  "B0B8T2XHTF": {
+    "asin": "B0B8T2XHTF",
+    "title": "The Line of Illeniel",
+    "aaxc_path": "/data/downloads/B0B8T2XHTF_The Line of Illeniel: Mageborn, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B8T2XHTF_The Line of Illeniel: Mageborn, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B8T2XHTF_The Line of Illeniel: Mageborn, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:11:24.755470",
+    "status": "success"
+  },
+  "B0BCR7NVB3": {
+    "asin": "B0BCR7NVB3",
+    "title": "Fluke and the Frontier Farce",
+    "aaxc_path": "/data/downloads/B0BCR7NVB3_Fluke and the Frontier Farce: The Fantastic Fluke, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BCR7NVB3_Fluke and the Frontier Farce: The Fantastic Fluke, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BCR7NVB3_Fluke and the Frontier Farce: The Fantastic Fluke, Book 4_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:12:07.573717",
+    "status": "success"
+  },
+  "B0BC299XT2": {
+    "asin": "B0BC299XT2",
+    "title": "Crystal Awakening",
+    "aaxc_path": "/data/downloads/B0BC299XT2_Crystal Awakening: An Epic Fantasy Adventure-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BC299XT2_Crystal Awakening: An Epic Fantasy Adventure-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BC299XT2_Crystal Awakening: An Epic Fantasy Adventure_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:13:45.751047",
+    "status": "success"
+  },
+  "B0BHXN1T3Z": {
+    "asin": "B0BHXN1T3Z",
+    "title": "King of Immortal Tithe",
+    "aaxc_path": "/data/downloads/B0BHXN1T3Z_King of Immortal Tithe: Darkmourn Universe, Book 2-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BHXN1T3Z_King of Immortal Tithe: Darkmourn Universe, Book 2-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BHXN1T3Z_King of Immortal Tithe: Darkmourn Universe, Book 2_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:15:58.860132",
+    "status": "success"
+  },
+  "B0BDNJZ9F2": {
+    "asin": "B0BDNJZ9F2",
+    "title": "The Archmage Unbound",
+    "aaxc_path": "/data/downloads/B0BDNJZ9F2_The Archmage Unbound: Mageborn, Book 3-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BDNJZ9F2_The Archmage Unbound: Mageborn, Book 3-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BDNJZ9F2_The Archmage Unbound: Mageborn, Book 3_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:16:05.465065",
+    "status": "success"
+  },
+  "B0BHJM2G38": {
+    "asin": "B0BHJM2G38",
+    "title": "Defiance of the Fall 7",
+    "aaxc_path": "/data/downloads/B0BHJM2G38_Defiance of the Fall 7: Defiance of the Fall, Book 7-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BHJM2G38_Defiance of the Fall 7: Defiance of the Fall, Book 7-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BHJM2G38_Defiance of the Fall 7: Defiance of the Fall, Book 7_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:16:23.706813",
+    "status": "success"
+  },
+  "B0BJS7CZ4H": {
+    "asin": "B0BJS7CZ4H",
+    "title": "The God-Stone War",
+    "aaxc_path": "/data/downloads/B0BJS7CZ4H_The God-Stone War: Mageborn, Book 4-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BJS7CZ4H_The God-Stone War: Mageborn, Book 4-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BJS7CZ4H_The God-Stone War: Mageborn, Book 4_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:17:21.285437",
+    "status": "success"
+  },
+  "B0BWFSGTKC": {
+    "asin": "B0BWFSGTKC",
+    "title": "Shadow's Seventh Step",
+    "aaxc_path": "/data/downloads/B0BWFSGTKC_Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7)-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BWFSGTKC_Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7)-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BWFSGTKC_Shadow's Seventh Step: A Fantasy LitRPG Adventure (Divine Apostasy, Book 7)_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:17:55.672582",
+    "status": "success"
+  },
+  "B0BD9DSX24": {
+    "asin": "B0BD9DSX24",
+    "title": "The Sixth Rune",
+    "aaxc_path": "/data/downloads/B0BD9DSX24_The Sixth Rune: A Fantasy LitRPG Adventure Divine Apostasy, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BD9DSX24_The Sixth Rune: A Fantasy LitRPG Adventure Divine Apostasy, Book 6-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BD9DSX24_The Sixth Rune: A Fantasy LitRPG Adventure Divine Apostasy, Book 6_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:18:03.188165",
+    "status": "success"
+  },
+  "B0BLJB61KF": {
+    "asin": "B0BLJB61KF",
+    "title": "The Final Redemption",
+    "aaxc_path": "/data/downloads/B0BLJB61KF_The Final Redemption: Mageborn, Book 5-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BLJB61KF_The Final Redemption: Mageborn, Book 5-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BLJB61KF_The Final Redemption: Mageborn, Book 5_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:18:23.005655",
+    "status": "success"
+  },
+  "B0BRDBWDQL": {
+    "asin": "B0BRDBWDQL",
+    "title": "Defiance of the Fall 8",
+    "aaxc_path": "/data/downloads/B0BRDBWDQL_Defiance of the Fall 8-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0BRDBWDQL_Defiance of the Fall 8-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0BRDBWDQL_Defiance of the Fall 8_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:22:03.640385",
+    "status": "success"
+  },
+  "B0B435SYJ6": {
+    "asin": "B0B435SYJ6",
+    "title": "Defiance of the Fall 6",
+    "aaxc_path": "/data/downloads/B0B435SYJ6_Defiance of the Fall 6: Defiance of the Fall, Book 6-AAX_44_128.aaxc",
+    "voucher_path": "/data/downloads/B0B435SYJ6_Defiance of the Fall 6: Defiance of the Fall, Book 6-AAX_44_128.voucher",
+    "cover_path": "/data/downloads/B0B435SYJ6_Defiance of the Fall 6: Defiance of the Fall, Book 6_(1215).jpg",
+    "downloaded_at": "2026-01-24T10:22:30.930522",
+    "status": "success"
+  },
+  "1774240491": {
+    "asin": "1774240491",
+    "title": "The Sixth Strand",
+    "aaxc_path": "/data/downloads/1774240491_The Sixth Strand: A Pattern of Shadow and Light, Book 5-AAX_22_64.aaxc",
+    "voucher_path": "/data/downloads/1774240491_The Sixth Strand: A Pattern of Shadow and Light, Book 5-AAX_22_64.voucher",
+    "cover_path": "/data/downloads/1774240491_The Sixth Strand: A Pattern of Shadow and Light, Book 5_(1215).jpg",
+    "downloaded_at": "2026-01-25T06:33:47.769825",
+    "status": "success"
   }
 }

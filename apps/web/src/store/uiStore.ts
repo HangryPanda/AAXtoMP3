@@ -5,6 +5,7 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { safeLocalStorage } from "@/lib/utils";
 
 /**
  * View mode for book display
@@ -70,11 +71,20 @@ export interface UIState {
   // Job Drawer state
   isJobDrawerOpen: boolean;
 
+  // Library UI
+  isRepairProgressCardVisible: boolean;
+
   // Progress Popover state
   progressPopover: {
     isOpen: boolean;
     isMinimized: boolean;
     position: { x: number; y: number };
+    activeTab: "active" | "failed" | "history";
+    /**
+     * UI-only "clear" marker used by ProgressPopover. Hides failed/history rows
+     * created before this timestamp without deleting anything from the backend.
+     */
+    clearedBeforeMs: number;
   };
 
   // Toasts
@@ -122,13 +132,19 @@ export interface UIActions {
   // Job Drawer
   setJobDrawerOpen: (open: boolean) => void;
 
+  // Library UI
+  setRepairProgressCardVisible: (visible: boolean) => void;
+  toggleRepairProgressCardVisible: () => void;
+
   // Progress Popover
-  openProgressPopover: () => void;
+  openProgressPopover: (tab?: UIState["progressPopover"]["activeTab"]) => void;
   closeProgressPopover: () => void;
   toggleProgressPopover: () => void;
   minimizeProgressPopover: () => void;
   maximizeProgressPopover: () => void;
   updateProgressPopoverPosition: (x: number, y: number) => void;
+  setProgressPopoverTab: (tab: UIState["progressPopover"]["activeTab"]) => void;
+  clearProgressPopoverUI: () => void;
 
   // Toasts
   addToast: (toast: Omit<Toast, "id">) => void;
@@ -166,10 +182,13 @@ export const useUIStore = create<UIStore>()(
       drawer: { isOpen: false, content: null },
       modal: { isOpen: false, type: null, data: null },
       isJobDrawerOpen: false,
+      isRepairProgressCardVisible: true,
       progressPopover: {
         isOpen: false,
         isMinimized: false,
         position: { x: 20, y: 80 },
+        activeTab: "active",
+        clearedBeforeMs: 0,
       },
       selectedBooks: new Set<string>(),
       isSelectionMode: false,
@@ -260,10 +279,20 @@ export const useUIStore = create<UIStore>()(
       // Job Drawer
       setJobDrawerOpen: (open) => set({ isJobDrawerOpen: open }),
 
+      // Library UI
+      setRepairProgressCardVisible: (visible) => set({ isRepairProgressCardVisible: visible }),
+      toggleRepairProgressCardVisible: () =>
+        set((state) => ({ isRepairProgressCardVisible: !state.isRepairProgressCardVisible })),
+
       // Progress Popover
-      openProgressPopover: () =>
+      openProgressPopover: (tab) =>
         set((state) => ({
-          progressPopover: { ...state.progressPopover, isOpen: true, isMinimized: false },
+          progressPopover: {
+            ...state.progressPopover,
+            isOpen: true,
+            isMinimized: false,
+            activeTab: tab ?? state.progressPopover.activeTab,
+          },
         })),
       closeProgressPopover: () =>
         set((state) => ({
@@ -288,6 +317,18 @@ export const useUIStore = create<UIStore>()(
       updateProgressPopoverPosition: (x, y) =>
         set((state) => ({
           progressPopover: { ...state.progressPopover, position: { x, y } },
+        })),
+      setProgressPopoverTab: (tab) =>
+        set((state) => ({
+          progressPopover: { ...state.progressPopover, activeTab: tab },
+        })),
+      clearProgressPopoverUI: () =>
+        set((state) => ({
+          progressPopover: {
+            ...state.progressPopover,
+            activeTab: "active",
+            clearedBeforeMs: Date.now(),
+          },
         })),
 
       // Toasts
@@ -328,11 +369,12 @@ export const useUIStore = create<UIStore>()(
     }),
     {
       name: "ui-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => safeLocalStorage),
       // Only persist view preferences
       partialize: (state) => ({
         viewMode: state.viewMode,
         sidebar: state.sidebar,
+        isRepairProgressCardVisible: state.isRepairProgressCardVisible,
         progressPopover: {
           ...state.progressPopover,
           isOpen: false, // don't auto-open on reload

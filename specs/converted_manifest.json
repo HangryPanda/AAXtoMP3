@@ -4916,5 +4916,189 @@
     "discovered_at": "2026-01-23T08:24:52.848374",
     "source": "filesystem_scan",
     "matched_by": "unknown"
+  },
+  "/data/downloads/B0BXQN4QB9_Waybound: Cradle, Book 12-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BXQN4QB9",
+    "title": "Waybound",
+    "output_path": "/data/converted/Audiobook/Will Wight/Waybound: Cradle, Book 12/Waybound: Cradle, Book 12.m4b",
+    "started_at": "2026-01-24T06:07:59.625439",
+    "ended_at": "2026-01-24T06:08:43.638295"
+  },
+  "/data/downloads/1774241544_Fae and Fare The Wandering Inn, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "1774241544",
+    "title": "Fae and Fare",
+    "output_path": "/data/converted/Audiobook/pirateaba/Fae and Faire: The Wandering Inn, Book 2/Fae and Faire: The Wandering Inn, Book 2.m4b",
+    "started_at": "2026-01-24T06:06:55.886120",
+    "ended_at": "2026-01-24T06:08:20.716079"
+  },
+  "/data/downloads/B09WST6L37_Mastering Magic: Jeff the Game Master, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09WST6L37",
+    "title": "Mastering Magic",
+    "output_path": "/data/converted/Audiobook/Jaime Castle, Troy Osgood/Mastering Magic: Jeff the Game Master, Book 3/Mastering Magic: Jeff the Game Master, Book 3.m4b",
+    "started_at": "2026-01-24T06:07:33.718782",
+    "ended_at": "2026-01-24T06:07:59.615899"
+  },
+  "/data/downloads/B09P4BYYX5_Heir of Novron [Dramatized Adaptation] Riyria Revelations, Book 3-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B09P4BYYX5",
+    "title": "Heir of Novron [Dramatized Adaptation]",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Heir of Novron [Dramatized Adaptation]: Riyria Revelations, Book 3/Heir of Novron [Dramatized Adaptation]: Riyria Revelations, Book 3.m4b",
+    "started_at": "2026-01-24T07:35:02.987740",
+    "ended_at": "2026-01-24T07:36:06.384572"
+  },
+  "/data/completed/B0D828ZG1Y_Drumindor Riyria Chronicles, Book 5-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0D828ZG1Y",
+    "title": "Drumindor",
+    "output_path": "/data/converted/Audiobook/Michael J. Sullivan/Drumindor: Riyria Chronicles, Book 5/Drumindor: Riyria Chronicles, Book 5.m4b",
+    "started_at": "2026-01-24T07:33:32.129806",
+    "ended_at": "2026-01-24T07:34:22.849204"
+  },
+  "/data/downloads/B0BTZ81D9L_Expanse Unbound, Book 6-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0BTZ81D9L",
+    "title": "Expanse",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Expanse: Unbound, Book 6/Expanse: Unbound, Book 6.m4b",
+    "started_at": "2026-01-24T06:06:54.016682",
+    "ended_at": "2026-01-24T06:07:33.706021"
+  },
+  "/data/completed/B0CKWP6FM1_Somewhere Beyond the Sea Cerulean Chronicles, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0CKWP6FM1",
+    "title": "Somewhere Beyond the Sea",
+    "output_path": "/data/converted/Audiobook/TJ Klune/Somewhere Beyond the Sea: Cerulean Chronicles, Book 2/Somewhere Beyond the Sea: Cerulean Chronicles, Book 2.m4b",
+    "started_at": "2026-01-24T07:32:58.321709",
+    "ended_at": "2026-01-24T07:33:39.030720"
+  },
+  "/data/downloads/B0BCH31C5F_Fury Unbound, Book 4-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BCH31C5F",
+    "title": "Fury: Unbound, Book 4",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Fury: Unbound, Book 4/Fury: Unbound, Book 4.m4b",
+    "started_at": "2026-01-24T04:17:19.097177",
+    "ended_at": "2026-01-24T04:18:20.016992"
+  },
+  "/data/downloads/B0B6GBZRH9_Hunger Unbound, Book 3-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0B6GBZRH9",
+    "title": "Hunger: Unbound, Book 3",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Hunger: Unbound, Book 3/Hunger: Unbound, Book 3.m4b",
+    "started_at": "2026-01-24T03:54:07.333724",
+    "ended_at": "2026-01-24T03:54:38.883801"
+  },
+  "/data/downloads/B0B1N8QZZ4_Silence Unbound, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0B1N8QZZ4",
+    "title": "Silence",
+    "output_path": "/data/converted/Audiobook/Nicoli Gonnella/Silence: Unbound, Book 2/Silence: Unbound, Book 2.m4b",
+    "started_at": "2026-01-24T06:05:40.687217",
+    "ended_at": "2026-01-24T06:06:13.902395"
+  },
+  "/data/downloads/B07V9PJ6VQ_The Enchanter's Soul The Ellwood Chronicles II-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B07V9PJ6VQ",
+    "title": "The Enchanter's Soul",
+    "output_path": "/data/converted/Audiobook/Michele Notaro/The Enchanter's Soul: The Ellwood Chronicles II/The Enchanter's Soul: The Ellwood Chronicles II.m4b",
+    "started_at": "2026-01-24T06:08:20.726934",
+    "ended_at": "2026-01-24T06:08:53.750448"
+  },
+  "/data/downloads/B0BH9FDKP8_System Change A LitRPG Adventure System Universe, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BH9FDKP8",
+    "title": "System Change: A LitRPG Adventure",
+    "output_path": "/data/converted/Audiobook/SunriseCV/System Change: System Universe, Book 1/System Change: System Universe, Book 1.m4b",
+    "started_at": "2026-01-24T06:08:43.647927",
+    "ended_at": "2026-01-24T06:09:25.568387"
+  },
+  "/data/downloads/B0BLD14L5V_Spellweaver Codex Elder Mage Chronicles, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0BLD14L5V",
+    "title": "Spellweaver Codex",
+    "output_path": "/data/converted/Audiobook/DB King/Spellweaver Codex: Elder Mage Chronicles, Book 1/Spellweaver Codex: Elder Mage Chronicles, Book 1.m4b",
+    "started_at": "2026-01-24T06:09:25.580033",
+    "ended_at": "2026-01-24T06:09:55.680767"
+  },
+  "/data/downloads/B0CW21HW3Q_Ashborn Primordial A Progression Fantasy Epic-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0CW21HW3Q",
+    "title": "Ashborn Primordial",
+    "output_path": "/data/converted/Audiobook/Vowron Prime/Ashborn Primordial: A Progression Fantasy Epic/Ashborn Primordial: A Progression Fantasy Epic.m4b",
+    "started_at": "2026-01-24T06:09:55.690795",
+    "ended_at": "2026-01-24T06:10:36.589961"
+  },
+  "/data/downloads/B0CC6J6XD2_The Path of Ascension Books 1-3.5 A LitRPG Adventure Box Set-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0CC6J6XD2",
+    "title": "The Path of Ascension: Books 1-3.5",
+    "output_path": "/data/converted/Audiobook/C. Mantis/The Path of Ascension: Books 1-3.5: A LitRPG Adventure Box Set/The Path of Ascension: Books 1-3.5: A LitRPG Adventure Box Set.m4b",
+    "started_at": "2026-01-24T06:08:53.760468",
+    "ended_at": "2026-01-24T06:10:36.774075"
+  },
+  "/data/downloads/B0CS4QYLHB_The Healer's Way Healer's Way, Book 1-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0CS4QYLHB",
+    "title": "The Healer's Way",
+    "output_path": "/data/converted/Audiobook/Oleg Sapphire, Alexey Kovtunov, Jennifer E. Sunseri - translator/The Healer's Way: Healer's Way, Book 1/The Healer's Way: Healer's Way, Book 1.m4b",
+    "started_at": "2026-01-24T06:10:36.598479",
+    "ended_at": "2026-01-24T06:11:04.155220"
+  },
+  "/data/downloads/B00HWF0MHW_Words of Radiance The Stormlight Archive, Book 2-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B00HWF0MHW",
+    "title": "Words of Radiance",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Words of Radiance: The Stormlight Archive, Book 2/Words of Radiance: The Stormlight Archive, Book 2.m4b",
+    "started_at": "2026-01-24T06:10:36.785804",
+    "ended_at": "2026-01-24T06:12:05.754801"
+  },
+  "/data/downloads/B0CQ3759C3_Wind and Truth Book Five of the Stormlight Archive-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B0CQ3759C3",
+    "title": "Wind and Truth",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/Wind and Truth: Book Five of the Stormlight Archive/Wind and Truth: Book Five of the Stormlight Archive.m4b",
+    "started_at": "2026-01-24T06:11:04.166989",
+    "ended_at": "2026-01-24T06:12:44.013295"
+  },
+  "/data/downloads/B06XWGXBL8_Improve Your Conversations Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B06XWGXBL8",
+    "title": "Improve Your Conversations",
+    "output_path": "/data/converted/Audiobook/Patrick King/Improve Your Conversations: Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques/Improve Your Conversations: Think on Your Feet, Witty Banter, and Always Know What to Say with Improv Comedy Techniques.m4b",
+    "started_at": "2026-01-24T06:12:44.022961",
+    "ended_at": "2026-01-24T06:12:48.643096"
+  },
+  "/data/downloads/B003ZWFO7E_The Way of Kings The Stormlight Archive, Book 1-AAX_22_64.aaxc": {
+    "status": "success",
+    "asin": "B003ZWFO7E",
+    "title": "The Way of Kings",
+    "output_path": "/data/converted/Audiobook/Brandon Sanderson/The Way of Kings: The Stormlight Archive, Book 1/The Way of Kings: The Stormlight Archive, Book 1.m4b",
+    "started_at": "2026-01-24T06:12:05.763703",
+    "ended_at": "2026-01-24T06:13:08.226678"
+  },
+  "/data/completed/B0DVTN4HZ6_Unintended Cultivator, Volume Five-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0DVTN4HZ6",
+    "title": "Unintended Cultivator, Volume Five",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Five/Unintended Cultivator, Volume Five.m4b",
+    "started_at": "2026-01-24T07:32:58.263891",
+    "ended_at": "2026-01-24T07:33:31.541274"
+  },
+  "/data/downloads/B0DMQ8QB6F_Unintended Cultivator, Volume Four-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B0DMQ8QB6F",
+    "title": "Unintended Cultivator, Volume Four",
+    "output_path": "/data/converted/Audiobook/Eric Dontigney/Unintended Cultivator, Volume Four/Unintended Cultivator, Volume Four.m4b",
+    "started_at": "2026-01-24T07:33:39.051146",
+    "ended_at": "2026-01-24T07:34:16.048254"
+  },
+  "/data/completed/B0934GTSGT_Carl's Doomsday Scenario Dungeon Crawler Carl, Book 2-AAX_44_128.aaxc": {
+    "status": "success",
+    "asin": "B08V8B2CGV",
+    "title": "Dungeon Crawler Carl",
+    "output_path": "/data/converted/Audiobook/Matt Dinniman/Carl's Doomsday Scenario: Dungeon Crawler Carl, Book 2/Carl's Doomsday Scenario: Dungeon Crawler Carl, Book 2.m4b",
+    "started_at": "2026-01-25T06:35:17.248470",
+    "ended_at": "2026-01-25T06:35:48.314372"
   }
 }

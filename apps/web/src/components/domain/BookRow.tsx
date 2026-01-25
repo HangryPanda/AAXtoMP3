@@ -22,6 +22,8 @@ export interface BookRowProps {
   book: Book;
   selectable?: boolean;
   selected?: boolean;
+  isCurrent?: boolean;
+  isPlaying?: boolean;
   onSelect?: (book: Book, selected: boolean) => void;
   onRowClick?: (book: Book) => void;
   onPlay?: (book: Book) => void;
@@ -36,6 +38,8 @@ export function BookRow({
   book,
   selectable = false,
   selected = false,
+  isCurrent = false,
+  isPlaying = false,
   onSelect,
   onRowClick,
   onPlay,
@@ -50,6 +54,8 @@ export function BookRow({
   const duration = formatRuntime(book.runtime_length_min);
   const purchaseDate = formatDate(book.purchase_date);
   const isPlayable = canPlay(book);
+  
+  const showPlaying = isCurrent && isPlaying;
 
   const handleRowClick = () => {
     onRowClick?.(book);
@@ -73,6 +79,7 @@ export function BookRow({
       className={cn(
         "flex items-center gap-4 rounded-lg border border-transparent px-4 py-3 transition-colors hover:bg-accent",
         selected && "bg-primary/5 border-primary/20",
+        isCurrent && "bg-accent/50",
         onRowClick && "cursor-pointer",
         className
       )}
@@ -89,7 +96,10 @@ export function BookRow({
       )}
 
       {/* Cover */}
-      <div className="h-12 w-12 shrink-0 overflow-hidden rounded bg-muted">
+      <div className={cn(
+        "h-12 w-12 shrink-0 overflow-hidden rounded bg-muted relative",
+        showPlaying && "ring-2 ring-primary ring-offset-1"
+      )}>
         {coverUrl ? (
           <Image
             src={coverUrl}
@@ -106,11 +116,18 @@ export function BookRow({
             <BookOpen className="h-6 w-6 text-muted-foreground/50" />
           </div>
         )}
+        
+        {/* Playing Overlay */}
+        {showPlaying && (
+          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <span className="w-1 h-3 bg-white animate-bounce" />
+          </div>
+        )}
       </div>
 
       {/* Title & Author */}
       <div className="min-w-0 flex-1">
-        <h3 className="truncate font-medium" title={book.title}>
+        <h3 className={cn("truncate font-medium", isCurrent && "text-primary")} title={book.title}>
           {book.title}
         </h3>
         <p className="truncate text-sm text-muted-foreground" title={author}>
@@ -143,14 +160,22 @@ export function BookRow({
       {/* Actions */}
       <div className="flex shrink-0 items-center gap-2">
         <Button
-          variant="ghost"
+          variant={showPlaying ? "default" : "ghost"}
           size="icon"
-          className="h-8 w-8"
+          className={cn("h-8 w-8", showPlaying && "h-8 w-8 rounded-full")}
           onClick={handlePlayClick}
           disabled={!isPlayable}
-          aria-label={`Play ${book.title}`}
+          aria-label={showPlaying ? `Pause ${book.title}` : `Play ${book.title}`}
         >
-          <Play className="h-4 w-4" />
+          {showPlaying ? (
+            // Pause icon
+            <div className="flex gap-0.5 h-3 items-center">
+              <span className="w-1 bg-current h-full" />
+              <span className="w-1 bg-current h-full" />
+            </div>
+          ) : (
+            <Play className="h-4 w-4" />
+          )}
         </Button>
 
         <ActionMenu

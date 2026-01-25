@@ -3,14 +3,106 @@
 import asyncio
 import json
 import logging
+import re
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import audible
-from core.config import get_settings
+from core.config import AudibleCliProgressFormat, get_settings
 
 logger = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# NDJSON Event Parsing (for --progress-format ndjson)
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class NdjsonDownloadEvent:
+    """Parsed NDJSON download event from audible-cli."""
+
+    event_type: str
+    asin: str | None = None
+    filename: str | None = None
+    current_bytes: int | None = None
+    total_bytes: int | None = None
+    bytes_per_sec: float | None = None
+    success: bool | None = None
+    resumed: bool | None = None
+    error_code: str | None = None
+    message: str | None = None
+    timestamp: str | None = None
+    raw: dict[str, Any] | None = None
+
+
+def parse_ndjson_download_line(line: str) -> NdjsonDownloadEvent | None:
+    """
+    Parse a single NDJSON line from audible-cli --progress-format ndjson.
+
+    Expected event types:
+    - download_start: {asin, filename, total_bytes, resumed, timestamp}
+    - download_progress: {asin, filename, current_bytes, total_bytes, bytes_per_sec, resumed, timestamp}
+    - download_complete: {asin, filename, total_bytes, success, timestamp}
+    - download_error: {asin, success:false, error_code, message}
+
+    Returns:
+        NdjsonDownloadEvent if parsing succeeds, None if line is malformed or not JSON.
+        Malformed lines are logged at WARNING level but do NOT raise exceptions.
+    """
+    line = line.strip()
+    if not line:
+        return None
+
+    try:
+        data = json.loads(line)
+    except json.JSONDecodeError as e:
+        # Malformed JSON - log and continue (MUST NOT crash)
+        logger.warning("NDJSON parse error (ignoring line): %s | line=%r", e, line[:200])
+        return None
+
+    if not isinstance(data, dict):
+        logger.warning("NDJSON line is not a dict (ignoring): %r", line[:200])
+        return None
+
+    event_type = data.get("event_type") or data.get("type") or "unknown"
+
+    return NdjsonDownloadEvent(
+        event_type=event_type,
+        asin=data.get("asin"),
+        filename=data.get("filename"),
+        current_bytes=_safe_int(data.get("current_bytes")),
+        total_bytes=_safe_int(data.get("total_bytes")),
+        bytes_per_sec=_safe_float(data.get("bytes_per_sec")),
+        success=data.get("success"),
+        resumed=data.get("resumed"),
+        error_code=data.get("error_code"),
+        message=data.get("message"),
+        timestamp=data.get("timestamp"),
+        raw=data,
+    )
+
+
+def _safe_int(val: Any) -> int | None:
+    """Safely convert value to int, return None on failure."""
+    if val is None:
+        return None
+    try:
+        return int(val)
+    except (TypeError, ValueError):
+        return None
+
+
+def _safe_float(val: Any) -> float | None:
+    """Safely convert value to float, return None on failure."""
+    if val is None:
+        return None
+    try:
+        return float(val)
+    except (TypeError, ValueError):
+        return None
 
 
 class AudibleError(Exception):
@@ -38,6 +130,22 @@ class AudibleDownloadError(AudibleError):
     pass
 
 
+class AudibleNdjsonDownloadError(AudibleDownloadError):
+    """Download failed with structured NDJSON error event.
+
+    Attributes:
+        asin: The ASIN that failed.
+        error_code: Structured error code from audible-cli.
+        message: Human-readable error message.
+    """
+
+    def __init__(self, asin: str, error_code: str, message: str):
+        self.asin = asin
+        self.error_code = error_code
+        self.message = message
+        super().__init__(f"Download failed for {asin}: [{error_code}] {message}")
+
+
 class AudibleClient:
     """Wrapper for audible operations."""
 
@@ -46,8 +154,6 @@ class AudibleClient:
         self.settings = get_settings()
         self.auth_file = self.settings.audible_auth_file
         self.profile = self.settings.audible_profile
-        # Derive config directory from auth file path for CLI commands
-        self.config_dir = self.auth_file.parent
 
     async def is_authenticated(self) -> bool:
         """
@@ -229,9 +335,14 @@ class AudibleClient:
         cover_size: str = "1215",
         quality: str = "high",
         aaxc: bool = True,
+        progress_callback: Callable[[int, int], None] | None = None,
     ) -> dict[str, Any]:
         """
         Download an audiobook from Audible.
+
+        Supports two progress parsing modes controlled by AUDIBLE_CLI_PROGRESS_FORMAT:
+        - 'tqdm' (default): Parse tqdm progress bar output
+        - 'ndjson': Use --progress-format ndjson for structured events
 
         Args:
             asin: Book ASIN to download.
@@ -239,6 +350,7 @@ class AudibleClient:
             cover_size: Cover image size.
             quality: Audio quality.
             aaxc: Download in AAXC format (required for newer books).
+            progress_callback: Optional callback(current_bytes, total_bytes).
 
         Returns:
             Dictionary with download result info including:
@@ -248,13 +360,18 @@ class AudibleClient:
             - stdout: str
             - stderr: str
             - files: list[str] (if successful)
+            - ndjson_error: dict (if NDJSON mode detected a download_error event)
         """
+        progress_format = self.settings.audible_cli_progress_format
+        use_ndjson = progress_format == AudibleCliProgressFormat.NDJSON
+
         logger.info(
-            "Starting download for ASIN %s to %s (format=%s, quality=%s)",
+            "Starting download for ASIN %s to %s (format=%s, quality=%s, progress_mode=%s)",
             asin,
             output_dir,
             "aaxc" if aaxc else "aax",
             quality,
+            progress_format.value,
         )
 
         # Ensure output directory exists
@@ -265,8 +382,6 @@ class AudibleClient:
         ]
 
         # Add global options (must come before subcommand)
-        if self.config_dir and self.config_dir.exists():
-            cmd.extend(["--config-dir", str(self.config_dir)])
         if self.profile:
             cmd.extend(["--profile", self.profile])
 
@@ -290,34 +405,123 @@ class AudibleClient:
         if aaxc:
             cmd.append("--aaxc")
 
+        # Add NDJSON progress format flag when enabled
+        if use_ndjson:
+            cmd.extend(["--progress-format", "ndjson"])
+
         logger.info("Running download command: %s", " ".join(cmd[:8]) + "...")
-        result = await self._run_command(cmd, timeout=1800)  # 30 minute timeout
+
+        # State for NDJSON error tracking
+        ndjson_error_event: NdjsonDownloadEvent | None = None
+
+        def _on_tqdm_progress_line(line: str) -> None:
+            """Parse tqdm-style progress output."""
+            if not progress_callback:
+                return
+            parsed = _parse_audible_cli_progress_line(line)
+            if not parsed:
+                return
+            cur_bytes, total_bytes = parsed
+            progress_callback(cur_bytes, total_bytes)
+
+        def _on_ndjson_stdout_line(line: str) -> None:
+            """Parse NDJSON events from stdout."""
+            nonlocal ndjson_error_event
+
+            event = parse_ndjson_download_line(line)
+            if not event:
+                # Malformed line - already logged by parser, continue
+                return
+
+            if event.event_type == "download_progress":
+                if progress_callback and event.current_bytes is not None and event.total_bytes is not None:
+                    progress_callback(event.current_bytes, event.total_bytes)
+            elif event.event_type == "download_start":
+                logger.info(
+                    "NDJSON download_start: asin=%s, filename=%s, total_bytes=%s, resumed=%s",
+                    event.asin, event.filename, event.total_bytes, event.resumed,
+                )
+                # Initialize progress with total bytes from start event
+                if progress_callback and event.total_bytes is not None:
+                    progress_callback(0, event.total_bytes)
+            elif event.event_type == "download_complete":
+                logger.info(
+                    "NDJSON download_complete: asin=%s, success=%s, total_bytes=%s",
+                    event.asin, event.success, event.total_bytes,
+                )
+                # Ensure progress shows 100% on completion
+                if progress_callback and event.total_bytes is not None and event.success:
+                    progress_callback(event.total_bytes, event.total_bytes)
+            elif event.event_type == "download_error":
+                logger.error(
+                    "NDJSON download_error: asin=%s, error_code=%s, message=%s",
+                    event.asin, event.error_code, event.message,
+                )
+                # Store the error event for result processing
+                ndjson_error_event = event
+            else:
+                # Unknown event type - log and continue (MUST NOT crash)
+                logger.debug("NDJSON unknown event type '%s': %s", event.event_type, event.raw)
+
+        # Select line handlers based on progress mode
+        if use_ndjson:
+            # NDJSON mode: stdout has JSON events, stderr may still have human-readable logs
+            on_stdout = _on_ndjson_stdout_line
+            on_stderr = None  # Don't parse stderr as progress in NDJSON mode
+        else:
+            # tqdm mode: both stdout and stderr may have tqdm progress bars
+            on_stdout = _on_tqdm_progress_line
+            on_stderr = _on_tqdm_progress_line
+
+        result = await self._run_command_streaming(
+            cmd,
+            timeout=1800,
+            on_stdout_line=on_stdout,
+            on_stderr_line=on_stderr,
+        )  # 30 minute timeout
         logger.info("Download command returned: returncode=%s, stderr_preview=%s",
                    result.get("returncode"), result.get("stderr", "")[:200])
 
-        success = result["returncode"] == 0
+        # Determine success - check both return code and NDJSON error events
+        success = result["returncode"] == 0 and ndjson_error_event is None
 
-        if success:
-            logger.info("Successfully downloaded ASIN %s", asin)
-            # Find downloaded files
-            downloaded_files = self._find_downloaded_files(asin, output_dir)
-            logger.debug("Downloaded files: %s", downloaded_files)
-        else:
-            logger.error(
-                "Download failed for ASIN %s: %s",
-                asin,
-                result["stderr"],
-            )
-            downloaded_files: list[str] = []
-
-        return {
+        # Build response
+        response: dict[str, Any] = {
             "success": success,
             "asin": asin,
             "output_dir": str(output_dir),
             "stdout": result["stdout"],
             "stderr": result["stderr"],
-            "files": downloaded_files,
         }
+
+        if success:
+            logger.info("Successfully downloaded ASIN %s", asin)
+            downloaded_files = self._find_downloaded_files(asin, output_dir)
+            logger.debug("Downloaded files: %s", downloaded_files)
+            response["files"] = downloaded_files
+        else:
+            # Include structured error info if we have an NDJSON error event
+            if ndjson_error_event:
+                response["ndjson_error"] = {
+                    "asin": ndjson_error_event.asin,
+                    "error_code": ndjson_error_event.error_code,
+                    "message": ndjson_error_event.message,
+                }
+                logger.error(
+                    "Download failed for ASIN %s: [%s] %s",
+                    asin,
+                    ndjson_error_event.error_code,
+                    ndjson_error_event.message,
+                )
+            else:
+                logger.error(
+                    "Download failed for ASIN %s: %s",
+                    asin,
+                    result["stderr"],
+                )
+            response["files"] = []
+
+        return response
 
     def _find_downloaded_files(self, asin: str, output_dir: Path) -> list[str]:
         """
@@ -422,8 +626,6 @@ class AudibleClient:
         logger.debug("Fetching activation bytes")
 
         cmd = ["audible"]
-        if self.config_dir and self.config_dir.exists():
-            cmd.extend(["--config-dir", str(self.config_dir)])
         if self.profile:
             cmd.extend(["--profile", self.profile])
         cmd.extend(["activation-bytes", "--output-format", "json"])
@@ -496,6 +698,15 @@ class AudibleClient:
 
             return result
 
+        except asyncio.CancelledError:
+            # Ensure we don't leave orphaned subprocesses when jobs are cancelled.
+            if process:
+                try:
+                    process.kill()
+                    await process.wait()
+                except Exception:
+                    pass
+            raise
         except asyncio.TimeoutError:
             logger.error("Command timed out after %ds: %s", timeout, cmd_str)
             if process:
@@ -523,3 +734,169 @@ class AudibleClient:
                 "stdout": "",
                 "stderr": str(e),
             }
+
+    async def _run_command_streaming(
+        self,
+        cmd: list[str],
+        timeout: int = 300,
+        on_stdout_line: Callable[[str], None] | None = None,
+        on_stderr_line: Callable[[str], None] | None = None,
+    ) -> dict[str, Any]:
+        """
+        Run an async subprocess command while streaming output.
+
+        This is primarily used for audible-cli download so we can derive file-level progress.
+        """
+        cmd_str = " ".join(cmd[:3]) + "..."
+        logger.info("Executing command (streaming): %s (timeout=%ds)", cmd_str, timeout)
+
+        process: asyncio.subprocess.Process | None = None
+        max_capture = 50_000
+        stdout_buf: list[str] = []
+        stderr_buf: list[str] = []
+        stdout_chars = 0
+        stderr_chars = 0
+
+        async def _read_stream(
+            stream: asyncio.StreamReader | None,
+            sink: list[str],
+            cap: str,
+            on_line: Callable[[str], None] | None,
+        ) -> None:
+            nonlocal stdout_chars, stderr_chars
+            if stream is None:
+                return
+            buf = ""
+            while True:
+                chunk = await stream.read(4096)
+                if not chunk:
+                    break
+                text = chunk.decode("utf-8", errors="replace")
+                # Capture (bounded)
+                if cap == "stdout":
+                    if stdout_chars < max_capture:
+                        take = text[: max(0, max_capture - stdout_chars)]
+                        sink.append(take)
+                        stdout_chars += len(take)
+                else:
+                    if stderr_chars < max_capture:
+                        take = text[: max(0, max_capture - stderr_chars)]
+                        sink.append(take)
+                        stderr_chars += len(take)
+
+                buf += text
+                # tqdm writes updates using carriage returns
+                while True:
+                    split_idx = None
+                    for sep in ("\r", "\n"):
+                        i = buf.find(sep)
+                        if i != -1 and (split_idx is None or i < split_idx):
+                            split_idx = i
+                    if split_idx is None:
+                        break
+                    line = buf[:split_idx]
+                    buf = buf[split_idx + 1 :]
+                    if on_line and line.strip():
+                        on_line(line)
+            if on_line and buf.strip():
+                on_line(buf)
+
+        try:
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+
+            stdout_task = asyncio.create_task(
+                _read_stream(process.stdout, stdout_buf, "stdout", on_stdout_line)
+            )
+            stderr_task = asyncio.create_task(
+                _read_stream(process.stderr, stderr_buf, "stderr", on_stderr_line)
+            )
+
+            await asyncio.wait_for(process.wait(), timeout=timeout)
+            await asyncio.gather(stdout_task, stderr_task)
+
+            return {
+                "returncode": process.returncode,
+                "stdout": "".join(stdout_buf),
+                "stderr": "".join(stderr_buf),
+            }
+
+        except asyncio.CancelledError:
+            if process:
+                try:
+                    process.kill()
+                    await process.wait()
+                except Exception:
+                    pass
+            raise
+        except asyncio.TimeoutError:
+            logger.error("Command timed out after %ds: %s", timeout, cmd_str)
+            if process:
+                try:
+                    process.kill()
+                    await process.wait()
+                except Exception:
+                    pass
+            return {
+                "returncode": -1,
+                "stdout": "".join(stdout_buf),
+                "stderr": "".join(stderr_buf) or f"Command timed out after {timeout}s",
+            }
+        except FileNotFoundError as e:
+            logger.error("Command not found: %s - %s", cmd[0], e)
+            return {
+                "returncode": -1,
+                "stdout": "".join(stdout_buf),
+                "stderr": f"Command not found: {e}",
+            }
+        except Exception as e:
+            logger.exception("Unexpected error running command (streaming): %s", cmd_str)
+            return {
+                "returncode": -1,
+                "stdout": "".join(stdout_buf),
+                "stderr": str(e),
+            }
+
+
+_PROGRESS_RE = re.compile(
+    r"(?P<pct>\d+)%\|.*?\|\s*(?P<cur>[0-9.]+)(?P<cur_unit>[kMGT]?)\s*/\s*(?P<tot>[0-9.]+)(?P<tot_unit>[kMGT]?)",
+    re.IGNORECASE,
+)
+
+
+def _unit_multiplier(unit: str) -> int:
+    u = (unit or "").lower()
+    if u == "k":
+        return 1024
+    if u == "m":
+        return 1024 ** 2
+    if u == "g":
+        return 1024 ** 3
+    if u == "t":
+        return 1024 ** 4
+    return 1
+
+
+def _parse_audible_cli_progress_line(line: str) -> tuple[int, int] | None:
+    """
+    Parse audible-cli tqdm output like:
+      `ASIN_Title-AAX_44_128.aaxc:   1%|          | 9.46M/845M ...`
+    """
+    if ".aax" not in line and ".aaxc" not in line:
+        return None
+    m = _PROGRESS_RE.search(line)
+    if not m:
+        return None
+    try:
+        cur = float(m.group("cur"))
+        tot = float(m.group("tot"))
+        cur_b = int(cur * _unit_multiplier(m.group("cur_unit")))
+        tot_b = int(tot * _unit_multiplier(m.group("tot_unit")))
+        if tot_b <= 0:
+            return None
+        return cur_b, tot_b
+    except Exception:
+        return None

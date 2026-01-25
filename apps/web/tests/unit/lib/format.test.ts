@@ -9,6 +9,7 @@ import {
   formatDurationVerbose,
   formatBytes,
   formatPercentage,
+  formatTime,
 } from "@/lib/format";
 
 describe("formatDate", () => {
@@ -137,3 +138,28 @@ describe("formatPercentage", () => {
     expect(formatPercentage(150)).toBe("100%");
   });
 });
+
+describe("formatTime", () => {
+  it("should format seconds to MM:SS", () => {
+    expect(formatTime(0)).toBe("00:00");
+    expect(formatTime(59)).toBe("00:59");
+    expect(formatTime(60)).toBe("01:00");
+    expect(formatTime(90)).toBe("01:30");
+  });
+
+  it("should format seconds to HH:MM:SS when hours exist", () => {
+    expect(formatTime(3600)).toBe("1:00:00");
+    expect(formatTime(3661)).toBe("1:01:01");
+    expect(formatTime(7322)).toBe("2:02:02");
+  });
+
+  it("should handle invalid values gracefully", () => {
+    expect(formatTime(-1)).toBe("00:00");
+    // @ts-expect-error Testing invalid input
+    expect(formatTime(null)).toBe("00:00");
+    // @ts-expect-error Testing invalid input
+    expect(formatTime(undefined)).toBe("00:00");
+    expect(formatTime(NaN)).toBe("00:00");
+  });
+});
+

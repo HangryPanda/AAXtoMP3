@@ -189,6 +189,8 @@ class TestDownloadJobEndpoint:
 
             # Verify job was queued
             mock_manager.queue_download.assert_called_once()
+            call_args = mock_manager.queue_download.call_args
+            assert call_args.args[1] == ["B00TEST123"]
 
     @pytest.mark.asyncio
     async def test_create_download_job_batch_asins(
@@ -213,10 +215,10 @@ class TestDownloadJobEndpoint:
             assert data["status"] == "QUEUED"
             assert "3 item" in data["message"]
 
-            # Verify job was queued with all ASINs
+            # Batch is queued as a single job with all ASINs.
             mock_manager.queue_download.assert_called_once()
             call_args = mock_manager.queue_download.call_args
-            assert call_args[0][1] == asins
+            assert call_args.args[1] == asins
 
     @pytest.mark.asyncio
     async def test_create_download_job_no_asin(
@@ -523,3 +525,255 @@ class TestCancelJobEndpoint:
 
             assert job_data["status"] == "CANCELLED"
             assert job_data["completed_at"] is not None
+
+
+class TestRetryJobEndpoint:
+    """Tests for POST /jobs/{id}/retry endpoint."""
+
+    @pytest.mark.asyncio
+    async def test_retry_failed_download_job(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test retrying a failed download job."""
+        import json
+
+        job = Job(
+            task_type=JobType.DOWNLOAD,
+            book_asin="B00TEST123",
+            status=JobStatus.FAILED,
+            payload_json=json.dumps({"asins": ["B00TEST123"]}),
+        )
+        test_session.add(job)
+        await test_session.commit()
+        await test_session.refresh(job)
+
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_download = AsyncMock()
+
+            response = await client.post(f"/jobs/{job.id}/retry")
+
+            assert response.status_code == 202
+            data = response.json()
+
+            assert "job_id" in data
+            assert data["status"] == "QUEUED"
+            assert "attempt #2" in data["message"]
+
+            # Verify new job was queued
+            mock_manager.queue_download.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_retry_failed_convert_job(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test retrying a failed conversion job."""
+        import json
+
+        job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.FAILED,
+            payload_json=json.dumps({"asin": "B00TEST123", "format": "m4b"}),
+        )
+        test_session.add(job)
+        await test_session.commit()
+        await test_session.refresh(job)
+
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_conversion = AsyncMock()
+
+            response = await client.post(f"/jobs/{job.id}/retry")
+
+            assert response.status_code == 202
+            data = response.json()
+
+            assert "job_id" in data
+            assert data["status"] == "QUEUED"
+            assert "attempt #2" in data["message"]
+
+            mock_manager.queue_conversion.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_retry_job_increments_attempt(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test that retrying a job increments the attempt number."""
+        import json
+
+        # Create a job that's already attempt 2
+        job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.FAILED,
+            payload_json=json.dumps({"asin": "B00TEST123", "format": "m4b"}),
+            attempt=2,
+        )
+        test_session.add(job)
+        await test_session.commit()
+        await test_session.refresh(job)
+
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_conversion = AsyncMock()
+
+            response = await client.post(f"/jobs/{job.id}/retry")
+
+            assert response.status_code == 202
+            data = response.json()
+
+            # Should be attempt #3
+            assert "attempt #3" in data["message"]
+
+            # Verify the new job has correct attempt number
+            new_job_id = data["job_id"]
+            get_response = await client.get(f"/jobs/{new_job_id}")
+            new_job_data = get_response.json()
+
+            assert new_job_data["attempt"] == 3
+            assert new_job_data["original_job_id"] == str(job.id)
+
+    @pytest.mark.asyncio
+    async def test_retry_job_sets_original_job_id(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test that retrying a job sets the original_job_id."""
+        import json
+
+        original_job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.FAILED,
+            payload_json=json.dumps({"asin": "B00TEST123", "format": "m4b"}),
+        )
+        test_session.add(original_job)
+        await test_session.commit()
+        await test_session.refresh(original_job)
+
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_conversion = AsyncMock()
+
+            response = await client.post(f"/jobs/{original_job.id}/retry")
+
+            assert response.status_code == 202
+            new_job_id = response.json()["job_id"]
+
+            # Verify the new job links back to original
+            get_response = await client.get(f"/jobs/{new_job_id}")
+            new_job_data = get_response.json()
+
+            assert new_job_data["original_job_id"] == str(original_job.id)
+
+    @pytest.mark.asyncio
+    async def test_retry_retried_job_links_to_original(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test that retrying a retry still links to the original job."""
+        import json
+        from uuid import uuid4
+
+        # Create the original job
+        original_id = uuid4()
+
+        # Create a retry of that job (attempt 2)
+        retry_job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.FAILED,
+            payload_json=json.dumps({"asin": "B00TEST123", "format": "m4b"}),
+            attempt=2,
+            original_job_id=original_id,
+        )
+        test_session.add(retry_job)
+        await test_session.commit()
+        await test_session.refresh(retry_job)
+
+        with patch("api.routes.jobs.job_manager") as mock_manager:
+            mock_manager.queue_conversion = AsyncMock()
+
+            response = await client.post(f"/jobs/{retry_job.id}/retry")
+
+            assert response.status_code == 202
+            new_job_id = response.json()["job_id"]
+
+            # Verify the new job (attempt 3) still links to original, not to retry_job
+            get_response = await client.get(f"/jobs/{new_job_id}")
+            new_job_data = get_response.json()
+
+            assert new_job_data["attempt"] == 3
+            assert new_job_data["original_job_id"] == str(original_id)
+
+    @pytest.mark.asyncio
+    async def test_retry_active_job_fails(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test that retrying an active job returns 409."""
+        import json
+
+        job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.RUNNING,
+            payload_json=json.dumps({"asin": "B00TEST123", "format": "m4b"}),
+        )
+        test_session.add(job)
+        await test_session.commit()
+        await test_session.refresh(job)
+
+        response = await client.post(f"/jobs/{job.id}/retry")
+
+        assert response.status_code == 409
+        assert "still active" in response.json()["detail"].lower()
+
+    @pytest.mark.asyncio
+    async def test_retry_nonexistent_job(
+        self,
+        client: AsyncClient,
+    ) -> None:
+        """Test retrying a non-existent job returns 404."""
+        fake_uuid = "12345678-1234-5678-1234-567812345678"
+
+        response = await client.post(f"/jobs/{fake_uuid}/retry")
+
+        assert response.status_code == 404
+
+    @pytest.mark.asyncio
+    async def test_job_response_includes_retry_fields(
+        self,
+        client: AsyncClient,
+        test_session: AsyncSession,
+    ) -> None:
+        """Test that job response includes attempt and original_job_id fields."""
+        from uuid import uuid4
+
+        original_id = uuid4()
+        job = Job(
+            task_type=JobType.CONVERT,
+            book_asin="B00TEST123",
+            status=JobStatus.COMPLETED,
+            attempt=2,
+            original_job_id=original_id,
+        )
+        test_session.add(job)
+        await test_session.commit()
+        await test_session.refresh(job)
+
+        response = await client.get(f"/jobs/{job.id}")
+
+        assert response.status_code == 200
+        data = response.json()
+
+        assert "attempt" in data
+        assert data["attempt"] == 2
+        assert "original_job_id" in data
+        assert data["original_job_id"] == str(original_id)

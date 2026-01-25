@@ -1,0 +1,92 @@
+# Repair & Reconcile Workflow (Source of Truth)
+
+This document is the **source of truth** for the Repair & Reconcile pipeline. This pipeline is responsible for synchronizing the database state with the external manifests and the actual state of the filesystem.
+
+It is written to prevent regressions and ensure architectural consistency. If you change behavior, you **must** update this document and re-run the validation steps at the end.
+
+---
+
+## Data Flow (Mental Model)
+
+1. **UI** triggers a Repair Preview: `GET /library/repair/preview`.
+   - Returns counts of items found on disk vs. items in the DB.
+2. **UI** applies Repair: `POST /library/repair/apply`.
+   - Queues a single `REPAIR` job row.
+3. **JobManager** (`apps/api/services/job_manager.py`) orchestrates the `REPAIR` job.
+4. **RepairPipeline** (`apps/api/services/repair_pipeline.py`) executes the logic:
+   - Scans media directories for actual files.
+   - Normalizes paths (handling host/container differences).
+   - Reconciles state: Filesystem ↔ Manifests ↔ Database.
+5. **On Completion**:
+   - Updates `Book` paths and statuses in the DB.
+   - Inserts "Local-Only" items for converted files without library entries.
+   - Generates a duplicates report TSV.
+
+---
+
+## What This Workflow Guarantees (MUST-FOLLOW)
+
+1. **Truth From Disk**:
+   - Counts and statuses MUST be derived from the actual filesystem and manifests, not just existing DB records.
+2. **Non-Destructive**:
+   - Repair MUST NOT delete any files automatically.
+   - Any identified duplicates MUST be reported as `DELETE_CANDIDATE` for manual review.
+3. **Path Normalization**:
+   - MUST be idempotent (normalizing an already normal path results in no change).
+   - MUST support Windows (`C:\`), macOS (`/Users/`), and Linux/Container (`/data/`) path formats.
+4. **Settings-Driven**:
+   - Behavior MUST be controlled exclusively via settings (e.g., `repair_extract_metadata`, `repair_update_manifests`).
+5. **Atomic Metadata**:
+   - If a converted file is missing metadata, the pipeline MUST be able to extract it during reconciliation (if enabled).
+6. **Local-Only Items**:
+   - Converted files found on disk that do not have a matching `Book` entry MUST be added to the `LocalItem` table to remain playable.
+
+---
+
+## Duplicates Reporting
+
+Repair MUST generate a stable duplicates report to identify multiple files for the same ASIN.
+
+- **Location**: `${converted_dir}/.repair_reports/repair_<timestamp>_duplicates.tsv`.
+- **Format**: TSV with columns: `asin`, `keep_or_delete`, `output_path`, `imported_at`, `reason`.
+- **Requirement**: Mark duplicates as `DELETE_CANDIDATE` only.
+
+---
+
+## End-to-End Execution Details
+
+### 1) Reconciliation Sequence
+1. **Manifest → Filesystem**: Verify that every entry in `download_manifest.json` and `converted_manifest.json` points to an existing file.
+2. **Filesystem → Manifest**: Backfill missing manifest entries from files found on disk using ASIN extraction or fuzzy title matching.
+3. **Manifest → Database**: Update `Book` statuses and paths (e.g., `Book.status` to `DOWNLOADED` or `COMPLETED`).
+
+### 2) Endpoint Contract
+- `GET /library/repair/preview`: Returns a summary of findings (counts of missing vs. new items).
+- `POST /library/repair/apply`: Queues the background job to perform the updates.
+
+---
+
+## Validation / Testing (MUST RUN Before Shipping)
+
+### 1) API tests (inside dev container)
+
+Run:
+```bash
+docker compose -f docker-compose.dev.yml exec -T api pytest -q \
+  tests/unit/test_repair_pipeline_paths.py \
+  tests/integration/test_repair_job.py
+```
+
+### 2) Manual validation
+
+1. Run a preview and confirm counts accurately reflect the bind-mounted directories.
+2. Apply repair and verify:
+   - The `REPAIR` job appears in the Jobs view and completes.
+   - A new TSV file is created in the `.repair_reports/` directory.
+   - "Local-Only" items appear in the library if orphaned converted files were present.
+
+## Common Failure Modes
+
+1. **Path Mismatch**: Files found on disk are not mapped correctly to container paths, leading to "Missing" reports.
+2. **Manifest Corruption**: Malformed JSON in manifests causes the pipeline to abort (MUST be handled gracefully).
+3. **DB Locking**: Large library repairs holding transactions too long (MUST use batching where appropriate).

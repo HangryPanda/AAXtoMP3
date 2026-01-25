@@ -6,6 +6,8 @@
 - `apps/api/`: primary backend (FastAPI + SQLModel + Alembic + PostgreSQL). Owns library sync, download/convert jobs, WebSockets, and streaming endpoints.
 - `core/`: conversion engine scripts (`AAXtoMP3`, `interactiveAAXtoMP3`) invoked by the API (mounted read-only in Docker).
 - `docker/`: nginx reverse proxy config + container entrypoints.
+- `docs/`: project documentation and notes.
+- `data/`: local dev bind-mount dirs for downloads/converted/completed/postgres (gitignored; may contain secrets).
 - `docker-compose.yml`: local “prod-like” stack (Postgres + API + Web + nginx).
 - `docker-compose.dev.yml`: local dev stack with hot reload (API `uvicorn --reload`, Next.js `npm run dev`).
 - `*.sh`, `*.py` in repo root: legacy/auxiliary utilities (library sync/metadata, environment setup, file moves).
@@ -25,6 +27,16 @@ This app is an **Audible Library Manager** with *feature parity* to the legacy S
 Stats like “Downloaded” and “Converted” are **not** just DB counters. They should be derived from:
 - Manifests in `specs/` (legacy) and/or the filesystem (bind-mounted media dirs in Docker).
 - Normalization of mixed host/container path formats.
+
+Repair also generates a duplicates report TSV for manual cleanup:
+- `${converted_dir}/.repair_reports/repair_*_duplicates.tsv` (columns: `asin | keep_or_delete | output_path | imported_at | reason`)
+- The repair workflow **does not delete** files automatically; it only reports `DELETE_CANDIDATE`s.
+
+Repair behavior is controlled by Settings (stored in DB and editable in the Web UI):
+- `repair_extract_metadata` (default: true) - extract chapters/metadata from converted M4B files during repair.
+- `repair_update_manifests` (default: true) - update manifests from filesystem scan during repair.
+- `repair_delete_duplicates` (default: false) - reserved for future automation; duplicates are currently reported only.
+- `move_files_policy` (`report_only` | `always_move` | `ask_each`) - policy for misplaced files.
 
 Key endpoints:
 - `GET /library/repair/preview` (counts: downloaded/converted/orphans/missing files)
@@ -48,6 +60,7 @@ Key endpoints:
 - Use the venv explicitly to avoid the “wrong python” problem: `cd apps/api && source .venv_test/bin/activate && python -m pytest`
 - `cd apps/api && ruff check . && mypy .`
 - Migrations: `cd apps/api && alembic upgrade head`
+  - If you add/change DB models or Settings fields, create an Alembic migration.
 
 ### Web (Next.js)
 - `cd apps/web && npm ci`
@@ -55,6 +68,9 @@ Key endpoints:
 - `cd apps/web && npm run lint`
 - `cd apps/web && npm test` (Vitest)
 - `cd apps/web && npm run test:e2e` (Playwright)
+
+If your repo lives on a network filesystem and Next.js fails with `.next/` persistence or `ENOTEMPTY` errors, run with a local dist dir:
+- `cd apps/web && rm -rf .next && NEXT_DIST_DIR=/tmp/audible-library-web-next npm run dev`
 
 ### Core engine (CLI)
 - `bash core/AAXtoMP3 -A <AUTHCODE> <file.aax>`: convert a book using your Audible authcode.
@@ -86,4 +102,5 @@ Key endpoints:
 - `--{dir,file,chapter}-naming-scheme` strings can evaluate shell command substitutions; treat untrusted input as code.
 - Never `eval` user-provided strings. When the API invokes `core/AAXtoMP3`, pass arguments as an array and validate/escape any naming-scheme inputs.
 - Avoid logging secrets (auth, cookies, tokens). Treat `~/.audible/*` as sensitive.
+- Treat `data/` as sensitive; it may contain local tokens/cookies/keys and should remain untracked.
 - Debug-only endpoints and any “raw Audible payload” views must stay behind `DEBUG=true`.

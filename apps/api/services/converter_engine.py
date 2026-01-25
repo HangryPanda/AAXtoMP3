@@ -37,18 +37,23 @@ class ConverterEngine:
     """Wrapper for AAXtoMP3 bash script execution."""
 
     # FFmpeg progress patterns
-    PROGRESS_PATTERN = re.compile(r"size=\s*\d+.*time=(\d+:\d+:\d+\.\d+)")
-    DURATION_PATTERN = re.compile(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)")
+    # Time pattern accepts variable decimal places (e.g., .4, .45, .456) or no decimal
+    PROGRESS_PATTERN = re.compile(r"size=\s*\d+.*time=(\d+:\d+:\d+(?:\.\d+)?)")
+    DURATION_PATTERN = re.compile(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)")
     # Additional patterns for robust progress parsing
+    # Speed pattern handles N/A and numeric values
     SPEED_PATTERN = re.compile(r"speed=\s*([\d.]+)x")
+    # Bitrate pattern handles N/A and numeric values
     BITRATE_PATTERN = re.compile(r"bitrate=\s*([\d.]+)kbits/s")
     # Error detection patterns
     ERROR_PATTERNS = [
-        re.compile(r"Error|ERROR|error", re.IGNORECASE),
-        re.compile(r"Invalid|invalid", re.IGNORECASE),
-        re.compile(r"failed|Failed|FAILED"),
-        re.compile(r"Permission denied"),
-        re.compile(r"No such file"),
+        re.compile(r"ERROR[:\s]", re.IGNORECASE),
+        re.compile(r"Invalid\s+argument", re.IGNORECASE),
+        re.compile(r"Permission\s+denied", re.IGNORECASE),
+        re.compile(r"No\s+such\s+file", re.IGNORECASE),
+        re.compile(r"Operation\s+not\s+permitted", re.IGNORECASE),
+        re.compile(r"Conversion\s+failed!", re.IGNORECASE),
+        re.compile(r"File\s+NOT\s+Found", re.IGNORECASE),
     ]
 
     def __init__(self) -> None:
@@ -244,7 +249,7 @@ class ConverterEngine:
         file_naming_scheme: str | None = None,
         compression: int | None = None,
         no_clobber: bool = False,
-        progress_callback: Callable[[int, str], None] | None = None,
+        progress_callback: Callable[[int, str, dict[str, Any] | None], None] | None = None,
     ) -> dict[str, Any]:
         """
         Execute AAXtoMP3 conversion with atomic writes and verification.
@@ -261,7 +266,10 @@ class ConverterEngine:
             file_naming_scheme: File naming pattern.
             compression: Compression level.
             no_clobber: Skip if exists.
-            progress_callback: Callback for progress updates (percent, line).
+            progress_callback: Callback for progress updates (percent, line, telemetry).
+                - percent: Progress percentage (0-100) or -1 for log-only lines.
+                - line: The raw output line.
+                - telemetry: Dict with convert_* keys (or None for log-only lines).
 
         Returns:
             Dictionary with conversion result.
@@ -317,30 +325,39 @@ class ConverterEngine:
                     stream: asyncio.StreamReader,
                     is_stderr: bool = False,
                 ) -> None:
-                    nonlocal last_progress
+                    nonlocal total_duration_seconds, last_progress
 
                     async for line in self._read_lines(stream):
                         if is_stderr:
                             error_lines.append(line)
-                            
-                            # Check for error patterns
-                            for pattern in self.ERROR_PATTERNS:
-                                if pattern.search(line):
-                                    detected_errors.append(line)
-                                    break
+                            # Parse duration from ffmpeg stderr
+                            duration_match = self.DURATION_PATTERN.search(line)
+                            if duration_match:
+                                hours = int(duration_match.group(1))
+                                minutes = int(duration_match.group(2))
+                                seconds = float(duration_match.group(3))
+                                total_duration_seconds = hours * 3600 + minutes * 60 + seconds
+                                logger.debug("Detected duration: %.2fs", total_duration_seconds)
                         else:
                             output_lines.append(line)
 
+                        # Check for error patterns in BOTH streams
+                        for pattern in self.ERROR_PATTERNS:
+                            if pattern.search(line):
+                                detected_errors.append(line)
+                                break
+
                         # Parse progress from ffmpeg output
                         if progress_callback:
-                            progress = self._parse_progress(line, total_duration_seconds)
-                            if progress is not None:
+                            telemetry = self.parse_ffmpeg_telemetry(line, total_duration_seconds)
+                            if telemetry is not None:
+                                progress = telemetry.get("convert_percent", 0)
                                 # Only update if progress increased (avoid jitter)
                                 if progress >= last_progress:
                                     last_progress = progress
-                                    progress_callback(progress, line)
+                                    progress_callback(progress, line, telemetry)
                             else:
-                                progress_callback(-1, line)  # Log line without progress
+                                progress_callback(-1, line, None)  # Log line without progress
 
                 if process.stdout and process.stderr:
                     await asyncio.gather(
@@ -529,12 +546,17 @@ class ConverterEngine:
         """
         Parse FFmpeg encoding speed from output line.
 
+        Handles N/A values safely (returns None).
+
         Args:
             line: Output line from ffmpeg.
 
         Returns:
-            Speed multiplier or None if not found.
+            Speed multiplier or None if not found or N/A.
         """
+        # Check for N/A first
+        if "speed=N/A" in line or "speed= N/A" in line:
+            return None
         match = self.SPEED_PATTERN.search(line)
         if match:
             try:
@@ -542,6 +564,102 @@ class ConverterEngine:
             except ValueError:
                 pass
         return None
+
+    def _parse_bitrate(self, line: str) -> float | None:
+        """
+        Parse FFmpeg encoding bitrate from output line.
+
+        Handles N/A values safely (returns None).
+
+        Args:
+            line: Output line from ffmpeg.
+
+        Returns:
+            Bitrate in kbps or None if not found or N/A.
+        """
+        # Check for N/A first
+        if "bitrate=N/A" in line or "bitrate= N/A" in line:
+            return None
+        match = self.BITRATE_PATTERN.search(line)
+        if match:
+            try:
+                return float(match.group(1))
+            except ValueError:
+                pass
+        return None
+
+    def parse_ffmpeg_telemetry(
+        self, line: str, total_duration_seconds: float
+    ) -> dict[str, Any] | None:
+        """
+        Parse full FFmpeg telemetry from a progress line.
+
+        Returns structured telemetry data for status.meta consumption.
+        This method is resilient - it does not raise on malformed lines.
+
+        Args:
+            line: Output line from ffmpeg.
+            total_duration_seconds: Total duration in seconds.
+
+        Returns:
+            Dictionary with telemetry keys, or None if not a progress line.
+            Keys:
+            - convert_current_ms: Current position in milliseconds
+            - convert_total_ms: Total duration in milliseconds
+            - convert_speed_x: Speed multiplier (if available)
+            - convert_bitrate_kbps: Bitrate in kbps (if available)
+            - convert_percent: Progress percentage (0-100)
+        """
+        # Must have total duration to compute progress
+        if total_duration_seconds <= 0:
+            return None
+
+        # Parse time from progress line
+        match = self.PROGRESS_PATTERN.search(line)
+        if not match:
+            return None
+
+        time_str = match.group(1)
+        parts = time_str.split(":")
+        if len(parts) != 3:
+            return None
+
+        try:
+            hours = int(parts[0])
+            minutes = int(parts[1])
+            seconds = float(parts[2])
+            current_seconds = hours * 3600 + minutes * 60 + seconds
+
+            # Use integer math to avoid float precision edge-cases (e.g., 1.4/10.0 -> 13.999999...)
+            current_ms = int(round(current_seconds * 1000))
+            total_ms = int(round(total_duration_seconds * 1000))
+            if total_ms <= 0:
+                return None
+
+            progress_percent = (current_ms * 100) // total_ms
+            progress_percent = min(100, max(0, int(progress_percent)))
+
+            telemetry: dict[str, Any] = {
+                "convert_current_ms": current_ms,
+                "convert_total_ms": total_ms,
+                "convert_percent": progress_percent,
+            }
+
+            # Add speed if available
+            speed = self._parse_speed(line)
+            if speed is not None:
+                telemetry["convert_speed_x"] = speed
+
+            # Add bitrate if available
+            bitrate = self._parse_bitrate(line)
+            if bitrate is not None:
+                telemetry["convert_bitrate_kbps"] = bitrate
+
+            return telemetry
+
+        except (ValueError, ZeroDivisionError):
+            # Malformed line - do not crash
+            return None
 
     def estimate_remaining_time(
         self,

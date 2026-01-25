@@ -13,6 +13,7 @@ export default function LibraryLayout({
   const pathname = usePathname();
   const { data: activeJobs } = useActiveJobs();
   const setJobDrawerOpen = useUIStore((state) => state.setJobDrawerOpen);
+  const openProgressPopover = useUIStore((s) => s.openProgressPopover);
   const isRepairProgressCardVisible = useUIStore((s) => s.isRepairProgressCardVisible);
   const toggleRepairProgressCardVisible = useUIStore((s) => s.toggleRepairProgressCardVisible);
   
@@ -22,6 +23,7 @@ export default function LibraryLayout({
         activePath: pathname,
         activeJobCount: activeJobs?.total ?? 0,
         onJobsClick: () => setJobDrawerOpen(true),
+        onTasksClick: () => openProgressPopover("history"),
         showRepairProgressCard: isRepairProgressCardVisible,
         onToggleRepairProgressCard: toggleRepairProgressCardVisible,
       }}

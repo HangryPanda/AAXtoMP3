@@ -7,7 +7,7 @@ on:
     branches: [main, master]
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: "24"
   PYTHON_VERSION: "3.11"
   POSTGRES_USER: test
   POSTGRES_PASSWORD: test

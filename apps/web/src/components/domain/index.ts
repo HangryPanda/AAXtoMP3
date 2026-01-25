@@ -16,9 +16,6 @@ export type { BookRowProps } from "./BookRow";
 export { LibraryToolbar } from "./LibraryToolbar";
 export type { LibraryToolbarProps, ViewMode, SortField, SortOrder } from "./LibraryToolbar";
 
-export { StickyPlayer } from "./StickyPlayer";
-export type { StickyPlayerProps } from "./StickyPlayer";
-
 export { ConnectedStickyPlayer } from "./ConnectedStickyPlayer";
 export type { ConnectedStickyPlayerProps } from "./ConnectedStickyPlayer";
 
